@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
+import datetime
 import enum
 
 from turberfield.dialogue.types import EnumFactory
@@ -26,3 +27,21 @@ class Spot(EnumFactory, enum.Enum):
     w12_goldhawk_cafe_approach = "gcpufzg2512x"
     w12_goldhawk_tavern_approach = "gcpufzbd8x5d"
     w12_latimer_arches_approach = "gcpv4cxb3dh4"
+
+blue_monday = datetime.date(1978, 1, 16)
+
+justin = SceneScript.Folder(
+    pkg=__name__,
+    description="Justin Delcroix has just got the sack.",
+    metadata=[blue_monday],
+    paths=["justin_19780116_fired/sorrows.rst"],
+    interludes=repeat(None)
+)
+
+ray = SceneScript.Folder(
+    pkg=__name__,
+    description="It's Ray Farington's last day.",
+    metadata=[blue_monday],
+    paths=["ray_19780116_retires/admin.rst"],
+    interludes=repeat(None)
+)
