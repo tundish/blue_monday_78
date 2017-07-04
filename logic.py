@@ -41,6 +41,7 @@ blue_monday = datetime.date(1978, 1, 16)
 ensemble = [
     Barman(name="Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
     Hipster(name="Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
+    PrisonOfficer(name="Ray Farington").set_state(Spot.w12_ducane_prison),
 ]
 
 references = ensemble + [Spot]
