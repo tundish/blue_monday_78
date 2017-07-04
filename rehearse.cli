@@ -2,3 +2,4 @@
 --folder=logic:ray
 --roles=1
 --strict
+--repeat=-1

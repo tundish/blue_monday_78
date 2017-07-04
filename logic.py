@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
+import collections
 import datetime
 import enum
 import itertools
@@ -24,7 +25,6 @@ from turberfield.dialogue.model import SceneScript
 from turberfield.dialogue.types import EnumFactory
 from turberfield.dialogue.types import Persona
 from turberfield.dialogue.types import Stateful
-from turberfield.utils.assembly import Assembly
 
 class Spot(EnumFactory, enum.Enum):
     w12_ducane_prison = "gcpv4d2dm6v2"
@@ -46,12 +46,18 @@ ensemble = [
 
 references = ensemble + [Spot]
 
+schedule = collections.deque([])
+
+def interlude(folder, index, ensemble, branches, log=None, loop=None):
+    schedule.rotate(-1)
+    return schedule[0]
+
 justin = SceneScript.Folder(
     pkg=__name__,
     description="Justin Delcroix has just got the sack.",
     metadata=[blue_monday],
     paths=["justin_19780116_fired/sorrows.rst"],
-    interludes=itertools.repeat(None)
+    interludes=itertools.repeat(interlude)
 )
 
 ray = SceneScript.Folder(
@@ -59,5 +65,7 @@ ray = SceneScript.Folder(
     description="It's Ray Farington's last day.",
     metadata=[blue_monday],
     paths=["ray_19780116_retires/admin.rst"],
-    interludes=itertools.repeat(None)
+    interludes=itertools.repeat(interlude)
 )
+
+schedule.extend((ray, justin))
