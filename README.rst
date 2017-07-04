@@ -1,6 +1,8 @@
 ..  Titling
     ##++::==~~--''``
 
+Blue Monday 78
+++++++++++++++
 
 This is a piece of work for the `Summer Novel Festival 2017`_ Game Jam.
 
