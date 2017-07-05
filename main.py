@@ -19,6 +19,7 @@
 import argparse
 import logging
 import sys
+import textwrap
 
 import tkinter as tk
 from tkinter.scrolledtext import ScrolledText
@@ -58,6 +59,15 @@ class GUIHandler(TerminalHandler):
     def handle_shot(self, obj):
         self.display(self.widget, obj.name.capitalize())
         return self.pause
+
+    def handle_line(self, obj):
+        if obj.persona is None:
+            return 0
+
+        name = getattr(obj.persona, "_name", "")
+        self.display(self.widget, textwrap.indent(name, " " * 2))
+        self.display(self.widget, textwrap.indent(obj.text, " " * 10))
+        return self.pause + self.dwell * obj.text.count(" ")
 
 class Presenter:
 
