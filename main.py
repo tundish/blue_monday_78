@@ -17,6 +17,7 @@
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
+import collections
 import logging
 import sys
 import textwrap
@@ -45,8 +46,16 @@ class GUIHandler(TerminalHandler):
         widget.configure(state="disabled")
         widget.see(tk.END)
 
+    @staticmethod
+    def parse_command(cmd):
+        try:
+            return cmd.strip().split(" ")[-1][0].lower()
+        except:
+            return None
+
     def __init__(self, widget, *args, **kwargs):
         self.widget = widget
+        self.buf = collections.deque()
         super().__init__(None, *args, **kwargs)
 
     def handle_scenescript(self, obj):
@@ -69,6 +78,18 @@ class GUIHandler(TerminalHandler):
         self.display(self.widget, textwrap.indent(obj.text, " " * 10))
         return self.pause + self.dwell * obj.text.count(" ")
 
+    def handle_interlude(self, *args, **kwargs):
+        if not self.buf:
+            interval = 5000
+            self.display(self.widget, "Enter a command: ")
+            self.widget.master.after(interval, self.handle_interlude, *args)
+            return interval
+        else:
+            cmd = "\n".join(self.buf)
+            self.log.info(cmd)
+            self.buf.clear()
+            return super().handle_interlude(*args, cmd=cmd, log=self.log, **kwargs)
+
 class Presenter:
 
     def __init__(self, args, textarea):
@@ -76,18 +97,24 @@ class Presenter:
         self.textarea = textarea
         self.log = logging.getLogger("bluemonday")
         self.events = None
+        self.handler = None
 
     def run(self):
         root = self.textarea.master
         if not self.events:
-            handler = GUIHandler(
+            self.handler = GUIHandler(
                 self.textarea,
                 dbPath=self.args.db,
                 pause=self.args.pause,
                 dwell=self.args.dwell,
                 log=self.log
             )
-            self.events = rehearse(logic.ray, logic.references, handler, strict=True)
+            self.events = rehearse(
+                logic.ray,
+                logic.references,
+                self.handler,
+                strict=True
+            )
             root.after(1, self.run)
         else:
             secs = next(self.events)
@@ -97,16 +124,7 @@ class Presenter:
         self.log.debug(event)
         widget = event.widget
         try:
-            n = int(widget.get().strip())
-        except ValueError:
-            pass
-        else:
-            self.textarea.configure(state="normal")
-            self.textarea.insert(tk.END, "\n")
-            for i in range(n):
-                self.textarea.insert(tk.END, "This is line {0}\n".format(i))
-            self.textarea.configure(state="disabled")
-            self.textarea.see(tk.END)
+            self.handler.buf.append(widget.get().strip())
         finally:
             widget.delete(0, tk.END)
 
@@ -115,7 +133,7 @@ def main(args):
 
     n = 0
     root = tk.Tk()
-    root.title("My Demo")
+    root.title("Blue Monday '78")
     root.geometry("500x400")
 
     entry = tk.Entry()
@@ -131,8 +149,7 @@ def main(args):
         entry.focus_set()
 
     p = Presenter(args, text)
-    #root.after(self.pause, self.events.append, obj)
-    root.after(10, p.run)
+    root.after(1, p.run)
     entry.bind("<Return>", p.on_enter)
 
     tk.mainloop()

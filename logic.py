@@ -48,7 +48,7 @@ references = ensemble + [Spot]
 
 schedule = collections.deque([])
 
-def interlude(folder, index, ensemble, branches, log=None, loop=None):
+def interlude(folder, index, ensemble, branches, cmd="", log=None, loop=None):
     schedule.rotate(-1)
     return schedule[0]
 
