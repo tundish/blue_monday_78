@@ -56,6 +56,7 @@ class GUIHandler(TerminalHandler):
     def __init__(self, widget, *args, **kwargs):
         self.widget = widget
         self.buf = collections.deque()
+        self.waiting = False
         super().__init__(None, *args, **kwargs)
 
     def handle_scenescript(self, obj):
@@ -78,16 +79,19 @@ class GUIHandler(TerminalHandler):
         self.display(self.widget, textwrap.indent(obj.text, " " * 10))
         return self.pause + self.dwell * obj.text.count(" ")
 
-    def handle_interlude(self, *args, **kwargs):
+    def handle_interlude(self, obj, folder, *args, **kwargs):
         if not self.buf:
+            self.waiting = True
             interval = 5000
             self.display(self.widget, "Enter a command: ")
-            self.widget.master.after(interval, self.handle_interlude, *args)
-            return interval
+            self.widget.master.after(interval, self.handle_interlude, obj, folder, *args)
+            return folder
         else:
+            self.waiting = False
             cmd = "\n".join(self.buf)
             self.log.info(cmd)
             self.buf.clear()
+            self.log.debug(args)
             return super().handle_interlude(*args, cmd=cmd, log=self.log, **kwargs)
 
 class Presenter:
@@ -100,8 +104,9 @@ class Presenter:
         self.handler = None
 
     def run(self):
+        secs = 6
         root = self.textarea.master
-        if not self.events:
+        if not self.handler:
             self.handler = GUIHandler(
                 self.textarea,
                 dbPath=self.args.db,
@@ -116,9 +121,12 @@ class Presenter:
                 strict=True
             )
             root.after(1, self.run)
+        elif not self.handler.waiting:
+            secs = next(self.events) or 6
         else:
-            secs = next(self.events)
-            root.after(int(secs * 1000), self.run)
+            secs = 6
+
+        root.after(int(secs * 1000), self.run)
 
     def on_enter(self, event):
         self.log.debug(event)
