@@ -82,6 +82,7 @@ class GUIHandler(TerminalHandler):
         return self.pause + self.dwell * obj.text.count(" ")
 
     def handle_interlude(self, obj, folder, *args, **kwargs):
+        raise NotImplementedError
         if not self.buf:
             self.waiting = True
             interval = 5000
@@ -109,6 +110,7 @@ class Presenter:
         self.folder = logic.ray
         self.state = None
         self.progress = None
+        self.interlude = None
         self.entry.bind("<Return>", self.on_input)
 
         root = self.textarea.master
@@ -124,15 +126,19 @@ class Presenter:
         root.after(int(secs * 1000), self.play)
 
     def prompt(self):
+        """ Inoperative ATM."""
         root = self.textarea.master
         if not self.buf and not self.seq:
             self.handler.display(self.textarea, "Enter a command: ")
-            root.after(30000, self.prompt)
-        else:
-            root.after(1200, self.prompt)
+
+    def new_state(self):
+        return zip(
+            itertools.count(),
+            SceneScript.scripts(**self.folder._asdict()),
+            self.folder.interludes
+        )
 
     def run(self):
-        interlude = None
         root = self.textarea.master
         if not self.handler:
             self.handler = GUIHandler(
@@ -143,25 +149,23 @@ class Presenter:
                 log=self.log
             )
             list(self.handler(logic.references, loop=root))
-            self.state = zip(
-                itertools.count(),
-                SceneScript.scripts(**self.folder._asdict()),
-                self.folder.interludes
-            )
+            self.state = self.new_state()
             root.after(1, self.run)
             return
         else:
             try:
-                index, script, interlude = next(self.state)
+                index, script, self.interlude = next(self.state)
+                self.params = (self.folder, index, logic.references, logic.schedule)
                 self.seq.append(script)
                 for shot, item in run_through(script, logic.references, strict=True):
                     self.seq.append(shot)
                     self.seq.append(item)
+
                 root.after(1, self.prompt)
             except StopIteration:
-                pass
+                self.state = self.new_state()
             finally:
-                self.log.info(interlude)
+                self.log.info(self.folder)
 
         root.after(6000, self.run)
 
@@ -172,6 +176,11 @@ class Presenter:
             val = widget.get().strip()
             self.buf.append(val)
             self.handler.display(self.textarea, val)
+            if not self.seq:
+                cmd = "\n".join(self.buf)
+                self.log.info(cmd)
+                self.buf.clear()
+                self.folder = self.interlude(*self.params, cmd=cmd)
         finally:
             widget.delete(0, tk.END)
 
