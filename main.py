@@ -18,6 +18,7 @@
 
 import argparse
 import collections
+import itertools
 import logging
 import sys
 import textwrap
@@ -26,7 +27,8 @@ import tkinter as tk
 from tkinter.scrolledtext import ScrolledText
 
 from turberfield.dialogue.handlers import TerminalHandler
-from turberfield.dialogue.player import rehearse
+from turberfield.dialogue.player import run_through
+from turberfield.dialogue.model import SceneScript
 from turberfield.utils.misc import log_setup
 
 import logic
@@ -84,27 +86,53 @@ class GUIHandler(TerminalHandler):
             self.waiting = True
             interval = 5000
             self.display(self.widget, "Enter a command: ")
-            self.widget.master.after(interval, self.handle_interlude, obj, folder, *args)
-            return folder
+            yield None
         else:
             self.waiting = False
             cmd = "\n".join(self.buf)
             self.log.info(cmd)
             self.buf.clear()
             self.log.debug(args)
-            return super().handle_interlude(*args, cmd=cmd, log=self.log, **kwargs)
+            yield super().handle_interlude(*args, cmd=cmd, log=self.log, **kwargs)
 
 class Presenter:
 
-    def __init__(self, args, textarea):
+    def __init__(self, args, textarea, entry):
         self.args = args
         self.textarea = textarea
+        self.entry = entry
         self.log = logging.getLogger("bluemonday")
         self.events = None
         self.handler = None
+        self.buf = collections.deque()
+        self.seq = collections.deque()
+        self.folder = logic.ray
+        self.state = None
+        self.progress = None
+        self.entry.bind("<Return>", self.on_input)
+
+        root = self.textarea.master
+        root.after(1, self.run)
+        root.after(1, self.play)
+
+    def play(self):
+        secs = 3
+        root = self.textarea.master
+        if self.seq:
+            item = self.seq.popleft()
+            secs = next(self.handler(item, loop=root), secs)
+        root.after(int(secs * 1000), self.play)
+
+    def prompt(self):
+        root = self.textarea.master
+        if not self.buf and not self.seq:
+            self.handler.display(self.textarea, "Enter a command: ")
+            root.after(30000, self.prompt)
+        else:
+            root.after(1200, self.prompt)
 
     def run(self):
-        secs = 6
+        interlude = None
         root = self.textarea.master
         if not self.handler:
             self.handler = GUIHandler(
@@ -114,27 +142,39 @@ class Presenter:
                 dwell=self.args.dwell,
                 log=self.log
             )
-            self.events = rehearse(
-                logic.ray,
-                logic.references,
-                self.handler,
-                strict=True
+            list(self.handler(logic.references, loop=root))
+            self.state = zip(
+                itertools.count(),
+                SceneScript.scripts(**self.folder._asdict()),
+                self.folder.interludes
             )
             root.after(1, self.run)
-        elif not self.handler.waiting:
-            secs = next(self.events) or 6
+            return
         else:
-            secs = 6
+            try:
+                index, script, interlude = next(self.state)
+                self.seq.append(script)
+                for shot, item in run_through(script, logic.references, strict=True):
+                    self.seq.append(shot)
+                    self.seq.append(item)
+                root.after(1, self.prompt)
+            except StopIteration:
+                pass
+            finally:
+                self.log.info(interlude)
 
-        root.after(int(secs * 1000), self.run)
+        root.after(6000, self.run)
 
-    def on_enter(self, event):
+    def on_input(self, event):
         self.log.debug(event)
         widget = event.widget
         try:
-            self.handler.buf.append(widget.get().strip())
+            val = widget.get().strip()
+            self.buf.append(val)
+            self.handler.display(self.textarea, val)
         finally:
             widget.delete(0, tk.END)
+
 
 def main(args):
     log = logging.getLogger(log_setup(args, "bluemonday"))
@@ -150,16 +190,7 @@ def main(args):
     text.focus_set()
     text.pack(side=tk.LEFT, fill=tk.Y)
 
-    if not n:
-        text.configure(state="normal")
-        text.insert(tk.END, "Enter a number: ")
-        text.configure(state="disabled")
-        entry.focus_set()
-
-    p = Presenter(args, text)
-    root.after(1, p.run)
-    entry.bind("<Return>", p.on_enter)
-
+    p = Presenter(args, text, entry)
     tk.mainloop()
 
 def parser(description=__doc__):

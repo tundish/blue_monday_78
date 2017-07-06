@@ -49,8 +49,8 @@ references = ensemble + [Spot]
 schedule = collections.deque([])
 
 def interlude(folder, index, ensemble, branches, cmd="", log=None, loop=None):
-    schedule.rotate(-1)
-    return schedule[0]
+    branches.rotate(-1)
+    return branches[0]
 
 justin = SceneScript.Folder(
     pkg=__name__,
