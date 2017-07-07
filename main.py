@@ -138,7 +138,7 @@ class Presenter:
             self.folder.interludes
         )
 
-    def run(self):
+    def run(self, reload=False):
         root = self.textarea.master
         if not self.handler:
             self.handler = GUIHandler(
@@ -154,8 +154,7 @@ class Presenter:
             return
         else:
             try:
-                index, script, self.interlude = next(self.state)
-                self.params = (self.folder, index, logic.references, logic.schedule)
+                self.index, script, self.interlude = next(self.state)
                 self.seq.append(script)
                 for shot, item in run_through(script, logic.references, strict=True):
                     self.seq.append(shot)
@@ -163,7 +162,8 @@ class Presenter:
 
                 root.after(1, self.prompt)
             except StopIteration:
-                self.state = self.new_state()
+                if reload:
+                    self.state = self.new_state()
             finally:
                 self.log.info(self.folder)
 
@@ -180,7 +180,10 @@ class Presenter:
                 cmd = "\n".join(self.buf)
                 self.log.info(cmd)
                 self.buf.clear()
-                self.folder = self.interlude(*self.params, cmd=cmd)
+                self.folder = self.interlude(
+                    self.folder, self.index, logic.references, logic.schedule, cmd=cmd
+                )
+                widget.master.after(1, self.run, True)
         finally:
             widget.delete(0, tk.END)
 
