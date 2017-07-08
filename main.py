@@ -41,7 +41,7 @@ Python 3.6 requires PyInstaller-3.3.dev0+gabfc806
 class GUIHandler(TerminalHandler):
 
     @staticmethod
-    def display(widget, text):
+    def display(widget, text=""):
         widget.configure(state="normal")
         widget.insert(tk.END, text)
         widget.insert(tk.END, "\n")
@@ -69,7 +69,7 @@ class GUIHandler(TerminalHandler):
         return self.pause
 
     def handle_shot(self, obj):
-        self.display(self.widget, obj.name.capitalize())
+        self.display(self.widget)
         return self.pause
 
     def handle_line(self, obj):
@@ -78,7 +78,7 @@ class GUIHandler(TerminalHandler):
 
         name = getattr(obj.persona, "_name", "")
         self.display(self.widget, textwrap.indent(name, " " * 2))
-        self.display(self.widget, textwrap.indent(obj.text, " " * 10))
+        self.display(self.widget, textwrap.indent(textwrap.fill(obj.text, width=60), " " * 10))
         return self.pause + self.dwell * obj.text.count(" ")
 
     def handle_interlude(self, obj, folder, *args, **kwargs):
@@ -122,7 +122,9 @@ class Presenter:
         root = self.textarea.master
         if self.seq:
             item = self.seq.popleft()
-            secs = next(self.handler(item, loop=root), secs)
+            rv = list(self.handler(item, loop=root))
+            self.log.debug(rv)
+            secs = rv[0] if rv and isinstance(rv[0], int) else secs
         root.after(int(secs * 1000), self.play)
 
     def prompt(self):
