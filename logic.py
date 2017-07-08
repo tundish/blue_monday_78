@@ -24,6 +24,7 @@ import itertools
 from turberfield.dialogue.model import SceneScript
 from turberfield.dialogue.types import EnumFactory
 from turberfield.dialogue.types import Persona
+from turberfield.dialogue.types import Player
 from turberfield.dialogue.types import Stateful
 
 class Spot(EnumFactory, enum.Enum):
@@ -32,16 +33,21 @@ class Spot(EnumFactory, enum.Enum):
     w12_goldhawk_tavern = "gcpufzbd8x5d"
     w12_latimer_arches = "gcpv4cxb3dh4"
 
+class PrisonOfficer(Stateful, Persona): pass
+class Prisoner(Stateful, Persona): pass
+class PrisonVisitor(Stateful, Persona): pass
 class Barman(Stateful, Persona): pass
 class Hipster(Stateful, Persona): pass
-class PrisonOfficer(Stateful, Persona): pass
+
 
 blue_monday = datetime.date(1978, 1, 16)
 
 ensemble = [
-    Barman(name="Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
-    Hipster(name="Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
-    PrisonOfficer(name="Ray Farington").set_state(Spot.w12_ducane_prison),
+    Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
+    Hipster(name="Mr Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
+    PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison),
+    Prisoner(name="Mr Martin Sheppey"),
+    PrisonVisitor(name="Mrs Karen Sheppey"),
 ]
 
 references = ensemble + [Spot]
@@ -64,7 +70,11 @@ ray = SceneScript.Folder(
     pkg=__name__,
     description="It's Ray Farington's last day.",
     metadata=[blue_monday],
-    paths=["ray_19780116_retires/admin.rst"],
+    paths=[
+        "ray_19780116_retires/admin.rst",
+        "ray_19780116_retires/homecoming.rst",
+        "ray_19780116_retires/escape.rst",
+    ],
     interludes=itertools.repeat(interlude)
 )
 

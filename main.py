@@ -105,6 +105,7 @@ class Presenter:
         self.log = logging.getLogger("bluemonday")
         self.events = None
         self.handler = None
+        self.player = None
         self.buf = collections.deque()
         self.seq = collections.deque()
         self.folder = logic.ray
@@ -114,7 +115,6 @@ class Presenter:
         self.entry.bind("<Return>", self.on_input)
 
         root = self.textarea.master
-        root.after(1, self.run)
         root.after(1, self.play)
 
     def play(self):
@@ -126,7 +126,6 @@ class Presenter:
         root.after(int(secs * 1000), self.play)
 
     def prompt(self):
-        """ Inoperative ATM."""
         root = self.textarea.master
         if not self.buf and not self.seq:
             self.handler.display(self.textarea, "Enter a command: ")
@@ -175,8 +174,14 @@ class Presenter:
         try:
             val = widget.get().strip()
             self.buf.append(val)
-            self.handler.display(self.textarea, val)
-            if not self.seq:
+            GUIHandler.display(self.textarea, val)
+            if not self.player:
+                self.player = logic.Player(name=val).set_state(logic.Spot.w12_ducane_prison)
+                logic.references.append(self.player)
+                self.buf.clear()
+                self.log.debug(logic.references)
+                widget.master.after(1, self.run)
+            elif not self.seq:
                 cmd = "\n".join(self.buf)
                 self.log.info(cmd)
                 self.buf.clear()
@@ -194,13 +199,15 @@ def main(args):
     n = 0
     root = tk.Tk()
     root.title("Blue Monday '78")
-    root.geometry("500x400")
+    root.geometry("560x400")
 
     entry = tk.Entry()
     entry.pack(side=tk.BOTTOM, fill=tk.X)
     text = ScrolledText(root)
     text.focus_set()
     text.pack(side=tk.LEFT, fill=tk.Y)
+
+    GUIHandler.display(text, "Enter your player name: ")
 
     p = Presenter(args, text, entry)
     tk.mainloop()
