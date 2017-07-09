@@ -42,6 +42,7 @@ class GUIHandler(TerminalHandler):
 
     @staticmethod
     def display(widget, text=""):
+        logging.getLogger("bluemonday.display").debug(text)
         widget.configure(state="normal")
         widget.insert(tk.END, text)
         widget.insert(tk.END, "\n")
@@ -58,7 +59,7 @@ class GUIHandler(TerminalHandler):
     def __init__(self, widget, *args, **kwargs):
         self.widget = widget
         self.buf = collections.deque()
-        self.waiting = False
+        self.speaker = None
         super().__init__(None, *args, **kwargs)
 
     def handle_scenescript(self, obj):
@@ -76,10 +77,16 @@ class GUIHandler(TerminalHandler):
         if obj.persona is None:
             return 0
 
-        name = getattr(obj.persona, "_name", "")
-        self.display(self.widget, textwrap.indent(name, " " * 2))
-        self.display(self.widget, textwrap.indent(textwrap.fill(obj.text, width=60), " " * 10))
-        return self.pause + self.dwell * obj.text.count(" ")
+        # TODO: Fix this properly in turberfield-dialogue
+        text = obj.text.replace("   ", " ").replace("  ", " ")
+
+        if self.speaker is not obj.persona:
+            self.display(self.widget, textwrap.indent(obj.persona.name.firstname, " " * 2))
+            self.speaker = obj.persona
+
+        self.display(self.widget, textwrap.indent(textwrap.fill(text, width=60), " " * 10))
+        self.display(self.widget)
+        return self.pause + self.dwell * text.count(" ")
 
     def handle_interlude(self, obj, folder, *args, **kwargs):
         raise NotImplementedError
@@ -118,12 +125,12 @@ class Presenter:
         root.after(1, self.play)
 
     def play(self):
-        secs = 3
+        secs = getattr(self.handler, "pause", 1)
         root = self.textarea.master
         if self.seq:
             item = self.seq.popleft()
+            logging.getLogger("bluemonday.play").debug(item)
             rv = list(self.handler(item, loop=root))
-            self.log.debug(rv)
             secs = rv[0] if rv and isinstance(rv[0], int) else secs
         root.after(int(secs * 1000), self.play)
 
@@ -157,7 +164,9 @@ class Presenter:
             try:
                 self.index, script, self.interlude = next(self.state)
                 self.seq.append(script)
+                logging.getLogger("bluemonday.run").debug(script)
                 for shot, item in run_through(script, logic.references, strict=True):
+                    logging.getLogger("bluemonday.run").debug(item)
                     self.seq.append(shot)
                     self.seq.append(item)
 
