@@ -42,7 +42,6 @@ class GUIHandler(TerminalHandler):
 
     @staticmethod
     def display(widget, text=""):
-        logging.getLogger("bluemonday.display").debug(text)
         widget.configure(state="normal")
         widget.insert(tk.END, text)
         widget.insert(tk.END, "\n")
@@ -88,21 +87,6 @@ class GUIHandler(TerminalHandler):
         self.display(self.widget)
         return self.pause + self.dwell * text.count(" ")
 
-    def handle_interlude(self, obj, folder, *args, **kwargs):
-        raise NotImplementedError
-        if not self.buf:
-            self.waiting = True
-            interval = 5000
-            self.display(self.widget, "Enter a command: ")
-            yield None
-        else:
-            self.waiting = False
-            cmd = "\n".join(self.buf)
-            self.log.info(cmd)
-            self.buf.clear()
-            self.log.debug(args)
-            yield super().handle_interlude(*args, cmd=cmd, log=self.log, **kwargs)
-
 class Presenter:
 
     def __init__(self, args, textarea, entry):
@@ -129,7 +113,6 @@ class Presenter:
         root = self.textarea.master
         if self.seq:
             item = self.seq.popleft()
-            logging.getLogger("bluemonday.play").debug(item)
             rv = list(self.handler(item, loop=root))
             secs = rv[0] if rv and isinstance(rv[0], int) else secs
         root.after(int(secs * 1000), self.play)
@@ -164,9 +147,7 @@ class Presenter:
             try:
                 self.index, script, self.interlude = next(self.state)
                 self.seq.append(script)
-                logging.getLogger("bluemonday.run").debug(script)
                 for shot, item in run_through(script, logic.references, strict=True):
-                    logging.getLogger("bluemonday.run").debug(item)
                     self.seq.append(shot)
                     self.seq.append(item)
 
@@ -174,13 +155,10 @@ class Presenter:
             except StopIteration:
                 if reload:
                     self.state = self.new_state()
-            finally:
-                self.log.info(self.folder)
 
         root.after(6000, self.run)
 
     def on_input(self, event):
-        self.log.debug(event)
         widget = event.widget
         try:
             val = widget.get().strip()
@@ -190,7 +168,6 @@ class Presenter:
                 self.player = logic.Player(name=val).set_state(logic.Spot.w12_ducane_prison)
                 logic.references.append(self.player)
                 self.buf.clear()
-                self.log.debug(logic.references)
                 widget.master.after(1, self.run)
             elif not self.seq:
                 cmd = "\n".join(self.buf)

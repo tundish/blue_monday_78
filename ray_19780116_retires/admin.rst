@@ -310,7 +310,8 @@ Ray complains about the service
     No-one replaces the stationery here you know. I had to bring in a load of rubber bands
     this morning from home.
 
-    The only thing we've got left here is pens. Ironically no one seems to steal those.
+    The only thing we've got left here is pens. Shamefully no one seems to want to steal
+    those.
 
 Ray says goodbye
 ----------------
