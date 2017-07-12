@@ -20,12 +20,51 @@ import collections
 import datetime
 import enum
 import itertools
+import re
+import unittest
 
 from turberfield.dialogue.model import SceneScript
 from turberfield.dialogue.types import EnumFactory
 from turberfield.dialogue.types import Persona
 from turberfield.dialogue.types import Player
 from turberfield.dialogue.types import Stateful
+
+class MatchMaker:
+
+    lookup = collections.defaultdict(list)
+    Phrase = collections.namedtuple("Phrase", ["gist", "variants"])
+
+    @classmethod
+    def register(cls, phrase):
+        for v in phrase.variants:
+            cls.lookup[cls.tokenize(v)].append(phrase)
+
+    @staticmethod
+    def tokenize(text):
+        return tuple(re.sub("[^a-z ]+", "", text.lower()).split())
+
+    @classmethod
+    def match(cls, text):
+        return iter(cls.lookup.get(cls.tokenize(text), []))
+
+    @classmethod
+    def words(cls):
+        return set(i for k in cls.lookup for i in k)
+
+class MatchmakerTests(unittest.TestCase):
+
+    def test_tokenize(self):
+        self.assertEqual(
+            ("one", "two", "hree", "four"),
+            MatchMaker.tokenize("oNe Two 3hree Four!")
+        )
+    def test_match(self):
+        phrase = MatchMaker.Phrase("Thank you.", ["thanks", "cheers"])
+        MatchMaker.register(phrase)
+        self.assertEqual(2, len(MatchMaker.words()))
+        rv = next(MatchMaker.match("Thanks!"), None)
+        self.assertEqual(phrase, rv)
+
 
 class Spot(EnumFactory, enum.Enum):
     w12_ducane_prison = "gcpv4d2dm6v2"
@@ -79,3 +118,6 @@ ray = SceneScript.Folder(
 )
 
 schedule.extend((ray, justin))
+
+if __name__ == "__main__":
+    unittest.main()
