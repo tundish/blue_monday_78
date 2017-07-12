@@ -38,6 +38,7 @@ class MatchMaker:
     def register(cls, phrase):
         for v in phrase.variants:
             cls.lookup[cls.tokenize(v)].append(phrase)
+        return phrase
 
     @staticmethod
     def tokenize(text):
@@ -52,13 +53,14 @@ class MatchMaker:
     def words(cls):
         return set(i for k in cls.lookup for i in k)
 
-class MatchmakerTests(unittest.TestCase):
+class MatchMakerTests(unittest.TestCase):
 
     def test_tokenize(self):
         self.assertEqual(
             ("one", "two", "hree", "four"),
             MatchMaker.tokenize("oNe Two 3hree Four!")
         )
+
     def test_match(self):
         phrase = MatchMaker.Phrase("Thank you.", ["thanks", "cheers"])
         MatchMaker.register(phrase)
@@ -98,9 +100,16 @@ ensemble = [
 
 references = ensemble + [Spot]
 
+phrases = [
+    MatchMaker.register(MatchMaker.Phrase(
+        "This is Frankie Marshall's place. Now go away.",
+        ["frankie", "go away", "leave", "off"]
+    )),
+]
+
 schedule = collections.deque([])
 
-def interlude(folder, index, ensemble, branches, cmd="", log=None, loop=None):
+def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=None):
     branches.rotate(-1)
     return branches[0]
 
