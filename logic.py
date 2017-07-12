@@ -45,7 +45,8 @@ class MatchMaker:
 
     @classmethod
     def match(cls, text):
-        return iter(cls.lookup.get(cls.tokenize(text), []))
+        key = tuple(i for i in cls.tokenize(text) if i in cls.words())
+        return iter(cls.lookup.get(key, []))
 
     @classmethod
     def words(cls):
@@ -63,6 +64,12 @@ class MatchmakerTests(unittest.TestCase):
         MatchMaker.register(phrase)
         self.assertEqual(2, len(MatchMaker.words()))
         rv = next(MatchMaker.match("Thanks!"), None)
+        self.assertEqual(phrase, rv)
+
+    def test_match_surplus(self):
+        phrase = MatchMaker.Phrase("Thank you.", ["thanks", "cheers"])
+        MatchMaker.register(phrase)
+        rv = next(MatchMaker.match("Thanks a lot!"), None)
         self.assertEqual(phrase, rv)
 
 
