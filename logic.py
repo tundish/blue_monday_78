@@ -55,6 +55,12 @@ class MatchMaker:
 
 class MatchMakerTests(unittest.TestCase):
 
+    def setUp(self):
+        self._lookup, MatchMaker.lookup = MatchMaker.lookup, collections.defaultdict(list)
+
+    def tearDown(self):
+        MatchMaker.lookup = self._lookup
+
     def test_tokenize(self):
         self.assertEqual(
             ("one", "two", "hree", "four"),
