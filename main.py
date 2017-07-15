@@ -172,7 +172,7 @@ class Presenter:
                 widget.master.after(1, self.run)
             elif not self.seq:
                 cmd = "\n".join(self.buf)
-                self.bebug.info(cmd)
+                self.log.debug(cmd)
                 phrase = next(logic.MatchMaker.match(cmd), None)
                 if phrase is not None:
                     self.buf.clear()
