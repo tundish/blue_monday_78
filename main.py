@@ -66,6 +66,7 @@ class GUIHandler(TerminalHandler):
 
     def handle_scene(self, obj):
         self.display(self.widget, obj.scene.capitalize())
+        self.speaker = None
         return self.pause
 
     def handle_shot(self, obj):
@@ -171,10 +172,12 @@ class Presenter:
                 widget.master.after(1, self.run)
             elif not self.seq:
                 cmd = "\n".join(self.buf)
-                self.log.info(cmd)
-                self.buf.clear()
+                self.bebug.info(cmd)
+                phrase = next(logic.MatchMaker.match(cmd), None)
+                if phrase is not None:
+                    self.buf.clear()
                 self.folder = self.interlude(
-                    self.folder, self.index, logic.references, logic.schedule, cmd=cmd
+                    self.folder, self.index, logic.references, logic.schedule, phrase=phrase
                 )
                 widget.master.after(1, self.run, True)
         finally:

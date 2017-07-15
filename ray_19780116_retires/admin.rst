@@ -43,10 +43,10 @@
    The player entity.
 
 
-First positions
-~~~~~~~~~~~~~~~
+Stairwell
+~~~~~~~~~
 
-HM Prison Wormwood Scrubs, J Wing.
+HM Prison Wormwood Scrubs.
 
 
 Ray does the intros
@@ -77,9 +77,7 @@ Ray does the intros
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~
 
-
-HM Prison Pentonville, J Wing.
-
+HM Prison Wormwood Scrubs.
 
 Karen talks of the journey
 --------------------------
@@ -297,7 +295,7 @@ Karen talks of the keys
 Guards' Office
 ~~~~~~~~~~~~~~
 
-HM Prison Pentonville, J Wing.
+HM Prison Wormwood Scrubs.
 
 Ray complains about the service
 -------------------------------
@@ -313,9 +311,10 @@ Ray complains about the service
     The only thing we've got left here is pens. Shamefully no one seems to want to steal
     those.
 
-Ray says goodbye
-----------------
+Ray does the paperwork
+----------------------
 
+.. This shot should end in a question. The next interlude will be the first to need user input/
 
 [OFFICER]_
 
@@ -326,16 +325,6 @@ Ray says goodbye
 
     It isn't usual to read a form B107 to its subject, |HERO_TITLE| |HERO_SURNAME|, but
     it looks like you've been playing it straight.
-
-    I can see you have a difficult family background. Very easy to find yourself in prison
-    the first time.
-
-    But I'd like to say, I've been impressed by your influence on |MARTIN_FIRSTNAME| |MARTIN_SURNAME|.
-    His literacy is very much improved. And he's been practicing his handwriting too, I understand.
-
-    Well done for making it so far.
-
-    Take every opportunity you find out there.
 
 
 .. |MARTIN_FIRSTNAME| property:: MARTIN.name.firstname
