@@ -281,8 +281,7 @@ Karen talks of the keys
     The big one is for the front doors. Silver one is the office key.
     And this one opens the padlock on the cage.
 
-    Flog as much of that gear as you can, but don't get caught with
-    it, right?
+    Whatever's in the cage, you can have. Don't touch nothing else. You got that?
 
 [MARTIN]_
 
