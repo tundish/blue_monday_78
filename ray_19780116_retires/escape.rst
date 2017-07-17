@@ -30,18 +30,43 @@ Ray's first hint
 
 [OFFICER]_
 
-    I can see you have a difficult family background. Very easy to find yourself in prison
-    the first time.
+    It's a funny thing. This happens to be my last day as well.
+    I'm about to take early retirement.
+
+    After thirty years. I came straight out of the Army into the Prison Service.
+
+    So at least we have this in common; neither of us can wait to get out of here! 
+
+.. Martin and Karen's argument has become very loud.
+
+[OFFICER]_
+
+    There's never enough time is there, to say what we have to. But I'd like
+    you to know I've been impressed by your influence on |MARTIN_FIRSTNAME| |MARTIN_SURNAME|.
+    His literacy is very much improved. And he's been practicing his handwriting too, I understand.
+
+.. There is cursing and screaming.
+
+[OFFICER]_
+
+    And I know why that is. You didn't start out with many options in life.
+    We know you have a difficult family background.
+
+    Most people don't recover from such a beginning. Except, you have a very special
+    kind of tenacity. You don't give up, do you?
+
+    I'd just like you to know, that I admire your attitude. Although I can see it might
+    lead to more trouble.
+
+.. An alarm bell rings.
+
+[OFFICER]_
+
+    So just let me say this.
 
     If you can't get rid of the family skeleton, you may as well make it dance.
 
-    But I'd like to say, I've been impressed by your influence on |MARTIN_FIRSTNAME| |MARTIN_SURNAME|.
-    His literacy is very much improved. And he's been practicing his handwriting too, I understand.
-
-    Well done for making it so far.
-
-    Take every opportunity you find out there.
-
+    Now, goodbye, and good luck.
 
 .. This scene should pass on a phrase for use later.
 
