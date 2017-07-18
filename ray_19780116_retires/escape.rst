@@ -56,7 +56,7 @@ Ray's first hint
     kind of tenacity. You don't give up, do you?
 
     I'd just like you to know, that I admire your attitude. Although I can see it might
-    lead to more trouble.
+    lead to more trouble if you're not careful.
 
 .. An alarm bell rings.
 
@@ -64,7 +64,7 @@ Ray's first hint
 
     So just let me say this.
 
-    If you can't get rid of the family skeleton, you may as well make it dance.
+    If you can't get rid of the family skeleton, you may as well make it dance, eh?
 
     Now, goodbye, and good luck.
 

@@ -92,6 +92,7 @@ class Prisoner(Stateful, Persona): pass
 class PrisonVisitor(Stateful, Persona): pass
 class Barman(Stateful, Persona): pass
 class Hipster(Stateful, Persona): pass
+class Character(Stateful, Persona): pass
 
 
 blue_monday = datetime.date(1978, 1, 16)
@@ -102,6 +103,9 @@ ensemble = [
     PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison),
     Prisoner(name="Mr Martin Sheppey"),
     PrisonVisitor(name="Mrs Karen Sheppey"),
+    Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
+    Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
+    Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),
 ]
 
 references = ensemble + [Spot]
