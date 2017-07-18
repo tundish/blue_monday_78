@@ -109,7 +109,7 @@ A pub in Shepherd's Bush
 
 [BARMAN]_
 
-    Very much a patriot, is Vic. Of the old scheool variety. And some of his circle can be a bit...
+    Very much a patriot, is Vic. Of the old school variety. And some of his circle can be a bit...
 
 [HIPSTER]_
 
