@@ -37,6 +37,7 @@ import logic
 Python 3.6 requires PyInstaller-3.3.dev0+gabfc806
 
 """
+DEFAULT_DWELL = TerminalHandler.dwell + 0.1
 
 class GUIHandler(TerminalHandler):
 
@@ -224,8 +225,8 @@ def parser(description=__doc__):
         help="Time in seconds [{th.pause}] to pause after a line.".format(th=TerminalHandler)
     )
     rv.add_argument(
-        "--dwell", type=float, default=TerminalHandler.dwell,
-        help="Time in seconds [{th.dwell}] to dwell on each word.".format(th=TerminalHandler)
+        "--dwell", type=float, default=DEFAULT_DWELL,
+        help="Time in seconds [{0}] to dwell on each word.".format(DEFAULT_DWELL)
     )
     rv.add_argument(
         "--db", required=False, default=None,
