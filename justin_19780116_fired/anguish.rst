@@ -31,7 +31,7 @@ A pub in Shepherd's Bush
 [NOTES]_
 
     The head and shoulders of |BARMAN_FIRSTNAME| |BARMAN_SURNAME| rise
-    slowly above the level of the counter top. He emerges up the cellar
+    slowly above the level of the counter top. He emerges from the cellar
     steps at a resigned pace.
 
     His eyes are attracted, like a magpie, to an object on the bar. It is
@@ -82,6 +82,41 @@ A pub in Shepherd's Bush
 [BARMAN]_
 
     Where's home for you then, |HIPSTER_FIRSTNAME|?
+
+[HIPSTER]_
+
+    Well, I grew up in Antigua, actually.
+
+[DRINKER_2]_
+
+    Where?
+
+[HIPSTER]_
+
+    My family are...
+
+    Have you heard of |HIPSTER_SURNAME|?
+
+[NOTES]_
+
+    Nobody has.
+
+[HIPSTER]_
+
+    Well, I'm |HIPSTER_FIRSTNAME| |HIPSTER_SURNAME|.
+
+    Our family has a shipping business.
+
+    My uncle, really.
+
+[DRINKER_2]_
+
+    Well stroll on. Get the door, |BARMAN_FIRSTNAME|. How much
+    shall we ask for ransom?
+
+[DRINKER_1]_
+
+    Ha ha ha ha!
 
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |BARMAN_SURNAME| property:: BARMAN.name.surname
