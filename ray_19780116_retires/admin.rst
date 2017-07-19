@@ -156,7 +156,7 @@ Karen talks of her work
 
     And wintertime the cold comes straight through the glass.
 
-    So I have my cardie.
+    So for that I have my cardie.
 
 [MARTIN]_
 
@@ -233,28 +233,31 @@ Karen talks of the keys
 
     With some documents. They were addressed to you.
 
-    How is your name on a property deed, |MARTIN|? Where did the money come from for that?
+    This is a property deed, in't it?
 
 [MARTIN]_
 
-    What money? There isn't any money.
+    How would I know?
 
 [KAREN]_
 
-    Oh, tell me about it! The only money we have is what I earn.
-
-    Then which bank gave you another loan? You're in prison for theft and you can't read.
+    Do you own property, now, |MARTIN|? While you're in for theft
+    and the only money we have is what I earn?
 
 [MARTIN]_
 
-    There's no bank and there's no money. I'm just doing a favour for someone.
+    I'm just doing a favour for someone.
 
 [KAREN]_
 
-    A favour? Oh my God, what are you mixed up in now?
+    A favour? Lord, what are you mixed up in now? A favour.
 
-    Every chance that comes along you go and fall for some dodgy scheme. And it's not
-    you that suffers in the end, it's me and the kids.
+    Someone's put one on you. You're getting letters from law firms and
+    you can't even read.
+
+    Every chance that comes along you go and fall for some dodgy deal.
+    And it's not you that suffers in the end, it's me and the kids.
+    It always comes back on us!
 
 [MARTIN]_
 
@@ -262,12 +265,21 @@ Karen talks of the keys
 
 [KAREN]_
 
-    Or I could call him over. You're not doing this to me again.
+    Or maybe I should call him over. You're not doing this to us again.
+    I'm sick of bloody solicitors and loan agreements and ...
+
+    Bailiffs! 
 
 [MARTIN]_
 
-    All right. See over there? That's my cellie. Gets out today.
-    |HERO| will take them.
+    All right. Shut up.
+
+    Shut up, will you.
+
+    See over there? That's my cellie. Gets out today.
+    |HERO| will have them.
+
+    Then you can shut up.
 
 [KAREN]_
 

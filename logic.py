@@ -87,6 +87,7 @@ class Spot(EnumFactory, enum.Enum):
     w12_goldhawk_tavern = "gcpufzbd8x5d"
     w12_latimer_arches = "gcpv4cxb3dh4"
 
+class Narrator(Stateful): pass
 class PrisonOfficer(Stateful, Persona): pass
 class Prisoner(Stateful, Persona): pass
 class PrisonVisitor(Stateful, Persona): pass
@@ -98,6 +99,7 @@ class Character(Stateful, Persona): pass
 blue_monday = datetime.date(1978, 1, 16)
 
 ensemble = [
+    Narrator(),
     Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
     Hipster(name="Mr Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
     PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison),
@@ -127,7 +129,11 @@ justin = SceneScript.Folder(
     pkg=__name__,
     description="Justin Delcroix has just got the sack.",
     metadata=[blue_monday],
-    paths=["justin_19780116_fired/sorrows.rst"],
+    paths=[
+        "justin_19780116_fired/sorrows.rst",
+        "justin_19780116_fired/anguish.rst",
+        "justin_19780116_fired/desparation.rst"
+    ],
     interludes=itertools.repeat(interlude)
 )
 
