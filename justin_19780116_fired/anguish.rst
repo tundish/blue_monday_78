@@ -34,8 +34,54 @@ A pub in Shepherd's Bush
     slowly above the level of the counter top. He emerges up the cellar
     steps at a resigned pace.
 
-    His eyes are drawn, like a magpie's to an object on the bar. It is
+    His eyes are attracted, like a magpie, to an object on the bar. It is
     the well-stocked wallet of |HIPSTER_FIRSTNAME| |HIPSTER_SURNAME|.
+
+[BARMAN]_
+
+    Get you another double, er...
+
+[HIPSTER]_
+
+    |HIPSTER_FIRSTNAME|.
+
+[BARMAN]_
+
+    There you go, |HIPSTER_FIRSTNAME|. That'll be one pound exactly.
+
+[HIPSTER]_
+
+    Cheers, geezer.
+
+[BARMAN]_
+
+    Thankyou.
+
+[DRINKER_1]_
+
+    Ha ha ha ha!
+
+    Oh, look out.
+
+[DRINKER_2]_
+
+    We could have a Mockney on our hands.
+
+[DRINKER_1]_
+
+    No, I thought Mick Jagger had walked in here for a minute.
+
+[BARMAN]_
+
+    You're not from around here, are you, son.
+
+[HIPSTER]_
+
+    No, actually.
+
+[BARMAN]_
+
+    Where's home for you then, |HIPSTER_FIRSTNAME|?
 
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |BARMAN_SURNAME| property:: BARMAN.name.surname

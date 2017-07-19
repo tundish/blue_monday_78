@@ -241,7 +241,7 @@ Karen talks of the keys
 
 [KAREN]_
 
-    Do you own property, now, |MARTIN|? While you're in for theft
+    Do you own property now, |MARTIN|? While you're banged up for theft
     and the only money we have is what I earn?
 
 [MARTIN]_
@@ -283,7 +283,7 @@ Karen talks of the keys
 
 [KAREN]_
 
-    Then |HERO| can have them. And |HERO| had better not turn up at my door, either.
+    Well |HERO| can have them. And |HERO| had better not turn up at my door, either.
     I don't want any more of your prison mates hanging around.
 
 [MARTIN]_
