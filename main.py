@@ -80,9 +80,12 @@ class GUIHandler(TerminalHandler):
 
         # TODO: Fix this properly in turberfield-dialogue
         text = obj.text.replace("   ", " ").replace("  ", " ")
-
+        name = getattr(obj.persona, "name", "")
         if self.speaker is not obj.persona:
-            self.display(self.widget, textwrap.indent(obj.persona.name.firstname, " " * 2))
+            self.display(
+                self.widget,
+                name and textwrap.indent(name.firstname, " " * 2)
+            )
             self.speaker = obj.persona
 
         self.display(self.widget, textwrap.indent(textwrap.fill(text, width=60), " " * 10))
