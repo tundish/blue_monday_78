@@ -125,7 +125,7 @@ A pub in Shepherd's Bush
 
 [BARMAN]_
 
-    Sorry to hear that, |HIPSTER_FIRSTNAME|. Hope gets better soon.
+    Sorry to hear that, |HIPSTER_FIRSTNAME|. Hope he gets better soon.
 
 [HIPSTER]_
 
@@ -187,6 +187,50 @@ A pub in Shepherd's Bush
 
     Oh behave, |BARMAN_FIRSTNAME|. I'm a loyal customer.
 
+[BARMAN]_
+
+    |DRINKER_2_FIRSTNAME|, my business partners recognise the value of honouring
+    loyal customers, which is why they allow me to operate a tab.
+
+    They understand that a working man can have cashflow problems now and then.
+
+[DRINKER_2]_
+
+    I am not some fucking mug.
+
+[BARMAN]_
+
+    They do get concerned |DRINKER_2_FIRSTNAME|, when that gentleman makes no
+    attempt to reduce his obligations after a period of one calendar month.
+
+    And you know that, because we have had this conversation before.
+
+[DRINKER_2]_
+
+    Oh come on, |BARMAN_FIRSTNAME|!
+
+[BARMAN]_
+
+    This is for your own good. I'm not the one who comes to collect if you're
+    late.
+
+    You do not want to find yourself in that spot, |DRINKER_2_FIRSTNAME|.
+
+[HIPSTER]_
+
+    It's okay. I'll get these.
+
+[BARMAN]_
+
+    Well that's very good of you, |HIPSTER_FIRSTNAME|.
+
+[DRINKER_2]_
+
+    Too right.
+
+[DRINKER_1]_
+
+    Ha ha ha ha!
 
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |BARMAN_SURNAME| property:: BARMAN.name.surname
