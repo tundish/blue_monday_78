@@ -189,8 +189,8 @@ A pub in Shepherd's Bush
 
 [BARMAN]_
 
-    |DRINKER_2_FIRSTNAME|, my business partners recognise the importance of honouring
-    loyal customers, which is why they allow me to operate a slate.
+    |DRINKER_2_FIRSTNAME|, my business partners recognise the importance of
+    retaining loyal customers, which is why they allow me to operate a slate.
 
     They understand that a working man can have cashflow problems now and then.
 
