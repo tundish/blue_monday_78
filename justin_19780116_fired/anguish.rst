@@ -34,7 +34,7 @@ A pub in Shepherd's Bush
     slowly above the level of the counter top. He emerges from the cellar
     steps at a resigned pace.
 
-    His eyes are attracted, like a magpie, to an object on the bar. It is
+    His gaze is attracted, like a magpie, to an object on the bar. It is
     the well-stocked wallet of |HIPSTER_FIRSTNAME| |HIPSTER_SURNAME|.
 
 [BARMAN]_
@@ -85,7 +85,7 @@ A pub in Shepherd's Bush
 
 [HIPSTER]_
 
-    Well, I grew up in Antigua, actually.
+    Well, I grew up in Antigua, as it happens.
 
 [DRINKER_2]_
 
@@ -117,6 +117,17 @@ A pub in Shepherd's Bush
 [DRINKER_1]_
 
     Ha ha ha ha!
+
+[HIPSTER]_
+
+    You're not going to get any money out of my Uncle these days. He's not
+    doing too well. He stopped paying my tuition fees last year and I had
+    to drop out of the course I was here for.
+
+[BARMAN]_
+
+    That's a shame, |HIPSTER_FIRSTNAME|.
+
 
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |BARMAN_SURNAME| property:: BARMAN.name.surname
