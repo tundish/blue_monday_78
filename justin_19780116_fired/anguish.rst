@@ -120,16 +120,76 @@ A pub in Shepherd's Bush
 
 [HIPSTER]_
 
-    You're not going to get any money out of my Uncle these days. He's not
-    doing too well. He stopped paying my tuition fees last year and I had
-    to drop out of the course I was here for.
+    You're not going to get any money out of my Uncle. He's not doing too well
+    these days.
 
 [BARMAN]_
 
-    That's a shame, |HIPSTER_FIRSTNAME|.
+    Sorry to hear that, |HIPSTER_FIRSTNAME|. Hope gets better soon.
+
+[HIPSTER]_
+
+    No, I mean the business is in trouble. We didn't know until recently.
+
+    I came here on a course originally. My tuition fees went up last year
+    and he said he couldn't pay them any more.
+
+    So I dropped out.
+
+[BARMAN]_
+
+    What course was that then, music?
+
+[HIPSTER]_
+
+    No, I was doing Banking and International Finance.
+
+[DRINKER_1]_
+
+    Stone me.
+
+[HIPSTER]_
+
+    At City University. So then I dropped out. And it's not the right time
+    to go back home right now because everyone's at each other's throats about
+    the liquidation.
+
+[DRINKER_2]_
+
+    Liquid nation.
+
+[DRINKER_1]_
+
+    Ha ha ha ha!
+
+[HIPSTER]_
+
+    So I got the job at the record company.
+
+[DRINKER_2]_
+
+    Yes please, |BARMAN_FIRSTNAME|.
+
+[HIPSTER]_
+
+    And then I realised that I wanted to be in music.
+
+[BARMAN]_
+
+    I'm very sorry, |DRINKER_2_FIRSTNAME|, but I'm going to need to see some
+    cash this evening.
+
+[HIPSTER]_
+
+    Not banking. Which is just...
+
+[DRINKER_2]_
+
+    Oh behave, |BARMAN_FIRSTNAME|. I'm a loyal customer.
 
 
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |BARMAN_SURNAME| property:: BARMAN.name.surname
+.. |DRINKER_2_FIRSTNAME| property:: DRINKER_2.name.firstname
 .. |HIPSTER_FIRSTNAME| property:: HIPSTER.name.firstname
 .. |HIPSTER_SURNAME| property:: HIPSTER.name.surname
