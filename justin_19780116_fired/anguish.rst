@@ -31,8 +31,8 @@ A pub in Shepherd's Bush
 [NOTES]_
 
     The head and shoulders of |BARMAN_FIRSTNAME| |BARMAN_SURNAME| rise
-    slowly above the level of the counter top. He emerges from the cellar
-    steps at a resigned pace.
+    slowly above the level of the counter top. He is negotiating the
+    cellar steps at a resigned pace.
 
     His gaze is attracted, like a magpie, to an object on the bar. It is
     the well-stocked wallet of |HIPSTER_FIRSTNAME| |HIPSTER_SURNAME|.
@@ -51,7 +51,7 @@ A pub in Shepherd's Bush
 
 [HIPSTER]_
 
-    Cheers, geezer.
+    Nice one, geezer.
 
 [BARMAN]_
 
@@ -138,7 +138,7 @@ A pub in Shepherd's Bush
 
 [BARMAN]_
 
-    What course was that then, music?
+    What course was that then; music?
 
 [HIPSTER]_
 
@@ -151,7 +151,7 @@ A pub in Shepherd's Bush
 [HIPSTER]_
 
     At City University. So then I dropped out. And it's not the right time
-    to go back home right now because everyone's at each other's throats about
+    to go back home right now because everyone's at each other's throats over
     the liquidation.
 
 [DRINKER_2]_
@@ -189,8 +189,8 @@ A pub in Shepherd's Bush
 
 [BARMAN]_
 
-    |DRINKER_2_FIRSTNAME|, my business partners recognise the value of honouring
-    loyal customers, which is why they allow me to operate a tab.
+    |DRINKER_2_FIRSTNAME|, my business partners recognise the importance of honouring
+    loyal customers, which is why they allow me to operate a slate.
 
     They understand that a working man can have cashflow problems now and then.
 
@@ -211,8 +211,8 @@ A pub in Shepherd's Bush
 
 [BARMAN]_
 
-    This is for your own good. I'm not the one who comes to collect if you're
-    late.
+    I am saying this for your own good. It's not me who comes to collect if
+    you're late.
 
     You do not want to find yourself in that spot, |DRINKER_2_FIRSTNAME|.
 
