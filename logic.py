@@ -131,7 +131,9 @@ justin = SceneScript.Folder(
     metadata=[blue_monday],
     paths=[
         "justin_19780116_fired/sorrows.rst",
+        "justin_19780116_fired/offence.rst",
         "justin_19780116_fired/anguish.rst",
+        "justin_19780116_fired/offence.rst",
         "justin_19780116_fired/desparation.rst"
     ],
     interludes=itertools.repeat(interlude)
