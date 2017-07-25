@@ -60,7 +60,11 @@ class GUIHandler(TerminalHandler):
         self.widget = widget
         self.buf = collections.deque()
         self.speaker = None
-        super().__init__(None, *args, **kwargs)
+        try:
+            super().__init__(None, *args, **kwargs)
+        except UserWarning:
+            # NOTE: dev on 12.04
+            pass
 
     def handle_scenescript(self, obj):
         return 1
@@ -84,7 +88,10 @@ class GUIHandler(TerminalHandler):
         if self.speaker is not obj.persona:
             self.display(
                 self.widget,
-                name and textwrap.indent(name.firstname, " " * 2)
+                name and textwrap.indent(
+                    " ".join(*name) if isinstance(self.speaker, logic.Player) else name.firstname,
+                    " " * 2
+                )
             )
             self.speaker = obj.persona
 
@@ -144,7 +151,11 @@ class Presenter:
                 dwell=self.args.dwell,
                 log=self.log
             )
-            list(self.handler(logic.references, loop=root))
+            try:
+                list(self.handler(logic.references, loop=root))
+            except AttributeError:
+                # NOTE: dev on 12.04
+                pass 
             self.state = self.new_state()
             root.after(1, self.run)
             return
