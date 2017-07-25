@@ -33,5 +33,10 @@ A pub in Shepherd's Bush
 
 [HERO]_
 
-    Boo.
+    If you can't get rid of the family skeleton, you may as well
+    make it dance.
+
+[BARRY]_
+
+    Quite so.
 

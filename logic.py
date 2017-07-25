@@ -117,6 +117,11 @@ phrases = [
         "This is Frankie Marshall's place. Now go away.",
         ["frankie", "go away", "leave", "off"]
     )),
+    MatchMaker.register(MatchMaker.Phrase(
+        "If you can't get rid of the family skeleton, "
+        "you may as well make it dance."
+        ["family", "skeleton", "dance"]
+    )),
 ]
 
 schedule = collections.deque([])
