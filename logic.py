@@ -20,6 +20,7 @@ import collections
 import datetime
 import enum
 import itertools
+import logging
 import re
 import unittest
 
@@ -53,6 +54,14 @@ class MatchMaker:
     def words(cls):
         return set(i for k in cls.lookup for i in k)
 
+class ArcTests(unittest.TestCase):
+
+    def setUp(self):
+        self.obj = next(i for i in ensemble if isinstance(i, Hipster))
+
+    def test_initial(self):
+        print(self.obj)
+
 class MatchMakerTests(unittest.TestCase):
 
     def setUp(self):
@@ -80,6 +89,10 @@ class MatchMakerTests(unittest.TestCase):
         rv = next(MatchMaker.match("Thanks a lot!"), None)
         self.assertEqual(phrase, rv)
 
+class Attitude(EnumFactory, enum.Enum):
+    neutral = 0
+    grumpy = 1
+    affable = 2
 
 class Spot(EnumFactory, enum.Enum):
     w12_ducane_prison = "gcpv4d2dm6v2"
@@ -101,7 +114,8 @@ blue_monday = datetime.date(1978, 1, 16)
 ensemble = [
     Narrator(),
     Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
-    Hipster(name="Mr Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
+    Hipster(name="Mr Justin Cornelis Delcroix").set_state(
+        Spot.w12_goldhawk_tavern).set_state(int(blue_monday.strftime("%Y%m%d"))),
     PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison),
     Prisoner(name="Mr Martin Sheppey"),
     PrisonVisitor(name="Mrs Karen Sheppey"),
@@ -110,7 +124,7 @@ ensemble = [
     Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),
 ]
 
-references = ensemble + [Spot]
+references = ensemble + [Attitude, Spot]
 
 phrases = [
     MatchMaker.register(MatchMaker.Phrase(
@@ -119,7 +133,7 @@ phrases = [
     )),
     MatchMaker.register(MatchMaker.Phrase(
         "If you can't get rid of the family skeleton, "
-        "you may as well make it dance."
+        "you may as well make it dance.",
         ["family", "skeleton", "dance"]
     )),
 ]
@@ -127,6 +141,16 @@ phrases = [
 schedule = collections.deque([])
 
 def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=None):
+    log = log or logging.getLogger("bluemonday.logic")
+    try:
+        match = phrases.index(phrase)
+    except ValueError:
+        pass
+    else:
+        if match == 0:
+            obj = next(i for i in ensemble if isinstance(i, Hipster))
+            obj.set_state(obj.get_state() + 1)
+
     branches.rotate(-1)
     return branches[0]
 

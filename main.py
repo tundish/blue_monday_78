@@ -50,6 +50,16 @@ class GUIHandler(TerminalHandler):
         widget.see(tk.END)
 
     @staticmethod
+    def announce(speaker):
+        if isinstance(speaker, logic.Player):
+            return "{0.firstname} {0.surname}".format(speaker.name)
+        else:
+            try:
+                return speaker.name.firstname
+            except AttributeError:
+                return ""
+
+    @staticmethod
     def parse_command(cmd):
         try:
             return cmd.strip().split(" ")[-1][0].lower()
@@ -84,16 +94,15 @@ class GUIHandler(TerminalHandler):
 
         # TODO: Fix this properly in turberfield-dialogue
         text = obj.text.replace("   ", " ").replace("  ", " ")
-        name = getattr(obj.persona, "name", "")
         if self.speaker is not obj.persona:
+            self.speaker = obj.persona
             self.display(
                 self.widget,
-                name and textwrap.indent(
-                    " ".join(*name) if isinstance(self.speaker, logic.Player) else name.firstname,
+                textwrap.indent(
+                    self.announce(self.speaker),
                     " " * 2
                 )
             )
-            self.speaker = obj.persona
 
         self.display(self.widget, textwrap.indent(textwrap.fill(text, width=60), " " * 10))
         self.display(self.widget)
@@ -183,6 +192,7 @@ class Presenter:
             if not self.player:
                 self.player = logic.Player(name=val).set_state(logic.Spot.w12_ducane_prison)
                 logic.references.append(self.player)
+                self.log.debug(self.player)
                 self.buf.clear()
                 widget.master.after(1, self.run)
             elif not self.seq:

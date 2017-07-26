@@ -36,7 +36,7 @@ A pub in Shepherd's Bush
     If you can't get rid of the family skeleton, you may as well
     make it dance.
 
-[BARRY]_
+[BARMAN]_
 
     Quite so.
 
@@ -48,7 +48,7 @@ A pub in Shepherd's Bush
 
     Do you hava a function room, |BARMAN_FIRSTNAME|?
 
-[BARRY]_
+[BARMAN]_
 
     We have a skittle alley out the back. It's for hire at a reasonable
     rate. 
@@ -57,7 +57,7 @@ A pub in Shepherd's Bush
 
     I'm going to put on some live acts.
 
-[BARRY]_
+[BARMAN]_
 
     Oh no, hang on, |HIPSTER_FIRSTNAME|. We have a very strict policy
     when it comes to entertainment.
@@ -66,7 +66,7 @@ A pub in Shepherd's Bush
 
     I'm thinking, three bands. Punk or ska.
 
-[BARRY]_
+[BARMAN]_
 
     Punk or...
 
@@ -74,7 +74,7 @@ A pub in Shepherd's Bush
 
     I'll do a tape of the gig and have it cut to flexidisc.
 
-[BARRY]_
+[BARMAN]_
 
     No, I'm sorry, |HIPSTER_FIRSTNAME|. That's not going to run.
 
@@ -82,7 +82,7 @@ A pub in Shepherd's Bush
 
     Maybe I could get an old warehouse or an empty factory.
 
-[BARRY]_
+[BARMAN]_
 
     I tell you what. I can hook you up with beverages.
     I'll do you a good price on Babycham, sale or return.
