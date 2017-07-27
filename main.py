@@ -185,8 +185,6 @@ class Presenter:
             except StopIteration:
                 self.state = self.new_state()
 
-        root.after(6000, self.run)
-
     def on_input(self, event):
         widget = event.widget
         try:
