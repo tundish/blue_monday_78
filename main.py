@@ -182,10 +182,8 @@ class Presenter:
                     self.seq.append(item)
                 self.log.info("Read ahead {0}".format(n))
 
-                root.after(1, self.prompt)
             except StopIteration:
-                if reload:
-                    self.state = self.new_state()
+                self.state = self.new_state()
 
         root.after(6000, self.run)
 
@@ -210,7 +208,7 @@ class Presenter:
                 self.folder = self.interlude(
                     self.folder, self.index, logic.references, logic.schedule, phrase=phrase
                 )
-                widget.master.after(1, self.run, True)
+                widget.master.after(1, self.run)
         finally:
             widget.delete(0, tk.END)
 
