@@ -138,10 +138,9 @@ phrases = [
     )),
 ]
 
-schedule = collections.deque([])
-
 def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=None):
     log = log or logging.getLogger("bluemonday.logic")
+    log.debug(branches)
     try:
         match = phrases.index(phrase)
     except ValueError:
@@ -153,6 +152,17 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
 
     branches.rotate(-1)
     return branches[0]
+
+local = SceneScript.Folder(
+    pkg=__name__,
+    description="Location-specific elaboration.",
+    metadata=[blue_monday],
+    paths=[
+        "w12_19780116_local/w12_latimer_arches.rst",
+        "w12_19780116_local/w12_goldhawk_tavern.rst",
+    ],
+    interludes=itertools.repeat(interlude)
+)
 
 justin = SceneScript.Folder(
     pkg=__name__,
@@ -180,8 +190,9 @@ ray = SceneScript.Folder(
     interludes=itertools.repeat(interlude)
 )
 
-plotlines = (ray, justin)
-schedule.extend(plotlines)
+plotlines = (justin, ray)
+schedule = collections.deque([local])
+schedule.extendleft(plotlines)
 
 if __name__ == "__main__":
     unittest.main()
