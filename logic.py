@@ -180,7 +180,8 @@ ray = SceneScript.Folder(
     interludes=itertools.repeat(interlude)
 )
 
-schedule.extend((ray, justin))
+plotlines = (ray, justin)
+schedule.extend(plotlines)
 
 if __name__ == "__main__":
     unittest.main()

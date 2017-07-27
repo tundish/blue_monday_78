@@ -68,7 +68,7 @@ A pub in Shepherd's Bush
 
 [BARMAN]_
 
-    Punk or...
+    Punk or ...?
 
 [HIPSTER]_
 
@@ -76,7 +76,7 @@ A pub in Shepherd's Bush
 
 [BARMAN]_
 
-    No, I'm sorry, |HIPSTER_FIRSTNAME|. That's not going to run.
+    No, I'm sorry, |HIPSTER_FIRSTNAME|. That's not going to fly.
 
 [HIPSTER]_
 

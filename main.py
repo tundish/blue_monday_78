@@ -168,13 +168,19 @@ class Presenter:
             self.state = self.new_state()
             root.after(1, self.run)
             return
-        else:
+        elif not self.seq:
             try:
                 self.index, script, self.interlude = next(self.state)
                 self.seq.append(script)
-                for shot, item in run_through(script, logic.references, strict=True):
+                strict = self.folder in logic.plotlines
+                self.log.info(self.folder.paths[self.index])
+                self.log.info("Strict mode on." if strict else "Strict mode off.")
+                n = 0
+                for shot, item in run_through(script, logic.references, strict=strict):
+                    n += 1
                     self.seq.append(shot)
                     self.seq.append(item)
+                self.log.info("Read ahead {0}".format(n))
 
                 root.after(1, self.prompt)
             except StopIteration:
