@@ -141,6 +141,7 @@ phrases = [
 def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=None):
     log = log or logging.getLogger("bluemonday.logic")
     log.debug(branches)
+    log.info(phrase)
     try:
         match = phrases.index(phrase)
     except ValueError:

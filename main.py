@@ -127,7 +127,7 @@ class Presenter:
         self.entry.bind("<Return>", self.on_input)
 
         root = self.textarea.master
-        root.after(1, self.play)
+        root.after(200, self.play)
 
     def play(self):
         secs = getattr(self.handler, "pause", 1)
@@ -143,11 +143,11 @@ class Presenter:
         if not self.buf and not self.seq:
             self.handler.display(self.textarea, "Enter a command: ")
 
-    def new_state(self):
+    def new_state(self, folder):
         return zip(
             itertools.count(),
-            SceneScript.scripts(**self.folder._asdict()),
-            self.folder.interludes
+            SceneScript.scripts(**folder._asdict()),
+            folder.interludes
         )
 
     def run(self, reload=False):
@@ -165,17 +165,20 @@ class Presenter:
             except AttributeError:
                 # NOTE: dev on 12.04
                 pass 
-            self.state = self.new_state()
+            self.state = self.new_state(self.folder)
             root.after(1, self.run)
             return
         elif not self.seq:
-            if self.interlude:
-                self.folder = self.interlude(
+            if self.interlude and self.phrase:
+                folder = self.interlude(
                     self.folder, self.index,
                     logic.references, logic.schedule,
                     phrase=self.phrase
                 )
                 self.phrase = None
+                if folder is not self.folder:
+                    self.state = self.new_state(folder)
+                    self.folder = folder
 
             n = 0
             while not n:
@@ -191,7 +194,8 @@ class Presenter:
                         self.seq.append(item)
                     self.log.info("Read ahead {0}".format(n))
                 except StopIteration:
-                    self.state = self.new_state()
+                    # Wait for an input phrase
+                    return
 
     def on_input(self, event):
         widget = event.widget
@@ -209,9 +213,10 @@ class Presenter:
                 cmd = "\n".join(self.buf)
                 self.log.debug(cmd)
                 self.phrase = next(logic.MatchMaker.match(cmd), None)
+                self.log.debug(self.phrase)
                 if self.phrase is not None:
                     self.buf.clear()
-                widget.master.after(1, self.run)
+                widget.master.after(200, self.run)
         finally:
             widget.delete(0, tk.END)
 
