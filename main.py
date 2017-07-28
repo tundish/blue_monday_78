@@ -122,7 +122,7 @@ class Presenter:
         self.seq = collections.deque()
         self.folder = logic.ray
         self.state = None
-        self.progress = None
+        self.phrase = None
         self.interlude = None
         self.entry.bind("<Return>", self.on_input)
 
@@ -169,6 +169,14 @@ class Presenter:
             root.after(1, self.run)
             return
         elif not self.seq:
+            if self.interlude:
+                self.folder = self.interlude(
+                    self.folder, self.index,
+                    logic.references, logic.schedule,
+                    phrase=self.phrase
+                )
+                self.phrase = None
+
             n = 0
             while not n:
                 try:
@@ -200,12 +208,9 @@ class Presenter:
             elif not self.seq:
                 cmd = "\n".join(self.buf)
                 self.log.debug(cmd)
-                phrase = next(logic.MatchMaker.match(cmd), None)
-                if phrase is not None:
+                self.phrase = next(logic.MatchMaker.match(cmd), None)
+                if self.phrase is not None:
                     self.buf.clear()
-                self.folder = self.interlude(
-                    self.folder, self.index, logic.references, logic.schedule, phrase=phrase
-                )
                 widget.master.after(1, self.run)
         finally:
             widget.delete(0, tk.END)
