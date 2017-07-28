@@ -169,21 +169,21 @@ class Presenter:
             root.after(1, self.run)
             return
         elif not self.seq:
-            try:
-                self.index, script, self.interlude = next(self.state)
-                self.seq.append(script)
-                strict = self.folder in logic.plotlines
-                self.log.info(self.folder.paths[self.index])
-                self.log.info("Strict mode on." if strict else "Strict mode off.")
-                n = 0
-                for shot, item in run_through(script, logic.references, strict=strict):
-                    n += 1
-                    self.seq.append(shot)
-                    self.seq.append(item)
-                self.log.info("Read ahead {0}".format(n))
-
-            except StopIteration:
-                self.state = self.new_state()
+            n = 0
+            while not n:
+                try:
+                    self.index, script, self.interlude = next(self.state)
+                    self.seq.append(script)
+                    strict = self.folder in logic.plotlines
+                    self.log.info(self.folder.paths[self.index])
+                    self.log.info("Strict mode on." if strict else "Strict mode off.")
+                    for shot, item in run_through(script, logic.references, strict=strict):
+                        n += 1
+                        self.seq.append(shot)
+                        self.seq.append(item)
+                    self.log.info("Read ahead {0}".format(n))
+                except StopIteration:
+                    self.state = self.new_state()
 
     def on_input(self, event):
         widget = event.widget
