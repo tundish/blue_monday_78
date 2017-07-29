@@ -10,7 +10,7 @@ __doc__ = open(
 ).read()
 
 setup(
-    name="blue_monday_78",
+    name="bluemonday78",
     version="0.1.0",
     description="A dramatic screenplay",
     author="D Haynes",

@@ -6,21 +6,21 @@
 :date: 2017-07-19
 
 .. entity:: NOTES
-   :types: logic.Narrator
+   :types: bluemonday78.logic.Narrator
 
 .. entity:: HIPSTER
-   :types: logic.Hipster
-   :states: logic.Spot.w12_goldhawk_tavern
+   :types: bluemonday78.logic.Hipster
+   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
 
 .. entity:: BARMAN
-   :types: logic.Barman
-   :states: logic.Spot.w12_goldhawk_tavern
+   :types: bluemonday78.logic.Barman
+   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
 
 .. entity:: DRINKER_1
-   :states: logic.Spot.w12_goldhawk_tavern
+   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
 
 .. entity:: DRINKER_2
-   :states: logic.Spot.w12_goldhawk_tavern
+   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
 
 Anguish
 ~~~~~~~

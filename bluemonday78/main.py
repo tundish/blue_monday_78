@@ -31,7 +31,7 @@ from turberfield.dialogue.player import run_through
 from turberfield.dialogue.model import SceneScript
 from turberfield.utils.misc import log_setup
 
-import logic
+from bluemonday78 import logic
 
 """
 Python 3.6 requires PyInstaller-3.3.dev0+gabfc806

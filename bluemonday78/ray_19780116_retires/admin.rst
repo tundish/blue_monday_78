@@ -10,8 +10,8 @@
 .. |MARTIN| property:: MARTIN.name.firstname
 
 .. entity:: OFFICER
-   :types: logic.PrisonOfficer
-   :states: logic.Spot.w12_ducane_prison
+   :types: bluemonday78.logic.PrisonOfficer
+   :states: bluemonday78.logic.Spot.w12_ducane_prison
 
    A Prison Officer. We first meet him on the day he retires.
 
@@ -20,7 +20,7 @@
     * Often upset by inefficiency and lack of structure
 
 .. entity:: KAREN
-   :types: logic.PrisonVisitor
+   :types: bluemonday78.logic.PrisonVisitor
 
    A beautician in her late forties.
 
@@ -29,7 +29,7 @@
     * Has always looked after |MARTIN|.
 
 .. entity:: MARTIN
-   :types: logic.Prisoner
+   :types: bluemonday78.logic.Prisoner
 
    A small-time offender in his mid forties.
 
@@ -38,7 +38,7 @@
     * Misbehaved at Standford Hill to see less of |KAREN|.
 
 .. entity:: HERO
-   :types: logic.Player
+   :types: bluemonday78.logic.Player
 
    The player entity.
 

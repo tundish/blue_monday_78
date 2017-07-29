@@ -6,16 +6,16 @@
 :date: 2017-07-15
 
 .. entity:: OFFICER
-   :types: logic.PrisonOfficer
-   :states: logic.Spot.w12_ducane_prison
+   :types: bluemonday78.logic.PrisonOfficer
+   :states: bluemonday78.logic.Spot.w12_ducane_prison
 
 .. entity:: HERO
-   :types: logic.Player
+   :types: bluemonday78.logic.Player
 
    The player entity.
 
 .. entity:: MARTIN
-   :types: logic.Prisoner
+   :types: bluemonday78.logic.Prisoner
 
    Mentioned.
 

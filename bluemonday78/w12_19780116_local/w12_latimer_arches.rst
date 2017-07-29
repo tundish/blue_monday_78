@@ -6,18 +6,18 @@
 :date: 2017-07-27
 
 .. entity:: DAY_01
-   :types:  logic.Narrator
-   :states: logic.Spot.w12_latimer_arches
+   :types:  bluemonday78.logic.Narrator
+   :states: bluemonday78.logic.Spot.w12_latimer_arches
             19780116
 
 .. entity:: DAY_02
-   :types:  logic.Narrator
-   :states: logic.Spot.w12_latimer_arches
+   :types:  bluemonday78.logic.Narrator
+   :states: bluemonday78.logic.Spot.w12_latimer_arches
             19780116
 
 .. entity:: DAY_03
-   :types:  logic.Narrator
-   :states: logic.Spot.w12_latimer_arches
+   :types:  bluemonday78.logic.Narrator
+   :states: bluemonday78.logic.Spot.w12_latimer_arches
             19780116
 
 Addison Arches
