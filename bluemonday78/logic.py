@@ -155,7 +155,7 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
     return branches[0]
 
 local = SceneScript.Folder(
-    pkg=__name__,
+    pkg="bluemonday78",
     description="Location-specific elaboration.",
     metadata=[blue_monday],
     paths=[
@@ -166,7 +166,7 @@ local = SceneScript.Folder(
 )
 
 justin = SceneScript.Folder(
-    pkg=__name__,
+    pkg="bluemonday78",
     description="Justin Delcroix has just got the sack.",
     metadata=[blue_monday],
     paths=[
@@ -180,7 +180,7 @@ justin = SceneScript.Folder(
 )
 
 ray = SceneScript.Folder(
-    pkg=__name__,
+    pkg="bluemonday78",
     description="It's Ray Farington's last day.",
     metadata=[blue_monday],
     paths=[
