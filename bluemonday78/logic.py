@@ -22,7 +22,6 @@ import enum
 import itertools
 import logging
 import re
-import unittest
 
 from turberfield.dialogue.model import SceneScript
 from turberfield.dialogue.types import EnumFactory
@@ -53,41 +52,6 @@ class MatchMaker:
     @classmethod
     def words(cls):
         return set(i for k in cls.lookup for i in k)
-
-class ArcTests(unittest.TestCase):
-
-    def setUp(self):
-        self.obj = next(i for i in ensemble if isinstance(i, Hipster))
-
-    def test_initial(self):
-        print(self.obj)
-
-class MatchMakerTests(unittest.TestCase):
-
-    def setUp(self):
-        self._lookup, MatchMaker.lookup = MatchMaker.lookup, collections.defaultdict(list)
-
-    def tearDown(self):
-        MatchMaker.lookup = self._lookup
-
-    def test_tokenize(self):
-        self.assertEqual(
-            ("one", "two", "hree", "four"),
-            MatchMaker.tokenize("oNe Two 3hree Four!")
-        )
-
-    def test_match(self):
-        phrase = MatchMaker.Phrase("Thank you.", ["thanks", "cheers"])
-        MatchMaker.register(phrase)
-        self.assertEqual(2, len(MatchMaker.words()))
-        rv = next(MatchMaker.match("Thanks!"), None)
-        self.assertEqual(phrase, rv)
-
-    def test_match_surplus(self):
-        phrase = MatchMaker.Phrase("Thank you.", ["thanks", "cheers"])
-        MatchMaker.register(phrase)
-        rv = next(MatchMaker.match("Thanks a lot!"), None)
-        self.assertEqual(phrase, rv)
 
 class Attitude(EnumFactory, enum.Enum):
     neutral = 0
@@ -194,6 +158,3 @@ ray = SceneScript.Folder(
 plotlines = (justin, ray)
 schedule = collections.deque([local])
 schedule.extendleft(plotlines)
-
-if __name__ == "__main__":
-    unittest.main()

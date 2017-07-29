@@ -24,7 +24,7 @@ setup(
         "License :: OSI Approved :: GNU Affero General Public License v3"
         " or later (AGPLv3+)"
     ],
-    packages=["bluemonday78"],
+    packages=["bluemonday78", "bluemonday78.test"],
     package_dir={"bluemonday78": "bluemonday78"},
     include_package_data=True,
     install_requires=["turberfield-dialogue"],
