@@ -32,8 +32,6 @@ setup(
             "w12_19780116_local/*",
         ]
     },
-    #package_dir={"bluemonday78": "bluemonday78"},
-    #include_package_data=True,
     install_requires=["turberfield-dialogue"],
     zip_safe=True,
     entry_points={}
