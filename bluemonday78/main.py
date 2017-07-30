@@ -205,7 +205,13 @@ class Presenter:
             GUIHandler.display(self.textarea, val)
             if not self.player:
                 self.player = logic.Player(name=val).set_state(logic.Spot.w12_ducane_prison)
-                logic.references.append(self.player)
+                try:
+                    player = next(i for i in logic.references if isinstance(i, logic.Player))
+                    logic.references.remove(player)
+                except (StopIteration, ValueError):
+                    pass
+                finally:
+                    logic.references.append(self.player)
                 self.log.debug(self.player)
                 self.buf.clear()
                 widget.master.after(1, self.run)

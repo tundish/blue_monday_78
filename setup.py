@@ -25,8 +25,15 @@ setup(
         " or later (AGPLv3+)"
     ],
     packages=["bluemonday78", "bluemonday78.test"],
-    package_dir={"bluemonday78": "bluemonday78"},
-    include_package_data=True,
+    package_data = {
+        "bluemonday78": [
+            "justin_19780116_fired/*",
+            "ray_19780116_retires/*",
+            "w12_19780116_local/*",
+        ]
+    },
+    #package_dir={"bluemonday78": "bluemonday78"},
+    #include_package_data=True,
     install_requires=["turberfield-dialogue"],
     zip_safe=True,
     entry_points={}

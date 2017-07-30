@@ -77,6 +77,7 @@ blue_monday = datetime.date(1978, 1, 16)
 
 ensemble = [
     Narrator(),
+    Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison),
     Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
     Hipster(name="Mr Justin Cornelis Delcroix").set_state(
         Spot.w12_goldhawk_tavern).set_state(int(blue_monday.strftime("%Y%m%d"))),
@@ -105,6 +106,9 @@ phrases = [
 def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=None):
     log = log or logging.getLogger("bluemonday.logic")
     log.debug(branches)
+    if not branches:
+        return
+
     log.info(phrase)
     try:
         match = phrases.index(phrase)
