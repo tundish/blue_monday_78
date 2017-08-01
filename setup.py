@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # encoding: UTF-8
 
+import ast
 from setuptools import setup
 import os.path
 
@@ -9,9 +10,20 @@ __doc__ = open(
     "r"
 ).read()
 
+try:
+    # For setup.py install
+    from bluemonday_78 import __version__ as version
+except ImportError:
+    # For pip installations
+    version = str(ast.literal_eval(
+        open(os.path.join(os.path.dirname(__file__),
+        "bluemonday78", "__init__.py"),
+        'r').read().split("=")[-1].strip()
+    ))
+
 setup(
     name="bluemonday78",
-    version="0.1.0",
+    version=version,
     description="A dramatic screenplay",
     author="D Haynes",
     author_email="tundish@gigeconomy.org.uk",

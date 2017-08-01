@@ -1,9 +1,20 @@
+import ast
+import os.path
 import sys
 
 from cx_Freeze import setup
 from cx_Freeze import Executable
 
 import turberfield
+
+try:
+    from bluemonday_78 import __version__ as version
+except ImportError:
+    version = str(ast.literal_eval(
+        open(os.path.join(os.path.dirname(__file__),
+        "bluemonday78", "__init__.py"),
+        'r').read().split("=")[-1].strip()
+    ))
 
 buildOptions = {
     "packages": [
@@ -31,19 +42,23 @@ if sys.version_info.major != 3:
     print("Supports Python 3 only.")
     sys.exit(1)
 
-if sys.version_info.minor > 5:
+if sys.version_info.minor >= 6:
     buildOptions["packages"].extend([
         "asyncio.base_futures", "asyncio.base_tasks",
     ])
 
 executables = [
-    Executable("bluemonday78/main.py", base=base)
+    Executable(
+        "bluemonday78/main.py",
+        targetName="bluemonday",
+        base=base
+    )
 ]
 
 setup(
     name="bluemonday78",
-    version="1.0",
-    description="",
+    version=version,
+    description="A dramatic screenplay",
     options={
         "build_dmg": buildOptions,
         "build_exe": buildOptions,
