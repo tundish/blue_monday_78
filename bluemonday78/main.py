@@ -36,6 +36,11 @@ from bluemonday78 import logic
 """
 Python 3.6 requires PyInstaller-3.3.dev0+gabfc806
 
+pip install --egg .
+pyinstaller --clean -y --add-data dist/bluemonday78-0.1.0-py3.6.egg:. bluemonday78/main.py
+"""
+"""
+python freeze.py bdist_dmg
 """
 DEFAULT_DWELL = TerminalHandler.dwell + 0.1
 
