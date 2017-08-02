@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#   -*- encoding: UTF-8 -*-
+# encoding: UTF-8
 
 # This file is part of Addison Arches.
 #

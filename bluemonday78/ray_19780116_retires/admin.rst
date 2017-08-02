@@ -11,7 +11,7 @@
 
 .. entity:: OFFICER
    :types: bluemonday78.logic.PrisonOfficer
-   :states: bluemonday78.logic.Spot.w12_ducane_prison
+   :states: bluemonday78.logic.Spot.w12_ducane_prison_visiting
 
    A Prison Officer. We first meet him on the day he retires.
 
@@ -337,6 +337,7 @@ Ray does the paperwork
     It isn't usual to read a form B107 to its subject, |HERO_TITLE| |HERO_SURNAME|, but
     it looks like you've been playing it straight.
 
+.. property:: OFFICER.state bluemonday78.logic.Spot.w12_ducane_prison_release
 
 .. |MARTIN_FIRSTNAME| property:: MARTIN.name.firstname
 .. |MARTIN_SURNAME| property:: MARTIN.name.surname

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#   -*- encoding: UTF-8 -*-
+# encoding: UTF-8
 
 # This file is part of Addison Arches.
 #
@@ -33,16 +33,9 @@ from turberfield.utils.misc import log_setup
 
 from bluemonday78 import logic
 
-"""
-Python 3.6 requires PyInstaller-3.3.dev0+gabfc806
 
-pip install --egg .
-pyinstaller --clean -y --add-data dist/bluemonday78-0.1.0-py3.6.egg:. bluemonday78/main.py
-"""
-"""
-python freeze.py bdist_dmg
-"""
 DEFAULT_DWELL = TerminalHandler.dwell + 0.1
+
 
 class GUIHandler(TerminalHandler):
 
@@ -80,6 +73,17 @@ class GUIHandler(TerminalHandler):
         except UserWarning:
             # NOTE: dev on 12.04
             pass
+
+    def handle_property(self, obj):
+        if obj.object is not None:
+            try:
+                setattr(obj.object, obj.attr, obj.val)
+                self.log.debug("Property {0}.{1} set to {2}.".format(
+                    obj.object, obj.attr, obj.val
+                ))
+            except AttributeError as e:
+                self.log.error(". ".join(getattr(e, "args", e) or e))
+        return 0
 
     def handle_scenescript(self, obj):
         return 1
@@ -129,6 +133,7 @@ class Presenter:
         self.state = None
         self.phrase = None
         self.interlude = None
+        self.prompt = None
         self.entry.bind("<Return>", self.on_input)
 
         root = self.textarea.master
@@ -141,12 +146,10 @@ class Presenter:
             item = self.seq.popleft()
             rv = list(self.handler(item, loop=root))
             secs = rv[0] if rv and isinstance(rv[0], int) else secs
+        elif self.handler and self.prompt is None:
+            self.prompt = "\t".join(logic.MatchMaker.words())
+            self.handler.display(self.textarea, self.prompt)
         root.after(int(secs * 1000), self.play)
-
-    def prompt(self):
-        root = self.textarea.master
-        if not self.buf and not self.seq:
-            self.handler.display(self.textarea, "Enter a command: ")
 
     def new_state(self, folder):
         return zip(
@@ -226,6 +229,7 @@ class Presenter:
                 self.phrase = next(logic.MatchMaker.match(cmd), None)
                 self.log.debug(self.phrase)
                 if self.phrase is not None:
+                    self.prompt = None
                     self.buf.clear()
                 widget.master.after(200, self.run)
         finally:

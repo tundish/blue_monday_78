@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#   -*- encoding: UTF-8 -*-
+# encoding: UTF-8
 
 # This file is part of Addison Arches.
 #
@@ -59,7 +59,9 @@ class Attitude(EnumFactory, enum.Enum):
     affable = 2
 
 class Spot(EnumFactory, enum.Enum):
-    w12_ducane_prison = "gcpv4d2dm6v2"
+    w12_ducane_prison = "gcpv4d"
+    w12_ducane_prison_visiting = "gcpv4d252v5y"
+    w12_ducane_prison_release = "gcpv4d1qmdzb"
     w12_goldhawk_cafe = "gcpufzg2512x"
     w12_goldhawk_tavern = "gcpufzbd8x5d"
     w12_latimer_arches = "gcpv4cxb3dh4"
@@ -81,7 +83,7 @@ ensemble = [
     Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
     Hipster(name="Mr Justin Cornelis Delcroix").set_state(
         Spot.w12_goldhawk_tavern).set_state(int(blue_monday.strftime("%Y%m%d"))),
-    PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison),
+    PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_visiting),
     Prisoner(name="Mr Martin Sheppey"),
     PrisonVisitor(name="Mrs Karen Sheppey"),
     Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
