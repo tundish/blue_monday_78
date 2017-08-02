@@ -40,7 +40,7 @@ DEFAULT_DWELL = TerminalHandler.dwell + 0.1
 class GUIHandler(TerminalHandler):
 
     @staticmethod
-    def display(widget, text=""):
+    def display(widget, text="", strong=False):
         widget.configure(state="normal")
         widget.insert(tk.END, text)
         widget.insert(tk.END, "\n")
@@ -147,7 +147,7 @@ class Presenter:
             rv = list(self.handler(item, loop=root))
             secs = rv[0] if rv and isinstance(rv[0], int) else secs
         elif self.handler and self.prompt is None:
-            self.prompt = "\t".join(logic.MatchMaker.words())
+            self.prompt = " ".join(sorted(logic.MatchMaker.words()))
             self.handler.display(self.textarea, self.prompt)
         root.after(int(secs * 1000), self.play)
 
@@ -178,12 +178,15 @@ class Presenter:
             return
         elif not self.seq:
             if self.interlude and self.phrase:
+                # TODO: create Line and send it to the handler
+                self.handler.display(self.textarea, self.phrase.gist)
                 folder = self.interlude(
                     self.folder, self.index,
                     logic.references, logic.schedule,
                     phrase=self.phrase
                 )
                 self.phrase = None
+                self.prompt = None
                 if folder is not self.folder:
                     self.state = self.new_state(folder)
                     self.folder = folder
@@ -229,7 +232,6 @@ class Presenter:
                 self.phrase = next(logic.MatchMaker.match(cmd), None)
                 self.log.debug(self.phrase)
                 if self.phrase is not None:
-                    self.prompt = None
                     self.buf.clear()
                 widget.master.after(200, self.run)
         finally:
