@@ -33,6 +33,7 @@ from turberfield.dialogue.model import SceneScript
 from turberfield.utils.misc import log_setup
 
 from bluemonday78 import logic
+from bluemonday78 import __version__
 
 
 DEFAULT_DWELL = TerminalHandler.dwell + 0.1
@@ -129,6 +130,26 @@ class GUIHandler(TerminalHandler):
         return self.pause + self.dwell * text.count(" ")
 
 class Presenter:
+
+    titles = textwrap.dedent(
+        """
+        Blue Monday '78.
+
+        Version {version}
+
+        A test piece of interactive dialogue.
+        Written during the Summer Novel Festival 2017 Game Jam.
+
+        First, pick a name for the main character.
+        Type it as 'title firstname surname', eg:
+
+            Mr Maurice Micklewhite
+
+        """).format(version=__version__)
+
+    credits = textwrap.dedent(
+        """
+        """)
 
     def __init__(self, args, textarea, entry):
         self.args = args
@@ -263,6 +284,7 @@ def main(args):
     text.focus_set()
     text.pack(side=tk.LEFT, fill=tk.Y)
 
+    GUIHandler.display(text, Presenter.titles)
     GUIHandler.display(text, "Enter your player name: ")
 
     p = Presenter(args, text, entry)
