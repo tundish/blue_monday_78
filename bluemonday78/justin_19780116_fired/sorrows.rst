@@ -97,7 +97,7 @@ A pub in Shepherd's Bush
 
 [BARMAN]_
 
-    Much business in Ramsgate in the Winter?
+    Much business in Ramsgate over the Winter?
 
 [DRINKER_2]_
 

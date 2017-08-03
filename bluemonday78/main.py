@@ -24,6 +24,7 @@ import sys
 import textwrap
 
 import tkinter as tk
+from tkinter.font import Font
 from tkinter.scrolledtext import ScrolledText
 
 from turberfield.dialogue.handlers import TerminalHandler
@@ -40,9 +41,12 @@ DEFAULT_DWELL = TerminalHandler.dwell + 0.1
 class GUIHandler(TerminalHandler):
 
     @staticmethod
-    def display(widget, text="", strong=False):
+    def display(widget, text="", tags=()):
         widget.configure(state="normal")
-        widget.insert(tk.END, text)
+        if not tags:
+            widget.insert(tk.END, text)
+        else:
+            widget.insert(tk.END, text, tags)
         widget.insert(tk.END, "\n")
         widget.configure(state="disabled")
         widget.see(tk.END)
@@ -68,6 +72,8 @@ class GUIHandler(TerminalHandler):
         self.widget = widget
         self.buf = collections.deque()
         self.speaker = None
+        self.widget.tag_config("speaker", font=Font(family="Courier", size=12, weight="normal"))
+        self.widget.tag_config("speech", font=Font(family="Courier", size=12, weight="bold"))
         try:
             super().__init__(None, *args, **kwargs)
         except UserWarning:
@@ -110,10 +116,15 @@ class GUIHandler(TerminalHandler):
                 textwrap.indent(
                     self.announce(self.speaker),
                     " " * 2
-                )
+                ),
+                tags=("speaker",)
             )
 
-        self.display(self.widget, textwrap.indent(textwrap.fill(text, width=60), " " * 10))
+        self.display(
+            self.widget,
+            textwrap.indent(textwrap.fill(text, width=60), " " * 10),
+            tags=("speech",)
+        )
         self.display(self.widget)
         return self.pause + self.dwell * text.count(" ")
 
