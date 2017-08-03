@@ -133,23 +133,40 @@ class Presenter:
 
     titles = textwrap.dedent(
         """
-        Blue Monday '78.
+            Blue Monday '78.
 
         Version {version}
 
-        A test piece of interactive dialogue.
-        Written during the Summer Novel Festival 2017 Game Jam.
+            A test piece of interactive dialogue.
+            Written during the Summer Novel Festival 2017 Game Jam.
 
-        First, pick a name for the main character.
-        Type it as 'title firstname surname', eg:
+            First, pick a name for the main character.
+            Type it as 'title firstname surname', eg:
 
-            Mr Maurice Micklewhite
+                Mr Maurice Micklewhite
 
         """).format(version=__version__)
 
-    credits = textwrap.dedent(
+    credits = textwrap.indent(textwrap.dedent(
         """
-        """)
+
+        Programming:
+
+                  tundish
+
+        Soundtrack:
+
+            JunkDLC featuring p'role
+
+        Written and produced by:
+
+                 D Haynes
+
+
+
+                 © MMCXVII
+
+        """), " " * 16)
 
     def __init__(self, args, textarea, entry):
         self.args = args
