@@ -82,6 +82,11 @@ HM Prison Wormwood Scrubs.
 Karen talks of the journey
 --------------------------
 
+.. fx:: bluemonday78 ray_19780116_retires/organ-thoughtful-loop.wav
+   :offset: 0
+   :duration: 9000
+   :loop: 8
+
 
 [KAREN]_
 
