@@ -85,7 +85,7 @@ Karen talks of the journey
 .. fx:: bluemonday78 ray_19780116_retires/organ-thoughtful-loop.wav
    :offset: 0
    :duration: 9000
-   :loop: 8
+   :loop: 1
 
 
 [KAREN]_
@@ -136,6 +136,12 @@ Karen talks of the journey
 
 Karen talks of her work
 -----------------------
+
+
+.. fx:: bluemonday78 ray_19780116_retires/organ-thoughtful-loop.wav
+   :offset: 0
+   :duration: 9000
+   :loop: 1
 
 
 [KAREN]_
