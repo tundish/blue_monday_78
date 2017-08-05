@@ -42,7 +42,7 @@ if sys.platform == "win32":
     os.environ["TCL_LIBRARY"] = os.path.join(sys.base_exec_prefix, "tcl", "tcl8.6")
     os.environ["TK_LIBRARY"] = os.path.join(sys.base_exec_prefix, "tcl", "tk8.6")
     buildOptions["packages"].extend([
-        "asyncio.proactor_events", "windows_utils"
+        "asyncio.proactor_events", "asyncio.windows_utils"
     ])
     buildOptions["include_files"].append(
         os.path.join(sys.base_exec_prefix, "DLLs", "tcl86t.dll")
@@ -68,7 +68,7 @@ if sys.version_info.minor >= 6:
 executables = [
     Executable(
         "bluemonday78/main.py",
-        targetName="bluemonday",
+        targetName="bluemonday.exe" if sys.platform == "win32" else "bluemonday",
         base=base
     )
 ]
