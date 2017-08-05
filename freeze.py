@@ -7,6 +7,12 @@ from cx_Freeze import Executable
 
 import turberfield
 
+"""
+To work, this script needs a bugfix version of cx_Freeze:
+https://github.com/tundish/cx_Freeze/tree/feature/multiplatform_turberfield_binaries_for_itch
+
+"""
+
 try:
     from bluemonday_78 import __version__ as version
 except ImportError:
@@ -22,16 +28,28 @@ buildOptions = {
         "asyncio.selector_events",
         "pkg_resources._vendor.six", "pkg_resources._vendor.appdirs",
         "pkg_resources._vendor.packaging", "pkg_resources._vendor.pyparsing",
-        "blessings", "turberfield.dialogue",
+        "blessings", "tkinter", "turberfield.dialogue",
         "bluemonday78",
     ],
     "namespace_packages": ["turberfield"],
     "includes": [],
+    "include_files": [],
     "excludes": []
 }
 
 if sys.platform == "win32":
     base = "Win32GUI"
+    os.environ["TCL_LIBRARY"] = os.path.join(sys.base_exec_prefix, "tcl", "tcl8.6")
+    os.environ["TK_LIBRARY"] = os.path.join(sys.base_exec_prefix, "tcl", "tk8.6")
+    buildOptions["packages"].extend([
+        "asyncio.proactor_events", "windows_utils"
+    ])
+    buildOptions["include_files"].append(
+        os.path.join(sys.base_exec_prefix, "DLLs", "tcl86t.dll")
+    )
+    buildOptions["include_files"].append(
+        os.path.join(sys.base_exec_prefix, "DLLs", "tk86t.dll")
+    )
 elif sys.platform == "darwin":
     base = None
     buildOptions["packages"].append("_sysconfigdata_m_darwin_darwin")
