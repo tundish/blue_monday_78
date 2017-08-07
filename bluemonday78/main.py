@@ -304,12 +304,14 @@ def main(args):
 
     entry = tk.Entry()
     entry.pack(side=tk.BOTTOM, fill=tk.X)
+
     text = ScrolledText(root)
+    width = GUIHandler.register_fonts(text)["speech"].measure("0" * 76)
     text.focus_set()
-    text.pack(side=tk.LEFT, fill=tk.Y)
-    width = GUIHandler.register_fonts(text)["speech"].measure("0" * 70)
-    log.debug("{0} wide.".format(width))
+    text.pack(fill=tk.BOTH, expand=True)
+
     root.geometry("{0}x400".format(int(width)))
+    log.debug("{0} wide.".format(width))
 
     GUIHandler.display(text, Presenter.titles)
     GUIHandler.display(text, "Enter your player name: ")
