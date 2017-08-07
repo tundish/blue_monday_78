@@ -42,6 +42,16 @@ DEFAULT_DWELL = TerminalHandler.dwell + 0.1
 class GUIHandler(TerminalHandler):
 
     @staticmethod
+    def register_fonts(widget):
+        fonts = {
+            "speaker": Font(family="Courier", size=12, weight="normal"),
+            "speech": Font(family="Courier", size=12, weight="bold"),
+        }
+        for k, v in fonts.items():
+            widget.tag_config(k, font=v)
+        return fonts
+
+    @staticmethod
     def display(widget, text="", tags=()):
         widget.configure(state="normal")
         if not tags:
@@ -73,8 +83,6 @@ class GUIHandler(TerminalHandler):
         self.widget = widget
         self.buf = collections.deque()
         self.speaker = None
-        self.widget.tag_config("speaker", font=Font(family="Courier", size=12, weight="normal"))
-        self.widget.tag_config("speech", font=Font(family="Courier", size=12, weight="bold"))
         try:
             super().__init__(None, *args, **kwargs)
         except UserWarning:
@@ -293,13 +301,15 @@ def main(args):
     n = 0
     root = tk.Tk()
     root.title("Blue Monday '78")
-    root.geometry("560x400")
 
     entry = tk.Entry()
     entry.pack(side=tk.BOTTOM, fill=tk.X)
     text = ScrolledText(root)
     text.focus_set()
     text.pack(side=tk.LEFT, fill=tk.Y)
+    width = GUIHandler.register_fonts(text)["speech"].measure("0" * 70)
+    log.debug("{0} wide.".format(width))
+    root.geometry("{0}x400".format(int(width)))
 
     GUIHandler.display(text, Presenter.titles)
     GUIHandler.display(text, "Enter your player name: ")
