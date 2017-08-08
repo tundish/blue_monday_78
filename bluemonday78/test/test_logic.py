@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
+from collections import Counter
+from collections.abc import Callable
 import copy
 import unittest
 
@@ -27,6 +29,7 @@ from bluemonday78.logic import Hipster
 from bluemonday78.logic import MatchMaker
 from bluemonday78.logic import Narrator
 from bluemonday78.logic import Player
+from bluemonday78.logic import ray
 from bluemonday78.logic import references
 from bluemonday78.logic import schedule
 
@@ -34,9 +37,8 @@ class SceneTests(unittest.TestCase):
 
     def setUp(self):
         self.references = references
-        self.game = [copy.deepcopy(i) for i in schedule]
 
-    def test_locations(self):
+    def test_ray(self):
         hipster = next(i for i in self.references if isinstance(i, Hipster))
         player = next(i for i in self.references if isinstance(i, Player))
         narrator = next(i for i in self.references if isinstance(i, Narrator))
@@ -50,3 +52,23 @@ class SceneTests(unittest.TestCase):
                 self.calls = 0
                 self.visits = Counter()
 
+            def __call__(self, obj, *args, **kwargs):
+                print(obj)
+                rv = obj
+                if isinstance(obj, Callable):
+                    folder, index, ensemble, branches = args
+                    rv = obj(
+                        folder, index, self.references,
+                        branches=branches,
+                        phrase=None
+                    )
+                yield rv
+
+        folder = copy.deepcopy(ray)
+        test_handler = MockHandler(self, folder, self.references)
+        rv = list(rehearse(
+            folder, self.references, test_handler,
+            branches=schedule,
+            repeat=0, strict=True, roles=1,
+            loop=None
+        ))
