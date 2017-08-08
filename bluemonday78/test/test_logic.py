@@ -33,6 +33,29 @@ from bluemonday78.logic import ray
 from bluemonday78.logic import references
 from bluemonday78.logic import schedule
 
+
+class MockHandler:
+
+    def __init__(self, parent, folder, references):
+        self.parent = parent
+        self.folder = folder
+        self.references = references
+        self.calls = 0
+        self.visits = Counter()
+
+    def __call__(self, obj, *args, **kwargs):
+        print(obj)
+        rv = obj
+        if isinstance(obj, Callable):
+            folder, index, ensemble, branches = args
+            rv = obj(
+                folder, index, self.references,
+                branches=branches,
+                phrase=None
+            )
+        yield rv
+
+
 class SceneTests(unittest.TestCase):
 
     def setUp(self):
@@ -42,27 +65,6 @@ class SceneTests(unittest.TestCase):
         hipster = next(i for i in self.references if isinstance(i, Hipster))
         player = next(i for i in self.references if isinstance(i, Player))
         narrator = next(i for i in self.references if isinstance(i, Narrator))
-
-        class MockHandler:
-
-            def __init__(self, parent, folder, references):
-                self.parent = parent
-                self.folder = folder
-                self.references = references
-                self.calls = 0
-                self.visits = Counter()
-
-            def __call__(self, obj, *args, **kwargs):
-                print(obj)
-                rv = obj
-                if isinstance(obj, Callable):
-                    folder, index, ensemble, branches = args
-                    rv = obj(
-                        folder, index, self.references,
-                        branches=branches,
-                        phrase=None
-                    )
-                yield rv
 
         folder = copy.deepcopy(ray)
         test_handler = MockHandler(self, folder, self.references)
