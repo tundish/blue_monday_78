@@ -44,7 +44,6 @@ class MockHandler:
         self.visits = Counter()
 
     def __call__(self, obj, *args, **kwargs):
-        print(obj)
         rv = obj
         if isinstance(obj, Callable):
             folder, index, ensemble, branches = args
@@ -68,6 +67,8 @@ class SceneTests(unittest.TestCase):
 
         folder = copy.deepcopy(ray)
         test_handler = MockHandler(self, folder, self.references)
+        self.assertTrue(next(MatchMaker.match("OK"), None))
+        self.assertFalse(next(MatchMaker.match("frankie"), None))
         rv = list(rehearse(
             folder, self.references, test_handler,
             branches=schedule,

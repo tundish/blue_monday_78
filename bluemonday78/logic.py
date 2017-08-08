@@ -95,14 +95,18 @@ references = ensemble + [Attitude, Spot]
 
 phrases = [
     MatchMaker.register(MatchMaker.Phrase(
+        "Too right.",
+        ["OK", "okay", "yes", "I agree"]
+    )),
+    MatchMaker.Phrase(
         "This is Frankie Marshall's place. Now go away.",
         ["frankie", "go away", "leave", "off"]
-    )),
-    MatchMaker.register(MatchMaker.Phrase(
+    ),
+    MatchMaker.Phrase(
         "If you can't get rid of the family skeleton, "
         "you may as well make it dance.",
         ["family", "skeleton", "dance"]
-    )),
+    ),
 ]
 
 def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=None):
