@@ -124,13 +124,14 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
 
     log.debug(branches)
     narrator = next(i for i in ensemble if isinstance(i, Narrator))
+    if folder is ray and index == 0:
+        narrator.set_state(Spot.w12_goldhawk_tavern)
+
     try:
         match = phrases.index(phrase)
         log.debug(phrase)
     except ValueError:
-        if folder is ray and index == 0:
-            narrator.set_state(Spot.w12_goldhawk_tavern)
-
+        pass
     else:
         if match == 0:
             obj = next(i for i in ensemble if isinstance(i, Hipster))

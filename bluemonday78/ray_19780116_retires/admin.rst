@@ -61,7 +61,7 @@ Ray does the intros
     |WIFE_TITLE| |WIFE_SURNAME|, you and |HUSBAND_FIRSTNAME| have a longer visit today
     while we're conducting an inspection of the cell.
 
-    |HERO_TITLE| |HERO_SURNAME|, I'm going to ask you into the Guard's Office in a moment.
+    |HERO_TITLE| |HERO_SURNAME|, I'm going to ask you into the Guards' Office in a moment.
     Please wait right here while I open up.
 
 
