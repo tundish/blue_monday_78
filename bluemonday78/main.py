@@ -196,6 +196,12 @@ class Presenter:
         root = self.textarea.master
         root.after(200, self.play)
 
+    @property
+    def autoplay(self):
+        narrator = next(i for i in logic.ensemble if isinstance(i, logic.Narrator))
+        player = next(i for i in logic.ensemble if isinstance(i, logic.Player))
+        return narrator.get_state(logic.Spot) != player.get_state(logic.Spot)
+
     def play(self):
         secs = getattr(self.handler, "pause", 1)
         root = self.textarea.master
@@ -204,7 +210,10 @@ class Presenter:
             rv = list(self.handler(item, loop=root))
             secs = rv[0] if rv and isinstance(rv[0], int) else secs
         elif self.handler and self.prompt is None:
-            self.prompt = " ".join(sorted(logic.MatchMaker.words()))
+            if self.autoplay:
+                self.prompt = "Press return."
+            else:
+                self.prompt = " ".join(sorted(logic.MatchMaker.words()))
             self.handler.display(self.textarea, self.prompt)
         root.after(int(secs * 1000), self.play)
 
@@ -234,9 +243,10 @@ class Presenter:
             root.after(1, self.run)
             return
         elif not self.seq:
-            if self.interlude and self.phrase:
-                # TODO: create Line and send it to the handler
-                self.handler.display(self.textarea, self.phrase.gist)
+            self.log.info("autoplay: {0}".format(self.autoplay))
+            if self.interlude and (self.autoplay or self.phrase):
+                if self.phrase:
+                    self.handler.display(self.textarea, self.phrase.gist)
                 folder = self.interlude(
                     self.folder, self.index,
                     logic.references, logic.schedule,
@@ -287,7 +297,6 @@ class Presenter:
                 cmd = "\n".join(self.buf)
                 self.log.debug(cmd)
                 self.phrase = next(logic.MatchMaker.match(cmd), None)
-                self.log.debug(self.phrase)
                 if self.phrase is not None:
                     self.buf.clear()
                 widget.master.after(200, self.run)

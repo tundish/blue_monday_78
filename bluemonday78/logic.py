@@ -111,13 +111,13 @@ phrases = [
 
 def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=None):
     log = log or logging.getLogger("bluemonday.logic")
-    log.debug(branches)
     if not branches:
         return
 
-    log.info(phrase)
+    log.debug(branches)
     try:
         match = phrases.index(phrase)
+        log.debug(phrase)
     except ValueError:
         pass
     else:
