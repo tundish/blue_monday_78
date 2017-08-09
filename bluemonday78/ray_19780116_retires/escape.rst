@@ -11,8 +11,7 @@
 
 .. entity:: HERO
    :types: bluemonday78.logic.Player
-
-   The player entity.
+   :states: bluemonday78.logic.Spot.w12_ducane_prison_release
 
 .. entity:: MARTIN
    :types: bluemonday78.logic.Prisoner
