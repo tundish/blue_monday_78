@@ -78,18 +78,22 @@ class Character(Stateful, Persona): pass
 blue_monday = datetime.date(1978, 1, 16)
 
 ensemble = [
-    Narrator(),
-    Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison),
-    Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
-    Hipster(name="Mr Justin Cornelis Delcroix").set_state(
-        Spot.w12_goldhawk_tavern).set_state(int(blue_monday.strftime("%Y%m%d"))),
-    PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_visiting),
-    Prisoner(name="Mr Martin Sheppey"),
-    PrisonVisitor(name="Mrs Karen Sheppey"),
-    Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
-    Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
-    Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),
+    i.set_state(int(blue_monday.strftime("%Y%m%d")))
+    for i in (
+        Narrator().set_state(Spot.w12_ducane_prison),
+        Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison),
+        Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
+        Hipster(name="Mr Justin Cornelis Delcroix").set_state(
+            Spot.w12_goldhawk_tavern),
+        PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison),
+        Prisoner(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison),
+        PrisonVisitor(name="Mrs Karen Sheppey").set_state(Spot.w12_ducane_prison),
+        Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
+        Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
+        Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern)
+    )
 ]
+
 
 references = ensemble + [Attitude, Spot]
 
@@ -110,6 +114,10 @@ phrases = [
 ]
 
 def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=None):
+    """
+    This function manipulates the Narrator. The action follows.
+
+    """
     log = log or logging.getLogger("bluemonday.logic")
     if not branches:
         return

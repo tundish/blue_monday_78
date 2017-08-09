@@ -145,7 +145,7 @@ class Presenter:
 
         Version {version}
 
-            A test piece of interactive dialogue.
+            An interactive dialogue test piece.
             Written during the Summer Novel Festival 2017 Game Jam.
 
             First, pick a name for the main character.
@@ -213,7 +213,10 @@ class Presenter:
             if self.autoplay:
                 self.prompt = "Press return."
             else:
-                self.prompt = " ".join(sorted(logic.MatchMaker.words()))
+                self.prompt = (
+                    "Choose from these words: " + 
+                    " ".join(sorted(logic.MatchMaker.words()))
+                )
             self.handler.display(self.textarea, self.prompt)
         root.after(int(secs * 1000), self.play)
 
