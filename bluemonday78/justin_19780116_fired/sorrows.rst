@@ -14,9 +14,11 @@
    :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
 
 .. entity:: DRINKER_1
+   :types: bluemonday78.logic.Character
    :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
 
 .. entity:: DRINKER_2
+   :types: bluemonday78.logic.Character
    :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
 
 Sorrows

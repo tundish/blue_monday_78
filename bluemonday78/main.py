@@ -269,6 +269,10 @@ class Presenter:
                     strict = self.folder in logic.plotlines
                     self.log.info(self.folder.paths[self.index])
                     self.log.info("Strict mode on." if strict else "Strict mode off.")
+                    with script as dialogue:
+                        selection = dialogue.select(logic.references, roles=1)
+                        self.log.debug(selection)
+
                     for shot, item in run_through(script, logic.references, strict=strict):
                         n += 1
                         self.seq.append(shot)
