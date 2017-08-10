@@ -44,6 +44,7 @@ class GUIHandler(TerminalHandler):
     @staticmethod
     def register_fonts(widget):
         fonts = {
+            "narrator": Font(family="Helvetica", size=10, weight="bold", slant="italic"),
             "speaker": Font(family="Courier", size=12, weight="normal"),
             "speech": Font(family="Courier", size=12, weight="bold"),
         }
@@ -129,10 +130,13 @@ class GUIHandler(TerminalHandler):
                 tags=("speaker",)
             )
 
+        narrator = next(i for i in logic.ensemble if isinstance(i, logic.Narrator))
+        tags = ("narrator",) if self.speaker is narrator else ("speech",)
+
         self.display(
             self.widget,
             textwrap.indent(textwrap.fill(text, width=60), " " * 10),
-            tags=("speech",)
+            tags=tags
         )
         self.display(self.widget)
         return self.pause + self.dwell * text.count(" ")
@@ -249,7 +253,26 @@ class Presenter:
             self.log.info("autoplay: {0}".format(self.autoplay))
             if self.interlude and (self.autoplay or self.phrase):
                 if self.phrase:
-                    self.handler.display(self.textarea, self.phrase.gist)
+                    self.handler.display(
+                        self.textarea,
+                        textwrap.indent(
+                            self.handler.announce(self.player),
+                            " " * 2
+                        ),
+                        tags=("speaker",)
+                    )
+
+                    self.handler.display(
+                        self.textarea,
+                        textwrap.indent(
+                            textwrap.fill(
+                                self.phrase.gist,
+                                width=60
+                            ),
+                        " " * 10),
+                        tags=("speech",)
+                    )
+
                 folder = self.interlude(
                     self.folder, self.index,
                     logic.references, logic.schedule,
