@@ -85,7 +85,7 @@ ensemble = [
         Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
         Hipster(name="Mr Justin Cornelis Delcroix").set_state(
             Spot.w12_goldhawk_tavern),
-        PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison),
+        PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_visiting),
         Prisoner(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison),
         PrisonVisitor(name="Mrs Karen Sheppey").set_state(Spot.w12_ducane_prison),
         Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
@@ -132,10 +132,6 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
         log.debug(phrase)
     except ValueError:
         pass
-    else:
-        if match == 0:
-            obj = next(i for i in ensemble if isinstance(i, Hipster))
-            obj.set_state(obj.get_state() + 1)
 
     branches.rotate(-1)
     log.info("Narrator -> {0}".format(narrator.get_state(Spot).name))

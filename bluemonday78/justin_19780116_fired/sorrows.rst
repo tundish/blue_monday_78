@@ -8,6 +8,7 @@
 .. entity:: HIPSTER
    :types: bluemonday78.logic.Hipster
    :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
+            19780116
 
 .. entity:: BARMAN
    :types: bluemonday78.logic.Barman
@@ -136,3 +137,5 @@ A pub in Shepherd's Bush
 [DRINKER_2]_
 
     Who?
+
+.. property:: HIPSTER.state 19780117

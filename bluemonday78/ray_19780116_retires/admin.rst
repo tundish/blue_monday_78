@@ -11,7 +11,7 @@
 
 .. entity:: OFFICER
    :types: bluemonday78.logic.PrisonOfficer
-   :states: bluemonday78.logic.Spot.w12_ducane_prison
+   :states: bluemonday78.logic.Spot.w12_ducane_prison_visiting
 
    A Prison Officer. We first meet him on the day he retires.
 
