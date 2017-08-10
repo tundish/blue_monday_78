@@ -124,8 +124,12 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
 
     log.debug(branches)
     narrator = next(i for i in ensemble if isinstance(i, Narrator))
-    if folder is ray and index == 0:
+    if folder is ray:
         narrator.set_state(Spot.w12_goldhawk_tavern)
+    elif folder is justin:
+        narrator.set_state(Spot.w12_latimer_arches)
+    else:
+        narrator.set_state(Spot.w12_ducane_prison)
 
     try:
         match = phrases.index(phrase)
@@ -134,7 +138,7 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
         pass
 
     branches.rotate(-1)
-    log.info("Narrator -> {0}".format(narrator.get_state(Spot).name))
+    log.info("Narrator at {0}".format(narrator.get_state(Spot).name))
     return branches[0]
 
 local = SceneScript.Folder(
