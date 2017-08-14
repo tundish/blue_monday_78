@@ -39,9 +39,11 @@ from bluemonday78.logic import ray
 from bluemonday78.logic import Spot
 from bluemonday78.logic import ensemble
 from bluemonday78.logic import schedule
+from bluemonday78.main import GUIHandler
+from bluemonday78.main import Presenter
 
 
-class MockHandler:
+class MockHandler(GUIHandler):
 
     def __init__(self, parent, folder, references):
         self.parent = parent
@@ -49,6 +51,7 @@ class MockHandler:
         self.references = references
         self.calls = 0
         self.visits = Counter()
+        super().__init__(widget=None)
 
     def __call__(self, obj, *args, **kwargs):
         rv = obj
@@ -66,26 +69,14 @@ class SceneTests(unittest.TestCase):
 
     def setUp(self):
         self.schedule = copy.deepcopy(schedule)
-        self.ensemble = [
-            Narrator(),
-            Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison),
-            Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
-            Hipster(name="Mr Justin Cornelis Delcroix").set_state(
-                Spot.w12_goldhawk_tavern).set_state(int(blue_monday.strftime("%Y%m%d"))),
-            PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_visiting),
-            Prisoner(name="Mr Martin Sheppey"),
-            PrisonVisitor(name="Mrs Karen Sheppey"),
-            Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
-            Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
-            Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),
-        ]
+        self.ensemble = ensemble()
 
-    def test_ray(self):
+    def test_interlude(self):
         hipster = next(i for i in self.ensemble if isinstance(i, Hipster))
         player = next(i for i in self.ensemble if isinstance(i, Player))
         narrator = next(i for i in self.ensemble if isinstance(i, Narrator))
 
-        folder = copy.deepcopy(ray)
+        folder = copy.deepcopy(schedule)
         test_handler = MockHandler(self, folder, self.ensemble)
         self.assertTrue(next(MatchMaker.match("OK"), None))
         self.assertFalse(next(MatchMaker.match("frankie"), None))
