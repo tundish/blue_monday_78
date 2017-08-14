@@ -67,7 +67,7 @@ Ray's first hint
 
     Now, goodbye, and good luck.
 
-.. This scene should pass on a phrase for use later.
+.. property:: HERO.state bluemonday78.logic.Spot.w12_latimer_arches
 
 .. |HERO| property:: HERO.name.firstname
 .. |MARTIN_FIRSTNAME| property:: MARTIN.name.firstname

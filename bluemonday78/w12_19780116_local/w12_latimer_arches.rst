@@ -16,12 +16,12 @@
 .. entity:: DAY_02
    :types:  bluemonday78.logic.Narrator
    :states: bluemonday78.logic.Spot.w12_latimer_arches
-            19780116
+            19780117
 
 .. entity:: DAY_03
    :types:  bluemonday78.logic.Narrator
    :states: bluemonday78.logic.Spot.w12_latimer_arches
-            19780116
+            19780118
 
 Addison Arches
 ~~~~~~~~~~~~~~
@@ -35,6 +35,8 @@ Day 01
 
     Pull back through the splintered roof of a wooden cabin in the yard
     alongside Addison Arches.
+
+.. property:: DAY_01.state 19780117
 
 Day 02
 ------
@@ -69,6 +71,8 @@ Day 02
     There are crates of engineering components and pallets of metal stock.
 
     We pass label after label. They all say 'INOR-8'.
+
+.. property:: DAY_02.state 19780118
 
 Day 03
 ------

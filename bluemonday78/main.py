@@ -44,7 +44,9 @@ class GUIHandler(TerminalHandler):
     @staticmethod
     def register_fonts(widget):
         fonts = {
-            "narrator": Font(family="Helvetica", size=10, weight="bold", slant="italic"),
+            "direction": Font(family="Helvetica", size=12),
+            "titles": Font(family="Helvetica", size=12, weight="bold"),
+            "narrator": Font(family="Helvetica", size=12, slant="italic"),
             "speaker": Font(family="Courier", size=12, weight="normal"),
             "speech": Font(family="Courier", size=12, weight="bold"),
         }
@@ -105,7 +107,8 @@ class GUIHandler(TerminalHandler):
         return 1
 
     def handle_scene(self, obj):
-        self.display(self.widget, obj.scene.capitalize())
+        self.display(self.widget, obj.scene.capitalize(), tags=("titles",))
+        self.display(self.widget, "\n", tags=("titles",))
         self.speaker = None
         return self.pause
 
@@ -151,6 +154,7 @@ class Presenter:
 
             An interactive dialogue test piece.
             Written during the Summer Novel Festival 2017 Game Jam.
+            All characters are fictional.
 
             First, pick a name for the main character.
             Type it as 'title firstname surname', eg:
@@ -352,8 +356,8 @@ def main(args):
     root.geometry("{0}x400".format(int(width)))
     log.debug("{0} wide.".format(width))
 
-    GUIHandler.display(text, Presenter.titles)
-    GUIHandler.display(text, "Enter your player name: ")
+    GUIHandler.display(text, Presenter.titles, tags=("titles",))
+    GUIHandler.display(text, "Enter your player name: ", tags=("direction",))
 
     p = Presenter(args, text, entry)
     tk.mainloop()

@@ -36,7 +36,7 @@ A pub in Shepherd's Bush
     cellar steps at a resigned pace.
 
     His gaze is attracted, like a magpie, to an object on the bar. It is
-    the well-stocked wallet of |HIPSTER_FIRSTNAME| |HIPSTER_SURNAME|.
+    the well-stuffed wallet of |HIPSTER_FIRSTNAME| |HIPSTER_SURNAME|.
 
 [BARMAN]_
 
@@ -64,11 +64,9 @@ A pub in Shepherd's Bush
 
     Oh, look out.
 
-[DRINKER_2]_
-
     We could have a Mockney on our hands.
 
-[DRINKER_1]_
+[DRINKER_2]_
 
     No, I thought Mick Jagger had walked in here for a minute.
 
@@ -152,7 +150,7 @@ A pub in Shepherd's Bush
 [HIPSTER]_
 
     At City University. So then I dropped out. And it's not the right time
-    to go back home right now because everyone's at each other's throats over
+    to go back home just now because everyone's at each other's throats over
     the liquidation.
 
 [DRINKER_2]_
