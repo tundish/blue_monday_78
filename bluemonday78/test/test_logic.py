@@ -71,15 +71,14 @@ class SceneTests(unittest.TestCase):
         self.schedule = copy.deepcopy(schedule)
         self.ensemble = ensemble()
 
-    def test_interlude(self):
+    def test_ray(self):
         hipster = next(i for i in self.ensemble if isinstance(i, Hipster))
         player = next(i for i in self.ensemble if isinstance(i, Player))
         narrator = next(i for i in self.ensemble if isinstance(i, Narrator))
 
-        folder = copy.deepcopy(schedule)
-        test_handler = MockHandler(self, folder, self.ensemble)
-        self.assertTrue(next(MatchMaker.match("OK"), None))
-        self.assertFalse(next(MatchMaker.match("frankie"), None))
+        game = copy.deepcopy(schedule)
+        folder = next(i for i in game if i.pkg == ray.pkg)
+        test_handler = MockHandler(self, game, self.ensemble)
         rv = list(rehearse(
             folder, self.ensemble, test_handler,
             branches=schedule,
