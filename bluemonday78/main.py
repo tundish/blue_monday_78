@@ -108,7 +108,7 @@ class GUIHandler(TerminalHandler):
 
     def handle_scene(self, obj):
         self.display(self.widget, obj.scene.capitalize(), tags=("titles",))
-        self.display(self.widget, "\n", tags=("titles",))
+        self.display(self.widget, tags=("titles",))
         self.speaker = None
         return self.pause
 
@@ -315,6 +315,7 @@ class Presenter:
             val = widget.get().strip()
             self.buf.append(val)
             GUIHandler.display(self.textarea, val)
+            GUIHandler.display(self.textarea)
             if not self.player:
                 self.player = logic.Player(name=val).set_state(logic.Spot.w12_ducane_prison)
                 try:
