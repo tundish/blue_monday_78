@@ -80,6 +80,12 @@ class SceneTests(unittest.TestCase):
         cls.state = Presenter.new_state(cls.folder)
         cls.handler = MockHandler(cls.folder, cls.ensemble)
 
+    @classmethod
+    def branch_folder(cls, folder):
+        if folder is not cls.folder:
+            cls.state = Presenter.new_state(folder)
+            cls.folder = folder
+
     @staticmethod
     def run_script(folder, script, references, handler, state):
         strict = folder in plotlines
@@ -89,6 +95,7 @@ class SceneTests(unittest.TestCase):
         )):
             list(handler(shot, loop=None))
             list(handler(item, loop=None))
+            print(item)
         return n
 
     def test_001(self):
@@ -120,7 +127,7 @@ class SceneTests(unittest.TestCase):
             phrase=None
         )
         self.assertEqual(justin.paths, folder.paths)
-        self.folder = folder
+        self.branch_folder(folder)
 
     def test_002(self):
         self.assertEqual(19780116, self.characters["Hipster"].get_state())
@@ -136,6 +143,42 @@ class SceneTests(unittest.TestCase):
                 self.folder, script, self.ensemble,
                 self.handler, self.state
             )
+            print(n)
+
+        self.assertEqual(19780117, self.characters["Hipster"].get_state())
+        self.assertEqual(
+            Spot.w12_goldhawk_tavern,
+            self.characters["Hipster"].get_state(Spot)
+        )
+
+        folder = interlude(
+            self.folder, index,
+            self.ensemble, self.schedule,
+            phrase=None
+        )
+        self.assertEqual(local.paths, folder.paths)
+        self.folder = folder
+
+    def test_003(self):
+        self.assertEqual(19780116, self.characters["Narrator"].get_state())
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["Narrator"].get_state(Spot)
+        )
+
+        n = 0
+        while not n:
+            index, script, interlude = next(self.state)
+            n = self.run_script(
+                self.folder, script, self.ensemble,
+                self.handler, self.state
+            )
+
+        self.assertEqual(19780116, self.characters["Narrator"].get_state())
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["Narrator"].get_state(Spot)
+        )
 
         folder = interlude(
             self.folder, index,
