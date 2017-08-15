@@ -119,7 +119,7 @@ class SceneTests(unittest.TestCase):
             self.ensemble, self.schedule,
             phrase=None
         )
-        self.assertEqual(local.paths, folder.paths)
+        self.assertEqual(justin.paths, folder.paths)
         self.folder = folder
 
     def test_002(self):
@@ -142,6 +142,6 @@ class SceneTests(unittest.TestCase):
             self.ensemble, self.schedule,
             phrase=None
         )
-        self.assertEqual(justin.paths, folder.paths)
+        self.assertEqual(local.paths, folder.paths)
         self.folder = folder
 

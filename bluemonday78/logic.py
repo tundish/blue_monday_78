@@ -138,10 +138,7 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
     except ValueError:
         pass
 
-    print(branches)
     branches.rotate(-1)
-    print(branches)
-
     log.info("Narrator at {0}".format(narrator.get_state(Spot).name))
     return branches[0]
 
