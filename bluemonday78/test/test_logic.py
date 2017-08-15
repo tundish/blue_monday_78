@@ -47,8 +47,7 @@ from bluemonday78.main import Presenter
 
 class MockHandler(GUIHandler):
 
-    def __init__(self, parent, folder, references):
-        self.parent = parent
+    def __init__(self, folder, references):
         self.folder = folder
         self.references = references
         self.calls = 0
@@ -70,30 +69,39 @@ class MockHandler(GUIHandler):
 class SceneTests(unittest.TestCase):
 
     def setUp(self):
-        self.schedule = copy.deepcopy(schedule)
         self.ensemble = ensemble()
+        self.schedule = copy.deepcopy(schedule)
+        self.characters = {
+            typ.__name__: next(i for i in self.ensemble if isinstance(i, typ))
+            for typ in (Hipster, Player, Narrator)
+        }
 
-    def test_ray(self):
-        hipster = next(i for i in self.ensemble if isinstance(i, Hipster))
-        player = next(i for i in self.ensemble if isinstance(i, Player))
-        narrator = next(i for i in self.ensemble if isinstance(i, Narrator))
+    @staticmethod
+    def run_script(folder, script, references, handler, state):
+        strict = folder in plotlines
+        for n, (shot, item) in enumerate(run_through(
+            script, references, strict=strict
+        )):
+            handler(shot)
+            handler(item)
+        return n
 
-        game = copy.deepcopy(schedule)
-        folder = next(i for i in game if i.pkg == ray.pkg)
-        state = Presenter.new_state(folder)
-        test_handler = MockHandler(self, game, self.ensemble)
-        with self.subTest(n=0):
-            strict = folder in plotlines
-            index, script, interlude = next(state)
-            for shot, item in run_through(
-                script, self.ensemble, strict=strict
-            ):
-                test_handler(shot)
-                test_handler(item)
-            folder = interlude(
-                folder, index,
-                self.ensemble, self.schedule,
-                phrase=None
-            )
-            self.assertEqual(justin.pkg, folder.pkg)
-        
+    def test_001(self):
+        # This first test does some initialisation
+        self.folder = next(i for i in self.schedule if i.pkg == ray.pkg)
+        self.state = Presenter.new_state(self.folder)
+        self.handler = MockHandler(self.folder, self.ensemble)
+
+        index, script, interlude = next(self.state)
+        self.run_script(
+            self.folder, script, self.ensemble,
+            self.handler, self.state
+        )
+        folder = interlude(
+            self.folder, index,
+            self.ensemble, self.schedule,
+            phrase=None
+        )
+        self.assertEqual(justin.pkg, folder.pkg)
+        self.folder = folder
+
