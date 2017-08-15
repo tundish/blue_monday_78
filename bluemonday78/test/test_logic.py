@@ -30,19 +30,16 @@ from bluemonday78.logic import blue_monday
 from bluemonday78.logic import Barman
 from bluemonday78.logic import Character
 from bluemonday78.logic import Hipster
-from bluemonday78.logic import justin
 from bluemonday78.logic import MatchMaker
 from bluemonday78.logic import Narrator
 from bluemonday78.logic import Player
-from bluemonday78.logic import plotlines
 from bluemonday78.logic import Prisoner
 from bluemonday78.logic import PrisonOfficer
 from bluemonday78.logic import PrisonVisitor
-from bluemonday78.logic import ray
 from bluemonday78.logic import Spot
-from bluemonday78.logic import ensemble
-from bluemonday78.logic import schedule
 from bluemonday78.main import Presenter
+from bluemonday78.logic import justin, local, ray
+from bluemonday78.logic import ensemble, plotlines, schedule
 
 
 class MockHandler(TerminalHandler):
@@ -61,7 +58,6 @@ class MockHandler(TerminalHandler):
         return obj
 
     def handle_property(self, obj):
-        print(obj)
         if obj.object is not None:
             try:
                 setattr(obj.object, obj.attr, obj.val)
@@ -72,13 +68,17 @@ class MockHandler(TerminalHandler):
 
 class SceneTests(unittest.TestCase):
 
-    def setUp(self):
-        self.ensemble = ensemble()
-        self.schedule = copy.deepcopy(schedule)
-        self.characters = {
-            typ.__name__: next(i for i in self.ensemble if isinstance(i, typ))
+    @classmethod
+    def setUpClass(cls):
+        cls.ensemble = ensemble()
+        cls.schedule = copy.deepcopy(schedule)
+        cls.characters = {
+            typ.__name__: next(i for i in cls.ensemble if isinstance(i, typ))
             for typ in (Hipster, Player, Narrator, PrisonOfficer)
         }
+        cls.folder = next(i for i in cls.schedule if i.paths == ray.paths)
+        cls.state = Presenter.new_state(cls.folder)
+        cls.handler = MockHandler(cls.folder, cls.ensemble)
 
     @staticmethod
     def run_script(folder, script, references, handler, state):
@@ -91,13 +91,15 @@ class SceneTests(unittest.TestCase):
             list(handler(item, loop=None))
         return n
 
-    def initialise(self):
-        self.folder = next(i for i in self.schedule if i.pkg == ray.pkg)
-        self.state = Presenter.new_state(self.folder)
-        self.handler = MockHandler(self.folder, self.ensemble)
-
     def test_001(self):
-        self.initialise()
+        self.assertEqual(
+            Spot.w12_ducane_prison,
+            self.characters["Player"].get_state(Spot)
+        )
+        self.assertEqual(
+            Spot.w12_ducane_prison_visiting,
+            self.characters["PrisonOfficer"].get_state(Spot)
+        )
 
         n = 0
         while not n:
@@ -117,6 +119,29 @@ class SceneTests(unittest.TestCase):
             self.ensemble, self.schedule,
             phrase=None
         )
-        self.assertEqual(justin.pkg, folder.pkg)
+        self.assertEqual(local.paths, folder.paths)
+        self.folder = folder
+
+    def test_002(self):
+        self.assertEqual(19780116, self.characters["Hipster"].get_state())
+        self.assertEqual(
+            Spot.w12_goldhawk_tavern,
+            self.characters["Hipster"].get_state(Spot)
+        )
+
+        n = 0
+        while not n:
+            index, script, interlude = next(self.state)
+            n = self.run_script(
+                self.folder, script, self.ensemble,
+                self.handler, self.state
+            )
+
+        folder = interlude(
+            self.folder, index,
+            self.ensemble, self.schedule,
+            phrase=None
+        )
+        self.assertEqual(justin.paths, folder.paths)
         self.folder = folder
 

@@ -125,9 +125,9 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
 
     log.debug(branches)
     narrator = next(i for i in ensemble if isinstance(i, Narrator))
-    if folder is ray:
+    if folder.paths == ray.paths:
         narrator.set_state(Spot.w12_goldhawk_tavern)
-    elif folder is justin:
+    elif folder.paths == justin.paths:
         narrator.set_state(Spot.w12_latimer_arches)
     else:
         narrator.set_state(Spot.w12_ducane_prison)
@@ -138,7 +138,10 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
     except ValueError:
         pass
 
+    print(branches)
     branches.rotate(-1)
+    print(branches)
+
     log.info("Narrator at {0}".format(narrator.get_state(Spot).name))
     return branches[0]
 
