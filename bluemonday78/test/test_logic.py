@@ -90,9 +90,10 @@ class SceneTests(unittest.TestCase):
     def run_script(folder, script, references, handler):
         strict = folder in plotlines
         n = 0
-        for n, (shot, item) in enumerate(run_through(
+        for shot, item in run_through(
             script, references, strict=strict
-        )):
+        ):
+            n += 1
             list(handler(shot, loop=None))
             list(handler(item, loop=None))
         return n
@@ -205,6 +206,7 @@ class SceneTests(unittest.TestCase):
                 self.handler
             )
             print(vars(script))
+            print(n)
 
         self.assertEqual(19780117, self.characters["Narrator"].get_state())
         self.assertEqual(
