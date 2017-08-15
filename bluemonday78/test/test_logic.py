@@ -87,7 +87,7 @@ class SceneTests(unittest.TestCase):
             cls.folder = folder
 
     @staticmethod
-    def run_script(folder, script, references, handler, state):
+    def run_script(folder, script, references, handler):
         strict = folder in plotlines
         n = 0
         for n, (shot, item) in enumerate(run_through(
@@ -112,7 +112,7 @@ class SceneTests(unittest.TestCase):
             index, script, interlude = next(self.state)
             n = self.run_script(
                 self.folder, script, self.ensemble,
-                self.handler, self.state
+                self.handler
             )
 
         self.assertEqual(19780116, self.characters["PrisonOfficer"].get_state())
@@ -140,9 +140,8 @@ class SceneTests(unittest.TestCase):
             index, script, interlude = next(self.state)
             n = self.run_script(
                 self.folder, script, self.ensemble,
-                self.handler, self.state
+                self.handler
             )
-            print(n)
 
         self.assertEqual(19780117, self.characters["Hipster"].get_state())
         self.assertEqual(
@@ -170,7 +169,7 @@ class SceneTests(unittest.TestCase):
             index, script, interlude = next(self.state)
             n = self.run_script(
                 self.folder, script, self.ensemble,
-                self.handler, self.state
+                self.handler
             )
 
         self.assertEqual(19780117, self.characters["Narrator"].get_state())
@@ -185,5 +184,43 @@ class SceneTests(unittest.TestCase):
             phrase=None
         )
         self.assertEqual(ray.paths, folder.paths)
-        self.folder = folder
+        self.branch_folder(folder)
+
+    def test_004(self):
+        self.assertEqual(19780117, self.characters["Narrator"].get_state())
+        self.assertEqual(
+            Spot.w12_ducane_prison,
+            self.characters["Narrator"].get_state(Spot)
+        )
+        self.assertEqual(
+            Spot.w12_ducane_prison_release,
+            self.characters["Player"].get_state(Spot)
+        )
+
+        n = 0
+        while not n:
+            index, script, interlude = next(self.state)
+            n = self.run_script(
+                self.folder, script, self.ensemble,
+                self.handler
+            )
+            print(vars(script))
+
+        self.assertEqual(19780117, self.characters["Narrator"].get_state())
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["Player"].get_state(Spot)
+        )
+
+        folder = interlude(
+            self.folder, index,
+            self.ensemble, self.schedule,
+            phrase=None
+        )
+        self.assertEqual(
+            Spot.w12_goldhawk_tavern,
+            self.characters["Narrator"].get_state(Spot)
+        )
+        self.assertEqual(ray.paths, folder.paths)
+        self.branch_folder(folder)
 
