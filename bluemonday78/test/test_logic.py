@@ -21,6 +21,7 @@ from collections.abc import Callable
 import copy
 import unittest
 
+from turberfield.dialogue.handlers import TerminalHandler
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.model import SceneScript
 from turberfield.dialogue.player import run_through
@@ -41,29 +42,32 @@ from bluemonday78.logic import ray
 from bluemonday78.logic import Spot
 from bluemonday78.logic import ensemble
 from bluemonday78.logic import schedule
-from bluemonday78.main import GUIHandler
 from bluemonday78.main import Presenter
 
 
-class MockHandler(GUIHandler):
+class MockHandler(TerminalHandler):
 
     def __init__(self, folder, references):
         self.folder = folder
         self.references = references
         self.calls = 0
         self.visits = Counter()
-        super().__init__(widget=None, references=references)
+        super().__init__(terminal=None, pause=0, dwell=0)
 
-    def __call__(self, obj, *args, **kwargs):
-        rv = obj
-        if isinstance(obj, Callable):
-            folder, index, ensemble, branches = args
-            rv = obj(
-                folder, index, self.references,
-                branches=branches,
-                phrase=None
-            )
-        yield rv
+    def handle_scene(self, obj):
+        return obj
+
+    def handle_shot(self, obj):
+        return obj
+
+    def handle_property(self, obj):
+        print(obj)
+        if obj.object is not None:
+            try:
+                setattr(obj.object, obj.attr, obj.val)
+            except AttributeError as e:
+                self.log.error(". ".join(getattr(e, "args", e) or e))
+        return obj
 
 
 class SceneTests(unittest.TestCase):
@@ -73,29 +77,40 @@ class SceneTests(unittest.TestCase):
         self.schedule = copy.deepcopy(schedule)
         self.characters = {
             typ.__name__: next(i for i in self.ensemble if isinstance(i, typ))
-            for typ in (Hipster, Player, Narrator)
+            for typ in (Hipster, Player, Narrator, PrisonOfficer)
         }
 
     @staticmethod
     def run_script(folder, script, references, handler, state):
         strict = folder in plotlines
+        n = 0
         for n, (shot, item) in enumerate(run_through(
             script, references, strict=strict
         )):
-            handler(shot)
-            handler(item)
+            list(handler(shot, loop=None))
+            list(handler(item, loop=None))
         return n
 
-    def test_001(self):
-        # This first test does some initialisation
+    def initialise(self):
         self.folder = next(i for i in self.schedule if i.pkg == ray.pkg)
         self.state = Presenter.new_state(self.folder)
         self.handler = MockHandler(self.folder, self.ensemble)
 
-        index, script, interlude = next(self.state)
-        self.run_script(
-            self.folder, script, self.ensemble,
-            self.handler, self.state
+    def test_001(self):
+        self.initialise()
+
+        n = 0
+        while not n:
+            index, script, interlude = next(self.state)
+            n = self.run_script(
+                self.folder, script, self.ensemble,
+                self.handler, self.state
+            )
+
+        self.assertEqual(19780116, self.characters["PrisonOfficer"].get_state())
+        self.assertEqual(
+            Spot.w12_ducane_prison_release,
+            self.characters["PrisonOfficer"].get_state(Spot)
         )
         folder = interlude(
             self.folder, index,
