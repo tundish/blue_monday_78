@@ -23,15 +23,17 @@ import unittest
 
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.model import SceneScript
-from turberfield.dialogue.player import rehearse
+from turberfield.dialogue.player import run_through
 
 from bluemonday78.logic import blue_monday
 from bluemonday78.logic import Barman
 from bluemonday78.logic import Character
 from bluemonday78.logic import Hipster
+from bluemonday78.logic import justin
 from bluemonday78.logic import MatchMaker
 from bluemonday78.logic import Narrator
 from bluemonday78.logic import Player
+from bluemonday78.logic import plotlines
 from bluemonday78.logic import Prisoner
 from bluemonday78.logic import PrisonOfficer
 from bluemonday78.logic import PrisonVisitor
@@ -51,7 +53,7 @@ class MockHandler(GUIHandler):
         self.references = references
         self.calls = 0
         self.visits = Counter()
-        super().__init__(widget=None)
+        super().__init__(widget=None, references=references)
 
     def __call__(self, obj, *args, **kwargs):
         rv = obj
@@ -78,10 +80,20 @@ class SceneTests(unittest.TestCase):
 
         game = copy.deepcopy(schedule)
         folder = next(i for i in game if i.pkg == ray.pkg)
+        state = Presenter.new_state(folder)
         test_handler = MockHandler(self, game, self.ensemble)
-        rv = list(rehearse(
-            folder, self.ensemble, test_handler,
-            branches=schedule,
-            repeat=0, strict=True, roles=1,
-            loop=None
-        ))
+        with self.subTest(n=0):
+            strict = folder in plotlines
+            index, script, interlude = next(state)
+            for shot, item in run_through(
+                script, self.ensemble, strict=strict
+            ):
+                test_handler(shot)
+                test_handler(item)
+            folder = interlude(
+                folder, index,
+                self.ensemble, self.schedule,
+                phrase=None
+            )
+            self.assertEqual(justin.pkg, folder.pkg)
+        

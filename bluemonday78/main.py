@@ -82,8 +82,9 @@ class GUIHandler(TerminalHandler):
         except:
             return None
 
-    def __init__(self, widget, *args, **kwargs):
+    def __init__(self, widget, references, *args, **kwargs):
         self.widget = widget
+        self.references = references
         self.buf = collections.deque()
         self.speaker = None
         try:
@@ -133,7 +134,10 @@ class GUIHandler(TerminalHandler):
                 tags=("speaker",)
             )
 
-        narrator = next(i for i in logic.ensemble if isinstance(i, logic.Narrator))
+        try:
+            narrator = next(i for i in self.references if isinstance(i, logic.Narrator))
+        except Exception as e:
+            self.log.info(e)
         tags = ("narrator",) if self.speaker is narrator else ("speech",)
 
         self.display(
@@ -194,6 +198,7 @@ class Presenter:
         self.player = None
         self.buf = collections.deque()
         self.seq = collections.deque()
+        self.ensemble = logic.ensemble()
         self.folder = logic.ray
         self.state = None
         self.phrase = None
@@ -204,10 +209,18 @@ class Presenter:
         root = self.textarea.master
         root.after(200, self.play)
 
+    @staticmethod
+    def new_state(folder):
+        return zip(
+            itertools.count(),
+            SceneScript.scripts(**folder._asdict()),
+            folder.interludes
+        )
+
     @property
     def autoplay(self):
-        narrator = next(i for i in logic.ensemble if isinstance(i, logic.Narrator))
-        player = next(i for i in logic.ensemble if isinstance(i, logic.Player))
+        narrator = next(i for i in self.ensemble if isinstance(i, logic.Narrator))
+        player = next(i for i in self.ensemble if isinstance(i, logic.Player))
         return narrator.get_state(logic.Spot) != player.get_state(logic.Spot)
 
     def play(self):
@@ -228,18 +241,12 @@ class Presenter:
             self.handler.display(self.textarea, self.prompt)
         root.after(int(secs * 1000), self.play)
 
-    def new_state(self, folder):
-        return zip(
-            itertools.count(),
-            SceneScript.scripts(**folder._asdict()),
-            folder.interludes
-        )
-
     def run(self, reload=False):
         root = self.textarea.master
         if not self.handler:
             self.handler = GUIHandler(
                 self.textarea,
+                logic.references,
                 dbPath=self.args.db,
                 pause=self.args.pause,
                 dwell=self.args.dwell,
