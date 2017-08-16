@@ -125,12 +125,15 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
 
     log.debug(branches)
     narrator = next(i for i in ensemble if isinstance(i, Narrator))
+    player = next(i for i in ensemble if isinstance(i, Player))
     if folder.paths == ray.paths:
         narrator.set_state(Spot.w12_goldhawk_tavern)
     elif folder.paths == justin.paths:
         narrator.set_state(Spot.w12_latimer_arches)
     else:
         narrator.set_state(Spot.w12_ducane_prison)
+        if narrator.get_state() == 19780118:
+            player.set_state(Spot.w12_goldhawk_tavern)
 
     try:
         match = phrases.index(phrase)

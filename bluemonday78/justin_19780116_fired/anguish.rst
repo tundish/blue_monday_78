@@ -231,6 +231,8 @@ A pub in Shepherd's Bush
 
     Ha ha ha ha!
 
+.. property:: HIPSTER.state 19780118
+
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |BARMAN_SURNAME| property:: BARMAN.name.surname
 .. |DRINKER_2_FIRSTNAME| property:: DRINKER_2.name.firstname

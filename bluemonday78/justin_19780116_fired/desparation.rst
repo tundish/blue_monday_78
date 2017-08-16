@@ -14,6 +14,7 @@
 .. entity:: HIPSTER
    :types: bluemonday78.logic.Hipster
    :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
+            19780119
 
 .. entity:: BARMAN
    :types: bluemonday78.logic.Barman

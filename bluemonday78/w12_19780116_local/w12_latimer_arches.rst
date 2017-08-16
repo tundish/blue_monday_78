@@ -18,11 +18,6 @@
    :states: bluemonday78.logic.Spot.w12_latimer_arches
             19780117
 
-.. entity:: DAY_03
-   :types:  bluemonday78.logic.Narrator
-   :states: bluemonday78.logic.Spot.w12_latimer_arches
-            19780118
-
 Addison Arches
 ~~~~~~~~~~~~~~
 
@@ -73,13 +68,6 @@ Day 02
     We pass label after label. They all say 'INOR-8'.
 
 .. property:: DAY_02.state 19780118
-
-Day 03
-------
-
-[DAY_03]_
-
-    Day three.
 
 .. |HERO_FIRSTNAME| property:: HERO.name.firstname
 .. |HERO_SURNAME| property:: HERO.name.surname

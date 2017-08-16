@@ -224,3 +224,65 @@ class SceneTests(unittest.TestCase):
         self.assertEqual(justin.paths, folder.paths)
         self.branch_folder(folder)
 
+    def test_005(self):
+        self.assertEqual(19780117, self.characters["Narrator"].get_state())
+        self.assertEqual(19780117, self.characters["Hipster"].get_state())
+        self.assertEqual(
+            Spot.w12_goldhawk_tavern,
+            self.characters["Narrator"].get_state(Spot)
+        )
+
+        n = 0
+        while not n:
+            index, script, interlude = next(self.state)
+            n = self.run_script(
+                self.folder, script, self.ensemble,
+                self.handler
+            )
+
+        self.assertEqual(19780117, self.characters["Narrator"].get_state())
+        self.assertEqual(19780118, self.characters["Hipster"].get_state())
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["Player"].get_state(Spot)
+        )
+
+        folder = interlude(
+            self.folder, index,
+            self.ensemble, self.schedule,
+            phrase=None
+        )
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["Player"].get_state(Spot)
+        )
+        self.assertEqual(local.paths, folder.paths)
+        self.branch_folder(folder)
+
+    def test_006(self):
+        n = 0
+        while not n:
+            index, script, interlude = next(self.state)
+            n = self.run_script(
+                self.folder, script, self.ensemble,
+                self.handler
+            )
+
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["Player"].get_state(Spot)
+        )
+
+        folder = interlude(
+            self.folder, index,
+            self.ensemble, self.schedule,
+            phrase=None
+        )
+        self.assertEqual(
+            Spot.w12_goldhawk_tavern,
+            self.characters["Player"].get_state(Spot)
+        )
+        self.assertEqual(19780118, self.characters["Narrator"].get_state())
+        self.assertEqual(ray.paths, folder.paths)
+        self.branch_folder(folder)
+
