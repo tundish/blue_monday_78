@@ -88,7 +88,7 @@ class SceneTests(unittest.TestCase):
 
     @staticmethod
     def run_script(folder, script, references, handler):
-        strict = folder in plotlines
+        strict = any(i.paths == folder.paths for i in plotlines)
         n = 0
         for shot, item in run_through(
             script, references, strict=strict
@@ -205,8 +205,6 @@ class SceneTests(unittest.TestCase):
                 self.folder, script, self.ensemble,
                 self.handler
             )
-            print(vars(script))
-            print(n)
 
         self.assertEqual(19780117, self.characters["Narrator"].get_state())
         self.assertEqual(
@@ -220,9 +218,9 @@ class SceneTests(unittest.TestCase):
             phrase=None
         )
         self.assertEqual(
-            Spot.w12_goldhawk_tavern,
-            self.characters["Narrator"].get_state(Spot)
+            Spot.w12_latimer_arches,
+            self.characters["Player"].get_state(Spot)
         )
-        self.assertEqual(ray.paths, folder.paths)
+        self.assertEqual(justin.paths, folder.paths)
         self.branch_folder(folder)
 
