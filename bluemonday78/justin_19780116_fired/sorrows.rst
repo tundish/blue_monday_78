@@ -92,7 +92,7 @@ A pub in Shepherd's Bush
 
 [DRINKER_2]_
 
-    And all winter. Christmas Eve.
+    And all winter. Christmas Eve, too.
 
 [DRINKER_1]_
 
@@ -104,11 +104,11 @@ A pub in Shepherd's Bush
 
 [DRINKER_2]_
 
-    There was for Vic. He used to move stuff back and forth. You know the stuff I mean.
+    There was for Vic. He used to move stuff back and forth. All sorts of gear.
     Regular. All year round.
 
-    The passengers were just for show, really. He does football tours too. So long as it's
-    Holland or Spain.
+    I don't think he even wanted passengers, really. He does football tours too.
+    So long as it's Holland or Spain.
 
 [BARMAN]_
 

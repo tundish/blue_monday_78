@@ -284,8 +284,8 @@ Karen talks of the keys
 
     Shut up, will you.
 
-    See over there? |HERO|'s a friend. Gets out today.
-    |HERO| will have them.
+    See over there? |HERO| was in my cell. Gets out today.
+    |HERO| will take them for a while.
 
     Then you can shut up.
 

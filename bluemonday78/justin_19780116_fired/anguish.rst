@@ -130,7 +130,7 @@ A pub in Shepherd's Bush
 
     No, I mean the business is in trouble. We didn't know until recently.
 
-    I came here on a course originally. My tuition fees went up last year
+    I came here on a course to begin with. My tuition fees went up last year
     and he said he couldn't pay them any more.
 
     So I dropped out.
