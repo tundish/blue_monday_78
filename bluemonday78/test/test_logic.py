@@ -286,3 +286,43 @@ class SceneTests(unittest.TestCase):
         self.assertEqual(ray.paths, folder.paths)
         self.branch_folder(folder)
 
+    def test_007(self):
+        n = 0
+        while not n:
+            try:
+                index, script, interlude = next(self.state)
+            except StopIteration:
+                # No selection from ray
+                folder = interlude(
+                    self.folder, index,
+                    self.ensemble, self.schedule,
+                    phrase=None
+                )
+                self.branch_folder(folder)
+
+            n = self.run_script(
+                self.folder, script, self.ensemble,
+                self.handler
+            )
+            print(n)
+
+        self.assertEqual(local.paths, folder.paths)
+        self.assertEqual(
+            Spot.w12_goldhawk_tavern,
+            self.characters["Player"].get_state(Spot)
+        )
+        self.assertEqual(19780118, self.characters["Narrator"].get_state())
+
+        folder = interlude(
+            self.folder, index,
+            self.ensemble, self.schedule,
+            phrase=None
+        )
+        self.assertEqual(
+            Spot.w12_goldhawk_tavern,
+            self.characters["Player"].get_state(Spot)
+        )
+        self.assertEqual(19780118, self.characters["Narrator"].get_state())
+        self.assertEqual(ray.paths, folder.paths)
+        self.branch_folder(folder)
+
