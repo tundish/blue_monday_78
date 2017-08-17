@@ -132,8 +132,7 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
         narrator.set_state(Spot.w12_latimer_arches)
     else:
         narrator.set_state(Spot.w12_ducane_prison)
-        if narrator.get_state() == 19780118:
-            player.set_state(Spot.w12_goldhawk_tavern)
+    log.info("Narrator at {0}".format(narrator.get_state(Spot).name))
 
     try:
         match = phrases.index(phrase)
@@ -141,9 +140,12 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
     except ValueError:
         pass
 
-    branches.rotate(-1)
-    log.info("Narrator at {0}".format(narrator.get_state(Spot).name))
-    return branches[0]
+    if narrator.get_state() == 19780118:
+        player.set_state(Spot.w12_goldhawk_tavern)
+        return local
+    else:
+        branches.rotate(-1)
+        return branches[0]
 
 local = SceneScript.Folder(
     pkg="bluemonday78",

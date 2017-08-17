@@ -68,6 +68,7 @@ Ray's first hint
     Now, goodbye, and good luck.
 
 .. property:: HERO.state bluemonday78.logic.Spot.w12_latimer_arches
+.. property:: OFFICER.state 19780118
 
 .. |HERO| property:: HERO.name.firstname
 .. |MARTIN_FIRSTNAME| property:: MARTIN.name.firstname

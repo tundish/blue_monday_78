@@ -280,19 +280,25 @@ class SceneTests(unittest.TestCase):
             self.ensemble, self.schedule,
             phrase=None
         )
+        self.assertEqual(19780118, self.characters["Hipster"].get_state())
+        self.assertEqual(19780118, self.characters["Narrator"].get_state())
+        self.assertEqual(19780118, self.characters["PrisonOfficer"].get_state())
+        self.assertEqual(local.paths, folder.paths)
+        self.branch_folder(folder)
+
+    def test_007(self):
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
             self.characters["Player"].get_state(Spot)
         )
         self.assertEqual(19780118, self.characters["Narrator"].get_state())
-        self.assertEqual(ray.paths, folder.paths)
-        self.branch_folder(folder)
 
-    def test_007(self):
         n = 0
         while not n:
+            print(self.folder)
             try:
                 index, script, interlude = next(self.state)
+                print("[", index, "]")
             except StopIteration:
                 # No selection from ray
                 folder = interlude(
@@ -301,13 +307,17 @@ class SceneTests(unittest.TestCase):
                     phrase=None
                 )
                 self.branch_folder(folder)
+                print(self.folder)
 
             n = self.run_script(
                 self.folder, script, self.ensemble,
                 self.handler
             )
+            print(vars(script))
+            print(n)
 
-        self.assertEqual(local.paths, folder.paths)
+        self.assertEqual(19780118, self.characters["Narrator"].get_state())
+        self.assertEqual(local.paths, self.folder.paths)
         self.assertEqual(1, index)
         self.assertEqual(
             Spot.w12_goldhawk_tavern,

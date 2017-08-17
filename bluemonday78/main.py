@@ -223,7 +223,7 @@ class Presenter:
         player = next(i for i in self.ensemble if isinstance(i, logic.Player))
         return (
             narrator.get_state(logic.Spot) != player.get_state(logic.Spot)
-            or player.get_state(logic.Spot) != Spot.w12_goldhawk_tavern
+            or player.get_state(logic.Spot) != logic.Spot.w12_goldhawk_tavern
         )
 
     def play(self):
