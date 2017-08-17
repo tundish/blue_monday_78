@@ -127,6 +127,7 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
 
     log.debug(branches)
     barman = next(i for i in ensemble if isinstance(i, Barman))
+    hipster = next(i for i in ensemble if isinstance(i, Hipster))
     narrator = next(i for i in ensemble if isinstance(i, Narrator))
     player = next(i for i in ensemble if isinstance(i, Player))
     if folder.paths == ray.paths:

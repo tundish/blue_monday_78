@@ -383,13 +383,7 @@ class SceneTests(unittest.TestCase):
         n = 0
         while not n:
             index, script, interlude = next(self.state)
-            self.assertEqual(justin.paths, folder.paths)
-            self.branch_folder(folder)
 
-            self.assertEqual(
-                19780119,
-                self.characters["Hipster"].get_state()
-            )
             n = self.run_script(
                 self.folder, script, self.ensemble,
                 self.handler
@@ -400,9 +394,12 @@ class SceneTests(unittest.TestCase):
             self.ensemble, self.schedule,
             phrase=phrases[1]
         )
+        self.assertEqual(
+            19780119,
+            self.characters["Hipster"].get_state()
+        )
+        self.assertEqual(justin.paths, folder.paths)
 
-
-        print(vars(script.doc))
         self.assertEqual(3, n)  # One each of script, shot, line
         self.branch_folder(folder)
 
