@@ -152,6 +152,7 @@ local = SceneScript.Folder(
     paths=[
         "w12_19780116_local/w12_latimer_arches.rst",
         "w12_19780116_local/w12_goldhawk_tavern.rst",
+        "w12_19780116_local/offence.rst",
     ],
     interludes=itertools.repeat(interlude)
 )
@@ -162,9 +163,7 @@ justin = SceneScript.Folder(
     metadata=[blue_monday],
     paths=[
         "justin_19780116_fired/sorrows.rst",
-        "justin_19780116_fired/offence.rst",
         "justin_19780116_fired/anguish.rst",
-        "justin_19780116_fired/offence.rst",
         "justin_19780116_fired/desparation.rst"
     ],
     interludes=itertools.repeat(interlude)

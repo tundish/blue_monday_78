@@ -221,7 +221,10 @@ class Presenter:
     def autoplay(self):
         narrator = next(i for i in self.ensemble if isinstance(i, logic.Narrator))
         player = next(i for i in self.ensemble if isinstance(i, logic.Player))
-        return narrator.get_state(logic.Spot) != player.get_state(logic.Spot)
+        return (
+            narrator.get_state(logic.Spot) != player.get_state(logic.Spot)
+            or player.get_state(logic.Spot) != Spot.w12_goldhawk_tavern
+        )
 
     def play(self):
         secs = getattr(self.handler, "pause", 1)

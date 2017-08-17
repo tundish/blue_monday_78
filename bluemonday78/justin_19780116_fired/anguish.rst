@@ -213,7 +213,7 @@ A pub in Shepherd's Bush
     I am saying this for your own good. It's not me who comes to collect if
     you're late.
 
-    You do not want to find yourself in that spot, |DRINKER_2_FIRSTNAME|.
+    You do not want to find yourself in that situation, |DRINKER_2_FIRSTNAME|.
 
 [HIPSTER]_
 

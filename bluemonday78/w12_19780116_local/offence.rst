@@ -19,10 +19,6 @@ Offence
 A pub in Shepherd's Bush
 ------------------------
 
-[HERO]_
-
-    This is Frankie Marshall's place.
-
 [BARMAN]_
 
     Aren't you the clever one. Now are you in need of refreshment?

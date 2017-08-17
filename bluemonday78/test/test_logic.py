@@ -272,6 +272,8 @@ class SceneTests(unittest.TestCase):
             Spot.w12_latimer_arches,
             self.characters["Player"].get_state(Spot)
         )
+        self.assertEqual(local.paths, self.folder.paths)
+        self.assertEqual(0, index)
 
         folder = interlude(
             self.folder, index,
@@ -304,14 +306,14 @@ class SceneTests(unittest.TestCase):
                 self.folder, script, self.ensemble,
                 self.handler
             )
-            print(n)
 
         self.assertEqual(local.paths, folder.paths)
+        self.assertEqual(1, index)
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
             self.characters["Player"].get_state(Spot)
         )
-        self.assertEqual(19780118, self.characters["Narrator"].get_state())
+        self.assertEqual(19780118, self.characters["Hipster"].get_state())
 
         folder = interlude(
             self.folder, index,
