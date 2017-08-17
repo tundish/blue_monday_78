@@ -83,8 +83,8 @@ class SceneTests(unittest.TestCase):
         cls.handler = MockHandler(cls.folder, cls.ensemble)
 
     @classmethod
-    def branch_folder(cls, folder):
-        if folder is not cls.folder:
+    def branch_folder(cls, folder, reload=False):
+        if reload or folder is not cls.folder:
             cls.state = Presenter.new_state(folder)
             cls.folder = folder
 
@@ -372,5 +372,37 @@ class SceneTests(unittest.TestCase):
             self.characters["Barman"].get_state(Attitude)
         )
         self.assertEqual(local.paths, folder.paths)
+        self.branch_folder(folder, reload=True)
+
+    def test_009(self):
+        self.assertEqual(
+            19780118,
+            self.characters["Hipster"].get_state()
+        )
+
+        n = 0
+        while not n:
+            index, script, interlude = next(self.state)
+            self.assertEqual(justin.paths, folder.paths)
+            self.branch_folder(folder)
+
+            self.assertEqual(
+                19780119,
+                self.characters["Hipster"].get_state()
+            )
+            n = self.run_script(
+                self.folder, script, self.ensemble,
+                self.handler
+            )
+
+        folder = interlude(
+            self.folder, index,
+            self.ensemble, self.schedule,
+            phrase=phrases[1]
+        )
+
+
+        print(vars(script.doc))
+        self.assertEqual(3, n)  # One each of script, shot, line
         self.branch_folder(folder)
 

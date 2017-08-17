@@ -145,6 +145,8 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
     else:
         if match == 0:
             barman.set_state(Attitude.grumpy)
+        elif match == 1:
+            hipster.set_state(19780119)
 
     if narrator.get_state() == 19780118:
         player.set_state(Spot.w12_goldhawk_tavern)
