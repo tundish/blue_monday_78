@@ -354,24 +354,21 @@ class SceneTests(unittest.TestCase):
                     self.ensemble, self.schedule,
                     phrase=phrases[0]
                 )
-                self.branch_folder(folder)
 
-            with script as dialogue:
-                selection = dialogue.select(self.ensemble, roles=1)
+                self.assertEqual(
+                    Attitude.grumpy,
+                    self.characters["Barman"].get_state(Attitude)
+                )
+                self.branch_folder(folder)
 
             n = self.run_script(
                 self.folder, script, self.ensemble,
                 self.handler
             )
 
-        folder = interlude(
-            self.folder, index,
-            self.ensemble, self.schedule,
-            phrase=phrases[0]
-        )
-
+        self.assertEqual(3, n)  # One each of script, shot, line
         self.assertEqual(
-            Attitude.grumpy,
+            Attitude.neutral,
             self.characters["Barman"].get_state(Attitude)
         )
         self.assertEqual(local.paths, folder.paths)
