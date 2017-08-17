@@ -26,20 +26,22 @@ from turberfield.dialogue.model import Model
 from turberfield.dialogue.model import SceneScript
 from turberfield.dialogue.player import run_through
 
+from bluemonday78.logic import Attitude
 from bluemonday78.logic import blue_monday
 from bluemonday78.logic import Barman
 from bluemonday78.logic import Character
 from bluemonday78.logic import Hipster
 from bluemonday78.logic import MatchMaker
 from bluemonday78.logic import Narrator
+from bluemonday78.logic import phrases
 from bluemonday78.logic import Player
 from bluemonday78.logic import Prisoner
 from bluemonday78.logic import PrisonOfficer
 from bluemonday78.logic import PrisonVisitor
 from bluemonday78.logic import Spot
-from bluemonday78.main import Presenter
 from bluemonday78.logic import justin, local, ray
 from bluemonday78.logic import ensemble, plotlines, schedule
+from bluemonday78.main import Presenter
 
 
 class MockHandler(TerminalHandler):
@@ -74,7 +76,7 @@ class SceneTests(unittest.TestCase):
         cls.schedule = copy.deepcopy(schedule)
         cls.characters = {
             typ.__name__: next(i for i in cls.ensemble if isinstance(i, typ))
-            for typ in (Hipster, Player, Narrator, PrisonOfficer)
+            for typ in (Barman, Hipster, Player, Narrator, PrisonOfficer)
         }
         cls.folder = next(i for i in cls.schedule if i.paths == ray.paths)
         cls.state = Presenter.new_state(cls.folder)
@@ -333,6 +335,45 @@ class SceneTests(unittest.TestCase):
             self.characters["Player"].get_state(Spot)
         )
         self.assertEqual(19780118, self.characters["Narrator"].get_state())
+        self.assertEqual(local.paths, folder.paths)
+        self.branch_folder(folder)
+
+    def test_008(self):
+        self.assertEqual(
+            Attitude.neutral,
+            self.characters["Barman"].get_state(Attitude)
+        )
+
+        n = 0
+        while not n:
+            try:
+                index, script, interlude = next(self.state)
+            except StopIteration:
+                folder = interlude(
+                    self.folder, index,
+                    self.ensemble, self.schedule,
+                    phrase=phrases[0]
+                )
+                self.branch_folder(folder)
+
+            with script as dialogue:
+                selection = dialogue.select(self.ensemble, roles=1)
+
+            n = self.run_script(
+                self.folder, script, self.ensemble,
+                self.handler
+            )
+
+        folder = interlude(
+            self.folder, index,
+            self.ensemble, self.schedule,
+            phrase=phrases[0]
+        )
+
+        self.assertEqual(
+            Attitude.grumpy,
+            self.characters["Barman"].get_state(Attitude)
+        )
         self.assertEqual(local.paths, folder.paths)
         self.branch_folder(folder)
 

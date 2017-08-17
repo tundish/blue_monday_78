@@ -83,7 +83,13 @@ def ensemble():
         for i in (
             Narrator().set_state(Spot.w12_ducane_prison),
             Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison),
-            Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
+            Barman(
+                name="Mr Barry Latimer"
+            ).set_state(
+                Attitude.neutral
+            ).set_state(
+                Spot.w12_goldhawk_tavern
+            ),
             Hipster(name="Mr Justin Cornelis Delcroix").set_state(
                 Spot.w12_goldhawk_tavern),
             PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_visiting),
@@ -99,10 +105,6 @@ def ensemble():
 references = ensemble() + [Attitude, Spot]
 
 phrases = [
-    MatchMaker.register(MatchMaker.Phrase(
-        "Too right.",
-        ["OK", "okay", "yes", "I agree"]
-    )),
     MatchMaker.Phrase(
         "This is Frankie Marshall's place. Now go away.",
         ["frankie", "go away", "leave", "off"]
@@ -124,6 +126,7 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
         return
 
     log.debug(branches)
+    barman = next(i for i in ensemble if isinstance(i, Barman))
     narrator = next(i for i in ensemble if isinstance(i, Narrator))
     player = next(i for i in ensemble if isinstance(i, Player))
     if folder.paths == ray.paths:
@@ -139,6 +142,9 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
         log.debug(phrase)
     except ValueError:
         pass
+    else:
+        if match == 0:
+            barman.set_state(Attitude.grumpy)
 
     if narrator.get_state() == 19780118:
         player.set_state(Spot.w12_goldhawk_tavern)
