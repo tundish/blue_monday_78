@@ -5,9 +5,6 @@
 :author: D Haynes
 :date: 2017-07-23
 
-.. entity:: HERO
-   :types: bluemonday78.logic.Player
-
 .. entity:: BARMAN
    :types:  bluemonday78.logic.Barman
    :states: bluemonday78.logic.Spot.w12_goldhawk_tavern

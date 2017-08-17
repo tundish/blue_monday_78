@@ -295,10 +295,8 @@ class SceneTests(unittest.TestCase):
 
         n = 0
         while not n:
-            print(self.folder)
             try:
                 index, script, interlude = next(self.state)
-                print("[", index, "]")
             except StopIteration:
                 # No selection from ray
                 folder = interlude(
@@ -307,14 +305,14 @@ class SceneTests(unittest.TestCase):
                     phrase=None
                 )
                 self.branch_folder(folder)
-                print(self.folder)
+
+            with script as dialogue:
+                selection = dialogue.select(self.ensemble, roles=1)
 
             n = self.run_script(
                 self.folder, script, self.ensemble,
                 self.handler
             )
-            print(vars(script))
-            print(n)
 
         self.assertEqual(19780118, self.characters["Narrator"].get_state())
         self.assertEqual(local.paths, self.folder.paths)
@@ -335,6 +333,6 @@ class SceneTests(unittest.TestCase):
             self.characters["Player"].get_state(Spot)
         )
         self.assertEqual(19780118, self.characters["Narrator"].get_state())
-        self.assertEqual(ray.paths, folder.paths)
+        self.assertEqual(local.paths, folder.paths)
         self.branch_folder(folder)
 

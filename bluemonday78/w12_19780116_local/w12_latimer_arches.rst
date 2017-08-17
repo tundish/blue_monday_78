@@ -7,6 +7,7 @@
 
 .. entity:: HERO
    :types: bluemonday78.logic.Player
+   :states: bluemonday78.logic.Spot.w12_latimer_arches
 
 .. entity:: DAY_01
    :types:  bluemonday78.logic.Narrator
@@ -65,7 +66,7 @@ Day 02
 
     There are crates of engineering components and pallets of metal stock.
 
-    We pass label after label. They all say 'INOR-8'.
+    We glimpse a label as we pass. It says 'INOR-8'.
 
 .. property:: DAY_02.state 19780118
 
