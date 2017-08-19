@@ -142,16 +142,19 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
         match = phrases.index(phrase)
         log.debug(phrase)
     except ValueError:
-        pass
-    else:
-        if match == 0:
-            barman.set_state(Attitude.grumpy)
-        elif match == 1:
-            hipster.set_state(19780119)
+        match = None
 
     if narrator.get_state() == 19780118:
         player.set_state(Spot.w12_goldhawk_tavern)
-        return local
+        if match == 0:
+            barman.set_state(Attitude.grumpy)
+            return local
+        elif match == 1:
+            hipster.set_state(19780119)
+            return justin
+        else:
+            return local
+
     else:
         branches.rotate(-1)
         return branches[0]

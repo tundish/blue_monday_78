@@ -399,7 +399,4 @@ class SceneTests(unittest.TestCase):
             self.characters["Hipster"].get_state()
         )
         self.assertEqual(justin.paths, folder.paths)
-
-        self.assertEqual(3, n)  # One each of script, shot, line
         self.branch_folder(folder)
-
