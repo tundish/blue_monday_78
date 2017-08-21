@@ -217,14 +217,14 @@ class Presenter:
             folder.interludes
         )
 
+    @staticmethod
+    def blocked(ensemble):
+        hipster = next(i for i in ensemble if isinstance(i, logic.Narrator))
+        return hipster.get_state() == 19780118
+
     @property
     def autoplay(self):
-        narrator = next(i for i in self.ensemble if isinstance(i, logic.Narrator))
-        player = next(i for i in self.ensemble if isinstance(i, logic.Player))
-        return (
-            narrator.get_state(logic.Spot) != player.get_state(logic.Spot)
-            or player.get_state(logic.Spot) != logic.Spot.w12_goldhawk_tavern
-        )
+        return not self.blocked(self.ensemble)
 
     def play(self):
         secs = getattr(self.handler, "pause", 1)
@@ -317,6 +317,9 @@ class Presenter:
                     self.log.info("Read ahead {0}".format(n))
                 except StopIteration:
                     # Wait for an input phrase
+                    self.log.debug("Waiting for input...")
+                    self.state = self.new_state(folder)
+                    self.folder = folder
                     return
 
     def on_input(self, event):
