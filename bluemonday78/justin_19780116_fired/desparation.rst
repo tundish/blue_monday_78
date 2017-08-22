@@ -10,6 +10,7 @@
 
 .. entity:: HERO
    :types: bluemonday78.logic.Player
+   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
 
 .. entity:: HIPSTER
    :types: bluemonday78.logic.Hipster
@@ -32,7 +33,7 @@ Desparation
 A pub in Shepherd's Bush
 ------------------------
 
-[NARRATOR]_
+[NOTES]_
 
     The wallpaper is scarred, grimy, and punctuated by a diverse collection
     of framed posters.

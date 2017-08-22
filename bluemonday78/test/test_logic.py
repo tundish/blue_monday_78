@@ -289,7 +289,7 @@ class SceneTests(unittest.TestCase):
         self.assertEqual(19780118, self.characters["Hipster"].get_state())
         self.assertEqual(19780118, self.characters["Narrator"].get_state())
         self.assertEqual(19780118, self.characters["PrisonOfficer"].get_state())
-        self.assertEqual(local.paths, folder.paths)
+        self.assertEqual(ray.paths, folder.paths)
         self.branch_folder(folder)
 
     def test_007(self):
@@ -297,7 +297,7 @@ class SceneTests(unittest.TestCase):
             Spot.w12_goldhawk_tavern,
             self.characters["Player"].get_state(Spot)
         )
-        self.assertEqual(19780118, self.characters["Narrator"].get_state())
+        self.assertEqual(19780118, self.characters["Hipster"].get_state())
 
         n = 0
         while not n:
@@ -310,7 +310,6 @@ class SceneTests(unittest.TestCase):
                     self.ensemble, self.schedule,
                     phrase=None
                 )
-                print(folder)
                 self.branch_folder(folder)
 
             with script as dialogue:
@@ -322,8 +321,8 @@ class SceneTests(unittest.TestCase):
             )
 
         self.assertEqual(19780118, self.characters["Narrator"].get_state())
-        self.assertEqual(local.paths, self.folder.paths)
-        self.assertEqual(1, index)
+        self.assertEqual(justin.paths, self.folder.paths)
+        self.assertEqual(2, index)
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
             self.characters["Player"].get_state(Spot)
@@ -340,7 +339,7 @@ class SceneTests(unittest.TestCase):
             self.characters["Player"].get_state(Spot)
         )
         self.assertEqual(19780118, self.characters["Narrator"].get_state())
-        self.assertEqual(justin.paths, folder.paths)
+        self.assertEqual(local.paths, folder.paths)
         self.branch_folder(folder)
 
     @unittest.skip("abandoned branching dialogue.")
