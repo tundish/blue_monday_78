@@ -318,8 +318,8 @@ class Presenter:
                 except StopIteration:
                     # Wait for an input phrase
                     self.log.debug("Waiting for input...")
-                    self.state = self.new_state(folder)
-                    self.folder = folder
+                    #self.state = self.new_state(folder)
+                    #self.folder = folder
                     return
 
     def on_input(self, event):

@@ -51,7 +51,11 @@ class MockHandler(TerminalHandler):
         self.references = references
         self.calls = 0
         self.visits = Counter()
-        super().__init__(terminal=None, pause=0, dwell=0)
+        try:
+            super().__init__(terminal=None, pause=0, dwell=0)
+        except UserWarning:
+            # NOTE: dev on 12.04
+            pass
 
     def handle_scene(self, obj):
         return obj
