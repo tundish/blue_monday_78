@@ -14,7 +14,7 @@
 .. entity:: HIPSTER
    :types: bluemonday78.logic.Hipster
    :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
-            19780119
+            19780118
 
 .. entity:: BARMAN
    :types: bluemonday78.logic.Barman
@@ -31,6 +31,17 @@ Desparation
 
 A pub in Shepherd's Bush
 ------------------------
+
+[NARRATOR]_
+
+    The wallpaper is scarred, grimy, and punctuated by a diverse collection
+    of framed posters.
+
+    Bills for boxing promotions. Flyers for striptease nights.
+
+    Here and there the signed photo of a local celebrity.
+
+    And one, incongruously, of a stricken cargo vessel run recently aground.
 
 [HERO]_
 

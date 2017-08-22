@@ -146,18 +146,9 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
 
     if narrator.get_state() == 19780118:
         player.set_state(Spot.w12_goldhawk_tavern)
-        if match == 0:
-            barman.set_state(Attitude.grumpy)
-            return local
-        elif match == 1:
-            hipster.set_state(19780119)
-            return justin
-        else:
-            return local
 
-    else:
-        branches.rotate(-1)
-        return branches[0]
+    branches.rotate(-1)
+    return branches[0]
 
 local = SceneScript.Folder(
     pkg="bluemonday78",
@@ -165,8 +156,6 @@ local = SceneScript.Folder(
     metadata=[blue_monday],
     paths=[
         "w12_19780116_local/w12_latimer_arches.rst",
-        "w12_19780116_local/w12_goldhawk_tavern.rst",
-        "w12_19780116_local/offence.rst",
     ],
     interludes=itertools.repeat(interlude)
 )
