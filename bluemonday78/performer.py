@@ -54,9 +54,12 @@ class Performer:
                 setattr(obj.object, obj.attr, obj.val)
         return obj
 
-    def run(self, react=True):
+    def run(self, react=True, strict=True, roles=1):
         try:
-            script, selection = self.next(self.folders, self.ensemble)
+            script, selection = self.next(
+                self.folders, self.ensemble,
+                strict=strict, roles=roles
+            )
         except TypeError:
             raise GeneratorExit
         with script as dialogue:
