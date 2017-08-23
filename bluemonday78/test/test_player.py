@@ -28,28 +28,47 @@ from bluemonday78.logic import ensemble, plotlines, schedule
 class Player:
 
     @staticmethod
-    def stopped(folders, ensemble, strict=True, roles=1):
+    def next(folders, ensemble, strict=True, roles=1):
         for folder in folders:
             scripts = SceneScript.scripts(**folder._asdict())
             for script in scripts:
                 with script as dialogue:
                     selection = dialogue.select(ensemble, roles=roles)
                     if all(selection.values()):
-                        return False
+                        return (script, selection)
                     elif not strict and any(selection.values()):
-                        return False
+                        return (script, selection)
         else:
-            return True
+            return None
+
+    @property
+    def stopped(self):
+        return not bool(self.next(self.folders, self.ensemble))
+
+    def __init__(self, folders, ensemble):
+        self.folders = folders
+        self.ensemble = ensemble
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        raise StopIteration
 
 class TestPlayer(unittest.TestCase):
 
     @classmethod
-    def setUpClass(cls):
-        cls.ensemble = ensemble()
-        cls.schedule = copy.deepcopy(schedule)
-        cls.characters = {
-            k.__name__: v for k, v in group_by_type(cls.ensemble).items()
+    def setUp(self):
+        self.ensemble = ensemble()
+        self.schedule = copy.deepcopy(schedule)
+        self.characters = {
+            k.__name__: v for k, v in group_by_type(self.ensemble).items()
         }
 
     def test_stopped(self):
-        self.assertFalse(Player.stopped(self.schedule, self.ensemble))
+        player = Player(self.schedule, self.ensemble)
+        self.assertFalse(player.stopped)
+
+    def test_play(self):
+        player = Player(self.schedule, self.ensemble)
+        self.assertEqual(9, len(list(player)))
