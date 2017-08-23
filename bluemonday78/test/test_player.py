@@ -16,18 +16,40 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
+import copy
 import unittest
 
+from turberfield.dialogue.model import SceneScript
 from turberfield.utils.misc import group_by_type
+
+from bluemonday78.logic import ensemble, plotlines, schedule
 
 
 class Player:
 
     @staticmethod
-    def stopped(folders, ensemble):
-        return None
+    def stopped(folders, ensemble, strict=True, roles=1):
+        for folder in folders:
+            scripts = SceneScript.scripts(**folder._asdict())
+            for script in scripts:
+                with script as dialogue:
+                    selection = dialogue.select(ensemble, roles=roles)
+                    if all(selection.values()):
+                        return False
+                    elif not strict and any(selection.values()):
+                        return False
+        else:
+            return True
 
 class TestPlayer(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        cls.ensemble = ensemble()
+        cls.schedule = copy.deepcopy(schedule)
+        cls.characters = {
+            k.__name__: v for k, v in group_by_type(cls.ensemble).items()
+        }
+
     def test_stopped(self):
-        self.fail()
+        self.assertFalse(Player.stopped(self.schedule, self.ensemble))
