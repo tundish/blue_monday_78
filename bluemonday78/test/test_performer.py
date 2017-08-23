@@ -26,7 +26,7 @@ from turberfield.utils.misc import group_by_type
 from bluemonday78.logic import ensemble, plotlines, schedule
 
 
-class Player:
+class Performer:
 
     @staticmethod
     def next(folders, ensemble, strict=True, roles=1):
@@ -71,10 +71,10 @@ class Player:
             for shot, item in model:
                 yield handler(shot)
                 yield handler(item)
-                if not self.shots or self.shots[-1].name != shot.name:
-                        self.shots.append(shot._replace(items=None))
+                if not self.shots or self.shots[-1][:2] != shot[:2]:
+                        self.shots.append(shot._replace(items=script.fP))
 
-class TestPlayer(unittest.TestCase):
+class TestPerformer(unittest.TestCase):
 
     @classmethod
     def setUp(self):
@@ -85,18 +85,18 @@ class TestPlayer(unittest.TestCase):
         }
 
     def test_stopped(self):
-        player = Player(self.schedule, self.ensemble)
-        self.assertFalse(player.stopped)
+        performer = Performer(self.schedule, self.ensemble)
+        self.assertFalse(performer.stopped)
 
     def test_play(self):
-        player = Player(self.schedule, self.ensemble)
-        self.assertEqual(148, len(list(player.run())))
-        self.assertEqual(6, len(player.shots))
-        self.assertEqual("ray does the paperwork", player.shots[-1].name)
+        performer = Performer(self.schedule, self.ensemble)
+        self.assertEqual(148, len(list(performer.run())))
+        self.assertEqual(6, len(performer.shots))
+        self.assertEqual("ray does the paperwork", performer.shots[-1].name)
 
     def test_run(self):
-        player = Player(self.schedule, self.ensemble)
-        while True:
-            list(player.run())
-            print(*player.shots, sep="\n")
+        performer = Performer(self.schedule, self.ensemble)
+        while not performer.stopped:
+            list(performer.run())
+            print(*performer.shots, sep="\n")
             print()
