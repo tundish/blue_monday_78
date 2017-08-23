@@ -19,6 +19,7 @@
 import copy
 import unittest
 
+from turberfield.dialogue.model import Model
 from turberfield.dialogue.model import SceneScript
 from turberfield.utils.misc import group_by_type
 
@@ -45,15 +46,33 @@ class Player:
     def stopped(self):
         return not bool(self.next(self.folders, self.ensemble))
 
-    def __init__(self, folders, ensemble):
+    def init(self, folders, ensemble):
         self.folders = folders
         self.ensemble = ensemble
 
-    def __iter__(self):
-        return self
+    def __init__(self, folders, ensemble):
+        self.shots = []
+        self.init(folders, ensemble)
 
-    def __next__(self):
-        raise StopIteration
+    def react(self, obj):
+        if isinstance(obj, Model.Property):
+            if obj.object is not None:
+                setattr(obj.object, obj.attr, obj.val)
+        return obj
+
+    def run(self, handler=None):
+        handler = handler or self.react
+        try:
+            script, selection = self.next(self.folders, self.ensemble)
+        except TypeError:
+            raise GeneratorExit
+        with script as dialogue:
+            model = dialogue.cast(selection).run()
+            for shot, item in model:
+                yield handler(shot)
+                yield handler(item)
+                if not self.shots or self.shots[-1].name != shot.name:
+                        self.shots.append(shot._replace(items=None))
 
 class TestPlayer(unittest.TestCase):
 
@@ -71,4 +90,13 @@ class TestPlayer(unittest.TestCase):
 
     def test_play(self):
         player = Player(self.schedule, self.ensemble)
-        self.assertEqual(9, len(list(player)))
+        self.assertEqual(148, len(list(player.run())))
+        self.assertEqual(6, len(player.shots))
+        self.assertEqual("ray does the paperwork", player.shots[-1].name)
+
+    def test_run(self):
+        player = Player(self.schedule, self.ensemble)
+        while True:
+            list(player.run())
+            print(*player.shots, sep="\n")
+            print()
