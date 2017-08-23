@@ -25,6 +25,7 @@ from turberfield.dialogue.handlers import TerminalHandler
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.model import SceneScript
 from turberfield.dialogue.player import run_through
+from turberfield.utils.misc import group_by_type
 
 from bluemonday78.logic import Attitude
 from bluemonday78.logic import blue_monday
@@ -42,34 +43,7 @@ from bluemonday78.logic import Spot
 from bluemonday78.logic import justin, local, ray
 from bluemonday78.logic import ensemble, plotlines, schedule
 from bluemonday78.main import Presenter
-
-
-class MockHandler(TerminalHandler):
-
-    def __init__(self, folder, references):
-        self.folder = folder
-        self.references = references
-        self.calls = 0
-        self.visits = Counter()
-        try:
-            super().__init__(terminal=None, pause=0, dwell=0)
-        except UserWarning:
-            # NOTE: dev on 12.04
-            pass
-
-    def handle_scene(self, obj):
-        return obj
-
-    def handle_shot(self, obj):
-        return obj
-
-    def handle_property(self, obj):
-        if obj.object is not None:
-            try:
-                setattr(obj.object, obj.attr, obj.val)
-            except AttributeError as e:
-                self.log.error(". ".join(getattr(e, "args", e) or e))
-        return obj
+from bluemonday78.performer import Performer
 
 
 class SceneTests(unittest.TestCase):
@@ -79,61 +53,35 @@ class SceneTests(unittest.TestCase):
         cls.ensemble = ensemble()
         cls.schedule = copy.deepcopy(schedule)
         cls.characters = {
-            typ.__name__: next(i for i in cls.ensemble if isinstance(i, typ))
-            for typ in (Barman, Hipster, Player, Narrator, PrisonOfficer)
+            k.__name__: v for k, v in group_by_type(cls.ensemble).items()
         }
-        cls.folder = next(i for i in cls.schedule if i.paths == ray.paths)
-        cls.state = Presenter.new_state(cls.folder)
-        cls.handler = MockHandler(cls.folder, cls.ensemble)
-
-    @classmethod
-    def branch_folder(cls, folder, reload=False):
-        if reload or folder is not cls.folder:
-            cls.state = Presenter.new_state(folder)
-            cls.folder = folder
-
-    @staticmethod
-    def run_script(folder, script, references, handler):
-        strict = any(i.paths == folder.paths for i in plotlines)
-        n = 0
-        for shot, item in run_through(
-            script, references, strict=strict
-        ):
-            n += 1
-            list(handler(shot, loop=None))
-            list(handler(item, loop=None))
-        return n
+        cls.performer = Performer(cls.schedule, cls.ensemble)
 
     def test_001(self):
         self.assertEqual(
-            Spot.w12_ducane_prison,
-            self.characters["Player"].get_state(Spot)
+            19780116,
+            self.characters["PrisonOfficer"][0].get_state()
         )
         self.assertEqual(
             Spot.w12_ducane_prison_visiting,
-            self.characters["PrisonOfficer"].get_state(Spot)
+            self.characters["PrisonOfficer"][0].get_state(Spot)
         )
 
-        n = 0
-        while not n:
-            index, script, interlude = next(self.state)
-            n = self.run_script(
-                self.folder, script, self.ensemble,
-                self.handler
-            )
+        list(self.performer.run())
+        self.assertEqual(6, len(self.performer.shots))
+        self.assertEqual(
+            "ray does the paperwork",
+            self.performer.shots[-1].name
+        )
 
-        self.assertEqual(19780116, self.characters["PrisonOfficer"].get_state())
+        self.assertEqual(
+            19780116,
+            self.characters["PrisonOfficer"][0].get_state()
+        )
         self.assertEqual(
             Spot.w12_ducane_prison_release,
-            self.characters["PrisonOfficer"].get_state(Spot)
+            self.characters["PrisonOfficer"][0].get_state(Spot)
         )
-        folder = interlude(
-            self.folder, index,
-            self.ensemble, self.schedule,
-            phrase=None
-        )
-        self.assertEqual(justin.paths, folder.paths)
-        self.branch_folder(folder)
 
     def test_002(self):
         self.assertEqual(19780116, self.characters["Hipster"].get_state())
