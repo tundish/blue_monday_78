@@ -292,6 +292,13 @@ class SceneTests(unittest.TestCase):
         self.assertEqual(ray.paths, folder.paths)
         self.branch_folder(folder)
 
+        folder = interlude(
+            self.folder, index,
+            self.ensemble, self.schedule,
+            phrase=None
+        )
+        self.branch_folder(folder)
+
     def test_007(self):
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
@@ -310,7 +317,6 @@ class SceneTests(unittest.TestCase):
                     self.ensemble, self.schedule,
                     phrase=None
                 )
-                self.branch_folder(folder)
 
             with script as dialogue:
                 selection = dialogue.select(self.ensemble, roles=1)
@@ -327,7 +333,7 @@ class SceneTests(unittest.TestCase):
             Spot.w12_goldhawk_tavern,
             self.characters["Player"].get_state(Spot)
         )
-        self.assertEqual(19780118, self.characters["Hipster"].get_state())
+        self.assertEqual(19780119, self.characters["Hipster"].get_state())
 
         folder = interlude(
             self.folder, index,
@@ -335,7 +341,7 @@ class SceneTests(unittest.TestCase):
             phrase=None
         )
         self.assertEqual(
-            Spot.w12_goldhawk_tavern,
+            Spot.w12_latimer_arches,
             self.characters["Player"].get_state(Spot)
         )
         self.assertEqual(19780118, self.characters["Narrator"].get_state())
@@ -412,7 +418,7 @@ class SceneTests(unittest.TestCase):
             Spot.w12_goldhawk_tavern,
             self.characters["Player"].get_state(Spot)
         )
-        self.assertEqual(19780118, self.characters["Hipster"].get_state())
+        self.assertEqual(19780119, self.characters["Hipster"].get_state())
 
         n = 0
         while not n:
@@ -436,8 +442,8 @@ class SceneTests(unittest.TestCase):
             )
 
         self.assertEqual(19780119, self.characters["Hipster"].get_state())
-        self.assertEqual(justin.paths, self.folder.paths)
-        self.assertEqual(1, index)
+        self.assertEqual(local.paths, self.folder.paths)
+        self.assertEqual(2, index)
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
             self.characters["Player"].get_state(Spot)
@@ -453,5 +459,5 @@ class SceneTests(unittest.TestCase):
             self.characters["Player"].get_state(Spot)
         )
         self.assertEqual(19780119, self.characters["PrisonOfficer"].get_state())
-        self.assertEqual(local.paths, folder.paths)
+        self.assertEqual(ray.paths, folder.paths)
         self.branch_folder(folder)

@@ -138,14 +138,10 @@ def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=Non
         narrator.set_state(Spot.w12_ducane_prison)
     log.info("Narrator at {0}".format(narrator.get_state(Spot).name))
 
-    try:
-        match = phrases.index(phrase)
-        log.debug(phrase)
-    except ValueError:
-        match = None
-
     if narrator.get_state() == 19780118:
         player.set_state(Spot.w12_goldhawk_tavern)
+    if hipster.get_state() == 19780119:
+        player.set_state(Spot.w12_latimer_arches)
 
     branches.rotate(-1)
     return branches[0]

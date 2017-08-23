@@ -100,5 +100,7 @@ A pub in Shepherd's Bush
     I tell you what. I can hook you up with beverages.
     I'll do you a good price on Babycham, sale or return.
 
+.. property:: HIPSTER.state 19780119
+
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |HIPSTER_FIRSTNAME| property:: HIPSTER.name.firstname
