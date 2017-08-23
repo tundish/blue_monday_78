@@ -60,8 +60,7 @@ class Performer:
                 setattr(obj.object, obj.attr, obj.val)
         return obj
 
-    def run(self, handler=None):
-        handler = handler or self.react
+    def run(self, react=True):
         try:
             script, selection = self.next(self.folders, self.ensemble)
         except TypeError:
@@ -69,10 +68,12 @@ class Performer:
         with script as dialogue:
             model = dialogue.cast(selection).run()
             for shot, item in model:
-                yield handler(shot)
-                yield handler(item)
+                yield shot
+                yield item
                 if not self.shots or self.shots[-1][:2] != shot[:2]:
                         self.shots.append(shot._replace(items=script.fP))
+                if react:
+                    self.react(item)
 
 class TestPerformer(unittest.TestCase):
 
