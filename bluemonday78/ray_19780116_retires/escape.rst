@@ -71,6 +71,7 @@ Ray's first hint
 
     Now, goodbye, and good luck.
 
+.. property:: NARRATOR.state bluemonday78.logic.Spot.w12_goldhawk_tavern
 .. property:: HERO.state bluemonday78.logic.Spot.w12_latimer_arches
 .. property:: OFFICER.state 19780118
 

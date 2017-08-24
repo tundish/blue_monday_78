@@ -139,46 +139,41 @@ class SceneTests(unittest.TestCase):
 
         self.assertEqual(19780117, self.characters["Narrator"][0].get_state())
         self.assertEqual(
-            Spot.w12_latimer_arches,
+            Spot.w12_ducane_prison_release,
             self.characters["Narrator"][0].get_state(Spot)
         )
 
     def test_004(self):
-        self.assertEqual(19780117, self.characters["Narrator"].get_state())
+        self.assertEqual(19780117, self.characters["Narrator"][0].get_state())
         self.assertEqual(
-            Spot.w12_ducane_prison,
-            self.characters["Narrator"].get_state(Spot)
+            Spot.w12_ducane_prison_release,
+            self.characters["Narrator"][0].get_state(Spot)
         )
         self.assertEqual(
             Spot.w12_ducane_prison_release,
-            self.characters["Player"].get_state(Spot)
+            self.characters["Player"][0].get_state(Spot)
         )
 
-        n = 0
-        while not n:
-            index, script, interlude = next(self.state)
-            n = self.run_script(
-                self.folder, script, self.ensemble,
-                self.handler
-            )
-
-        self.assertEqual(19780117, self.characters["Narrator"].get_state())
+        list(self.performer.run())
+        self.assertEqual(9, len(self.performer.shots))
         self.assertEqual(
-            Spot.w12_latimer_arches,
-            self.characters["Player"].get_state(Spot)
+            "getting out",
+            self.performer.shots[-1].scene
         )
 
-        folder = interlude(
-            self.folder, index,
-            self.ensemble, self.schedule,
-            phrase=None
+        self.assertEqual(
+            19780117,
+            self.characters["Narrator"][0].get_state()
         )
         self.assertEqual(
-            Spot.w12_latimer_arches,
-            self.characters["Player"].get_state(Spot)
+            Spot.w12_goldhawk_tavern,
+            self.characters["Narrator"][0].get_state(Spot)
         )
-        self.assertEqual(justin.paths, folder.paths)
-        self.branch_folder(folder)
+
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["Player"][0].get_state(Spot)
+        )
 
     def test_005(self):
         self.assertEqual(19780117, self.characters["Narrator"].get_state())
