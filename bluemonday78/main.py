@@ -34,6 +34,7 @@ from turberfield.utils.misc import log_setup
 
 from bluemonday78 import logic
 from bluemonday78 import __version__
+from bluemonday78.performer import Performer
 
 
 DEFAULT_DWELL = TerminalHandler.dwell + 0.1
@@ -205,6 +206,7 @@ class Presenter:
         self.interlude = None
         self.prompt = None
         self.entry.bind("<Return>", self.on_input)
+        self.performer = Performer(logic.schedule, self.ensemble)
 
         root = self.textarea.master
         root.after(200, self.play)
@@ -264,63 +266,7 @@ class Presenter:
             root.after(1, self.run)
             return
         elif not self.seq:
-            self.log.info("autoplay: {0}".format(self.autoplay))
-            if self.interlude and (self.autoplay or self.phrase):
-                if self.phrase:
-                    self.handler.display(
-                        self.textarea,
-                        textwrap.indent(
-                            self.handler.announce(self.player),
-                            " " * 2
-                        ),
-                        tags=("speaker",)
-                    )
-
-                    self.handler.display(
-                        self.textarea,
-                        textwrap.indent(
-                            textwrap.fill(
-                                self.phrase.gist,
-                                width=60
-                            ),
-                        " " * 10),
-                        tags=("speech",)
-                    )
-
-                folder = self.interlude(
-                    self.folder, self.index,
-                    logic.references, logic.schedule,
-                    phrase=self.phrase
-                )
-                self.phrase = None
-                self.prompt = None
-                if folder is not self.folder:
-                    self.state = self.new_state(folder)
-                    self.folder = folder
-
-            n = 0
-            while not n:
-                try:
-                    self.index, script, self.interlude = next(self.state)
-                    self.seq.append(script)
-                    strict = self.folder in logic.plotlines
-                    self.log.info(self.folder.paths[self.index])
-                    self.log.info("Strict mode on." if strict else "Strict mode off.")
-                    with script as dialogue:
-                        selection = dialogue.select(logic.references, roles=1)
-                        self.log.debug(selection)
-
-                    for shot, item in run_through(script, logic.references, strict=strict):
-                        n += 1
-                        self.seq.append(shot)
-                        self.seq.append(item)
-                    self.log.info("Read ahead {0}".format(n))
-                except StopIteration:
-                    # Wait for an input phrase
-                    self.log.debug("Waiting for input...")
-                    #self.state = self.new_state(folder)
-                    #self.folder = folder
-                    return
+            self.seq = self.performer.run()
 
     def on_input(self, event):
         widget = event.widget
