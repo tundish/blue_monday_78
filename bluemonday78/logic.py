@@ -81,7 +81,7 @@ def ensemble():
     return [
         i.set_state(int(blue_monday.strftime("%Y%m%d")))
         for i in (
-            Narrator().set_state(Spot.w12_ducane_prison),
+            Narrator().set_state(Spot.w12_ducane_prison_visiting),
             Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison),
             Barman(
                 name="Mr Barry Latimer"

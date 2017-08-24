@@ -22,6 +22,10 @@
    :types: bluemonday78.logic.Character
    :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
 
+.. entity:: NARRATOR
+   :types: bluemonday78.logic.Narrator
+   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
+
 Sorrows
 ~~~~~~~
 
@@ -139,3 +143,4 @@ A pub in Shepherd's Bush
     Who?
 
 .. property:: HIPSTER.state 19780117
+.. property:: NARRATOR.state bluemonday78.logic.Spot.w12_latimer_arches

@@ -23,6 +23,10 @@
 .. entity:: DRINKER_2
    :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
 
+.. entity:: NARRATOR
+   :types: bluemonday78.logic.Narrator
+   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
+
 Anguish
 ~~~~~~~
 

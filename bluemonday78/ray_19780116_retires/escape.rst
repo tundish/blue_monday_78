@@ -18,6 +18,10 @@
 
    Mentioned.
 
+.. entity:: NARRATOR
+   :types: bluemonday78.logic.Narrator
+   :states: bluemonday78.logic.Spot.w12_ducane_prison_release
+
 Getting Out
 ~~~~~~~~~~~
 

@@ -7,7 +7,6 @@
 
 .. entity:: HERO
    :types: bluemonday78.logic.Player
-   :states: bluemonday78.logic.Spot.w12_latimer_arches
 
 .. entity:: DAY_01
    :types:  bluemonday78.logic.Narrator
