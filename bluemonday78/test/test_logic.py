@@ -130,10 +130,10 @@ class SceneTests(unittest.TestCase):
             self.characters["Narrator"][0].get_state(Spot)
         )
 
-        list(self.performer.run(strict=False))
-        self.assertEqual(13, len(self.performer.shots))
+        list(self.performer.run())
+        self.assertEqual(8, len(self.performer.shots))
         self.assertEqual(
-            "w12_latimer_arches",
+            "addison arches",
             self.performer.shots[-1].scene
         )
 

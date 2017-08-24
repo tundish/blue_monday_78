@@ -151,7 +151,8 @@ local = SceneScript.Folder(
     description="Location-specific elaboration.",
     metadata=[blue_monday],
     paths=[
-        "w12_19780116_local/w12_latimer_arches.rst",
+        "w12_19780116_local/w12_latimer_arches_19780116.rst",
+        "w12_19780116_local/w12_latimer_arches_19780117.rst",
     ],
     interludes=itertools.repeat(interlude)
 )

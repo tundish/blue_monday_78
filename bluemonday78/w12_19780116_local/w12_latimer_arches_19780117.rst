@@ -8,12 +8,7 @@
 .. entity:: HERO
    :types: bluemonday78.logic.Player
 
-.. entity:: DAY_01
-   :types:  bluemonday78.logic.Narrator
-   :states: bluemonday78.logic.Spot.w12_latimer_arches
-            19780116
-
-.. entity:: DAY_02
+.. entity:: NARRATOR
    :types:  bluemonday78.logic.Narrator
    :states: bluemonday78.logic.Spot.w12_latimer_arches
             19780117
@@ -21,22 +16,10 @@
 Addison Arches
 ~~~~~~~~~~~~~~
 
-Day 01
-------
+Day Two
+-------
 
-[DAY_01]_
-
-    Birdsong. A sparrow is perched on the rim of a latrine.
-
-    Pull back through the splintered roof of a wooden cabin in the yard
-    alongside Addison Arches.
-
-.. property:: DAY_01.state 19780117
-
-Day 02
-------
-
-[DAY_02]_
+[NARRATOR]_
 
     The sleeping figure of |HERO_FIRSTNAME| |HERO_SURNAME| lies the
     length of the office floor.
@@ -44,19 +27,19 @@ Day 02
     Pull out through the internal window and rotate to present the dusty
     interior of 18 Addison Arches.
 
-[DAY_02]_
+[NARRATOR]_
 
     The cage contains tumbled stacks of consumer items in their retail
     packaging.
 
-[DAY_02]_
+[NARRATOR]_
 
     Walk forward towards the main doors under which light is showing.
 
     Electrical junction boxes to the left are rusty and have been stripped
     of their cabling.
 
-[DAY_02]_
+[NARRATOR]_
 
     But scaffolding to the right on the wall is new.
 
@@ -67,7 +50,7 @@ Day 02
 
     We glimpse a label as we pass. It says 'INOR-8'.
 
-.. property:: DAY_02.state 19780118
+.. property:: NARRATOR.state 19780118
 
 .. |HERO_FIRSTNAME| property:: HERO.name.firstname
 .. |HERO_SURNAME| property:: HERO.name.surname
