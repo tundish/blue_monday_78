@@ -26,8 +26,10 @@ Morning outside the warehouse.
 On the approach
 ---------------
 
-.. property:: HERO.state bluemonday78.logic.Spot.w12_latimer_arches
+.. property:: OFFICER.state bluemonday78.logic.Spot.w12_latimer_arches
 
 [OFFICER]_
 
     More interesting.
+
+.. property:: OFFICER.state 19780119

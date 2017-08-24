@@ -285,116 +285,34 @@ class SceneTests(unittest.TestCase):
             self.characters["PrisonOfficer"][0].get_state()
         )
 
-    @unittest.skip("abandoned branching dialogue.")
     def test_008(self):
         self.assertEqual(
-            Attitude.neutral,
-            self.characters["Barman"].get_state(Attitude)
+            Spot.w12_latimer_arches,
+            self.characters["Player"][0].get_state(Spot)
         )
 
-        n = 0
-        while not n:
-            try:
-                index, script, interlude = next(self.state)
-            except StopIteration:
-                folder = interlude(
-                    self.folder, index,
-                    self.ensemble, self.schedule,
-                    phrase=phrases[0]
-                )
-
-                self.assertEqual(
-                    Attitude.grumpy,
-                    self.characters["Barman"].get_state(Attitude)
-                )
-                self.branch_folder(folder)
-
-            n = self.run_script(
-                self.folder, script, self.ensemble,
-                self.handler
-            )
-
-        self.assertEqual(3, n)  # One each of script, shot, line
+        list(self.performer.run())
+        self.assertEqual(13, len(self.performer.shots))
         self.assertEqual(
-            Attitude.neutral,
-            self.characters["Barman"].get_state(Attitude)
+            "a chance encounter",
+            self.performer.shots[-1].scene
         )
-        self.assertEqual(local.paths, folder.paths)
-        self.branch_folder(folder, reload=True)
 
-    @unittest.skip("abandoned branching dialogue.")
-    def test_009(self):
+
         self.assertEqual(
-            19780118,
-            self.characters["Hipster"].get_state()
+            Spot.w12_latimer_arches,
+            self.characters["PrisonOfficer"][0].get_state(Spot)
         )
 
-        n = 0
-        while not n:
-            index, script, interlude = next(self.state)
-
-            n = self.run_script(
-                self.folder, script, self.ensemble,
-                self.handler
-            )
-
-        folder = interlude(
-            self.folder, index,
-            self.ensemble, self.schedule,
-            phrase=phrases[1]
-        )
         self.assertEqual(
             19780119,
-            self.characters["Hipster"].get_state()
-        )
-        self.assertEqual(justin.paths, folder.paths)
-        self.branch_folder(folder)
-
-    def test_010(self):
-        self.assertEqual(
-            Spot.w12_goldhawk_tavern,
-            self.characters["Player"].get_state(Spot)
-        )
-        self.assertEqual(19780119, self.characters["Hipster"].get_state())
-
-        n = 0
-        while not n:
-            try:
-                index, script, interlude = next(self.state)
-            except StopIteration:
-                # No selection from ray
-                folder = interlude(
-                    self.folder, index,
-                    self.ensemble, self.schedule,
-                    phrase=None
-                )
-                self.branch_folder(folder)
-
-            with script as dialogue:
-                selection = dialogue.select(self.ensemble, roles=1)
-
-            n = self.run_script(
-                self.folder, script, self.ensemble,
-                self.handler
-            )
-
-        self.assertEqual(19780119, self.characters["Hipster"].get_state())
-        self.assertEqual(local.paths, self.folder.paths)
-        self.assertEqual(2, index)
-        self.assertEqual(
-            Spot.w12_goldhawk_tavern,
-            self.characters["Player"].get_state(Spot)
-        )
-
-        folder = interlude(
-            self.folder, index,
-            self.ensemble, self.schedule,
-            phrase=None
+            self.characters["Hipster"][0].get_state()
         )
         self.assertEqual(
             Spot.w12_latimer_arches,
-            self.characters["Player"].get_state(Spot)
+            self.characters["Player"][0].get_state(Spot)
         )
-        self.assertEqual(19780119, self.characters["PrisonOfficer"].get_state())
-        self.assertEqual(ray.paths, folder.paths)
-        self.branch_folder(folder)
+        self.assertEqual(
+            19780119,
+            self.characters["PrisonOfficer"][0].get_state()
+        )

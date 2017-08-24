@@ -41,7 +41,7 @@ class TestPerformer(unittest.TestCase):
 
     def test_play(self):
         performer = Performer(self.schedule, self.ensemble)
-        self.assertEqual(148, len(list(performer.run())))
+        self.assertEqual(150, len(list(performer.run())))
         self.assertEqual(6, len(performer.shots))
         self.assertEqual("ray does the paperwork", performer.shots[-1].name)
 
