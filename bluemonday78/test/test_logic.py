@@ -254,51 +254,36 @@ class SceneTests(unittest.TestCase):
     def test_007(self):
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
-            self.characters["Player"].get_state(Spot)
+            self.characters["Player"][0].get_state(Spot)
         )
-        self.assertEqual(19780118, self.characters["Hipster"].get_state())
-
-        n = 0
-        while not n:
-            try:
-                index, script, interlude = next(self.state)
-            except StopIteration:
-                # No selection from ray
-                folder = interlude(
-                    self.folder, index,
-                    self.ensemble, self.schedule,
-                    phrase=None
-                )
-
-            with script as dialogue:
-                selection = dialogue.select(self.ensemble, roles=1)
-
-            n = self.run_script(
-                self.folder, script, self.ensemble,
-                self.handler
-            )
-
-        self.assertEqual(19780118, self.characters["Narrator"].get_state())
-        self.assertEqual(justin.paths, self.folder.paths)
-        self.assertEqual(2, index)
         self.assertEqual(
-            Spot.w12_goldhawk_tavern,
-            self.characters["Player"].get_state(Spot)
+            19780118,
+            self.characters["Hipster"][0].get_state()
         )
-        self.assertEqual(19780119, self.characters["Hipster"].get_state())
+        self.assertEqual(
+            19780118,
+            self.characters["Narrator"][0].get_state()
+        )
 
-        folder = interlude(
-            self.folder, index,
-            self.ensemble, self.schedule,
-            phrase=None
+        list(self.performer.run())
+        self.assertEqual(11, len(self.performer.shots))
+        self.assertEqual(
+            "desparation",
+            self.performer.shots[-1].scene
+        )
+
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["Player"][0].get_state(Spot)
         )
         self.assertEqual(
             Spot.w12_latimer_arches,
-            self.characters["Player"].get_state(Spot)
+            self.characters["Narrator"][0].get_state(Spot)
         )
-        self.assertEqual(19780118, self.characters["Narrator"].get_state())
-        self.assertEqual(local.paths, folder.paths)
-        self.branch_folder(folder)
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["PrisonOfficer"][0].get_state(Spot)
+        )
 
     @unittest.skip("abandoned branching dialogue.")
     def test_008(self):
