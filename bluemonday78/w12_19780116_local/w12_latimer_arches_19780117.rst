@@ -51,6 +51,7 @@ Day Two
     We glimpse a label as we pass. It says 'INOR-8'.
 
 .. property:: NARRATOR.state 19780118
+.. property:: HERO.state bluemonday78.logic.Spot.w12_goldhawk_tavern
 
 .. |HERO_FIRSTNAME| property:: HERO.name.firstname
 .. |HERO_SURNAME| property:: HERO.name.surname

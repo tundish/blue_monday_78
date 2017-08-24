@@ -5,9 +5,14 @@
 :author: D Haynes
 :date: 2017-07-23
 
+.. entity:: NARRATOR
+   :types:  bluemonday78.logic.Narrator
+   :states: bluemonday78.logic.Spot.w12_latimer_arches
+            19780119
+
 .. entity:: OFFICER
    :types: bluemonday78.logic.PrisonOfficer
-   :states: bluemonday78.logic.Spot.w12_latimer_arches
+   :states: 19780118
 
 .. entity:: HERO
    :types: bluemonday78.logic.Player
@@ -21,6 +26,7 @@ Morning outside the warehouse.
 On the approach
 ---------------
 
+.. property:: HERO.state bluemonday78.logic.Spot.w12_latimer_arches
 
 [OFFICER]_
 

@@ -235,7 +235,7 @@ class SceneTests(unittest.TestCase):
         )
 
         self.assertEqual(
-            Spot.w12_latimer_arches,
+            Spot.w12_goldhawk_tavern,
             self.characters["Player"][0].get_state(Spot)
         )
         self.assertEqual(
@@ -266,7 +266,7 @@ class SceneTests(unittest.TestCase):
         )
 
         list(self.performer.run())
-        self.assertEqual(11, len(self.performer.shots))
+        self.assertEqual(12, len(self.performer.shots))
         self.assertEqual(
             "desparation",
             self.performer.shots[-1].scene
@@ -281,8 +281,8 @@ class SceneTests(unittest.TestCase):
             self.characters["Narrator"][0].get_state(Spot)
         )
         self.assertEqual(
-            Spot.w12_latimer_arches,
-            self.characters["PrisonOfficer"][0].get_state(Spot)
+            19780118,
+            self.characters["PrisonOfficer"][0].get_state()
         )
 
     @unittest.skip("abandoned branching dialogue.")

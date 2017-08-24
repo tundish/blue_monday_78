@@ -5,7 +5,7 @@
 :author: D Haynes
 :date: 2017-07-25
 
-.. entity:: NOTES
+.. entity:: NARRATOR
    :types: bluemonday78.logic.Narrator
 
 .. entity:: HERO
@@ -33,7 +33,7 @@ Desparation
 A pub in Shepherd's Bush
 ------------------------
 
-[NOTES]_
+[NARRATOR]_
 
     The wallpaper is scarred, grimy, and punctuated by a diverse collection
     of framed posters.
@@ -55,11 +55,17 @@ A pub in Shepherd's Bush
 
 [HIPSTER]_
 
-    Why didn't I think of that? Of course.
+    Why didn't I think of that?
+
+[BARMAN]_
+
+    Maybe you need to read a little wider.
+
+[HIPSTER]_
 
     I need to put out some of my own records.
 
-    Do you hava a function room, |BARMAN_FIRSTNAME|?
+    Do you have a function room, |BARMAN_FIRSTNAME|?
 
 [BARMAN]_
 
@@ -101,6 +107,8 @@ A pub in Shepherd's Bush
     I'll do you a good price on Babycham, sale or return.
 
 .. property:: HIPSTER.state 19780119
+.. property:: NARRATOR.state 19780119
+.. property:: HERO.state bluemonday78.logic.Spot.w12_latimer_arches
 
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |HIPSTER_FIRSTNAME| property:: HIPSTER.name.firstname
