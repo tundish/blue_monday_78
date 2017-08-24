@@ -201,14 +201,13 @@ class SceneTests(unittest.TestCase):
             self.characters["Narrator"][0].get_state()
         )
         self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["Narrator"][0].get_state(Spot)
+        )
+        self.assertEqual(
             19780118,
             self.characters["Hipster"][0].get_state()
         )
-        self.assertEqual(
-            Spot.w12_latimer_arches,
-            self.characters["Player"][0].get_state(Spot)
-        )
-
         self.assertEqual(
             Spot.w12_latimer_arches,
             self.characters["Player"][0].get_state(Spot)
@@ -229,9 +228,9 @@ class SceneTests(unittest.TestCase):
         )
 
         list(self.performer.run())
-        self.assertEqual(10, len(self.performer.shots))
+        self.assertEqual(11, len(self.performer.shots))
         self.assertEqual(
-            "anguish",
+            "addison arches",
             self.performer.shots[-1].scene
         )
 

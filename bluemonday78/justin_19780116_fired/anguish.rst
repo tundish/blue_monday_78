@@ -233,6 +233,7 @@ A pub in Shepherd's Bush
     Ha ha ha ha!
 
 .. property:: HIPSTER.state 19780118
+.. property:: NARRATOR.state bluemonday78.logic.Spot.w12_latimer_arches
 
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |BARMAN_SURNAME| property:: BARMAN.name.surname
