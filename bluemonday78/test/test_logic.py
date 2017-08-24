@@ -176,39 +176,43 @@ class SceneTests(unittest.TestCase):
         )
 
     def test_005(self):
-        self.assertEqual(19780117, self.characters["Narrator"].get_state())
-        self.assertEqual(19780117, self.characters["Hipster"].get_state())
+        self.assertEqual(
+            19780117,
+            self.characters["Narrator"][0].get_state()
+        )
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
-            self.characters["Narrator"].get_state(Spot)
-        )
-
-        n = 0
-        while not n:
-            index, script, interlude = next(self.state)
-            n = self.run_script(
-                self.folder, script, self.ensemble,
-                self.handler
-            )
-
-        self.assertEqual(19780117, self.characters["Narrator"].get_state())
-        self.assertEqual(19780118, self.characters["Hipster"].get_state())
-        self.assertEqual(
-            Spot.w12_latimer_arches,
-            self.characters["Player"].get_state(Spot)
-        )
-
-        folder = interlude(
-            self.folder, index,
-            self.ensemble, self.schedule,
-            phrase=None
+            self.characters["Narrator"][0].get_state(Spot)
         )
         self.assertEqual(
-            Spot.w12_latimer_arches,
-            self.characters["Player"].get_state(Spot)
+            19780117,
+            self.characters["Hipster"][0].get_state()
         )
-        self.assertEqual(local.paths, folder.paths)
-        self.branch_folder(folder)
+
+        list(self.performer.run())
+        self.assertEqual(10, len(self.performer.shots))
+        self.assertEqual(
+            "anguish",
+            self.performer.shots[-1].scene
+        )
+
+        self.assertEqual(
+            19780117,
+            self.characters["Narrator"][0].get_state()
+        )
+        self.assertEqual(
+            19780118,
+            self.characters["Hipster"][0].get_state()
+        )
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["Player"][0].get_state(Spot)
+        )
+
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["Player"][0].get_state(Spot)
+        )
 
     def test_006(self):
         n = 0

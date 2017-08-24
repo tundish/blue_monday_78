@@ -5,9 +5,6 @@
 :author: D Haynes
 :date: 2017-07-19
 
-.. entity:: NOTES
-   :types: bluemonday78.logic.Narrator
-
 .. entity:: HIPSTER
    :types: bluemonday78.logic.Hipster
    :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
@@ -33,7 +30,7 @@ Anguish
 A pub in Shepherd's Bush
 ------------------------
 
-[NOTES]_
+[NARRATOR]_
 
     The head and shoulders of |BARMAN_FIRSTNAME| |BARMAN_SURNAME| rise
     slowly above the level of the counter top. He is negotiating the
@@ -100,7 +97,7 @@ A pub in Shepherd's Bush
 
     Have you heard of |HIPSTER_SURNAME|?
 
-[NOTES]_
+[NARRATOR]_
 
     Nobody has.
 
