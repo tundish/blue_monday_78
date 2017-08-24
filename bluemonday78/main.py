@@ -232,7 +232,7 @@ class Presenter:
         secs = getattr(self.handler, "pause", 1)
         root = self.textarea.master
         if self.seq:
-            item = self.seq.popleft()
+            item = self.seq.pop()
             rv = list(self.handler(item, loop=root))
             secs = rv[0] if rv and isinstance(rv[0], int) else secs
         elif self.handler and self.prompt is None:
@@ -266,7 +266,7 @@ class Presenter:
             root.after(1, self.run)
             return
         elif not self.seq:
-            self.seq = self.performer.run()
+            self.seq = list(self.performer.run(react=False))
 
     def on_input(self, event):
         widget = event.widget
