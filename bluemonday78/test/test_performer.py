@@ -21,7 +21,7 @@ import unittest
 
 from turberfield.utils.misc import group_by_type
 
-from bluemonday78.logic import ensemble, plotlines, schedule
+from bluemonday78.logic import ensemble, schedule
 from bluemonday78.performer import Performer
 
 

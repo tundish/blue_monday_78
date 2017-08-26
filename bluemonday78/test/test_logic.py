@@ -16,33 +16,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
-from collections import Counter
-from collections.abc import Callable
 import copy
 import unittest
 
-from turberfield.dialogue.handlers import TerminalHandler
-from turberfield.dialogue.model import Model
-from turberfield.dialogue.model import SceneScript
-from turberfield.dialogue.player import run_through
 from turberfield.utils.misc import group_by_type
 
-from bluemonday78.logic import Attitude
-from bluemonday78.logic import blue_monday
-from bluemonday78.logic import Barman
-from bluemonday78.logic import Character
-from bluemonday78.logic import Hipster
-from bluemonday78.logic import MatchMaker
-from bluemonday78.logic import Narrator
-from bluemonday78.logic import phrases
-from bluemonday78.logic import Player
-from bluemonday78.logic import Prisoner
-from bluemonday78.logic import PrisonOfficer
-from bluemonday78.logic import PrisonVisitor
 from bluemonday78.logic import Spot
-from bluemonday78.logic import justin, local, ray
-from bluemonday78.logic import ensemble, plotlines, schedule
-from bluemonday78.main import Presenter
+from bluemonday78.logic import ensemble, schedule
 from bluemonday78.performer import Performer
 
 
@@ -297,7 +277,6 @@ class SceneTests(unittest.TestCase):
             "a chance encounter",
             self.performer.shots[-1].scene
         )
-
 
         self.assertEqual(
             Spot.w12_latimer_arches,

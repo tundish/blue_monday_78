@@ -16,9 +16,12 @@ try:
 except ImportError:
     # For pip installations
     version = str(ast.literal_eval(
-        open(os.path.join(os.path.dirname(__file__),
-        "bluemonday78", "__init__.py"),
-        'r').read().split("=")[-1].strip()
+        open(os.path.join(
+            os.path.dirname(__file__),
+            "bluemonday78",
+            "__init__.py"),
+            "r"
+        ).read().split("=")[-1].strip()
     ))
 
 setup(
@@ -37,7 +40,7 @@ setup(
         " or later (AGPLv3+)"
     ],
     packages=["bluemonday78", "bluemonday78.test"],
-    package_data = {
+    package_data={
         "bluemonday78": [
             "justin_19780116_fired/*",
             "ray_19780116_retires/*",

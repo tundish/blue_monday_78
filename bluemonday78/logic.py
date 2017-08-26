@@ -20,38 +20,12 @@ import collections
 import datetime
 import enum
 import itertools
-import logging
-import re
 
 from turberfield.dialogue.model import SceneScript
 from turberfield.dialogue.types import EnumFactory
 from turberfield.dialogue.types import Persona
 from turberfield.dialogue.types import Player
 from turberfield.dialogue.types import Stateful
-
-class MatchMaker:
-
-    lookup = collections.defaultdict(list)
-    Phrase = collections.namedtuple("Phrase", ["gist", "variants"])
-
-    @classmethod
-    def register(cls, phrase):
-        for v in phrase.variants:
-            cls.lookup[cls.tokenize(v)].append(phrase)
-        return phrase
-
-    @staticmethod
-    def tokenize(text):
-        return tuple(re.sub("[^a-z ]+", "", text.lower()).split())
-
-    @classmethod
-    def match(cls, text):
-        key = tuple(i for i in cls.tokenize(text) if i in cls.words())
-        return iter(cls.lookup.get(key, []))
-
-    @classmethod
-    def words(cls):
-        return set(i for k in cls.lookup for i in k)
 
 class Attitude(EnumFactory, enum.Enum):
     neutral = 0
@@ -76,6 +50,7 @@ class Character(Stateful, Persona): pass
 
 
 blue_monday = datetime.date(1978, 1, 16)
+
 
 def ensemble():
     return [
@@ -104,47 +79,6 @@ def ensemble():
 
 references = ensemble() + [Attitude, Spot]
 
-phrases = [
-    MatchMaker.Phrase(
-        "This is Frankie Marshall's place. Now go away.",
-        ["frankie", "go away", "leave", "off"]
-    ),
-    MatchMaker.Phrase(
-        "If you can't get rid of the family skeleton, "
-        "you may as well make it dance.",
-        ["family", "skeleton", "dance"]
-    ),
-]
-
-def interlude(folder, index, ensemble, branches, phrase=None, log=None, loop=None):
-    """
-    This function manipulates the Narrator. The action follows.
-
-    """
-    log = log or logging.getLogger("bluemonday.logic")
-    if not branches:
-        return
-
-    log.debug(branches)
-    barman = next(i for i in ensemble if isinstance(i, Barman))
-    hipster = next(i for i in ensemble if isinstance(i, Hipster))
-    narrator = next(i for i in ensemble if isinstance(i, Narrator))
-    player = next(i for i in ensemble if isinstance(i, Player))
-    if folder.paths == ray.paths:
-        narrator.set_state(Spot.w12_goldhawk_tavern)
-    elif folder.paths == justin.paths:
-        narrator.set_state(Spot.w12_latimer_arches)
-    else:
-        narrator.set_state(Spot.w12_ducane_prison)
-    log.info("Narrator at {0}".format(narrator.get_state(Spot).name))
-
-    if narrator.get_state() == 19780118:
-        player.set_state(Spot.w12_goldhawk_tavern)
-    if hipster.get_state() == 19780119:
-        player.set_state(Spot.w12_latimer_arches)
-
-    branches.rotate(-1)
-    return branches[0]
 
 local = SceneScript.Folder(
     pkg="bluemonday78",
@@ -154,8 +88,9 @@ local = SceneScript.Folder(
         "w12_19780116_local/w12_latimer_arches_19780116.rst",
         "w12_19780116_local/w12_latimer_arches_19780117.rst",
     ],
-    interludes=itertools.repeat(interlude)
+    interludes=itertools.repeat(None)
 )
+
 
 justin = SceneScript.Folder(
     pkg="bluemonday78",
@@ -166,7 +101,7 @@ justin = SceneScript.Folder(
         "justin_19780116_fired/anguish.rst",
         "justin_19780116_fired/desparation.rst"
     ],
-    interludes=itertools.repeat(interlude)
+    interludes=itertools.repeat(None)
 )
 
 ray = SceneScript.Folder(
@@ -178,7 +113,7 @@ ray = SceneScript.Folder(
         "ray_19780116_retires/escape.rst",
         "ray_19780116_retires/homecoming.rst",
     ],
-    interludes=itertools.repeat(interlude)
+    interludes=itertools.repeat(None)
 )
 
 plotlines = (justin, ray)

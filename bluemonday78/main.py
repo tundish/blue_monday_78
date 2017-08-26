@@ -28,7 +28,6 @@ from tkinter.font import Font
 from tkinter.scrolledtext import ScrolledText
 
 from turberfield.dialogue.handlers import TerminalHandler
-from turberfield.dialogue.player import run_through
 from turberfield.dialogue.model import SceneScript
 from turberfield.utils.misc import log_setup
 
@@ -149,6 +148,7 @@ class GUIHandler(TerminalHandler):
         self.display(self.widget)
         return self.pause + self.dwell * text.count(" ")
 
+
 class Presenter:
 
     titles = textwrap.dedent(
@@ -257,7 +257,7 @@ class Presenter:
                 list(self.handler(logic.references, loop=root))
             except AttributeError:
                 # NOTE: dev on 12.04
-                pass 
+                pass
             self.state = self.new_state(self.folder)
             root.after(1, self.run)
             return
@@ -296,7 +296,6 @@ class Presenter:
 def main(args):
     log = logging.getLogger(log_setup(args, "bluemonday"))
 
-    n = 0
     root = tk.Tk()
     root.title("Blue Monday '78")
 
@@ -314,11 +313,12 @@ def main(args):
     GUIHandler.display(text, Presenter.titles, tags=("titles",))
     GUIHandler.display(text, "Enter your player name: ", tags=("direction",))
 
-    p = Presenter(args, text, entry)
+    Presenter(args, text, entry)
     tk.mainloop()
 
+
 def parser(description=__doc__):
-    rv =  argparse.ArgumentParser(
+    rv = argparse.ArgumentParser(
         description,
         fromfile_prefix_chars="@"
     )
@@ -349,6 +349,7 @@ def parser(description=__doc__):
         help="Session id (internal use only)")
     return rv
 
+
 def run():
     p = parser()
     args = p.parse_args()
@@ -365,6 +366,7 @@ def run():
         p.print_help()
 
     sys.exit(rv)
+
 
 if __name__ == "__main__":
     run()
