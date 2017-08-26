@@ -107,7 +107,7 @@ On the approach
  
 [OFFICER]_
 
-    Well I'd say that's where your problems begin.
+    And I'd say that's where your problems begin.
 
 .. property:: OFFICER.state 19780119
 
