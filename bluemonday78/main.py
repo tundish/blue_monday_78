@@ -202,7 +202,6 @@ class Presenter:
         self.ensemble = logic.ensemble()
         self.folder = logic.ray
         self.state = None
-        self.phrase = None
         self.interlude = None
         self.prompt = None
         self.entry.bind("<Return>", self.on_input)
@@ -232,17 +231,14 @@ class Presenter:
         secs = getattr(self.handler, "pause", 1)
         root = self.textarea.master
         if self.seq:
-            item = self.seq.pop()
+            item = self.seq.popleft()
             rv = list(self.handler(item, loop=root))
             secs = rv[0] if rv and isinstance(rv[0], int) else secs
-        elif self.handler and self.prompt is None:
-            if self.autoplay:
-                self.prompt = "Press return."
-            else:
-                self.prompt = (
-                    "Choose from these words: " + 
-                    " ".join(sorted(logic.MatchMaker.words()))
-                )
+        elif self.performer.stopped:
+            self.handler.display(self.textarea, self.credits, tags=("titles",))
+            return
+        elif self.player and self.handler and self.prompt is None:
+            self.prompt = "Press return."
             self.handler.display(self.textarea, self.prompt)
         root.after(int(secs * 1000), self.play)
 
@@ -266,7 +262,7 @@ class Presenter:
             root.after(1, self.run)
             return
         elif not self.seq:
-            self.seq = list(self.performer.run(react=False))
+            self.seq.extend(list(self.performer.run(react=False)))
 
     def on_input(self, event):
         widget = event.widget
@@ -278,21 +274,20 @@ class Presenter:
             if not self.player:
                 self.player = logic.Player(name=val).set_state(logic.Spot.w12_ducane_prison)
                 try:
-                    player = next(i for i in logic.references if isinstance(i, logic.Player))
-                    logic.references.remove(player)
-                except (StopIteration, ValueError):
-                    pass
+                    player = next(i for i in self.ensemble if isinstance(i, logic.Player))
+                    self.ensemble.remove(player)
+                except (StopIteration, ValueError) as e:
+                    self.log.debug(e)
                 finally:
-                    logic.references.append(self.player)
-                self.log.debug(self.player)
+                    self.ensemble.append(self.player)
+                    self.log.debug(self.player)
                 self.buf.clear()
                 widget.master.after(1, self.run)
-            elif not self.seq:
+            elif self.prompt:
                 cmd = "\n".join(self.buf)
                 self.log.debug(cmd)
-                self.phrase = next(logic.MatchMaker.match(cmd), None)
-                if self.phrase is not None:
-                    self.buf.clear()
+                self.buf.clear()
+                self.prompt = None
                 widget.master.after(200, self.run)
         finally:
             widget.delete(0, tk.END)
