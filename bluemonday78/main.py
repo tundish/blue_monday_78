@@ -135,7 +135,6 @@ class GUIHandler(TerminalHandler):
             )
 
         tags = ("narrator",) if isinstance(self.speaker, logic.Narrator) else ("speech",)
-        self.log.debug(self.speaker)
 
         self.display(
             self.widget,
@@ -161,10 +160,8 @@ class Presenter:
 
             First, pick a name for the main character.
             Type it as 'title firstname surname', eg:
-
-                Mr Maurice Micklewhite
-
         """).format(version=__version__), "titles"),
+        ("    Mr Maurice Micklewhite", "narrator"), 
     ]
 
     credits = textwrap.indent(textwrap.dedent(
@@ -258,7 +255,7 @@ class Presenter:
         try:
             val = widget.get().strip()
             self.buf.append(val)
-            GUIHandler.display(self.textarea, val)
+            GUIHandler.display(self.textarea, val, ("narrator",))
             GUIHandler.display(self.textarea)
             if not self.player:
                 self.player = logic.Player(name=val).set_state(logic.Spot.w12_ducane_prison)
@@ -301,6 +298,7 @@ def main(args):
 
     for text, tag in Presenter.titles:
         GUIHandler.display(widget, text, tags=(tag,))
+    GUIHandler.display(widget)
     GUIHandler.display(widget, "Enter your player name: ", tags=("direction",))
 
     Presenter(args, widget, entry)
