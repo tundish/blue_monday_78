@@ -151,7 +151,8 @@ class GUIHandler(TerminalHandler):
 
 class Presenter:
 
-    titles = textwrap.dedent(
+    titles = [(
+        textwrap.dedent(
         """
             Blue Monday '78.
 
@@ -166,7 +167,8 @@ class Presenter:
 
                 Mr Maurice Micklewhite
 
-        """).format(version=__version__)
+        """).format(version=__version__), "titles"),
+    ]
 
     credits = textwrap.indent(textwrap.dedent(
         """
@@ -177,7 +179,7 @@ class Presenter:
 
         Soundtrack:
 
-            JunkDLC featuring p'role
+            JunkDLC featuring P'role
 
         Written and produced by:
 
@@ -185,7 +187,7 @@ class Presenter:
 
 
 
-                 © MMCXVII
+                 © MMXVII
 
         """), " " * 16)
 
@@ -194,7 +196,6 @@ class Presenter:
         self.textarea = textarea
         self.entry = entry
         self.log = logging.getLogger("bluemonday")
-        self.events = None
         self.handler = None
         self.player = None
         self.buf = collections.deque()
@@ -209,14 +210,6 @@ class Presenter:
 
         root = self.textarea.master
         root.after(200, self.play)
-
-    @staticmethod
-    def new_state(folder):
-        return zip(
-            itertools.count(),
-            SceneScript.scripts(**folder._asdict()),
-            folder.interludes
-        )
 
     @staticmethod
     def blocked(ensemble):
@@ -258,7 +251,6 @@ class Presenter:
             except AttributeError:
                 # NOTE: dev on 12.04
                 pass
-            self.state = self.new_state(self.folder)
             root.after(1, self.run)
             return
         elif not self.seq:
@@ -302,18 +294,19 @@ def main(args):
     entry = tk.Entry()
     entry.pack(side=tk.BOTTOM, fill=tk.X)
 
-    text = ScrolledText(root)
-    width = GUIHandler.register_fonts(text)["speech"].measure("0" * 76)
-    text.focus_set()
-    text.pack(fill=tk.BOTH, expand=True)
+    widget = ScrolledText(root)
+    width = GUIHandler.register_fonts(widget)["speech"].measure("0" * 76)
+    widget.focus_set()
+    widget.pack(fill=tk.BOTH, expand=True)
 
     root.geometry("{0}x400".format(int(width)))
     log.debug("{0} wide.".format(width))
 
-    GUIHandler.display(text, Presenter.titles, tags=("titles",))
-    GUIHandler.display(text, "Enter your player name: ", tags=("direction",))
+    for text, tag in Presenter.titles:
+        GUIHandler.display(widget, text, tags=(tag,))
+    GUIHandler.display(widget, "Enter your player name: ", tags=("direction",))
 
-    Presenter(args, text, entry)
+    Presenter(args, widget, entry)
     tk.mainloop()
 
 

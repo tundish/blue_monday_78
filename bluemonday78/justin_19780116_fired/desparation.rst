@@ -170,7 +170,7 @@ A pub in Shepherd's Bush
 
 [BARMAN]_
 
-    Oh yes. Keeps forever, will Babycham. But they changed the
+    Oh yes. Keeps forever, does Babycham. But they changed the
     label a little while back. These are the old style, that's all.
 
 [DRINKER_2]_
