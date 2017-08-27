@@ -113,7 +113,6 @@ On the approach
 
 .. |HERO_FIRSTNAME| property:: HERO.name.firstname
 .. |HERO_SURNAME| property:: HERO.name.surname
-.. |OFFICER_FIRSTNAME| property:: OFFICER.name.title
+.. |OFFICER_TITLE| property:: OFFICER.name.title
 .. |OFFICER_FIRSTNAME| property:: OFFICER.name.firstname
-.. |OFFICER_SURNAME| property:: OFFICER.name.surname
 .. |OFFICER_SURNAME| property:: OFFICER.name.surname
