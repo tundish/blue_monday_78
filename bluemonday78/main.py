@@ -46,7 +46,7 @@ class GUIHandler(TerminalHandler):
         fonts = {
             "direction": Font(family="Helvetica", size=12),
             "titles": Font(family="Helvetica", size=12, weight="bold"),
-            "narrator": Font(family="Helvetica", size=12, slant="italic"),
+            "narrator": Font(family="Courier", size=12, slant="italic"),
             "speaker": Font(family="Courier", size=12, weight="normal"),
             "speech": Font(family="Courier", size=12, weight="bold"),
         }
@@ -134,11 +134,8 @@ class GUIHandler(TerminalHandler):
                 tags=("speaker",)
             )
 
-        try:
-            narrator = next(i for i in self.references if isinstance(i, logic.Narrator))
-        except Exception as e:
-            self.log.info(e)
-        tags = ("narrator",) if self.speaker is narrator else ("speech",)
+        tags = ("narrator",) if isinstance(self.speaker, logic.Narrator) else ("speech",)
+        self.log.debug(self.speaker)
 
         self.display(
             self.widget,

@@ -40,7 +40,9 @@ Ray's first hint
 
     So at least we have this in common; neither of us can wait to get out of here! 
 
-.. Martin and Karen's argument has become very loud.
+[NARRATOR]_
+
+    Martin and Karen's argument has become very loud.
 
 [OFFICER]_
 
@@ -48,7 +50,9 @@ Ray's first hint
     you to know I've been impressed by your influence on |MARTIN_FIRSTNAME| |MARTIN_SURNAME|.
     His literacy is very much improved. And he's been practicing his handwriting too, I understand.
 
-.. There is cursing and screaming.
+[NARRATOR]_
+
+    There is cursing and screaming.
 
 [OFFICER]_
 
@@ -61,7 +65,9 @@ Ray's first hint
     I'd just like you to know, that I admire your attitude. Although I can see it might
     lead to more trouble if you're not careful.
 
-.. An alarm bell rings.
+[NARRATOR]_
+
+    An alarm bell rings.
 
 [OFFICER]_
 
