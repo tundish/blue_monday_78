@@ -20,6 +20,7 @@ import argparse
 import collections
 import itertools
 import logging
+from numbers import Number
 import sys
 import textwrap
 
@@ -36,7 +37,8 @@ from bluemonday78 import __version__
 from bluemonday78.performer import Performer
 
 
-DEFAULT_DWELL = TerminalHandler.dwell + 0.1
+DEFAULT_PAUSE = 1.5
+DEFAULT_DWELL = 0.3
 
 
 class GUIHandler(TerminalHandler):
@@ -225,7 +227,8 @@ class Presenter:
         if self.seq:
             item = self.seq.popleft()
             rv = list(self.handler(item, loop=root))
-            secs = rv[0] if rv and isinstance(rv[0], int) else secs
+            secs = rv[0] if rv and isinstance(rv[0], Number) else secs
+            self.log.debug(secs)
         elif self.performer.stopped:
             self.handler.display(self.textarea, self.credits, tags=("titles",))
             return
@@ -327,12 +330,12 @@ def parser(description=__doc__):
         "--log", default=None, dest="log_path",
         help="Set a file path for log output")
     rv.add_argument(
-        "--pause", type=float, default=TerminalHandler.pause,
-        help="Time in seconds [{th.pause}] to pause after a line.".format(th=TerminalHandler)
+        "--pause", type=float, default=DEFAULT_PAUSE,
+        help="Time in seconds [{0:0.3}] to pause after a line.".format(DEFAULT_PAUSE)
     )
     rv.add_argument(
         "--dwell", type=float, default=DEFAULT_DWELL,
-        help="Time in seconds [{0}] to dwell on each word.".format(DEFAULT_DWELL)
+        help="Time in seconds [{0:0.3}] to dwell on each word.".format(DEFAULT_DWELL)
     )
     rv.add_argument(
         "--db", required=False, default=None,
