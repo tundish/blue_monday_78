@@ -32,10 +32,11 @@ Sorrows
 A pub in Shepherd's Bush
 ------------------------
 
-.. Monday afternoon.
-.. Justin has been working as a junior for Stiff Records.
-.. He's just been fired.
-.. Justin is carrying a Sony Pressman TC-D5.
+[NARRATOR]_
+
+    Monday afternoon. Just two hours ago, Stiff Records fired their
+    most junior runner. He ran off with a Sony Pressman TC-D5 and is
+    now in the Goldhawk Tavern, Shepherd's Bush.
 
 [BARMAN]_
 
@@ -47,12 +48,12 @@ A pub in Shepherd's Bush
 
 [BARMAN]_
 
-    I'm guessing by the tape recorder and the early and expeditious application of
-    my best whisky that you may be a journalist.
+    I'm guessing by the tape recorder and the early and expeditious application 
+    of my best whisky that you may be a journalist.
 
 [HIPSTER]_
 
-    No, I'm in music. Or I was until this afternoon.
+    No, I'm in music. Or I was until this morning. Got my marching orders.
 
 [BARMAN]_
 
@@ -111,7 +112,8 @@ A pub in Shepherd's Bush
     There was for Vic. He used to move stuff back and forth. All sorts of gear.
     Regular. All year round.
 
-    I don't think he even wanted passengers, really. He does football tours too.
+    I don't think he really wanted passengers to be honest.
+    Just his little crew of mates. He does football tours too. 
     So long as it's Holland or Spain.
 
 [BARMAN]_
@@ -128,7 +130,7 @@ A pub in Shepherd's Bush
 
 [DRINKER_1]_
 
-    Some of those Ramsgate trips could be rather...
+    I remember those Ramsgate trips could be rather...
 
     Tense.
 

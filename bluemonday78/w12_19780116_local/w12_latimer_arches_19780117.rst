@@ -43,8 +43,8 @@ Day Two
 
     But scaffolding to the right on the wall is new.
 
-    Camera follows the length of it back again and track upwards. It is well put
-    together and forms a mezzanine to the warehouse.
+    Camera follows the length of it back again and tracks upwards. It is well
+    put together and forms a mezzanine to the warehouse.
 
     There are crates of engineering components and pallets of metal stock.
 

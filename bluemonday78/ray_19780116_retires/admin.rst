@@ -303,12 +303,11 @@ Karen talks of the keys
 
     Hey, |HERO| do me a favour until I get out.
 
-    The big one is for the front doors, obviously.
-    The silver one is the office key.
-    And this opens the padlock on the cage.
+    You get in with this big one. You need to shake the door while you turn it.
+    The silver one is the office key. And this opens the padlock on the cage.
 
-    Whatever's in the cage, you can have. But don't touch nothing else.
-    Nothing else. You got that?
+    Whatever's in the cage you can have, okay; it's junk. Just get rid of it.
+    But don't touch nothing else. Nothing else at all. You got that?
 
 [HUSBAND]_
 

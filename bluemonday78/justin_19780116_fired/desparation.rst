@@ -75,7 +75,7 @@ A pub in Shepherd's Bush
 
 [HIPSTER]_
 
-    What I need is get some band nights going.
+    What I need is to get some band nights going.
 
     Do you have a function room, |BARMAN_FIRSTNAME|?
 
@@ -112,8 +112,8 @@ A pub in Shepherd's Bush
 
 [DRINKER_1]_
 
-    Plenty of empty places around here. You wouldn't have to pay
-    anyone if you used one of the factories down the road.
+    Plenty of empty places around here. You won't have to pay
+    anyone if you use one of the factories down the road.
 
 [DRINKER_2]_
 
@@ -161,7 +161,7 @@ A pub in Shepherd's Bush
 
 [BARMAN]_
 
-    You've got your Natch for the boys, and for the punk ladies, a
+    You've got Natch for the boys, and for the punk ladies, a
     nice little Babycham.
 
 [HIPSTER]_
@@ -196,5 +196,5 @@ A pub in Shepherd's Bush
 
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |HIPSTER_FIRSTNAME| property:: HIPSTER.name.firstname
-.. |HERO_FIRSTNAME| property:: HIPSTER.name.firstname
-.. |HERO_SURNAME| property:: HIPSTER.name.surname
+.. |HERO_FIRSTNAME| property:: HERO.name.firstname
+.. |HERO_SURNAME| property:: HERO.name.surname

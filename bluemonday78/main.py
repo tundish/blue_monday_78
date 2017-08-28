@@ -37,7 +37,7 @@ from bluemonday78 import __version__
 from bluemonday78.performer import Performer
 
 
-DEFAULT_PAUSE = 1.5
+DEFAULT_PAUSE = 1.2
 DEFAULT_DWELL = 0.3
 
 
