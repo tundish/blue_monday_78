@@ -20,7 +20,7 @@ Day One
 
     Birdsong. A sparrow is perched on the rim of a latrine.
 
-    Pull back through the splintered roof of a wooden cabin in the yard
+    Camera pulls back through the splintered roof of a wooden cabin in the yard
     alongside Addison Arches.
 
 .. property:: NARRATOR.state 19780117

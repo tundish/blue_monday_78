@@ -151,16 +151,21 @@ class Presenter:
         textwrap.dedent(
         """
             Blue Monday '78.
-
-        Version {version}
-
-            An interactive dialogue test piece.
-            Written during the Summer Novel Festival 2017 Game Jam.
-            All characters are fictional.
-
-            First, pick a name for the main character.
-            Type it as 'title firstname surname', eg:
-        """).format(version=__version__), "titles"),
+        """), "titles"),
+        ("    Version {version}".format(version=__version__), "direction"),
+        (textwrap.dedent(
+        """
+        An interactive dialogue test piece.
+        Written during the Summer Novel Festival 2017 Game Jam.
+        """
+        ).format(version=__version__), "titles"),
+        (
+        "    All characters are fictional.\n"
+        "    Contains strong language.", "direction"),
+        (textwrap.dedent("""
+        First, pick a name for the main character.
+        Type it as 'title firstname surname', eg:
+        """), "titles"),
         ("    Mr Maurice Micklewhite", "narrator"), 
     ]
 
