@@ -8,8 +8,8 @@ from cx_Freeze import Executable
 import turberfield
 
 """
-To work, this script needs a bugfix version of cx_Freeze:
-https://github.com/tundish/cx_Freeze/tree/feature/multiplatform_turberfield_binaries_for_itch
+To work, this script needs a version of cx_Freeze later than 2017-08-09:
+https://github.com/anthony-tuininga/cx_Freeze
 
 """
 
