@@ -2,8 +2,12 @@
     Scene ~~
     Shot --
 
+.. |VERSION| property:: bluemonday78.logic.version
+
 :author: D Haynes
 :date: 2017-07-04
+:project: bluemonday78
+:version: |VERSION|
 
 .. |HERO| property:: HERO.name.firstname
 .. |WIFE| property:: WIFE.name.firstname
@@ -55,7 +59,6 @@ HM Prison Wormwood Scrubs.
 
 Ray does the intros
 -------------------
-
 
 [OFFICER]_
 

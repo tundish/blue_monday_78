@@ -27,6 +27,8 @@ from turberfield.dialogue.types import Persona
 from turberfield.dialogue.types import Player
 from turberfield.dialogue.types import Stateful
 
+from bluemonday78 import __version__ as version
+
 class Attitude(EnumFactory, enum.Enum):
     neutral = 0
     grumpy = 1
