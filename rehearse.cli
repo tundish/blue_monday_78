@@ -1,5 +1,7 @@
 --references=bluemonday78.logic:references
 --folder=bluemonday78.logic:ray
+--folder=bluemonday78.logic:justin
+--folder=bluemonday78.logic:local
 --roles=1
 --repeat=0
 --strict
