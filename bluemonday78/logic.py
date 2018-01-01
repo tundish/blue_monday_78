@@ -22,6 +22,7 @@ import enum
 import itertools
 
 from turberfield.dialogue.model import SceneScript
+from turberfield.dialogue.types import DataObject
 from turberfield.dialogue.types import EnumFactory
 from turberfield.dialogue.types import Persona
 from turberfield.dialogue.types import Player
@@ -42,6 +43,12 @@ class Spot(EnumFactory, enum.Enum):
     w12_goldhawk_tavern = "gcpufzbd8x5d"
     w12_latimer_arches = "gcpv4cxb3dh4"
 
+class Via(EnumFactory, enum.Enum):
+    block = 0
+    forwd = 1
+    bckwd = 2
+    bidir = 3
+
 class Narrator(Stateful): pass
 class PrisonOfficer(Stateful, Persona): pass
 class Prisoner(Stateful, Persona): pass
@@ -49,6 +56,7 @@ class PrisonVisitor(Stateful, Persona): pass
 class Barman(Stateful, Persona): pass
 class Hipster(Stateful, Persona): pass
 class Character(Stateful, Persona): pass
+class Location(Stateful, DataObject): pass
 
 
 blue_monday = datetime.date(1978, 1, 16)
@@ -74,12 +82,14 @@ def ensemble():
             PrisonVisitor(name="Mrs Karen Sheppey").set_state(Spot.w12_ducane_prison),
             Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
             Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
-            Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern)
+            Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),
+            Location(label="Addison Arches 18A").set_state(Spot.w12_latimer_arches),
+            Location(label="Wormwood Scrubs").set_state(Spot.w12_ducane_prison),
         )
     ]
 
 
-references = ensemble() + [Attitude, Spot]
+references = ensemble() + [Attitude, Spot, Via]
 
 
 local = SceneScript.Folder(
