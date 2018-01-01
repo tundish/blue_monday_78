@@ -30,11 +30,11 @@ from tkinter.scrolledtext import ScrolledText
 
 from turberfield.dialogue.handlers import TerminalHandler
 from turberfield.dialogue.model import SceneScript
+from turberfield.dialogue.performer import Performer
 from turberfield.utils.misc import log_setup
 
 from bluemonday78 import logic
 from bluemonday78 import __version__
-from bluemonday78.performer import Performer
 
 
 DEFAULT_PAUSE = 1.2

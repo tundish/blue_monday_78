@@ -19,11 +19,11 @@
 import copy
 import unittest
 
+from turberfield.dialogue.performer import Performer
 from turberfield.utils.misc import group_by_type
 
 from bluemonday78.logic import Spot
 from bluemonday78.logic import ensemble, schedule
-from bluemonday78.performer import Performer
 
 
 class SceneTests(unittest.TestCase):
@@ -86,7 +86,9 @@ class SceneTests(unittest.TestCase):
         )
 
         self.assertFalse(self.performer.stopped)
-        script, selection = self.performer.next(self.performer.folders, self.performer.ensemble)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
+        )
         list(self.performer.run())
         self.assertEqual(7, len(self.performer.shots))
         self.assertEqual(

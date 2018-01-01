@@ -47,7 +47,10 @@ setup(
             "w12_19780116_local/*",
         ]
     },
-    install_requires=["turberfield-dialogue[audio]"],
+    install_requires=[
+        "turberfield-dialogue>=0.13.0[audio]",
+        "turberfield-utils>=0.33.0",
+    ],
     zip_safe=True,
     entry_points={}
 )
