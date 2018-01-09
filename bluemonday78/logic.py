@@ -128,6 +128,15 @@ ray = SceneScript.Folder(
     interludes=itertools.repeat(None)
 )
 
+fade_in = SceneScript.Folder(
+    pkg="bluemonday78",
+    description="It's Ray Farington's last day.",
+    metadata=[blue_monday],
+    paths=[
+        "ray_19780116_retires/step_forward.rst",
+    ],
+    interludes=itertools.repeat(None)
+)
 plotlines = (justin, ray)
 schedule = collections.deque([local])
 schedule.extendleft(plotlines)

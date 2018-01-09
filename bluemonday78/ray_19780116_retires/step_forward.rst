@@ -38,8 +38,8 @@ A Prison Wing
 HM Prison Wormwood Scrubs.
 
 
-Ray is at the door
-------------------
+Ray is on the landing
+---------------------
 
 [NARRATOR]_
 
@@ -47,7 +47,7 @@ Ray is at the door
 
 [CELLMATE]_
 
-    Good luck then, |HERO_FIRSTNAME| mate. Stay lucky.
+    Off you go then, |HERO_FIRSTNAME| mate. Stay lucky.
 
     I wonder who they're going to put in here with me next?
 
@@ -68,6 +68,8 @@ Ray is at the door
 
     Yes, |OFFICER_TITLE| |OFFICER_SURNAME|.
 
+.. |OFFICER_TITLE| property:: OFFICER.name.title
+.. |OFFICER_SURNAME| property:: OFFICER.name.surname
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
 .. |CELLMATE_SURNAME| property:: CELLMATE.name.surname
 .. |HERO_TITLE| property:: HERO.name.title
