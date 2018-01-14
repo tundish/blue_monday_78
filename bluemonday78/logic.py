@@ -29,6 +29,7 @@ from turberfield.dialogue.types import Player
 from turberfield.dialogue.types import Stateful
 
 from bluemonday78 import __version__ as version
+from bluemonday78.test.paths import GoldenPath
 
 class Attitude(EnumFactory, enum.Enum):
     neutral = 0
@@ -135,7 +136,7 @@ fade_in = SceneScript.Folder(
     paths=[
         "ray_19780116_retires/step_forward.rst",
     ],
-    interludes=itertools.repeat(None)
+    interludes=itertools.repeat(GoldenPath.listen_to_karen)
 )
 plotlines = (justin, ray)
 schedule = collections.deque([local])

@@ -24,7 +24,7 @@ from turberfield.utils.misc import group_by_type
 
 from bluemonday78.logic import Spot
 from bluemonday78.logic import ensemble, schedule
-
+from bluemonday78.logic import fade_in  # Rework
 
 class SceneTests(unittest.TestCase):
 
@@ -38,6 +38,10 @@ class SceneTests(unittest.TestCase):
         cls.performer = Performer(cls.schedule, cls.ensemble)
 
     def test_001(self):
+        folder, index, script, selection, interlude = self.performer.next(
+            self.schedule, self.ensemble, strict=True, roles=1
+        )
+        print(interlude)
         self.assertEqual(
             Spot.w12_ducane_prison_visiting,
             self.characters["Narrator"][0].get_state(Spot)
@@ -296,4 +300,53 @@ class SceneTests(unittest.TestCase):
         self.assertEqual(
             19780119,
             self.characters["PrisonOfficer"][0].get_state()
+        )
+
+class ReworkTests(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.ensemble = ensemble()
+        cls.schedule = [copy.deepcopy(fade_in)]
+        cls.characters = {
+            k.__name__: v for k, v in group_by_type(cls.ensemble).items()
+        }
+        cls.performer = Performer(cls.schedule, cls.ensemble)
+
+    def test_001(self):
+        folder, index, script, selection, interlude = self.performer.next(
+            self.schedule, self.ensemble, strict=True, roles=1
+        )
+        print(interlude)
+        self.assertEqual(
+            Spot.w12_ducane_prison_visiting,
+            self.characters["Narrator"][0].get_state(Spot)
+        )
+        self.assertEqual(
+            19780116,
+            self.characters["PrisonOfficer"][0].get_state()
+        )
+        self.assertEqual(
+            Spot.w12_ducane_prison_visiting,
+            self.characters["PrisonOfficer"][0].get_state(Spot)
+        )
+
+        list(self.performer.run())
+        self.assertEqual(6, len(self.performer.shots))
+        self.assertEqual(
+            "ray does the paperwork",
+            self.performer.shots[-1].name
+        )
+
+        self.assertEqual(
+            19780116,
+            self.characters["PrisonOfficer"][0].get_state()
+        )
+        self.assertEqual(
+            Spot.w12_ducane_prison_release,
+            self.characters["PrisonOfficer"][0].get_state(Spot)
+        )
+        self.assertEqual(
+            Spot.w12_goldhawk_tavern,
+            self.characters["Narrator"][0].get_state(Spot)
         )
