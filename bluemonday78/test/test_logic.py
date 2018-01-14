@@ -307,28 +307,28 @@ class ReworkTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.ensemble = ensemble()
-        cls.schedule = [copy.deepcopy(fade_in)]
+        cls.dialogue = [copy.deepcopy(fade_in)]
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
         }
-        cls.performer = Performer(cls.schedule, cls.ensemble)
+        cls.performer = Performer(cls.dialogue, cls.ensemble)
 
     def setUp(self):
         (self.folder, self.index, self.script, self.selection,
          self.interlude) = self.performer.next(
-            self.schedule, self.ensemble, strict=True, roles=1
+            self.dialogue, self.ensemble, strict=True, roles=1
         )
 
     def tearDown(self):
         if isinstance(self.interlude, Callable):
             branch = self.interlude(
-                self.folder, self.index, self.ensemble, self.schedule
+                self.folder, self.index, self.ensemble, self.dialogue
             )
             self.assertIs(self.folder, branch)
 
     def test_001(self):
         self.assertEqual(
-            Spot.w12_ducane_prison_visiting,
+            Spot.w12_ducane_prison_wing,
             self.characters["Narrator"][0].get_state(Spot)
         )
         self.assertEqual(
@@ -336,7 +336,7 @@ class ReworkTests(unittest.TestCase):
             self.characters["PrisonOfficer"][0].get_state()
         )
         self.assertEqual(
-            Spot.w12_ducane_prison_visiting,
+            Spot.w12_ducane_prison_wing,
             self.characters["PrisonOfficer"][0].get_state(Spot)
         )
 
