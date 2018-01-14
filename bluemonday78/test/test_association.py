@@ -27,6 +27,26 @@ class AssociationTests(unittest.TestCase):
     def tearDown(self):
         Associations.clear()
 
+    def test_register_simple(self):
+        Associations.register(
+            Via.bidir,
+            Location(label="Wormwood Scrubs prison wing"),
+            Location(label="Wormwood Scrubs reception"),
+        )
+        lookup = Associations.instance().lookup
+        self.assertIn(
+            Location(label="Wormwood Scrubs prison wing"),
+            lookup
+        )
+        self.assertIn(
+            Location(label="Wormwood Scrubs reception"),
+            lookup
+        )
+        self.assertIn(
+            Via.bidir,
+            lookup[Location(label="Wormwood Scrubs reception")]
+        )
+
     def test_ensemble(self):
         Associations.register(
             Via.bidir,
@@ -35,4 +55,3 @@ class AssociationTests(unittest.TestCase):
         )
         rv = Associations.ensemble("wing")
         self.assertIsInstance(rv, Location)
-        print(Associations.ensemble())

@@ -72,7 +72,10 @@ class Associations(Singleton):
 
     @classmethod
     def register(cls, rel, *args):
-        pass
+        cls().lookup
+
+    def __init__(self):
+        self.lookup = collections.OrderedDict([])
 
     def ensemble(query, limit=1):
         return collections.OrderedDict([(
