@@ -27,6 +27,7 @@ from turberfield.dialogue.types import EnumFactory
 from turberfield.dialogue.types import Persona
 from turberfield.dialogue.types import Player
 from turberfield.dialogue.types import Stateful
+from turberfield.utils.misc import Singleton
 
 from bluemonday78 import __version__ as version
 from bluemonday78.test.paths import GoldenPath
@@ -63,6 +64,35 @@ class Location(Stateful, DataObject): pass
 blue_monday = datetime.date(1978, 1, 16)
 
 
+class Associations(Singleton):
+
+    def ensemble():
+        return collections.OrderedDict([(
+            getattr(i, "_name", getattr(i, "label", type(i).__name__)).lower(), 
+            i.set_state(int(blue_monday.strftime("%Y%m%d"))))
+            for i in (
+                Narrator().set_state(Spot.w12_ducane_prison_visiting),
+                Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison),
+                Barman(
+                    name="Mr Barry Latimer"
+                ).set_state(
+                    Attitude.neutral
+                ).set_state(
+                    Spot.w12_goldhawk_tavern
+                ),
+                Hipster(name="Mr Justin Cornelis Delcroix").set_state(
+                    Spot.w12_goldhawk_tavern),
+                PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_visiting),
+                Prisoner(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison),
+                PrisonVisitor(name="Mrs Karen Sheppey").set_state(Spot.w12_ducane_prison),
+                Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
+                Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
+                Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),
+                Location(label="Addison Arches 18A").set_state(Spot.w12_latimer_arches),
+                Location(label="Wormwood Scrubs").set_state(Spot.w12_ducane_prison),
+            )
+        ])
+
 def ensemble():
     return [
         i.set_state(int(blue_monday.strftime("%Y%m%d")))
@@ -88,7 +118,6 @@ def ensemble():
             Location(label="Wormwood Scrubs").set_state(Spot.w12_ducane_prison),
         )
     ]
-
 
 references = ensemble() + [Attitude, Spot, Via]
 
