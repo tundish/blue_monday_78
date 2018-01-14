@@ -64,7 +64,11 @@ class Location(Stateful, DataObject): pass
 blue_monday = datetime.date(1978, 1, 16)
 
 
+# TODO:: Is Singleton a good idea? Testing.
 class Associations(Singleton):
+
+    def __init__(self):
+        self.lookup = collections.OrderedDict([])
 
     @classmethod
     def clear(cls):
@@ -73,10 +77,12 @@ class Associations(Singleton):
     @classmethod
     def register(cls, rel, *args):
         obj = cls()
+        for arg in args:
+            if arg not in obj.lookup:
+                obj.lookup[arg] = collections.defaultdict(set)
+            obj.lookup[arg][rel].update(set(args))
 
-    def __init__(self):
-        self.lookup = collections.OrderedDict([])
-
+    @classmethod
     def ensemble(query, limit=1):
         return collections.OrderedDict([(
             getattr(i, "_name", getattr(i, "label", type(i).__name__)).lower(), 
