@@ -66,7 +66,15 @@ blue_monday = datetime.date(1978, 1, 16)
 
 class Associations(Singleton):
 
-    def ensemble():
+    @classmethod
+    def clear(cls):
+        pass
+
+    @classmethod
+    def register(cls, rel, *args):
+        pass
+
+    def ensemble(query, limit=1):
         return collections.OrderedDict([(
             getattr(i, "_name", getattr(i, "label", type(i).__name__)).lower(), 
             i.set_state(int(blue_monday.strftime("%Y%m%d"))))
