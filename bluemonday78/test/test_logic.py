@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
+from collections.abc import Callable
 import copy
 import unittest
 
@@ -41,7 +42,6 @@ class SceneTests(unittest.TestCase):
         folder, index, script, selection, interlude = self.performer.next(
             self.schedule, self.ensemble, strict=True, roles=1
         )
-        print(interlude)
         self.assertEqual(
             Spot.w12_ducane_prison_visiting,
             self.characters["Narrator"][0].get_state(Spot)
@@ -313,11 +313,20 @@ class ReworkTests(unittest.TestCase):
         }
         cls.performer = Performer(cls.schedule, cls.ensemble)
 
-    def test_001(self):
-        folder, index, script, selection, interlude = self.performer.next(
+    def setUp(self):
+        (self.folder, self.index, self.script, self.selection,
+         self.interlude) = self.performer.next(
             self.schedule, self.ensemble, strict=True, roles=1
         )
-        print(interlude)
+
+    def tearDown(self):
+        if isinstance(self.interlude, Callable):
+            branch = self.interlude(
+                self.folder, self.index, self.ensemble, self.schedule
+            )
+            self.assertIs(self.folder, branch)
+
+    def test_001(self):
         self.assertEqual(
             Spot.w12_ducane_prison_visiting,
             self.characters["Narrator"][0].get_state(Spot)
