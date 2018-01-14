@@ -27,7 +27,6 @@ from turberfield.dialogue.types import EnumFactory
 from turberfield.dialogue.types import Persona
 from turberfield.dialogue.types import Player
 from turberfield.dialogue.types import Stateful
-from turberfield.utils.misc import Singleton
 
 from bluemonday78 import __version__ as version
 from bluemonday78.test.paths import GoldenPath
@@ -64,26 +63,21 @@ class Location(Stateful, DataObject): pass
 blue_monday = datetime.date(1978, 1, 16)
 
 
-# TODO:: Is Singleton a good idea? Testing.
-class Associations(Singleton):
+class Associations:
 
     def __init__(self):
         self.lookup = collections.OrderedDict([])
 
-    @classmethod
-    def clear(cls):
-        obj = cls()
+    def clear(self):
+        pass
 
-    @classmethod
-    def register(cls, rel, *args):
-        obj = cls()
+    def register(self, rel, *args):
         for arg in args:
-            if arg not in obj.lookup:
-                obj.lookup[arg] = collections.defaultdict(set)
-            obj.lookup[arg][rel].update(set(args))
+            if arg not in self.lookup:
+                self.lookup[arg] = collections.defaultdict(set)
+            self.lookup[arg][rel].update(set(args))
 
-    @classmethod
-    def ensemble(query, limit=1):
+    def ensemble(self, query):
         return collections.OrderedDict([(
             getattr(i, "_name", getattr(i, "label", type(i).__name__)).lower(), 
             i.set_state(int(blue_monday.strftime("%Y%m%d"))))

@@ -24,16 +24,16 @@ from bluemonday78.logic import Via
 
 class AssociationTests(unittest.TestCase):
 
-    def tearDown(self):
-        Associations.clear()
+    def setUp(self):
+        self.associations = Associations()
 
     def test_register_simple(self):
-        Associations.register(
+        self.associations.register(
             Via.bidir,
             Location(label="Wormwood Scrubs prison wing"),
             Location(label="Wormwood Scrubs reception"),
         )
-        lookup = Associations.instance().lookup
+        lookup = self.associations.lookup
         self.assertIn(
             Location(label="Wormwood Scrubs prison wing"),
             lookup
@@ -48,10 +48,10 @@ class AssociationTests(unittest.TestCase):
         )
 
     def test_ensemble(self):
-        Associations.register(
+        self.associations.register(
             Via.bidir,
             Location(label="Wormwood Scrubs prison wing"),
             Location(label="Wormwood Scrubs reception"),
         )
-        rv = Associations.ensemble("wing")
+        rv = self.associations.ensemble("wing")
         self.assertIsInstance(rv, Location)
