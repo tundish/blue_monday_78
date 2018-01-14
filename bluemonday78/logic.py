@@ -68,11 +68,11 @@ class Associations(Singleton):
 
     @classmethod
     def clear(cls):
-        pass
+        obj = cls()
 
     @classmethod
     def register(cls, rel, *args):
-        cls().lookup
+        obj = cls()
 
     def __init__(self):
         self.lookup = collections.OrderedDict([])
