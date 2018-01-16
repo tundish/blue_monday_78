@@ -40,6 +40,7 @@ class Spot(EnumFactory, enum.Enum):
     w12_ducane_prison = "gcpv4d"
     w12_ducane_prison_visiting = "gcpv4d252v5y"
     w12_ducane_prison_release = "gcpv4d1qmdzb"
+    w12_ducane_prison_wing = "gcpv4d1qrstu"  # TODO: recalculate
     w12_goldhawk_cafe = "gcpufzg2512x"
     w12_goldhawk_tavern = "gcpufzbd8x5d"
     w12_latimer_arches = "gcpv4cxb3dh4"
