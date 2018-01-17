@@ -70,7 +70,9 @@ class Associations:
         self.lookup = collections.OrderedDict([])
 
     def clear(self):
-        pass
+        for rels in self.lookup.values():
+            for objs in rels.values():
+                objs.clear()
 
     def register(self, rel, *args):
         for arg in args:

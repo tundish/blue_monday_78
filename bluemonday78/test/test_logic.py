@@ -375,3 +375,17 @@ class AssociationsTests(unittest.TestCase):
             with self.subTest(rel=rel):
                 self.assertTrue(objs)
                 self.assertNotIn(ensemble[0], objs)
+
+    def test_clear(self):
+        self.assertTrue(all(
+            len(objs)
+            for k, rels in self.associations.lookup.items()
+            for rel, objs in rels.items()
+        ))
+        self.associations.clear()
+        self.assertTrue(list(self.associations.ensemble()))
+        self.assertFalse(any(
+            len(objs)
+            for k, rels in self.associations.lookup.items()
+            for rel, objs in rels.items()
+        ))
