@@ -303,6 +303,7 @@ class SceneTests(unittest.TestCase):
             self.characters["PrisonOfficer"][0].get_state()
         )
 
+
 class ReworkTests(unittest.TestCase):
 
     @classmethod
@@ -361,3 +362,16 @@ class ReworkTests(unittest.TestCase):
             Spot.w12_goldhawk_tavern,
             self.characters["Narrator"][0].get_state(Spot)
         )
+
+class AssociationsTests(unittest.TestCase):
+
+    def setUp(self):
+        self.associations = associations()
+
+    def test_no_self_relationships(self):
+        ensemble = list(self.associations.ensemble())
+        rels = self.associations.lookup[ensemble[0]]
+        for rel, objs in rels.items():
+            with self.subTest(rel=rel):
+                self.assertTrue(objs)
+                self.assertNotIn(ensemble[0], objs)

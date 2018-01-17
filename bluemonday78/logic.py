@@ -76,7 +76,7 @@ class Associations:
         for arg in args:
             if arg not in self.lookup:
                 self.lookup[arg] = collections.defaultdict(set)
-            self.lookup[arg][rel].update(set(args))
+            self.lookup[arg][rel].update(set(args) - {arg})
 
     def ensemble(self, *args, **kwargs):
         return self.lookup.keys()
