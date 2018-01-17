@@ -23,6 +23,7 @@ import unittest
 from turberfield.dialogue.performer import Performer
 from turberfield.utils.misc import group_by_type
 
+from bluemonday78.logic import associations
 from bluemonday78.logic import Spot
 from bluemonday78.logic import ensemble, schedule
 from bluemonday78.logic import fade_in  # Rework
@@ -306,7 +307,7 @@ class ReworkTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.ensemble = ensemble()
+        cls.ensemble = associations().ensemble()
         cls.dialogue = [copy.deepcopy(fade_in)]
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
@@ -314,6 +315,7 @@ class ReworkTests(unittest.TestCase):
         cls.performer = Performer(cls.dialogue, cls.ensemble)
 
     def setUp(self):
+        self.assertEqual(16, len(self.ensemble))
         (self.folder, self.index, self.script, self.selection,
          self.interlude) = self.performer.next(
             self.dialogue, self.ensemble, strict=True, roles=1

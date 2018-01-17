@@ -78,32 +78,8 @@ class Associations:
                 self.lookup[arg] = collections.defaultdict(set)
             self.lookup[arg][rel].update(set(args))
 
-    def ensemble(self, query):
-        return collections.OrderedDict([(
-            getattr(i, "_name", getattr(i, "label", type(i).__name__)).lower(), 
-            i.set_state(int(blue_monday.strftime("%Y%m%d"))))
-            for i in (
-                Narrator().set_state(Spot.w12_ducane_prison_visiting),
-                Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison),
-                Barman(
-                    name="Mr Barry Latimer"
-                ).set_state(
-                    Attitude.neutral
-                ).set_state(
-                    Spot.w12_goldhawk_tavern
-                ),
-                Hipster(name="Mr Justin Cornelis Delcroix").set_state(
-                    Spot.w12_goldhawk_tavern),
-                PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_visiting),
-                Prisoner(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison),
-                PrisonVisitor(name="Mrs Karen Sheppey").set_state(Spot.w12_ducane_prison),
-                Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
-                Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
-                Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),
-                Location(label="Addison Arches 18A").set_state(Spot.w12_latimer_arches),
-                Location(label="Wormwood Scrubs").set_state(Spot.w12_ducane_prison),
-            )
-        ])
+    def ensemble(self, *args, **kwargs):
+        return self.lookup.keys()
 
 def ensemble():
     return [
@@ -130,6 +106,17 @@ def ensemble():
             Location(label="Wormwood Scrubs").set_state(Spot.w12_ducane_prison),
         )
     ]
+
+def associations():
+    rv = Associations()
+    rv.register(
+        Via.block,
+        Location(label="Addison Arches 18A").set_state(Spot.w12_latimer_arches),
+        Location(label="Wormwood Scrubs").set_state(Spot.w12_ducane_prison_visiting),
+        Location(label="Wormwood Scrubs").set_state(Spot.w12_ducane_prison_release),
+        Location(label="Wormwood Scrubs").set_state(Spot.w12_ducane_prison_wing),
+    )
+    return rv
 
 references = ensemble() + [Attitude, Spot, Via]
 
