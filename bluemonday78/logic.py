@@ -84,6 +84,7 @@ class Associations:
                 self.lookup[obj] = collections.defaultdict(set)
         if rel is not None:
             self.lookup[primary][rel].update(subjects)
+        return self
 
     def search(self, **kwargs):
         return set(
