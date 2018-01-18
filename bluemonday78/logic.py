@@ -74,11 +74,13 @@ class Associations:
             for objs in rels.values():
                 objs.clear()
 
-    def register(self, rel, *args):
-        for arg in args:
-            if arg not in self.lookup:
-                self.lookup[arg] = collections.defaultdict(set)
-            self.lookup[arg][rel].update(set(args) - {arg})
+    def register(self, rel, primary, *args, **kwargs):
+        subjects = set(args)
+        for obj in {primary} | subjects:
+            if obj not in self.lookup:
+                self.lookup[obj] = collections.defaultdict(set)
+        self.lookup[primary][rel].update(subjects)
+        # TODO: query items via kwargs and add them too.
 
     def ensemble(self, *args, **kwargs):
         return self.lookup.keys()

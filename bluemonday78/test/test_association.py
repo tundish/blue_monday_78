@@ -30,21 +30,15 @@ class AssociationTests(unittest.TestCase):
     def test_register_simple(self):
         self.associations.register(
             Via.bidir,
-            Location(label="Wormwood Scrubs prison wing"),
-            Location(label="Wormwood Scrubs reception"),
+            Location(id=1, label="Wormwood Scrubs prison wing"),
+            Location(id=2, label="Wormwood Scrubs reception"),
         )
         lookup = self.associations.lookup
-        self.assertIn(
-            Location(label="Wormwood Scrubs prison wing"),
-            lookup
-        )
-        self.assertIn(
-            Location(label="Wormwood Scrubs reception"),
-            lookup
-        )
+        self.assertTrue([i for i in lookup if i.id == 1])
+        self.assertTrue([i for i in lookup if i.id == 2])
         self.assertIn(
             Via.bidir,
-            lookup[Location(label="Wormwood Scrubs reception")]
+            lookup[list(self.associations.ensemble())[0]]
         )
 
     def test_ensemble(self):
