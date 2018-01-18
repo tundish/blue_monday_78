@@ -27,6 +27,20 @@ class AssociationTests(unittest.TestCase):
     def setUp(self):
         self.associations = Associations()
 
+    def test_register_none(self):
+        self.associations.register(
+            None,
+            Location(id=1, label="Wormwood Scrubs prison wing"),
+            Location(id=2, label="Wormwood Scrubs reception"),
+        )
+        lookup = self.associations.lookup
+        self.assertTrue([i for i in lookup if i.id == 1])
+        self.assertTrue([i for i in lookup if i.id == 2])
+        self.assertNotIn(
+            None,
+            lookup[next(i for i in lookup if i.id == 1)],
+        )
+
     def test_register_simple(self):
         self.associations.register(
             Via.bidir,

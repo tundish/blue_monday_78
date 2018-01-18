@@ -82,8 +82,8 @@ class Associations:
         for obj in {primary} | subjects:
             if obj not in self.lookup:
                 self.lookup[obj] = collections.defaultdict(set)
-        self.lookup[primary][rel].update(subjects)
-        # TODO: query items via kwargs and add them too.
+        if rel is not None:
+            self.lookup[primary][rel].update(subjects)
 
     def search(self, **kwargs):
         return set(
