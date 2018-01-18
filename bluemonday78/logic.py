@@ -74,6 +74,9 @@ class Associations:
             for objs in rels.values():
                 objs.clear()
 
+    def ensemble(self, *args, **kwargs):
+        return self.lookup.keys()
+
     def register(self, rel, primary, *args, **kwargs):
         subjects = set(args)
         for obj in {primary} | subjects:
@@ -82,8 +85,12 @@ class Associations:
         self.lookup[primary][rel].update(subjects)
         # TODO: query items via kwargs and add them too.
 
-    def ensemble(self, *args, **kwargs):
-        return self.lookup.keys()
+    def search(self, **kwargs):
+        return set(
+            i for i in self.lookup.keys()
+            for k, v in kwargs.items()
+            if getattr(i, k, None) == v
+        )
 
 def ensemble():
     return [

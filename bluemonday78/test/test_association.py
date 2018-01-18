@@ -47,5 +47,6 @@ class AssociationTests(unittest.TestCase):
             Location(label="Wormwood Scrubs prison wing"),
             Location(label="Wormwood Scrubs reception"),
         )
-        rv = self.associations.ensemble("wing")
-        self.assertIsInstance(rv, Location)
+        rv = self.associations.search(label="Wormwood Scrubs reception")
+        self.assertEqual(1, len(rv))
+        self.assertIsInstance(rv.pop(), Location)
