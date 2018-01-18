@@ -38,7 +38,7 @@ class AssociationTests(unittest.TestCase):
         self.assertTrue([i for i in lookup if i.id == 2])
         self.assertIn(
             Via.bidir,
-            lookup[list(self.associations.ensemble())[0]]
+            lookup[next(i for i in lookup if i.id == 1)],
         )
 
     def test_ensemble(self):
