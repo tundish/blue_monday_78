@@ -308,7 +308,8 @@ class ReworkTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.ensemble = associations().ensemble()
+        cls.asscns = associations()
+        cls.ensemble = cls.asscns.ensemble()
         cls.dialogue = [copy.deepcopy(fade_in)]
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
@@ -332,7 +333,7 @@ class ReworkTests(unittest.TestCase):
     def test_001(self):
         self.assertEqual(
             Spot.w12_ducane_prison_wing,
-            self.characters["Narrator"][0].get_state(Spot)
+            self.asscns.search(_name="Mr Martin Sheppey").pop().get_state(Spot)
         )
         self.assertEqual(
             19780116,
