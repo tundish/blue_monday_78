@@ -25,14 +25,14 @@ from turberfield.utils.misc import group_by_type
 
 from bluemonday78.logic import associations
 from bluemonday78.logic import Spot
-from bluemonday78.logic import ensemble, schedule
+from bluemonday78.logic import associations, schedule
 from bluemonday78.logic import fade_in  # Rework
 
 class SceneTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.ensemble = ensemble()
+        cls.ensemble = list(associations().ensemble())
         cls.schedule = copy.deepcopy(schedule)
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
