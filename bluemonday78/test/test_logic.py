@@ -32,12 +32,27 @@ class SceneTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.ensemble = list(associations().ensemble())
-        cls.schedule = copy.deepcopy(schedule)
+        cls.asscns = associations()
+        cls.ensemble = cls.asscns.ensemble()
+        cls.dialogue = [copy.deepcopy(fade_in)]
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
         }
-        cls.performer = Performer(cls.schedule, cls.ensemble)
+        cls.performer = Performer(cls.dialogue, cls.ensemble)
+
+    def setUp(self):
+        self.assertEqual(15, len(self.ensemble))
+        (self.folder, self.index, self.script, self.selection,
+         self.interlude) = self.performer.next(
+            self.dialogue, self.ensemble, strict=True, roles=1
+        )
+
+    def tearDown(self):
+        if isinstance(self.interlude, Callable):
+            branch = self.interlude(
+                self.folder, self.index, self.ensemble, self.dialogue
+            )
+            self.assertIs(self.folder, branch)
 
     def test_001(self):
         folder, index, script, selection, interlude = self.performer.next(
@@ -53,6 +68,40 @@ class SceneTests(unittest.TestCase):
         )
         self.assertEqual(
             Spot.w12_ducane_prison_visiting,
+            self.characters["PrisonOfficer"][0].get_state(Spot)
+        )
+
+        list(self.performer.run())
+        self.assertEqual(6, len(self.performer.shots))
+        self.assertEqual(
+            "ray does the paperwork",
+            self.performer.shots[-1].name
+        )
+
+        self.assertEqual(
+            19780116,
+            self.characters["PrisonOfficer"][0].get_state()
+        )
+        self.assertEqual(
+            Spot.w12_ducane_prison_release,
+            self.characters["PrisonOfficer"][0].get_state(Spot)
+        )
+        self.assertEqual(
+            Spot.w12_goldhawk_tavern,
+            self.characters["Narrator"][0].get_state(Spot)
+        )
+
+    def test_001(self):
+        self.assertEqual(
+            Spot.w12_ducane_prison_wing,
+            self.asscns.search(_name="Mr Martin Sheppey").pop().get_state(Spot)
+        )
+        self.assertEqual(
+            19780116,
+            self.characters["PrisonOfficer"][0].get_state()
+        )
+        self.assertEqual(
+            Spot.w12_ducane_prison_wing,
             self.characters["PrisonOfficer"][0].get_state(Spot)
         )
 
@@ -302,91 +351,3 @@ class SceneTests(unittest.TestCase):
             19780119,
             self.characters["PrisonOfficer"][0].get_state()
         )
-
-
-class ReworkTests(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls):
-        cls.asscns = associations()
-        cls.ensemble = cls.asscns.ensemble()
-        cls.dialogue = [copy.deepcopy(fade_in)]
-        cls.characters = {
-            k.__name__: v for k, v in group_by_type(cls.ensemble).items()
-        }
-        cls.performer = Performer(cls.dialogue, cls.ensemble)
-
-    def setUp(self):
-        self.assertEqual(15, len(self.ensemble))
-        (self.folder, self.index, self.script, self.selection,
-         self.interlude) = self.performer.next(
-            self.dialogue, self.ensemble, strict=True, roles=1
-        )
-
-    def tearDown(self):
-        if isinstance(self.interlude, Callable):
-            branch = self.interlude(
-                self.folder, self.index, self.ensemble, self.dialogue
-            )
-            self.assertIs(self.folder, branch)
-
-    def test_001(self):
-        self.assertEqual(
-            Spot.w12_ducane_prison_wing,
-            self.asscns.search(_name="Mr Martin Sheppey").pop().get_state(Spot)
-        )
-        self.assertEqual(
-            19780116,
-            self.characters["PrisonOfficer"][0].get_state()
-        )
-        self.assertEqual(
-            Spot.w12_ducane_prison_wing,
-            self.characters["PrisonOfficer"][0].get_state(Spot)
-        )
-
-        list(self.performer.run())
-        self.assertEqual(6, len(self.performer.shots))
-        self.assertEqual(
-            "ray does the paperwork",
-            self.performer.shots[-1].name
-        )
-
-        self.assertEqual(
-            19780116,
-            self.characters["PrisonOfficer"][0].get_state()
-        )
-        self.assertEqual(
-            Spot.w12_ducane_prison_release,
-            self.characters["PrisonOfficer"][0].get_state(Spot)
-        )
-        self.assertEqual(
-            Spot.w12_goldhawk_tavern,
-            self.characters["Narrator"][0].get_state(Spot)
-        )
-
-class AssociationsTests(unittest.TestCase):
-
-    def setUp(self):
-        self.associations = associations()
-
-    def test_no_self_relationships(self):
-        ensemble = list(self.associations.ensemble())
-        rels = self.associations.lookup[ensemble[0]]
-        for rel, objs in rels.items():
-            with self.subTest(rel=rel):
-                self.assertTrue(objs)
-                self.assertNotIn(ensemble[0], objs)
-
-    def test_clear(self):
-        self.assertTrue(all(
-            len(objs)
-            for k, rels in self.associations.lookup.items()
-            for rel, objs in rels.items()
-        ))
-        self.associations.clear()
-        self.assertTrue(list(self.associations.ensemble()))
-        self.assertFalse(any(
-            len(objs)
-            for k, rels in self.associations.lookup.items()
-            for rel, objs in rels.items()
-        ))
