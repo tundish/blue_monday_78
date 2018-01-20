@@ -18,7 +18,7 @@
 
 import unittest
 
-from bluemonday78.logic import Associations
+from bluemonday78.associations import Associations
 from bluemonday78.logic import Location
 from bluemonday78.logic import Via
 
