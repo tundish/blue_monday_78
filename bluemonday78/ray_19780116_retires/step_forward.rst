@@ -5,7 +5,7 @@
 .. |VERSION| property:: bluemonday78.logic.version
 
 :author: D Haynes
-:date: 2017-07-04
+:date: 2018-01-20
 :project: bluemonday78
 :version: |VERSION|
 
@@ -14,7 +14,7 @@
 
 .. entity:: OFFICER
    :types: bluemonday78.logic.PrisonOfficer
-   :states: bluemonday78.logic.Spot.w12_ducane_prison_visiting
+   :states: bluemonday78.logic.Spot.w12_ducane_prison_wing
 
    A Prison Officer. We first meet him on the day he retires.
 

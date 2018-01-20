@@ -24,17 +24,18 @@ from turberfield.dialogue.performer import Performer
 from turberfield.utils.misc import group_by_type
 
 from bluemonday78.logic import associations
+from bluemonday78.logic import ray
 from bluemonday78.logic import Spot
-from bluemonday78.logic import associations, schedule
-from bluemonday78.logic import fade_in  # Rework
+from bluemonday78.logic import schedule
 
-class SceneTests(unittest.TestCase):
+class RaySequenceTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
         cls.asscns = associations()
         cls.ensemble = cls.asscns.ensemble()
-        cls.dialogue = [copy.deepcopy(fade_in)]
+        # cls.dialogue = copy.deepcopy(dialogue)
+        cls.dialogue = [copy.deepcopy(ray)]
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
         }
@@ -54,9 +55,9 @@ class SceneTests(unittest.TestCase):
             )
             self.assertIs(self.folder, branch)
 
-    def test_001(self):
+    def test_old_001(self):
         folder, index, script, selection, interlude = self.performer.next(
-            self.schedule, self.ensemble, strict=True, roles=1
+            self.dialogue, self.ensemble, strict=True, roles=1
         )
         self.assertEqual(
             Spot.w12_ducane_prison_visiting,
@@ -106,9 +107,9 @@ class SceneTests(unittest.TestCase):
         )
 
         list(self.performer.run())
-        self.assertEqual(6, len(self.performer.shots))
+        self.assertEqual(1, len(self.performer.shots))
         self.assertEqual(
-            "ray does the paperwork",
+            "ray is on the landing",
             self.performer.shots[-1].name
         )
 

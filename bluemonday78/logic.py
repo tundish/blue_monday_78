@@ -72,7 +72,7 @@ def associations():
         *(i.set_state(int(blue_monday.strftime("%Y%m%d")))
           for i in (
             Narrator().set_state(Spot.w12_ducane_prison_visiting),
-            Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison),
+            Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison_wing),
             Barman(
                 name="Mr Barry Latimer"
             ).set_state(
@@ -82,8 +82,8 @@ def associations():
             ),
             Hipster(name="Mr Justin Cornelis Delcroix").set_state(
                 Spot.w12_goldhawk_tavern),
-            PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_visiting),
-            Prisoner(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison),
+            PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_wing),
+            Prisoner(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison_wing),
             PrisonVisitor(name="Mrs Karen Sheppey").set_state(Spot.w12_ducane_prison),
             Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
             Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
@@ -137,7 +137,7 @@ ray = SceneScript.Folder(
     interludes=itertools.repeat(None)
 )
 
-fade_in = SceneScript.Folder(
+ray = SceneScript.Folder(
     pkg="bluemonday78",
     description="It's Ray Farington's last day.",
     metadata=[blue_monday],
@@ -146,6 +146,7 @@ fade_in = SceneScript.Folder(
     ],
     interludes=itertools.repeat(GoldenPath.listen_to_karen)
 )
+
 plotlines = (justin, ray)
 schedule = collections.deque([local])
 schedule.extendleft(plotlines)
