@@ -121,23 +121,15 @@ class RaySequenceTests(unittest.TestCase):
 
     def test_003(self):
         self.assertEqual(197801160810, self.characters["PrisonVisitor"][0].get_state())
-        self.assertEqual(
-            Spot.w12_latimer_arches,
-            self.characters["Narrator"][0].get_state(Spot)
-        )
 
         list(self.performer.run())
-        self.assertEqual(8, len(self.performer.shots))
+        self.assertEqual(3, len(self.performer.shots))
         self.assertEqual(
-            "addison arches",
+            "in the visiting suite",
             self.performer.shots[-1].scene
         )
 
-        self.assertEqual(19780117, self.characters["Narrator"][0].get_state())
-        self.assertEqual(
-            Spot.w12_ducane_prison_release,
-            self.characters["Narrator"][0].get_state(Spot)
-        )
+        self.assertEqual(197801160820, self.characters["PrisonVisitor"][0].get_state())
 
     def test_004(self):
         self.assertEqual(19780117, self.characters["Narrator"][0].get_state())

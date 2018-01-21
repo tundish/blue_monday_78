@@ -9,6 +9,10 @@
 :project: bluemonday78
 :version: |VERSION|
 
+.. entity:: WIFE
+   :types: bluemonday78.logic.PrisonVisitor
+   :states: 197801160810
+
 .. entity:: HUSBAND
    :types: bluemonday78.logic.Prisoner
 
@@ -17,10 +21,6 @@
     * Can't read. Dislocated.
     * Does what he's told. Wants a quiet life.
     * Misbehaved at Standford Hill to see less of |WIFE|.
-
-.. entity:: WIFE
-   :types: bluemonday78.logic.PrisonVisitor
-   :states: 197801160810
 
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~
@@ -85,6 +85,8 @@ Karen talks of her work
     Mandy had it all the time she was there so fair's fair.
 
 
+.. property:: WIFE.state 197801160820
+
 [HUSBAND]_
 
     . . .
@@ -109,3 +111,4 @@ Karen talks of her work
     No, I still do the cleaning.
 
 .. |HUSBAND_FIRSTNAME| property:: HUSBAND.name.firstname
+.. |WIFE| property:: WIFE.name.firstname
