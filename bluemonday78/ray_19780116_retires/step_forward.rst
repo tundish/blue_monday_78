@@ -68,6 +68,10 @@ Ray is on the landing
 
     Yes, |OFFICER_TITLE| |OFFICER_SURNAME|.
 
+.. property:: OFFICER.state bluemonday78.logic.Spot.w12_ducane_prison_release
+.. property:: CELLMATE.state bluemonday78.logic.Spot.w12_ducane_prison_visiting
+.. property:: HERO.state bluemonday78.logic.Spot.w12_ducane_prison_visiting
+
 .. |OFFICER_TITLE| property:: OFFICER.name.title
 .. |OFFICER_SURNAME| property:: OFFICER.name.surname
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname

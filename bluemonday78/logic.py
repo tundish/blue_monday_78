@@ -143,6 +143,7 @@ ray = SceneScript.Folder(
     metadata=[blue_monday],
     paths=[
         "ray_19780116_retires/step_forward.rst",
+        "ray_19780116_retires/getting_here.rst",
     ],
     interludes=itertools.repeat(GoldenPath.listen_to_karen)
 )
