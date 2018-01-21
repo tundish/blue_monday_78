@@ -18,6 +18,10 @@
     * Does what he's told. Wants a quiet life.
     * Misbehaved at Standford Hill to see less of |WIFE|.
 
+.. entity:: WIFE
+   :types: bluemonday78.logic.PrisonVisitor
+   :states: 197801160810
+
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~
 
