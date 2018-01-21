@@ -61,7 +61,7 @@ class RaySequenceTests(unittest.TestCase):
             self.asscns.search(_name="Mr Martin Sheppey").pop().get_state(Spot)
         )
         self.assertEqual(
-            19780116,
+            197801160800,
             self.characters["PrisonOfficer"][0].get_state()
         )
         self.assertEqual(
@@ -77,7 +77,7 @@ class RaySequenceTests(unittest.TestCase):
         )
 
         self.assertEqual(
-            19780116,
+            197801160800,
             self.characters["PrisonOfficer"][0].get_state()
         )
         self.assertEqual(
@@ -91,12 +91,8 @@ class RaySequenceTests(unittest.TestCase):
 
     def test_002(self):
         self.assertEqual(
-            Spot.w12_goldhawk_tavern,
-            self.characters["Narrator"][0].get_state(Spot)
-        )
-        self.assertEqual(
-            19780116,
-            self.characters["Hipster"][0].get_state()
+            197801160800,
+            self.characters["PrisonVisitor"][0].get_state()
         )
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
@@ -108,15 +104,15 @@ class RaySequenceTests(unittest.TestCase):
             self.performer.folders, self.performer.ensemble
         )
         list(self.performer.run())
-        self.assertEqual(7, len(self.performer.shots))
+        self.assertEqual(2, len(self.performer.shots))
         self.assertEqual(
-            "sorrows",
+            "in the visiting suite",
             self.performer.shots[-1].scene
         )
 
         self.assertEqual(
-            19780117,
-            self.characters["Hipster"][0].get_state()
+            197801160810,
+            self.characters["PrisonVisitor"][0].get_state()
         )
         self.assertEqual(
             Spot.w12_goldhawk_tavern,

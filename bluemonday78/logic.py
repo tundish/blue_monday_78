@@ -69,7 +69,7 @@ def associations():
     rv = Associations()
     rv.register(
         None,
-        *(i.set_state(int(blue_monday.strftime("%Y%m%d")))
+        *(i.set_state(int(blue_monday.strftime("%Y%m%d0800")))
           for i in (
             Narrator().set_state(Spot.w12_ducane_prison_visiting),
             Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison_wing),

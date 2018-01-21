@@ -15,6 +15,7 @@
 
 .. entity:: WIFE
    :types: bluemonday78.logic.PrisonVisitor
+   :states: 197801160800
 
    A beautician in her late forties.
 
@@ -98,6 +99,8 @@ Karen talks of the journey
     No, it's...
 
     A shame.
+
+.. property:: WIFE.state 197801160810
 
 .. |HUSBAND_FIRSTNAME| property:: HUSBAND.name.firstname
 .. |HERO_TITLE| property:: HERO.name.title
