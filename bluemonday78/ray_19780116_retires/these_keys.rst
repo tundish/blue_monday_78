@@ -15,6 +15,7 @@
 
 .. entity:: WIFE
    :types: bluemonday78.logic.PrisonVisitor
+   :states: 197801160820
 
    A beautician in her late forties.
 
@@ -125,3 +126,5 @@ Karen talks of the keys
     Well then |HERO| can have them.
     And |HERO| had better not turn up at my door, either.
     I don't want any more of your prison mates hanging around.
+
+.. property:: WIFE.state 197801160830

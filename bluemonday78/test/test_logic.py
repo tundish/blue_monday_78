@@ -132,36 +132,16 @@ class RaySequenceTests(unittest.TestCase):
         self.assertEqual(197801160820, self.characters["PrisonVisitor"][0].get_state())
 
     def test_004(self):
-        self.assertEqual(19780117, self.characters["Narrator"][0].get_state())
-        self.assertEqual(
-            Spot.w12_ducane_prison_release,
-            self.characters["Narrator"][0].get_state(Spot)
-        )
-        self.assertEqual(
-            Spot.w12_ducane_prison_release,
-            self.characters["Player"][0].get_state(Spot)
-        )
+        self.assertEqual(197801160820, self.characters["PrisonVisitor"][0].get_state())
 
         list(self.performer.run())
-        self.assertEqual(9, len(self.performer.shots))
+        self.assertEqual(4, len(self.performer.shots))
         self.assertEqual(
-            "getting out",
+            "in the visiting suite",
             self.performer.shots[-1].scene
         )
 
-        self.assertEqual(
-            19780117,
-            self.characters["Narrator"][0].get_state()
-        )
-        self.assertEqual(
-            Spot.w12_goldhawk_tavern,
-            self.characters["Narrator"][0].get_state(Spot)
-        )
-
-        self.assertEqual(
-            Spot.w12_latimer_arches,
-            self.characters["Player"][0].get_state(Spot)
-        )
+        self.assertEqual(197801160830, self.characters["PrisonVisitor"][0].get_state())
 
     def test_005(self):
         self.assertEqual(
