@@ -22,6 +22,10 @@
     * Does what he's told. Wants a quiet life.
     * Misbehaved at Standford Hill to see less of |WIFE|.
 
+.. entity:: HERO
+   :types: bluemonday78.logic.Player
+   :states: bluemonday78.logic.Spot.w12_ducane_prison_visiting
+
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~
 

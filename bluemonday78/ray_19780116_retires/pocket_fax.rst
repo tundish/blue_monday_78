@@ -15,7 +15,7 @@
 
 .. entity:: OFFICER
    :types: bluemonday78.logic.PrisonOfficer
-   :states: bluemonday78.logic.Spot.w12_ducane_prison_visiting
+   :states: bluemonday78.logic.Spot.w12_ducane_prison_release
 
    A Prison Officer. We first meet him on the day he retires.
 
@@ -43,6 +43,7 @@
 
 .. entity:: HERO
    :types: bluemonday78.logic.Player
+   :states: bluemonday78.logic.Spot.w12_ducane_prison_release
 
    The player entity.
 

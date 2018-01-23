@@ -34,6 +34,7 @@
 
 .. entity:: HERO
    :types: bluemonday78.logic.Player
+   :states: bluemonday78.logic.Spot.w12_ducane_prison_visiting
 
    The player entity.
 
