@@ -123,11 +123,13 @@ ray = SceneScript.Folder(
         "ray_19780116_retires/getting_here.rst",
         "ray_19780116_retires/hows_work.rst",
         "ray_19780116_retires/these_keys.rst",
+        "ray_19780116_retires/pocket_fax.rst",
     ],
     interludes=[
         GoldenPath.listen_to_karen,
         GoldenPath.listen_to_karen,
         GoldenPath.listen_to_karen,
+        GoldenPath.get_out_of_prison,
         GoldenPath.get_out_of_prison,
     ]
 )

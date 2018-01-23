@@ -47,10 +47,6 @@
 
    The player entity.
 
-.. entity:: NARRATOR
-   :types: bluemonday78.logic.Narrator
-   :states: bluemonday78.logic.Spot.w12_ducane_prison_visiting
-
 
 Stairwell
 ~~~~~~~~~
@@ -360,7 +356,6 @@ Ray does the paperwork
 
 .. property:: OFFICER.state bluemonday78.logic.Spot.w12_ducane_prison_release
 .. property:: HERO.state bluemonday78.logic.Spot.w12_ducane_prison_release
-.. property:: NARRATOR.state bluemonday78.logic.Spot.w12_goldhawk_tavern
 
 .. |HUSBAND_FIRSTNAME| property:: HUSBAND.name.firstname
 .. |HUSBAND_SURNAME| property:: HUSBAND.name.surname
