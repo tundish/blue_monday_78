@@ -124,7 +124,12 @@ ray = SceneScript.Folder(
         "ray_19780116_retires/hows_work.rst",
         "ray_19780116_retires/these_keys.rst",
     ],
-    interludes=itertools.repeat(GoldenPath.listen_to_karen)
+    interludes=[
+        GoldenPath.listen_to_karen,
+        GoldenPath.listen_to_karen,
+        GoldenPath.listen_to_karen,
+        GoldenPath.get_out_of_prison,
+    ]
 )
 
 plotlines = (justin, ray)
