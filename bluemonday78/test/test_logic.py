@@ -34,7 +34,6 @@ class RaySequenceTests(unittest.TestCase):
     def setUpClass(cls):
         cls.asscns = associations()
         cls.ensemble = cls.asscns.ensemble()
-        # cls.dialogue = copy.deepcopy(dialogue)
         cls.dialogue = [copy.deepcopy(ray)]
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()

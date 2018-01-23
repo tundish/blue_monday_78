@@ -16,8 +16,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
+from turberfield.dialogue.types import Player
+from bluemonday78.types import Spot
+
 class GoldenPath:
 
     def listen_to_karen(folder, index, references, *args, **kwargs):
+        player = next(i for i in references if isinstance(i, Player))
+        player.set_state(Spot.w12_ducane_prison_visiting)
         return folder
-        
