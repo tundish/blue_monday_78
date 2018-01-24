@@ -10,8 +10,6 @@
 :version: |VERSION|
 
 .. |HERO| property:: HERO.name.firstname
-.. |WIFE| property:: WIFE.name.firstname
-.. |HUSBAND| property:: HUSBAND.name.firstname
 
 .. entity:: OFFICER
    :types: bluemonday78.logic.PrisonOfficer
