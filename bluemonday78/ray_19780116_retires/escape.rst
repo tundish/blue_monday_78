@@ -8,6 +8,7 @@
 .. entity:: OFFICER
    :types: bluemonday78.logic.PrisonOfficer
    :states: bluemonday78.logic.Spot.w12_ducane_prison_release
+            197801160820
 
 .. entity:: HERO
    :types: bluemonday78.logic.Player
@@ -20,7 +21,6 @@
 
 .. entity:: NARRATOR
    :types: bluemonday78.logic.Narrator
-   :states: bluemonday78.logic.Spot.w12_ducane_prison_release
 
 Getting Out
 ~~~~~~~~~~~
@@ -77,9 +77,7 @@ Ray's first hint
 
     Now, goodbye, and good luck.
 
-.. property:: NARRATOR.state bluemonday78.logic.Spot.w12_goldhawk_tavern
-.. property:: HERO.state bluemonday78.logic.Spot.w12_latimer_arches
-.. property:: OFFICER.state 19780118
+.. property:: OFFICER.state 197801160830
 
 .. |HERO| property:: HERO.name.firstname
 .. |MARTIN_FIRSTNAME| property:: MARTIN.name.firstname
