@@ -214,6 +214,10 @@ class RaySequenceTests(unittest.TestCase):
 
     def test_008(self):
         self.assertEqual(
+            197801160830,
+            self.characters["PrisonOfficer"][0].get_state()
+        )
+        self.assertEqual(
             Spot.w12_latimer_arches,
             self.characters["Player"][0].get_state(Spot)
         )
