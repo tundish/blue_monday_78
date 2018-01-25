@@ -27,6 +27,7 @@ from bluemonday78.logic import associations
 from bluemonday78.logic import ray
 from bluemonday78.logic import Spot
 from bluemonday78.logic import schedule
+from bluemonday78.types import Drama
 
 class RaySequenceTests(unittest.TestCase):
 
@@ -41,7 +42,7 @@ class RaySequenceTests(unittest.TestCase):
         cls.performer = Performer(cls.dialogue, cls.ensemble)
 
     def setUp(self):
-        self.assertEqual(15, len(self.ensemble))
+        self.assertEqual(16, len(self.ensemble))
         (self.folder, self.index, self.script, self.selection,
          self.interlude) = self.performer.next(
             self.dialogue, self.ensemble, strict=True, roles=1
@@ -69,6 +70,7 @@ class RaySequenceTests(unittest.TestCase):
         )
 
         list(self.performer.run())
+        self.assertTrue(self.performer.script.fP.endswith("step_forward.rst"))
         self.assertEqual(1, len(self.performer.shots))
         self.assertEqual(
             "ray is on the landing",
@@ -103,6 +105,7 @@ class RaySequenceTests(unittest.TestCase):
             self.performer.folders, self.performer.ensemble
         )
         list(self.performer.run())
+        self.assertTrue(self.performer.script.fP.endswith("getting_here.rst"))
         self.assertEqual(2, len(self.performer.shots))
         self.assertEqual(
             "in the visiting suite",
@@ -122,6 +125,7 @@ class RaySequenceTests(unittest.TestCase):
         self.assertEqual(197801160810, self.characters["PrisonVisitor"][0].get_state())
 
         list(self.performer.run())
+        self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"))
         self.assertEqual(3, len(self.performer.shots))
         self.assertEqual(
             "in the visiting suite",
@@ -134,6 +138,7 @@ class RaySequenceTests(unittest.TestCase):
         self.assertEqual(197801160820, self.characters["PrisonVisitor"][0].get_state())
 
         list(self.performer.run())
+        self.assertTrue(self.performer.script.fP.endswith("these_keys.rst"))
         self.assertEqual(4, len(self.performer.shots))
         self.assertEqual(
             "in the visiting suite",
@@ -147,6 +152,7 @@ class RaySequenceTests(unittest.TestCase):
         self.assertEqual(197801160800, self.characters["PrisonOfficer"][0].get_state())
 
         list(self.performer.run())
+        self.assertTrue(self.performer.script.fP.endswith("pocket_fax.rst"))
         self.assertEqual(6, len(self.performer.shots))
         self.assertEqual(
             "guards' office",
@@ -167,6 +173,7 @@ class RaySequenceTests(unittest.TestCase):
         )
 
         list(self.performer.run())
+        self.assertTrue(self.performer.script.fP.endswith("admin.rst"))
         self.assertEqual(8, len(self.performer.shots))
         self.assertEqual(
             "guards' office",
@@ -188,6 +195,10 @@ class RaySequenceTests(unittest.TestCase):
 
     def test_007(self):
         self.assertEqual(
+            Drama.inactive,
+            self.characters["Mission"][0].get_state(Drama)
+        )
+        self.assertEqual(
             197801160820,
             self.characters["PrisonOfficer"][0].get_state()
         )
@@ -197,10 +208,15 @@ class RaySequenceTests(unittest.TestCase):
         )
 
         list(self.performer.run())
-        self.assertEqual(9, len(self.performer.shots))
+        self.assertTrue(self.performer.script.fP.endswith("frankly.rst"))
+        self.assertEqual(10, len(self.performer.shots))
         self.assertEqual(
-            "getting out",
+            "guards' office",
             self.performer.shots[-1].scene
+        )
+        self.assertEqual(
+            "ray does the paperwork",
+            self.performer.shots[-1].name,
         )
 
         self.assertEqual(
@@ -210,6 +226,10 @@ class RaySequenceTests(unittest.TestCase):
         self.assertEqual(
             197801160830,
             self.characters["PrisonOfficer"][0].get_state()
+        )
+        self.assertEqual(
+            Drama.active,
+            self.characters["Mission"][0].get_state(Drama)
         )
 
     def test_008(self):
@@ -224,6 +244,7 @@ class RaySequenceTests(unittest.TestCase):
 
         list(self.performer.run())
         self.assertEqual(13, len(self.performer.shots))
+        self.assertTrue(self.performer.script.fP.endswith("transfer.rst"))
         self.assertEqual(
             "a chance encounter",
             self.performer.shots[-1].scene

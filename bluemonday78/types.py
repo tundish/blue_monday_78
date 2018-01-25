@@ -24,10 +24,9 @@ from turberfield.dialogue.types import Persona
 from turberfield.dialogue.types import Stateful
 
 
-class Attitude(EnumFactory, enum.Enum):
-    neutral = 0
-    grumpy = 1
-    affable = 2
+class Drama(EnumFactory, enum.Enum):
+    inactive = 0
+    active = 1
 
 class Spot(EnumFactory, enum.Enum):
     w12_ducane_prison = "gcpv4d"
@@ -52,3 +51,4 @@ class Barman(Stateful, Persona): pass
 class Hipster(Stateful, Persona): pass
 class Character(Stateful, Persona): pass
 class Location(Stateful, DataObject): pass
+class Mission(Stateful, DataObject): pass

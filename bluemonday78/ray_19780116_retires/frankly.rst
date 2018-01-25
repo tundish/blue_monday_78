@@ -14,7 +14,7 @@
 .. entity:: OFFICER
    :types: bluemonday78.logic.PrisonOfficer
    :states: bluemonday78.logic.Spot.w12_ducane_prison_release
-            197801160810
+            197801160820
 
 .. entity:: HERO
    :types: bluemonday78.logic.Player

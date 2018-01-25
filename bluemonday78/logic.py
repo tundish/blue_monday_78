@@ -27,11 +27,12 @@ from turberfield.dialogue.types import Player
 from bluemonday78 import __version__ as version
 from bluemonday78.associations import Associations
 from bluemonday78.paths import GoldenPath
-from bluemonday78.types import Attitude
 from bluemonday78.types import Barman
+from bluemonday78.types import Drama
 from bluemonday78.types import Character
 from bluemonday78.types import Hipster
 from bluemonday78.types import Location
+from bluemonday78.types import Mission
 from bluemonday78.types import Narrator
 from bluemonday78.types import Prisoner
 from bluemonday78.types import PrisonOfficer
@@ -41,6 +42,10 @@ from bluemonday78.types import Via
 
 blue_monday = datetime.date(1978, 1, 16)
 
+def missions():
+    return [
+        Mission(name="break_it_up", objective="").set_state(Drama.inactive),
+    ]
 
 def associations():
     rv = Associations()
@@ -50,15 +55,8 @@ def associations():
           for i in (
             Narrator().set_state(Spot.w12_ducane_prison_visiting),
             Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison_wing),
-            Barman(
-                name="Mr Barry Latimer"
-            ).set_state(
-                Attitude.neutral
-            ).set_state(
-                Spot.w12_goldhawk_tavern
-            ),
-            Hipster(name="Mr Justin Cornelis Delcroix").set_state(
-                Spot.w12_goldhawk_tavern),
+            Barman( name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
+            Hipster(name="Mr Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
             PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_wing),
             Prisoner(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison_wing),
             PrisonVisitor(name="Mrs Karen Sheppey").set_state(Spot.w12_ducane_prison),
@@ -72,10 +70,11 @@ def associations():
         Location(label="Wormwood Scrubs visiting").set_state(Spot.w12_ducane_prison_visiting),
         Location(label="Wormwood Scrubs reception").set_state(Spot.w12_ducane_prison_release),
         Location(label="Wormwood Scrubs prison wing").set_state(Spot.w12_ducane_prison_wing),
+        *missions()
     )
     return rv
 
-references = list(associations().ensemble()) + [Attitude, Spot, Via]
+references = list(associations().ensemble()) + [Spot, Via]
 
 
 local = SceneScript.Folder(
@@ -133,6 +132,7 @@ ray = SceneScript.Folder(
         GoldenPath.listen_to_karen,
         GoldenPath.listen_to_karen,
         GoldenPath.listen_to_karen,
+        GoldenPath.get_out_of_prison,
         GoldenPath.get_out_of_prison,
         GoldenPath.get_out_of_prison,
         GoldenPath.get_out_of_prison,
