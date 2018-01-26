@@ -28,7 +28,7 @@ from bluemonday78.logic import associations
 from bluemonday78.logic import ray
 from bluemonday78.logic import Spot
 from bluemonday78.logic import schedule
-from bluemonday78.types import Drama
+from bluemonday78.types import Mission
 
 class RaySequenceTests(unittest.TestCase):
 
@@ -47,7 +47,7 @@ class RaySequenceTests(unittest.TestCase):
         cls.performer = Performer(cls.dialogue, cls.ensemble)
 
     def setUp(self):
-        self.assertEqual(16, len(self.ensemble))
+        self.assertEqual(15, len(self.ensemble))
         (self.folder, self.index, self.script, self.selection,
          self.interlude) = self.performer.next(
             self.dialogue, self.ensemble, strict=True, roles=1
@@ -200,10 +200,6 @@ class RaySequenceTests(unittest.TestCase):
 
     def test_007(self):
         self.assertEqual(
-            Drama.inactive,
-            self.characters["Mission"][0].get_state(Drama)
-        )
-        self.assertEqual(
             197801160820,
             self.characters["PrisonOfficer"][0].get_state()
         )
@@ -233,13 +229,10 @@ class RaySequenceTests(unittest.TestCase):
             197801160830,
             self.characters["PrisonOfficer"][0].get_state()
         )
-        mission = self.characters["Mission"][0]
+
+        hero = self.characters["Player"][0]
         location = self.asscns.search(label="Wormwood Scrubs visiting").pop()
-        self.assertEqual(
-            Drama.active,
-            mission.get_state(Drama)
-        )
-        self.assertIn(location, self.asscns.lookup[mission][Drama.active])
+        self.assertIn(location, self.asscns.lookup[hero][Mission.travel])
 
     def test_008(self):
         self.assertEqual(

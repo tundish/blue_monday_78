@@ -22,10 +22,6 @@
 
    The player entity.
 
-.. entity:: MISSION
-   :types: bluemonday78.logic.Mission
-   :states: bluemonday78.types.Drama.inactive
-
 .. entity:: OBJECTIVE
    :types: bluemonday78.logic.Location
    :states: bluemonday78.logic.Spot.w12_ducane_prison_visiting
@@ -72,14 +68,11 @@ Ray does the paperwork
 
 .. property:: OFFICER.state 197801160830
 
-.. memory:: bluemonday78.types.Drama.active
-   :subject: MISSION
+.. memory:: bluemonday78.types.Mission.travel
+   :subject: HERO
    :object: OBJECTIVE
 
    Go to |OBJECTIVE_LABEL| and check on |CELLMATE_FIRSTNAME|..
-
-.. property:: MISSION.state bluemonday78.types.Drama.active
-
 
 .. |HERO_TITLE| property:: HERO.name.title
 .. |HERO_SURNAME| property:: HERO.name.surname

@@ -28,6 +28,9 @@ class Drama(EnumFactory, enum.Enum):
     inactive = 0
     active = 1
 
+class Mission(EnumFactory, enum.Enum):
+    travel = "travel"
+
 class Spot(EnumFactory, enum.Enum):
     w12_ducane_prison = "gcpv4d"
     w12_ducane_prison_visiting = "gcpv4d252v5y"
@@ -51,4 +54,3 @@ class Barman(Stateful, Persona): pass
 class Hipster(Stateful, Persona): pass
 class Character(Stateful, Persona): pass
 class Location(Stateful, DataObject): pass
-class Mission(Stateful, DataObject): pass
