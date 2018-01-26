@@ -20,6 +20,7 @@ from collections.abc import Callable
 import copy
 import unittest
 
+from turberfield.dialogue.model import Model
 from turberfield.dialogue.performer import Performer
 from turberfield.utils.misc import group_by_type
 
@@ -30,6 +31,12 @@ from bluemonday78.logic import schedule
 from bluemonday78.types import Drama
 
 class RaySequenceTests(unittest.TestCase):
+
+    def memory_handler(obj):
+        if isinstance(obj, Model.Memory):
+            if obj.subject is not None:
+                obj.subject.set_state(obj.state)
+        # TODO: obj.object, text, html
 
     @classmethod
     def setUpClass(cls):
@@ -207,7 +214,8 @@ class RaySequenceTests(unittest.TestCase):
             self.characters["Player"][0].get_state(Spot)
         )
 
-        list(self.performer.run())
+        for obj in self.performer.run():
+            RaySequenceTests.memory_handler(obj)
         self.assertTrue(self.performer.script.fP.endswith("frankly.rst"))
         self.assertEqual(10, len(self.performer.shots))
         self.assertEqual(

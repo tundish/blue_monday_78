@@ -22,6 +22,13 @@
 
    The player entity.
 
+.. entity:: MISSION
+   :types: bluemonday78.logic.Mission
+   :states: bluemonday78.types.Drama.inactive
+
+.. entity:: CELLMATE
+   :types: bluemonday78.logic.Prisoner
+
 Guards' Office
 ~~~~~~~~~~~~~~
 
@@ -59,7 +66,15 @@ Ray does the paperwork
 
     That's what we like to see, eh?
 
-.. property:: OFFICER.state 197801160820
+.. property:: OFFICER.state 197801160830
+
+.. memory:: bluemonday78.types.Drama.active
+   :subject: MISSION
+   :object: HERO
+
+   Go and check on |CELLMATE_FIRSTNAME|..
+
 
 .. |HERO_TITLE| property:: HERO.name.title
 .. |HERO_SURNAME| property:: HERO.name.surname
+.. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
