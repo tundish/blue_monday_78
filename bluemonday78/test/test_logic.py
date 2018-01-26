@@ -32,11 +32,9 @@ from bluemonday78.types import Drama
 
 class RaySequenceTests(unittest.TestCase):
 
-    def memory_handler(obj):
-        if isinstance(obj, Model.Memory):
-            if obj.subject is not None:
-                obj.subject.set_state(obj.state)
-        # TODO: obj.object, text, html
+    def make_association(obj, associations):
+        if isinstance(obj, Model.Memory) and obj.object:
+            associations.register(obj.state, obj.subject, obj.object)
 
     @classmethod
     def setUpClass(cls):
@@ -215,7 +213,7 @@ class RaySequenceTests(unittest.TestCase):
         )
 
         for obj in self.performer.run():
-            RaySequenceTests.memory_handler(obj)
+            RaySequenceTests.make_association(obj, self.asscns)
         self.assertTrue(self.performer.script.fP.endswith("frankly.rst"))
         self.assertEqual(10, len(self.performer.shots))
         self.assertEqual(
@@ -235,10 +233,13 @@ class RaySequenceTests(unittest.TestCase):
             197801160830,
             self.characters["PrisonOfficer"][0].get_state()
         )
+        mission = self.characters["Mission"][0]
+        location = self.asscns.search(label="Wormwood Scrubs visiting").pop()
         self.assertEqual(
             Drama.active,
-            self.characters["Mission"][0].get_state(Drama)
+            mission.get_state(Drama)
         )
+        self.assertIn(location, self.asscns.lookup[mission][Drama.active])
 
     def test_008(self):
         self.assertEqual(

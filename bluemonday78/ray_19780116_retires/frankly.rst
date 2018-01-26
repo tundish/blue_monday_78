@@ -26,6 +26,10 @@
    :types: bluemonday78.logic.Mission
    :states: bluemonday78.types.Drama.inactive
 
+.. entity:: OBJECTIVE
+   :types: bluemonday78.logic.Location
+   :states: bluemonday78.logic.Spot.w12_ducane_prison_visiting
+
 .. entity:: CELLMATE
    :types: bluemonday78.logic.Prisoner
 
@@ -70,11 +74,14 @@ Ray does the paperwork
 
 .. memory:: bluemonday78.types.Drama.active
    :subject: MISSION
-   :object: HERO
+   :object: OBJECTIVE
 
-   Go and check on |CELLMATE_FIRSTNAME|..
+   Go to |OBJECTIVE_LABEL| and check on |CELLMATE_FIRSTNAME|..
+
+.. property:: MISSION.state bluemonday78.types.Drama.active
 
 
 .. |HERO_TITLE| property:: HERO.name.title
 .. |HERO_SURNAME| property:: HERO.name.surname
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
+.. |OBJECTIVE_LABEL| property:: OBJECTIVE.label
