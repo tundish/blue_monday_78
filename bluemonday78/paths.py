@@ -21,12 +21,12 @@ from bluemonday78.types import Spot
 
 class GoldenPath:
 
-    def listen_to_karen(folder, index, references, *args, **kwargs):
+    def locate_to_karen(folder, index, references, *args, **kwargs):
         player = next(i for i in references if isinstance(i, Player))
         player.set_state(Spot.w12_ducane_prison_visiting)
         return folder
 
-    def get_out_of_prison(folder, index, references, *args, **kwargs):
+    def locate_to_ray(folder, index, references, *args, **kwargs):
         player = next(i for i in references if isinstance(i, Player))
         player.set_state(Spot.w12_ducane_prison_release)
         return folder

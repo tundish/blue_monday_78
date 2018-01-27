@@ -269,3 +269,39 @@ class RaySequenceTests(unittest.TestCase):
             19780119,
             self.characters["PrisonOfficer"][0].get_state()
         )
+
+    def test_009(self):
+        self.assertEqual(
+            197801160830,
+            self.characters["PrisonOfficer"][0].get_state()
+        )
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["Player"][0].get_state(Spot)
+        )
+
+        list(self.performer.run())
+        self.assertEqual(13, len(self.performer.shots))
+        self.assertTrue(self.performer.script.fP.endswith("escape.rst"))
+        self.assertEqual(
+            "a chance encounter",
+            self.performer.shots[-1].scene
+        )
+
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["PrisonOfficer"][0].get_state(Spot)
+        )
+
+        self.assertEqual(
+            19780119,
+            self.characters["Hipster"][0].get_state()
+        )
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["Player"][0].get_state(Spot)
+        )
+        self.assertEqual(
+            19780119,
+            self.characters["PrisonOfficer"][0].get_state()
+        )

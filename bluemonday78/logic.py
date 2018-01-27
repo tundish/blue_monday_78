@@ -128,15 +128,15 @@ ray = SceneScript.Folder(
         "ray_19780116_retires/escape.rst",
     ],
     interludes=[
-        GoldenPath.listen_to_karen,
-        GoldenPath.listen_to_karen,
-        GoldenPath.listen_to_karen,
-        GoldenPath.get_out_of_prison,
-        GoldenPath.get_out_of_prison,
-        GoldenPath.get_out_of_prison,
-        GoldenPath.get_out_of_prison,
-        GoldenPath.get_out_of_prison,
-        GoldenPath.get_out_of_prison,
+        GoldenPath.locate_to_karen,
+        GoldenPath.locate_to_karen,
+        GoldenPath.locate_to_karen,
+        GoldenPath.locate_to_ray,
+        GoldenPath.locate_to_ray,
+        GoldenPath.locate_to_ray,
+        GoldenPath.locate_to_ray,
+        GoldenPath.locate_to_karen,
+        GoldenPath.locate_to_ray,
     ]
 )
 
