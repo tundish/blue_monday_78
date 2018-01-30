@@ -134,9 +134,9 @@ ray = SceneScript.Folder(
         GoldenPath.locate_to_ray,
         GoldenPath.locate_to_ray,
         GoldenPath.locate_to_ray,
-        GoldenPath.locate_to_ray,
         GoldenPath.locate_to_karen,
         GoldenPath.locate_to_ray,
+        GoldenPath.locate_to_karen,
     ]
 )
 

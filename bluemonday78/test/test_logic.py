@@ -18,6 +18,7 @@
 
 from collections.abc import Callable
 import copy
+import sys
 import unittest
 
 from turberfield.dialogue.model import Model
@@ -54,6 +55,8 @@ class RaySequenceTests(unittest.TestCase):
         )
 
     def tearDown(self):
+        print("Teardown", self.folder.paths[self.index], file=sys.stderr)
+        print("Interlude", self.interlude, file=sys.stderr)
         if isinstance(self.interlude, Callable):
             branch = self.interlude(
                 self.folder, self.index, self.ensemble, self.dialogue
@@ -235,39 +238,32 @@ class RaySequenceTests(unittest.TestCase):
         self.assertIn(location, self.asscns.lookup[hero][Mission.travel])
 
     def test_008(self):
+        hero = self.characters["Player"][0]
+        self.assertEqual(
+            Spot.w12_ducane_prison_visiting,
+            hero.get_state(Spot)
+        )
+
+        self.assertEqual(
+            197801160830,
+            self.characters["PrisonVisitor"][0].get_state()
+        )
         self.assertEqual(
             197801160830,
             self.characters["PrisonOfficer"][0].get_state()
         )
-        self.assertEqual(
-            Spot.w12_latimer_arches,
-            self.characters["Player"][0].get_state(Spot)
-        )
 
         list(self.performer.run())
-        self.assertEqual(13, len(self.performer.shots))
+        self.assertEqual(11, len(self.performer.shots))
         self.assertTrue(self.performer.script.fP.endswith("transfer.rst"))
         self.assertEqual(
-            "a chance encounter",
+            "in the visiting suite",
             self.performer.shots[-1].scene
         )
 
         self.assertEqual(
-            Spot.w12_latimer_arches,
+            Spot.w12_ducane_prison_release,
             self.characters["PrisonOfficer"][0].get_state(Spot)
-        )
-
-        self.assertEqual(
-            19780119,
-            self.characters["Hipster"][0].get_state()
-        )
-        self.assertEqual(
-            Spot.w12_latimer_arches,
-            self.characters["Player"][0].get_state(Spot)
-        )
-        self.assertEqual(
-            19780119,
-            self.characters["PrisonOfficer"][0].get_state()
         )
 
     def test_009(self):
@@ -304,4 +300,10 @@ class RaySequenceTests(unittest.TestCase):
         self.assertEqual(
             19780119,
             self.characters["PrisonOfficer"][0].get_state()
+        )
+
+    def test_010(self):
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            self.characters["Player"][0].get_state(Spot)
         )
