@@ -8,7 +8,7 @@
 .. entity:: OFFICER
    :types: bluemonday78.logic.PrisonOfficer
    :states: bluemonday78.logic.Spot.w12_ducane_prison_release
-            197801160820
+            197801160830
 
 .. entity:: HERO
    :types: bluemonday78.logic.Player
@@ -16,8 +16,6 @@
 
 .. entity:: MARTIN
    :types: bluemonday78.logic.Prisoner
-
-   Mentioned.
 
 .. entity:: NARRATOR
    :types: bluemonday78.logic.Narrator
