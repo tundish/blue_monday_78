@@ -61,7 +61,7 @@ class RaySequenceTests(unittest.TestCase):
             branch = self.interlude(
                 self.folder, self.index, self.ensemble, self.dialogue
             )
-            self.assertIs(self.folder, branch)
+            self.assertIn(branch, (self.folder, None))
 
     def test_001(self):
         self.assertEqual(

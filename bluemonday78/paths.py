@@ -30,3 +30,6 @@ class GoldenPath:
         player = next(i for i in references if isinstance(i, Player))
         player.set_state(Spot.w12_ducane_prison_release)
         return folder
+
+    def stop(folder, index, references, *args, **kwargs):
+        return None
