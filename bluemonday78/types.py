@@ -30,6 +30,7 @@ class Drama(EnumFactory, enum.Enum):
 
 class Mission(EnumFactory, enum.Enum):
     travel = "travel"
+    empty = "empty"
 
 class Spot(EnumFactory, enum.Enum):
     w12_ducane_prison = "gcpv4d"
