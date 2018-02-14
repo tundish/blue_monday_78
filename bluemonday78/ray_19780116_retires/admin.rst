@@ -33,7 +33,10 @@ Ray complains about the service
 
 [NARRATOR]_
 
-    Well, we have to wait a little while longer.
+    The Guard's Room is a shabby little office. There are some filing cabinets and a couple
+    of chairs. Everything is painted a thick institutional green.
+
+    |OFFICER_FIRSTNAME| |OFFICER_SURNAME| is tidying up a high wooden desk.
 
 [OFFICER]_
 
