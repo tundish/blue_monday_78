@@ -47,9 +47,18 @@ Ray is on the landing
 
 [CELLMATE]_
 
-    Off you go then, |HERO_FIRSTNAME| mate. Stay lucky.
+    Here we go then. Looks like you're gonna get the Book.
 
-    I wonder who they're going to put in here with me next?
+[HERO]_
+
+    The what?
+
+[CELLMATE]_
+
+    That's |OFFICER_SURNAME| outside. They call him the Book.
+    He's a total loony.
+
+    Good luck.
 
 [OFFICER]_
 
@@ -66,7 +75,28 @@ Ray is on the landing
 
 [CELLMATE]_
 
+    But I haven't done anything, |OFFICER_TITLE| |OFFICER_SURNAME|.
+
+[OFFICER]_
+
+    This cell is scheduled for a contraband search.
+
+    You will both vacate this cell immediately.
+
+    You will touch nothing on your way out.
+
+[CELLMATE]_
+
     Yes, |OFFICER_TITLE| |OFFICER_SURNAME|.
+
+[NARRATOR]_
+
+    |CELLMATE_SURNAME| and |HERO_SURNAME| step out of the cell onto the narrow
+    balcony.
+
+[OFFICER]_
+
+    Right, now we will proceed in silence to Visiting Suite. At the double!
 
 .. property:: OFFICER.state bluemonday78.logic.Spot.w12_ducane_prison_release
 .. property:: CELLMATE.state bluemonday78.logic.Spot.w12_ducane_prison_visiting

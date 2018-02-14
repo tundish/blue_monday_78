@@ -20,7 +20,8 @@
    :types: bluemonday78.logic.Player
    :states: bluemonday78.logic.Spot.w12_ducane_prison_release
 
-   The player entity.
+.. entity:: NARRATOR
+   :types: bluemonday78.logic.Narrator
 
 Guards' Office
 ~~~~~~~~~~~~~~
@@ -30,6 +31,9 @@ HM Prison Wormwood Scrubs.
 Ray complains about the service
 -------------------------------
 
+[NARRATOR]_
+
+    Well, we have to wait a little while longer.
 
 [OFFICER]_
 
@@ -63,3 +67,6 @@ Ray does the paperwork
 
 .. |HERO_TITLE| property:: HERO.name.title
 .. |HERO_SURNAME| property:: HERO.name.surname
+.. |OFFICER_TITLE| property:: OFFICER.name.title
+.. |OFFICER_FIRSTNAME| property:: OFFICER.name.firstname
+.. |OFFICER_SURNAME| property:: OFFICER.name.surname

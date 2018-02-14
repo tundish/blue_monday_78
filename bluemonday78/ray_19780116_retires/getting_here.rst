@@ -38,6 +38,9 @@
 
    The player entity.
 
+.. entity:: NARRATOR
+   :types: bluemonday78.logic.Narrator
+
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -46,6 +49,12 @@ HM Prison Wormwood Scrubs.
 Karen talks of the journey
 --------------------------
 
+[NARRATOR]_
+
+    The Visiting Suite is not much more than a long hall with small tables arranged
+    in a grid.
+
+    |HERO_FIRSTNAME| |HERO_SURNAME| hangs back in a corner by the door. 
 
 [WIFE]_
 
@@ -105,6 +114,7 @@ Karen talks of the journey
 
 .. |HUSBAND_FIRSTNAME| property:: HUSBAND.name.firstname
 .. |HERO_TITLE| property:: HERO.name.title
+.. |HERO_FIRSTNAME| property:: HERO.name.firstname
 .. |HERO_SURNAME| property:: HERO.name.surname
 .. |WIFE_TITLE| property:: WIFE.name.title
 .. |WIFE_SURNAME| property:: WIFE.name.surname
