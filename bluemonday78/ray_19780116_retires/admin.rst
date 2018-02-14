@@ -9,8 +9,6 @@
 :project: bluemonday78
 :version: |VERSION|
 
-.. |HERO| property:: HERO.name.firstname
-
 .. entity:: OFFICER
    :types: bluemonday78.logic.PrisonOfficer
    :states: bluemonday78.logic.Spot.w12_ducane_prison_release
@@ -27,26 +25,6 @@ Guards' Office
 ~~~~~~~~~~~~~~
 
 HM Prison Wormwood Scrubs.
-
-Ray complains about the service
--------------------------------
-
-[NARRATOR]_
-
-    The Guard's Room is a shabby little office. There are some filing cabinets and a couple
-    of chairs. Everything is painted a thick institutional green.
-
-    |OFFICER_FIRSTNAME| |OFFICER_SURNAME| is tidying up a high wooden desk.
-
-[OFFICER]_
-
-    Dear oh dear, what a mess today. I'm the only one who tidies this place up.
-
-    No-one replaces the stationery here you know. I had to bring in a load of rubber bands
-    this morning from home.
-
-    The only thing we've got left here is pens. Shamefully no one seems to want to steal
-    those.
 
 Ray does the paperwork
 ----------------------

@@ -5,7 +5,7 @@
 .. |VERSION| property:: bluemonday78.logic.version
 
 :author: D Haynes
-:date: 2017-07-04
+:date: 2018-02-14
 :project: bluemonday78
 :version: |VERSION|
 
@@ -28,15 +28,24 @@
 
    The player entity.
 
+.. entity:: NARRATOR
+   :types: bluemonday78.logic.Narrator
+
 
 Guards' Office
 ~~~~~~~~~~~~~~
 
 HM Prison Wormwood Scrubs.
 
-Ray complains about the service
--------------------------------
+Ray bestows a parting gift
+--------------------------
 
+[NARRATOR]_
+
+    The Guard's Room is a shabby little office. There are some filing cabinets and a couple
+    of chairs. Everything is painted a thick institutional green.
+
+    |OFFICER_FIRSTNAME| |OFFICER_SURNAME| is tidying up a high wooden desk.
 
 [OFFICER]_
 
@@ -48,25 +57,10 @@ Ray complains about the service
     The only thing we've got left here is pens. Shamefully no one seems to want to steal
     those.
 
-Ray does the paperwork
-----------------------
-
-.. This shot has to end with the Player getting the Pocketfax
-
-[OFFICER]_
-
-    Well, now, let's have you on your way.
-
-
-[OFFICER]_
-
-    It isn't usual to read a form B107 to its subject,
-    |HERO_TITLE| |HERO_SURNAME|, but it looks like you've been playing it
-    straight.
-
-    That's what we like to see, eh?
-
 .. property:: OFFICER.state 197801160810
 
 .. |HERO_TITLE| property:: HERO.name.title
 .. |HERO_SURNAME| property:: HERO.name.surname
+.. |OFFICER_TITLE| property:: OFFICER.name.title
+.. |OFFICER_FIRSTNAME| property:: OFFICER.name.firstname
+.. |OFFICER_SURNAME| property:: OFFICER.name.surname
