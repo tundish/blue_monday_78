@@ -77,7 +77,7 @@ Martin hands over the keys
 
    |OBJECTIVE_LABEL| is accessible.
 
-.. memory:: bluemonday78.types.Mission.empty
+.. memory:: bluemonday78.types.Travel.intention
    :subject: HERO
    :object: OBJECTIVE
 

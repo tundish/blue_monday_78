@@ -29,7 +29,7 @@ from bluemonday78.logic import associations
 from bluemonday78.logic import ray
 from bluemonday78.logic import Spot
 from bluemonday78.logic import schedule
-from bluemonday78.types import Mission
+from bluemonday78.types import Travel
 
 class RaySequenceTests(unittest.TestCase):
 
@@ -235,7 +235,7 @@ class RaySequenceTests(unittest.TestCase):
 
         hero = self.characters["Player"][0]
         location = self.asscns.search(label="Wormwood Scrubs visiting").pop()
-        self.assertIn(location, self.asscns.lookup[hero][Mission.travel])
+        self.assertIn(location, self.asscns.lookup[hero][Travel.intention])
 
     def test_008(self):
         hero = self.characters["Player"][0]

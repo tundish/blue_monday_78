@@ -28,9 +28,9 @@ class Drama(EnumFactory, enum.Enum):
     inactive = 0
     active = 1
 
-class Mission(EnumFactory, enum.Enum):
-    travel = "travel"
-    empty = "empty"
+class Travel(EnumFactory, enum.Enum):
+    intention = "intention"
+    arrival = "arrival"
 
 class Spot(EnumFactory, enum.Enum):
     w12_ducane_prison = "gcpv4d"

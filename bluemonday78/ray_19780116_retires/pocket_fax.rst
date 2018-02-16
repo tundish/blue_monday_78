@@ -49,13 +49,19 @@ Ray bestows a parting gift
 
 [OFFICER]_
 
-    Dear oh dear, what a mess today. I'm the only one who tidies this place up.
+    Good Lord, what a mess. I'm the only one who tidies this place up.
 
     No-one replaces the stationery here you know. I had to bring in a load of rubber bands
     this morning from home.
 
-    The only thing we've got left here is pens. Shamefully no one seems to want to steal
-    those.
+[NARRATOR]_
+
+    |OFFICER_FIRSTNAME| |OFFICER_SURNAME| pulls something out of a box near the floor.
+    He looks at it for a moment.
+
+[OFFICER]_
+
+    You may as well have this. It's not doing any good in here.
 
 .. property:: OFFICER.state 197801160810
 

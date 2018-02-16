@@ -68,7 +68,7 @@ Ray does the paperwork
 
 .. property:: OFFICER.state 197801160830
 
-.. memory:: bluemonday78.types.Mission.travel
+.. memory:: bluemonday78.types.Travel.intention
    :subject: HERO
    :object: OBJECTIVE
 

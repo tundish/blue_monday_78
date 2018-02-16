@@ -31,6 +31,7 @@ Ray's first hint
 
 [OFFICER]_
 
+    Well, now, let's have you on your way.
     It's a funny thing. This happens to be my last day as well.
     I'm about to take early retirement.
 
@@ -78,6 +79,7 @@ Ray's first hint
 .. property:: OFFICER.state 197801160830
 
 .. |HERO| property:: HERO.name.firstname
+.. |HERO_SURNAME| property:: HERO.name.surname
 .. |MARTIN_FIRSTNAME| property:: MARTIN.name.firstname
 .. |MARTIN_SURNAME| property:: MARTIN.name.surname
 

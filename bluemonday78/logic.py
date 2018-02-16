@@ -32,7 +32,6 @@ from bluemonday78.types import Drama
 from bluemonday78.types import Character
 from bluemonday78.types import Hipster
 from bluemonday78.types import Location
-from bluemonday78.types import Mission
 from bluemonday78.types import Narrator
 from bluemonday78.types import Prisoner
 from bluemonday78.types import PrisonOfficer
@@ -41,11 +40,6 @@ from bluemonday78.types import Spot
 from bluemonday78.types import Via
 
 blue_monday = datetime.date(1978, 1, 16)
-
-def missions():
-    return [
-        Mission(name="break_it_up", objective="").set_state(Drama.inactive),
-    ]
 
 def associations():
     rv = Associations()

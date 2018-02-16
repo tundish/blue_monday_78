@@ -33,7 +33,7 @@ Ray does the paperwork
 
 [OFFICER]_
 
-    Well, now, let's have you on your way.
+    Don't think for a second I want you hanging around here, |HERO_SURNAME|.
 
 
 [OFFICER]_
