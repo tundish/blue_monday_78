@@ -63,6 +63,27 @@ Ray bestows a parting gift
 
     You may as well have this. It's not doing any good in here.
 
+Ray shares a memory
+-------------------
+
+[OFFICER]_
+
+    I used to issue these to all my squad leaders. I trained them
+    to make a note of everything they saw, every day.
+
+[HERO]_
+
+    Thanks, |OFFICER_TITLE| |OFFICER_SURNAME|.
+
+[OFFICER]_
+
+    Can't give you a pen I'm afraid, they've all gone.
+
+[HERO]_
+
+    That's okay, |OFFICER_TITLE| |OFFICER_SURNAME|.
+
+
 .. property:: OFFICER.state 197801160810
 
 .. |HERO_TITLE| property:: HERO.name.title

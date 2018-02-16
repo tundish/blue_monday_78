@@ -182,7 +182,7 @@ class RaySequenceTests(unittest.TestCase):
 
         list(self.performer.run())
         self.assertTrue(self.performer.script.fP.endswith("admin.rst"))
-        self.assertEqual(8, len(self.performer.shots))
+        self.assertEqual(7, len(self.performer.shots))
         self.assertEqual(
             "guards' office",
             self.performer.shots[-1].scene
@@ -214,7 +214,7 @@ class RaySequenceTests(unittest.TestCase):
         for obj in self.performer.run():
             RaySequenceTests.make_association(obj, self.asscns)
         self.assertTrue(self.performer.script.fP.endswith("frankly.rst"))
-        self.assertEqual(10, len(self.performer.shots))
+        self.assertEqual(9, len(self.performer.shots))
         self.assertEqual(
             "guards' office",
             self.performer.shots[-1].scene
@@ -254,7 +254,7 @@ class RaySequenceTests(unittest.TestCase):
         )
 
         list(self.performer.run())
-        self.assertEqual(11, len(self.performer.shots))
+        self.assertEqual(10, len(self.performer.shots))
         self.assertTrue(self.performer.script.fP.endswith("transfer.rst"))
         self.assertEqual(
             "in the visiting suite",
@@ -277,7 +277,7 @@ class RaySequenceTests(unittest.TestCase):
         )
 
         list(self.performer.run())
-        self.assertEqual(12, len(self.performer.shots))
+        self.assertEqual(11, len(self.performer.shots))
         self.assertTrue(self.performer.script.fP.endswith("escape.rst"))
         self.assertEqual(
             "getting out",

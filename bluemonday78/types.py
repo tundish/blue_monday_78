@@ -29,7 +29,10 @@ class Drama(EnumFactory, enum.Enum):
     active = 1
 
 class Travel(EnumFactory, enum.Enum):
+    refusal = "refusal"
     intention = "intention"
+    departure = "departure"
+    transit = "transit"
     arrival = "arrival"
 
 class Spot(EnumFactory, enum.Enum):
