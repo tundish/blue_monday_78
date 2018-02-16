@@ -30,6 +30,7 @@ from bluemonday78.logic import ray
 from bluemonday78.logic import Spot
 from bluemonday78.logic import schedule
 from bluemonday78.types import Travel
+from bluemonday78.types import Visibility
 
 class RaySequenceTests(unittest.TestCase):
 
@@ -48,7 +49,7 @@ class RaySequenceTests(unittest.TestCase):
         cls.performer = Performer(cls.dialogue, cls.ensemble)
 
     def setUp(self):
-        self.assertEqual(15, len(self.ensemble))
+        self.assertEqual(16, len(self.ensemble))
         (self.folder, self.index, self.script, self.selection,
          self.interlude) = self.performer.next(
             self.dialogue, self.ensemble, strict=True, roles=1
@@ -159,6 +160,7 @@ class RaySequenceTests(unittest.TestCase):
         self.assertEqual(197801160830, self.characters["PrisonVisitor"][0].get_state())
         self.assertEqual(197801160800, self.characters["PrisonOfficer"][0].get_state())
 
+        self.assertEqual(Visibility.hidden, self.characters["NoteBook"][0].get_state(Visibility))
         list(self.performer.run())
         self.assertTrue(self.performer.script.fP.endswith("pocket_fax.rst"))
         self.assertEqual(6, len(self.performer.shots))
@@ -172,6 +174,7 @@ class RaySequenceTests(unittest.TestCase):
             Spot.w12_ducane_prison_release,
             self.characters["Player"][0].get_state(Spot)
         )
+        self.assertEqual(Visibility.visible, self.characters["NoteBook"][0].get_state(Visibility))
 
     def test_006(self):
         self.assertEqual(197801160810, self.characters["PrisonOfficer"][0].get_state())

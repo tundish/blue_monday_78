@@ -31,6 +31,8 @@
 .. entity:: NARRATOR
    :types: bluemonday78.logic.Narrator
 
+.. entity:: NOTEBOOK
+   :states: bluemonday78.logic.Visibility.hidden
 
 Guards' Office
 ~~~~~~~~~~~~~~
@@ -63,9 +65,11 @@ Ray bestows a parting gift
 
     You may as well have this. It's not doing any good in here.
 
+.. property:: NOTEBOOK.state bluemonday78.logic.Visibility.visible
+
 [NARRATOR]_
 
-    |OFFICER_SURNAME| tosses onto the desk a small book. Its cover is of board and cloth.
+    |OFFICER_SURNAME| tosses onto the desk a small book. Its cover is of stiffened cloth.
     A few dozen waxy leaves of thick paper have been double-punched through with holes.
     It is held together by a shoelace.
 
@@ -88,6 +92,15 @@ Ray shares a memory
 [HERO]_
 
     That's okay, |OFFICER_TITLE| |OFFICER_SURNAME|.
+
+[NARRATOR]_
+
+    Someone has been throwing sharpened pencils at the suspended ceiling. Two or
+    three are stuck into the soft board and are just within reach.
+
+[OFFICER]_
+
+    Help yourself to a pencil, though.
 
 
 .. property:: OFFICER.state 197801160810

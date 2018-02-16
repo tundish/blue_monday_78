@@ -24,9 +24,9 @@ from turberfield.dialogue.types import Persona
 from turberfield.dialogue.types import Stateful
 
 
-class Drama(EnumFactory, enum.Enum):
-    inactive = 0
-    active = 1
+class Visibility(EnumFactory, enum.Enum):
+    hidden = 0
+    visible = 1
 
 class Travel(EnumFactory, enum.Enum):
     refusal = "refusal"
@@ -51,6 +51,7 @@ class Via(EnumFactory, enum.Enum):
     bidir = 3
 
 class Narrator(Stateful): pass
+class NoteBook(Stateful): pass
 class PrisonOfficer(Stateful, Persona): pass
 class Prisoner(Stateful, Persona): pass
 class PrisonVisitor(Stateful, Persona): pass
