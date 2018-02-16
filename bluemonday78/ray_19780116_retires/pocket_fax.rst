@@ -45,14 +45,14 @@ Ray bestows a parting gift
     The Guard's Room is a shabby little office. There are some filing cabinets and a couple
     of chairs. Everything is painted a thick institutional green.
 
-    |OFFICER_FIRSTNAME| |OFFICER_SURNAME| is tidying up a high wooden desk.
+    |OFFICER_FIRSTNAME| |OFFICER_SURNAME| is rearranging boxes on a high wooden desk.
 
 [OFFICER]_
 
     Good Lord, what a mess. I'm the only one who tidies this place up.
 
     No-one replaces the stationery here you know. I had to bring in a load of rubber bands
-    this morning from home.
+    this morning from home. And I see we're out of pens again.
 
 [NARRATOR]_
 
@@ -63,13 +63,19 @@ Ray bestows a parting gift
 
     You may as well have this. It's not doing any good in here.
 
+[NARRATOR]_
+
+    |OFFICER_SURNAME| tosses onto the desk a small book. Its cover is of board and cloth.
+    A few dozen waxy leaves of thick paper have been double-punched through with holes.
+    It is held together by a shoelace.
+
 Ray shares a memory
 -------------------
 
 [OFFICER]_
 
-    I used to issue these to all my squad leaders. I trained them
-    to make a note of everything they saw, every day.
+    I would always issue these to my squad leaders. I used to train them
+    to make a note of everything they saw.
 
 [HERO]_
 
@@ -77,7 +83,7 @@ Ray shares a memory
 
 [OFFICER]_
 
-    Can't give you a pen I'm afraid, they've all gone.
+    Can't give you a pen I'm afraid.
 
 [HERO]_
 
