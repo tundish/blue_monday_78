@@ -37,6 +37,7 @@ from bluemonday78.types import Prisoner
 from bluemonday78.types import PrisonOfficer
 from bluemonday78.types import PrisonVisitor
 from bluemonday78.types import Spot
+from bluemonday78.types import Travel
 from bluemonday78.types import Via
 from bluemonday78.types import Visibility
 
@@ -69,7 +70,7 @@ def associations():
     )
     return rv
 
-references = list(associations().ensemble()) + [Spot, Via]
+references = list(associations().ensemble()) + [Spot, Travel, Via, Visibility]
 
 
 local = SceneScript.Folder(
