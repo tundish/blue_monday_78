@@ -32,6 +32,7 @@
    :types: bluemonday78.logic.Narrator
 
 .. entity:: NOTEBOOK
+   :types: bluemonday78.logic.NoteBook
    :states: bluemonday78.logic.Visibility.hidden
 
 Guards' Office
