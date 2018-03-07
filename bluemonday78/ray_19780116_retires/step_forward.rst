@@ -47,7 +47,7 @@ Ray is on the landing
 
 [CELLMATE]_
 
-    Here we go then. Looks like you're gonna get the Book.
+    Off you go then, |HERO_FIRSTNAME|. Looks like you're gonna get the Book.
 
 [HERO]_
 
@@ -58,7 +58,7 @@ Ray is on the landing
     That's |OFFICER_SURNAME| outside. They call him the Book.
     He's a total loony.
 
-    Good luck.
+    Good luck on the outside.
 
 [OFFICER]_
 
@@ -95,6 +95,11 @@ Ray is on the landing
     balcony.
 
 [OFFICER]_
+
+    |CELLMATE_SURNAME|, your lady wife has arrived outside. So you will have
+    thirty minutes visiting time until 09:00.
+
+    |HERO_SURNAME| you are with me while I sign you off for release.
 
     Right, now we will proceed in silence to Visiting Suite. At the double!
 
