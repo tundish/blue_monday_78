@@ -29,42 +29,57 @@
 .. entity:: CELLMATE
    :types: bluemonday78.logic.Prisoner
 
+.. entity:: NARRATOR
+   :types: bluemonday78.logic.Narrator
+
 Guards' Office
 ~~~~~~~~~~~~~~
 
 HM Prison Wormwood Scrubs.
 
-Ray complains about the service
--------------------------------
-
-
-[OFFICER]_
-
-    Dear oh dear, what a mess today. I'm the only one who tidies this place up.
-
-    No-one replaces the stationery here you know. I had to bring in a load of rubber bands
-    this morning from home.
-
-    The only thing we've got left here is pens. Shamefully no one seems to want to steal
-    those.
-
 Ray does the paperwork
 ----------------------
 
-.. This shot has to end in a question. It invites user input.
+.. Ray gives the PC a mission (find out what Martin's up to).
 
 [OFFICER]_
 
     Well, now, let's have you on your way.
+    It's a funny thing. This happens to be my last day as well.
+    I'm about to take early retirement.
 
+    After thirty years. I came straight out of the Army into the Prison Service.
+
+    So at least we have this in common; neither of us can wait to get out of here! 
+
+[NARRATOR]_
+
+    Martin and Karen's argument has become very loud.
 
 [OFFICER]_
 
-    It isn't usual to read a form B107 to its subject,
-    |HERO_TITLE| |HERO_SURNAME|, but it looks like you've been playing it
-    straight.
+    There's never enough time is there, to say what we have to. But I'd like
+    you to know I've been impressed by your influence on |CELLMATE_FIRSTNAME| |CELLMATE_SURNAME|.
+    His literacy is very much improved. And he's been practicing his handwriting too, I understand.
 
-    That's what we like to see, eh?
+[NARRATOR]_
+
+    There is cursing and screaming.
+
+[OFFICER]_
+
+    And I know why that is. You didn't start out with many options in life.
+    We know you have a difficult family background.
+
+    Most people don't recover from such a beginning. Except, you have a very special
+    kind of tenacity. You don't give up, do you?
+
+    I'd just like you to know, that I admire your attitude. Although I can see it might
+    lead to more trouble if you're not careful.
+
+[NARRATOR]_
+
+    An alarm bell rings.
 
 .. property:: OFFICER.state 197801160830
 
@@ -77,4 +92,5 @@ Ray does the paperwork
 .. |HERO_TITLE| property:: HERO.name.title
 .. |HERO_SURNAME| property:: HERO.name.surname
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
+.. |CELLMATE_SURNAME| property:: CELLMATE.name.surname
 .. |OBJECTIVE_LABEL| property:: OBJECTIVE.label

@@ -29,7 +29,7 @@ HM Prison Wormwood Scrubs.
 Ray does the paperwork
 ----------------------
 
-.. This shot has to end in a question. It invites user input.
+.. Ray teaches the PC a phrase.
 
 [OFFICER]_
 
