@@ -21,10 +21,9 @@ import datetime
 import itertools
 
 from turberfield.dialogue.model import SceneScript
-from turberfield.dialogue.types import EnumFactory
 from turberfield.dialogue.types import Player
 
-from bluemonday78 import __version__ as version
+from bluemonday78 import __version__ as version # noqa
 from bluemonday78.associations import Associations
 from bluemonday78.paths import GoldenPath
 from bluemonday78.types import Barman
@@ -33,7 +32,6 @@ from bluemonday78.types import Hipster
 from bluemonday78.types import Location
 from bluemonday78.types import Narrator
 from bluemonday78.types import NoteBook
-from bluemonday78.types import Indicative
 from bluemonday78.types import Phrase
 from bluemonday78.types import Prisoner
 from bluemonday78.types import PrisonOfficer
@@ -45,23 +43,25 @@ from bluemonday78.types import Visibility
 
 blue_monday = datetime.date(1978, 1, 16)
 
+ShowYourself = Phrase.build("show yourself")
+
 def associations():
     rv = Associations()
     rv.register(
-        None,
-        *(i.set_state(int(blue_monday.strftime("%Y%m%d0800")))
-          for i in (
-            Narrator().set_state(Spot.w12_ducane_prison_visiting),
-            Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison_wing),
-            Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
-            Hipster(name="Mr Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
-            PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_wing),
-            Prisoner(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison_wing),
-            PrisonVisitor(name="Mrs Karen Sheppey").set_state(Spot.w12_ducane_prison),
-            Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
-            Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
-            Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),
-          )
+        None, *(
+            i.set_state(int(blue_monday.strftime("%Y%m%d0800")))
+            for i in (
+                Narrator().set_state(Spot.w12_ducane_prison_visiting),
+                Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison_wing),
+                Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
+                Hipster(name="Mr Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
+                PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_wing),
+                Prisoner(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison_wing),
+                PrisonVisitor(name="Mrs Karen Sheppey").set_state(Spot.w12_ducane_prison),
+                Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
+                Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
+                Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),
+            )
         ),
         NoteBook().set_state(Visibility.hidden),
         Location(label="Addison Arches 18A").set_state(Spot.w12_latimer_arches),
@@ -69,12 +69,10 @@ def associations():
         Location(label="Wormwood Scrubs visiting").set_state(Spot.w12_ducane_prison_visiting),
         Location(label="Wormwood Scrubs reception").set_state(Spot.w12_ducane_prison_release),
         Location(label="Wormwood Scrubs prison wing").set_state(Spot.w12_ducane_prison_wing),
-    )
-    rv.register(
-        None,
-        Phrase(text="Hmmm", html="Hmmm")
+        ShowYourself.instance()
     )
     return rv
+
 
 references = list(associations().ensemble()) + [Spot, Travel, Via, Visibility]
 

@@ -18,7 +18,6 @@
 
 import argparse
 import collections
-import itertools
 import logging
 from numbers import Number
 import sys
@@ -29,7 +28,6 @@ from tkinter.font import Font
 from tkinter.scrolledtext import ScrolledText
 
 from turberfield.dialogue.handlers import TerminalHandler
-from turberfield.dialogue.model import SceneScript
 from turberfield.dialogue.performer import Performer
 from turberfield.utils.misc import log_setup
 
@@ -81,7 +79,7 @@ class GUIHandler(TerminalHandler):
     def parse_command(cmd):
         try:
             return cmd.strip().split(" ")[-1][0].lower()
-        except:
+        except Exception:
             return None
 
     def __init__(self, widget, references, *args, **kwargs):
@@ -151,15 +149,16 @@ class Presenter:
 
     titles = [(
         textwrap.dedent(
-        """
-            Blue Monday '78.
-        """), "titles"),
+            """
+                Blue Monday '78.
+            """
+        ), "titles"),
         ("    Version {version}".format(version=__version__), "direction"),
         (textwrap.dedent(
-        """
-        An interactive dialogue test piece.
-        Written during the Summer Novel Festival 2017 Game Jam.
-        """
+            """
+            An interactive dialogue test piece.
+            Written during the Summer Novel Festival 2017 Game Jam.
+            """
         ).format(version=__version__), "titles"),
         (
         "    All characters are fictional.\n"
@@ -168,7 +167,7 @@ class Presenter:
         First, pick a name for the main character.
         Type it as 'title firstname surname', eg:
         """), "titles"),
-        ("    Mr Maurice Micklewhite", "narrator"), 
+        ("    Mr Maurice Micklewhite", "narrator"),
     ]
 
     credits = textwrap.indent(textwrap.dedent(

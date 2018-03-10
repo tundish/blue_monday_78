@@ -28,7 +28,6 @@ from turberfield.utils.misc import group_by_type
 from bluemonday78.logic import associations
 from bluemonday78.logic import ray
 from bluemonday78.logic import Spot
-from bluemonday78.logic import schedule
 from bluemonday78.types import Travel
 from bluemonday78.types import Visibility
 
@@ -160,7 +159,10 @@ class RaySequenceTests(unittest.TestCase):
         self.assertEqual(197801160830, self.characters["PrisonVisitor"][0].get_state())
         self.assertEqual(197801160800, self.characters["PrisonOfficer"][0].get_state())
 
-        self.assertEqual(Visibility.hidden, self.characters["NoteBook"][0].get_state(Visibility))
+        self.assertEqual(
+            Visibility.hidden,
+            self.characters["NoteBook"][0].get_state(Visibility)
+        )
         list(self.performer.run())
         self.assertTrue(self.performer.script.fP.endswith("pocket_fax.rst"))
         self.assertEqual(6, len(self.performer.shots))
@@ -174,7 +176,10 @@ class RaySequenceTests(unittest.TestCase):
             Spot.w12_ducane_prison_release,
             self.characters["Player"][0].get_state(Spot)
         )
-        self.assertEqual(Visibility.visible, self.characters["NoteBook"][0].get_state(Visibility))
+        self.assertEqual(
+            Visibility.visible,
+            self.characters["NoteBook"][0].get_state(Visibility)
+        )
 
     def test_006(self):
         self.assertEqual(197801160810, self.characters["PrisonOfficer"][0].get_state())

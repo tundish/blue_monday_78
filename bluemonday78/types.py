@@ -17,6 +17,7 @@
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
 import enum
+import string
 
 from turberfield.dialogue.types import DataObject
 from turberfield.dialogue.types import EnumFactory
@@ -57,6 +58,35 @@ class Via(EnumFactory, enum.Enum):
     bckwd = 2
     bidir = 3
 
+class Phrase:
+
+    _table = {
+        ord(c): val
+        for seq, val in ((string.punctuation, None), (string.whitespace, " "))
+        for c in seq
+    }
+
+    @staticmethod
+    def build(text, html=None):
+
+        @classmethod
+        def instance(cls):
+            if getattr(cls, "_instance", None) is None:
+                cls._instance = cls()
+            return cls._instance
+
+        html = html or text
+        return type(
+            Phrase.class_name(text),
+            (Stateful,),
+            {"text": text, "html": html, "instance": instance}
+        )
+
+    @staticmethod
+    def class_name(text):
+        sane = text.lower().translate(Phrase._table)
+        return "".join(i.capitalize() for i in sane.split())
+
 class Narrator(Stateful): pass
 class NoteBook(Stateful): pass
 class PrisonOfficer(Stateful, Persona): pass
@@ -66,8 +96,3 @@ class Barman(Stateful, Persona): pass
 class Hipster(Stateful, Persona): pass
 class Character(Stateful, Persona): pass
 class Location(Stateful, DataObject): pass
-
-class Phrase(Stateful, DataObject): pass
-class Imperative(Phrase): pass
-class Indicative(Phrase): pass
-class Interrogative(Phrase): pass
