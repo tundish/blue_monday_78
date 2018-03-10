@@ -28,6 +28,13 @@ class Visibility(EnumFactory, enum.Enum):
     hidden = 0
     visible = 1
 
+class Speech(EnumFactory, enum.Enum):
+    overheard = "overheard"
+    unspoken = "unspoken"
+    spoken = "spoken"
+    ignored = "ignored"
+    repeated = "repeated"
+
 class Travel(EnumFactory, enum.Enum):
     refusal = "refusal"
     intention = "intention"
@@ -59,3 +66,8 @@ class Barman(Stateful, Persona): pass
 class Hipster(Stateful, Persona): pass
 class Character(Stateful, Persona): pass
 class Location(Stateful, DataObject): pass
+
+class Phrase(Stateful, DataObject): pass
+class Imperative(Phrase): pass
+class Indicative(Phrase): pass
+class Interrogative(Phrase): pass

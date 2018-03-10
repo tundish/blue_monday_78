@@ -21,6 +21,9 @@
 .. entity:: NARRATOR
    :types: bluemonday78.logic.Narrator
 
+.. entity:: SPELL
+   :types: bluemonday78.logic.Phrase
+
 Guards' Office
 ~~~~~~~~~~~~~~
 
@@ -43,6 +46,10 @@ Ray does the paperwork
     straight.
 
     That's what we like to see, eh?
+
+[OFFICER]_
+
+    *show yourself*
 
 .. property:: OFFICER.state 197801160820
 

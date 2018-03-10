@@ -33,6 +33,8 @@ from bluemonday78.types import Hipster
 from bluemonday78.types import Location
 from bluemonday78.types import Narrator
 from bluemonday78.types import NoteBook
+from bluemonday78.types import Indicative
+from bluemonday78.types import Phrase
 from bluemonday78.types import Prisoner
 from bluemonday78.types import PrisonOfficer
 from bluemonday78.types import PrisonVisitor
@@ -51,7 +53,7 @@ def associations():
           for i in (
             Narrator().set_state(Spot.w12_ducane_prison_visiting),
             Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison_wing),
-            Barman( name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
+            Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
             Hipster(name="Mr Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
             PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_wing),
             Prisoner(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison_wing),
@@ -67,6 +69,10 @@ def associations():
         Location(label="Wormwood Scrubs visiting").set_state(Spot.w12_ducane_prison_visiting),
         Location(label="Wormwood Scrubs reception").set_state(Spot.w12_ducane_prison_release),
         Location(label="Wormwood Scrubs prison wing").set_state(Spot.w12_ducane_prison_wing),
+    )
+    rv.register(
+        None,
+        Phrase(text="Hmmm", html="Hmmm")
     )
     return rv
 
