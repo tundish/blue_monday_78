@@ -69,7 +69,7 @@ def associations():
         Location(label="Wormwood Scrubs visiting").set_state(Spot.w12_ducane_prison_visiting),
         Location(label="Wormwood Scrubs reception").set_state(Spot.w12_ducane_prison_release),
         Location(label="Wormwood Scrubs prison wing").set_state(Spot.w12_ducane_prison_wing),
-        ShowYourself.instance()
+        ShowYourself()
     )
     return rv
 

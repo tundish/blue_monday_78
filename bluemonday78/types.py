@@ -67,7 +67,7 @@ class Phrase:
     }
 
     @staticmethod
-    def build(text, html=None):
+    def build(text):
 
         @classmethod
         def instance(cls):
@@ -75,11 +75,10 @@ class Phrase:
                 cls._instance = cls()
             return cls._instance
 
-        html = html or text
         return type(
             Phrase.class_name(text),
             (Stateful,),
-            {"text": text, "html": html, "instance": instance}
+            {"text": text, "instance": instance}
         )
 
     @staticmethod

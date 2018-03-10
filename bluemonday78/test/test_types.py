@@ -29,7 +29,7 @@ class PhraseTests(unittest.TestCase):
             Phrase.class_name("That's 2.5 hours' work __all__   wasted!")
         )
 
-    def test_no_html(self):
+    def test_build(self):
         cls = Phrase.build("these are testing times")
         self.assertTrue(issubclass(cls, Stateful))
         obj = cls.instance()
