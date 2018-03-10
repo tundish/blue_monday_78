@@ -34,3 +34,4 @@ class PhraseTests(unittest.TestCase):
         self.assertTrue(issubclass(cls, Stateful))
         obj = cls.instance()
         self.assertIsInstance(obj, Stateful)
+        self.assertEqual("these are testing times", obj.text)
