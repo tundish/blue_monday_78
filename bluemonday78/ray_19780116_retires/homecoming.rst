@@ -111,6 +111,14 @@ On the approach
 
 .. property:: OFFICER.state 19780119
 
+.. Needs alternative for "show yourself":
+.. I'm going to put you straight.
+.. Insubordinate. Insolent. A trickster with criminal tendencies.
+.. That last quality might be useful.
+.. But if I have any trouble with you |HERO|,  I shall bite you, |HERO|.
+.. And I shall bite you so hard you'll go right back to where I found you.
+
+
 .. |HERO_FIRSTNAME| property:: HERO.name.firstname
 .. |HERO_SURNAME| property:: HERO.name.surname
 .. |OFFICER_TITLE| property:: OFFICER.name.title
