@@ -24,12 +24,12 @@ class GoldenPath:
     def locate_to_karen(folder, index, references, *args, **kwargs):
         player = next(i for i in references if isinstance(i, Player))
         player.set_state(Spot.w12_ducane_prison_visiting)
-        return folder
+        return folder.metadata
 
     def locate_to_ray(folder, index, references, *args, **kwargs):
         player = next(i for i in references if isinstance(i, Player))
         player.set_state(Spot.w12_ducane_prison_release)
-        return folder
+        return folder.metadata
 
     def stop(folder, index, references, *args, **kwargs):
         return None

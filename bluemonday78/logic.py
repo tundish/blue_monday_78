@@ -80,7 +80,7 @@ references = list(associations().ensemble()) + [Spot, Travel, Via, Visibility]
 local = SceneScript.Folder(
     pkg="bluemonday78",
     description="Location-specific elaboration.",
-    metadata=[blue_monday],
+    metadata={"timestamp": blue_monday},
     paths=[
         "w12_19780116_local/w12_latimer_arches_19780116.rst",
         "w12_19780116_local/w12_latimer_arches_19780117.rst",
@@ -92,7 +92,7 @@ local = SceneScript.Folder(
 justin = SceneScript.Folder(
     pkg="bluemonday78",
     description="Justin Delcroix has just got the sack.",
-    metadata=[blue_monday],
+    metadata={"timestamp": blue_monday},
     paths=[
         "justin_19780116_fired/sorrows.rst",
         "justin_19780116_fired/anguish.rst",
@@ -104,7 +104,7 @@ justin = SceneScript.Folder(
 ray = SceneScript.Folder(
     pkg="bluemonday78",
     description="It's Ray Farington's last day.",
-    metadata=[blue_monday],
+    metadata={"timestamp": blue_monday},
     paths=[
         "ray_19780116_retires/admin.rst",
         "ray_19780116_retires/escape.rst",
@@ -116,7 +116,7 @@ ray = SceneScript.Folder(
 ray = SceneScript.Folder(
     pkg="bluemonday78",
     description="It's Ray Farington's last day.",
-    metadata=[blue_monday],
+    metadata={"timestamp": blue_monday},
     paths=[
         "ray_19780116_retires/step_forward.rst",
         "ray_19780116_retires/getting_here.rst",

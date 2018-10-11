@@ -58,10 +58,10 @@ class RaySequenceTests(unittest.TestCase):
         print("Teardown", self.folder.paths[self.index], file=sys.stderr)
         print("Interlude", self.interlude, file=sys.stderr)
         if isinstance(self.interlude, Callable):
-            branch = self.interlude(
+            metadata = self.interlude(
                 self.folder, self.index, self.ensemble, self.dialogue
             )
-            self.assertIn(branch, (self.folder, None))
+            self.assertIn(metadata, (None, self.folder.metadata))
 
     def test_001(self):
         self.assertEqual(

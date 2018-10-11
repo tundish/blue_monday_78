@@ -200,7 +200,7 @@ class Presenter:
         self.player = None
         self.buf = collections.deque()
         self.seq = collections.deque()
-        self.ensemble = logic.ensemble()
+        self.ensemble = list(logic.associations().ensemble())
         self.folder = logic.ray
         self.state = None
         self.interlude = None
