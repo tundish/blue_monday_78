@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: UTF-8
 
 # This file is part of Addison Arches.
@@ -32,7 +32,6 @@ from bluemonday78.types import Hipster
 from bluemonday78.types import Location
 from bluemonday78.types import Narrator
 from bluemonday78.types import NoteBook
-from bluemonday78.types import Phrase
 from bluemonday78.types import Prisoner
 from bluemonday78.types import PrisonOfficer
 from bluemonday78.types import PrisonVisitor
@@ -42,8 +41,6 @@ from bluemonday78.types import Via
 from bluemonday78.types import Visibility
 
 blue_monday = datetime.date(1978, 1, 16)
-
-ShowYourself = Phrase.build("show yourself")
 
 def associations():
     rv = Associations()
@@ -69,7 +66,6 @@ def associations():
         Location(label="Wormwood Scrubs visiting").set_state(Spot.w12_ducane_prison_visiting),
         Location(label="Wormwood Scrubs reception").set_state(Spot.w12_ducane_prison_release),
         Location(label="Wormwood Scrubs prison wing").set_state(Spot.w12_ducane_prison_wing),
-        ShowYourself()
     )
     return rv
 

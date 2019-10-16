@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: UTF-8
 
 # This file is part of Addison Arches.
@@ -18,20 +18,11 @@
 
 import unittest
 
-from bluemonday78.types import Phrase
-from turberfield.dialogue.types import Stateful
+from bluemonday78.types import Keys
 
-class PhraseTests(unittest.TestCase):
 
-    def test_class_name(self):
-        self.assertEqual(
-            "Thats25HoursWorkAllWasted",
-            Phrase.class_name("That's 2.5 hours' work __all__   wasted!")
-        )
+class ObjectiveTests(unittest.TestCase):
 
-    def test_build(self):
-        cls = Phrase.build("these are testing times")
-        self.assertTrue(issubclass(cls, Stateful))
-        obj = cls.instance()
-        self.assertIsInstance(obj, Stateful)
-        self.assertEqual("these are testing times", obj.text)
+    def test_keys(self):
+        state = Keys.factory(name="waiting")
+        self.assertEqual(Keys.waiting, state)

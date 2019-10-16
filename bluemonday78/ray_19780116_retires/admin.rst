@@ -21,9 +21,6 @@
 .. entity:: NARRATOR
    :types: bluemonday78.logic.Narrator
 
-.. entity:: SPELL
-   :types: bluemonday78.logic.ShowYourself
-
 Guards' Office
 ~~~~~~~~~~~~~~
 

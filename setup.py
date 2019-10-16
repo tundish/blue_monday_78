@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# encoding: UTF-8
-
 import ast
 from setuptools import setup
 import os.path

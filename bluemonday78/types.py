@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: UTF-8
 
 # This file is part of Addison Arches.
@@ -24,6 +24,14 @@ from turberfield.dialogue.types import EnumFactory
 from turberfield.dialogue.types import Persona
 from turberfield.dialogue.types import Stateful
 
+
+class Objective(EnumFactory, enum.Enum):
+
+    @classmethod
+    def states(cls):
+        return ["waiting", "running", "success", "failure"]
+
+Keys = Objective("Keys", Objective.states(), module=__name__)
 
 class Visibility(EnumFactory, enum.Enum):
     hidden = 0
@@ -58,33 +66,6 @@ class Via(EnumFactory, enum.Enum):
     bckwd = 2
     bidir = 3
 
-class Phrase:
-
-    _table = {
-        ord(c): val
-        for seq, val in ((string.punctuation, None), (string.whitespace, " "))
-        for c in seq
-    }
-
-    @staticmethod
-    def build(text):
-
-        @classmethod
-        def instance(cls):
-            if getattr(cls, "_instance", None) is None:
-                cls._instance = cls()
-            return cls._instance
-
-        return type(
-            Phrase.class_name(text),
-            (Stateful,),
-            {"text": text, "instance": instance}
-        )
-
-    @staticmethod
-    def class_name(text):
-        sane = text.lower().translate(Phrase._table)
-        return "".join(i.capitalize() for i in sane.split())
 
 class Narrator(Stateful): pass
 class NoteBook(Stateful): pass

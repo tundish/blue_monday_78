@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: UTF-8
 
 # This file is part of Addison Arches.
@@ -48,7 +48,7 @@ class RaySequenceTests(unittest.TestCase):
         cls.performer = Performer(cls.dialogue, cls.ensemble)
 
     def setUp(self):
-        self.assertEqual(17, len(self.ensemble))
+        self.assertEqual(16, len(self.ensemble))
         (self.folder, self.index, self.script, self.selection,
          self.interlude) = self.performer.next(
             self.dialogue, self.ensemble, strict=True, roles=1
