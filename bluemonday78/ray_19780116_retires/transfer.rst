@@ -71,19 +71,6 @@ Martin hands over the keys
     And don't let anybody in there. If you get anyone poking around,
     tell them you're looking after it for Frankie Marshall.
 
-.. memory:: bluemonday78.types.Via.forwd
-   :subject: EXIT
-   :object: OBJECTIVE
-
-   |OBJECTIVE_LABEL| is accessible.
-
-.. memory:: bluemonday78.types.Travel.intention
-   :subject: HERO
-   :object: OBJECTIVE
-
-   Go to |OBJECTIVE_LABEL| and empty the downstairs
-   cage so it's ready when Frankie Marshall wants it.
-
 .. |CELLMATE| property:: CELLMATE.name.firstname
 .. |HERO| property:: HERO.name.firstname
 .. |OBJECTIVE_LABEL| property:: OBJECTIVE.label

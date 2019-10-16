@@ -33,7 +33,6 @@
 
 .. entity:: NOTEBOOK
    :types: bluemonday78.logic.NoteBook
-   :states: bluemonday78.logic.Visibility.hidden
 
 Guards' Office
 ~~~~~~~~~~~~~~
@@ -65,8 +64,6 @@ Ray bestows a parting gift
 [OFFICER]_
 
     You may as well have this. It's not doing any good in here.
-
-.. property:: NOTEBOOK.state bluemonday78.logic.Visibility.visible
 
 [NARRATOR]_
 

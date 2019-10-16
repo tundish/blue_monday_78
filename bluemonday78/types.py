@@ -33,24 +33,6 @@ class Objective(EnumFactory, enum.Enum):
 
 Keys = Objective("Keys", Objective.states(), module=__name__)
 
-class Visibility(EnumFactory, enum.Enum):
-    hidden = 0
-    visible = 1
-
-class Speech(EnumFactory, enum.Enum):
-    overheard = "overheard"
-    unspoken = "unspoken"
-    spoken = "spoken"
-    ignored = "ignored"
-    repeated = "repeated"
-
-class Travel(EnumFactory, enum.Enum):
-    refusal = "refusal"
-    intention = "intention"
-    departure = "departure"
-    transit = "transit"
-    arrival = "arrival"
-
 class Spot(EnumFactory, enum.Enum):
     w12_ducane_prison = "gcpv4d"
     w12_ducane_prison_visiting = "gcpv4d252v5y"
@@ -59,12 +41,6 @@ class Spot(EnumFactory, enum.Enum):
     w12_goldhawk_cafe = "gcpufzg2512x"
     w12_goldhawk_tavern = "gcpufzbd8x5d"
     w12_latimer_arches = "gcpv4cxb3dh4"
-
-class Via(EnumFactory, enum.Enum):
-    block = 0
-    forwd = 1
-    bckwd = 2
-    bidir = 3
 
 
 class Narrator(Stateful): pass

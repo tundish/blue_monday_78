@@ -81,14 +81,6 @@ Ray does the paperwork
 
     An alarm bell rings.
 
-.. property:: OFFICER.state 197801160830
-
-.. memory:: bluemonday78.types.Travel.intention
-   :subject: HERO
-   :object: OBJECTIVE
-
-   Go to |OBJECTIVE_LABEL| and check on |CELLMATE_FIRSTNAME|..
-
 .. |HERO_TITLE| property:: HERO.name.title
 .. |HERO_SURNAME| property:: HERO.name.surname
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname

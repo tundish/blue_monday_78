@@ -36,9 +36,6 @@ from bluemonday78.types import Prisoner
 from bluemonday78.types import PrisonOfficer
 from bluemonday78.types import PrisonVisitor
 from bluemonday78.types import Spot
-from bluemonday78.types import Travel
-from bluemonday78.types import Via
-from bluemonday78.types import Visibility
 
 blue_monday = datetime.date(1978, 1, 16)
 
@@ -60,7 +57,7 @@ def associations():
                 Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),
             )
         ),
-        NoteBook().set_state(Visibility.hidden),
+        NoteBook(),
         Location(label="Addison Arches 18A").set_state(Spot.w12_latimer_arches),
         Location(label="Wormwood Scrubs").set_state(Spot.w12_ducane_prison),
         Location(label="Wormwood Scrubs visiting").set_state(Spot.w12_ducane_prison_visiting),
@@ -70,7 +67,7 @@ def associations():
     return rv
 
 
-references = list(associations().ensemble()) + [Spot, Travel, Via, Visibility]
+references = list(associations().ensemble())
 
 
 local = SceneScript.Folder(

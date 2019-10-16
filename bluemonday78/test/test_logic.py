@@ -28,8 +28,6 @@ from turberfield.utils.misc import group_by_type
 from bluemonday78.logic import associations
 from bluemonday78.logic import ray
 from bluemonday78.logic import Spot
-from bluemonday78.types import Travel
-from bluemonday78.types import Visibility
 
 class RaySequenceTests(unittest.TestCase):
 
@@ -159,10 +157,6 @@ class RaySequenceTests(unittest.TestCase):
         self.assertEqual(197801160830, self.characters["PrisonVisitor"][0].get_state())
         self.assertEqual(197801160800, self.characters["PrisonOfficer"][0].get_state())
 
-        self.assertEqual(
-            Visibility.hidden,
-            self.characters["NoteBook"][0].get_state(Visibility)
-        )
         list(self.performer.run())
         self.assertTrue(self.performer.script.fP.endswith("pocket_fax.rst"))
         self.assertEqual(6, len(self.performer.shots))
@@ -175,10 +169,6 @@ class RaySequenceTests(unittest.TestCase):
         self.assertEqual(
             Spot.w12_ducane_prison_release,
             self.characters["Player"][0].get_state(Spot)
-        )
-        self.assertEqual(
-            Visibility.visible,
-            self.characters["NoteBook"][0].get_state(Visibility)
         )
 
     def test_006(self):
@@ -236,14 +226,9 @@ class RaySequenceTests(unittest.TestCase):
             Spot.w12_ducane_prison_release,
             self.characters["Player"][0].get_state(Spot)
         )
-        self.assertEqual(
-            197801160830,
-            self.characters["PrisonOfficer"][0].get_state()
-        )
 
         hero = self.characters["Player"][0]
         location = self.asscns.search(label="Wormwood Scrubs visiting").pop()
-        self.assertIn(location, self.asscns.lookup[hero][Travel.intention])
 
     def test_008(self):
         hero = self.characters["Player"][0]
@@ -255,10 +240,6 @@ class RaySequenceTests(unittest.TestCase):
         self.assertEqual(
             197801160830,
             self.characters["PrisonVisitor"][0].get_state()
-        )
-        self.assertEqual(
-            197801160830,
-            self.characters["PrisonOfficer"][0].get_state()
         )
 
         list(self.performer.run())
@@ -276,37 +257,18 @@ class RaySequenceTests(unittest.TestCase):
 
     def test_009(self):
         self.assertEqual(
-            197801160830,
-            self.characters["PrisonOfficer"][0].get_state()
-        )
-        self.assertEqual(
             Spot.w12_ducane_prison_release,
             self.characters["Player"][0].get_state(Spot)
         )
 
         list(self.performer.run())
         self.assertEqual(9, len(self.performer.shots))
-        self.assertTrue(self.performer.script.fP.endswith("escape.rst"))
-        self.assertEqual(
-            "getting out",
-            self.performer.shots[-1].scene
-        )
 
         self.assertEqual(
             Spot.w12_ducane_prison_release,
             self.characters["PrisonOfficer"][0].get_state(Spot)
         )
 
-        self.assertEqual(
-            Spot.w12_ducane_prison_release,
-            self.characters["Player"][0].get_state(Spot)
-        )
-        self.assertEqual(
-            197801160830,
-            self.characters["PrisonOfficer"][0].get_state()
-        )
-
-    def test_010(self):
         self.assertEqual(
             Spot.w12_ducane_prison_release,
             self.characters["Player"][0].get_state(Spot)

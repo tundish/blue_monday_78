@@ -20,7 +20,6 @@ import unittest
 
 from bluemonday78.associations import Associations
 from bluemonday78.logic import Location
-from bluemonday78.logic import Via
 
 class AssociationTests(unittest.TestCase):
 
@@ -41,45 +40,12 @@ class AssociationTests(unittest.TestCase):
             lookup[next(i for i in lookup if i.id == 1)],
         )
 
-    def test_register_simple(self):
-        self.associations.register(
-            Via.bidir,
-            Location(id=1, label="Wormwood Scrubs prison wing"),
-            Location(id=2, label="Wormwood Scrubs reception"),
-        )
-        lookup = self.associations.lookup
-        self.assertTrue([i for i in lookup if i.id == 1])
-        self.assertTrue([i for i in lookup if i.id == 2])
-        self.assertIn(
-            Via.bidir,
-            lookup[next(i for i in lookup if i.id == 1)],
-        )
-
-    def test_search(self):
-        self.associations.register(
-            Via.bidir,
-            Location(label="Wormwood Scrubs prison wing"),
-            Location(label="Wormwood Scrubs reception"),
-        )
-        rv = self.associations.search(label="Wormwood Scrubs reception")
-        self.assertEqual(1, len(rv))
-        self.assertIsInstance(rv.pop(), Location)
-
     def test_register_search(self):
         assoc = self.associations.register(
             None,
             Location(id=1, label="Wormwood Scrubs prison wing"),
             Location(id=2, label="Wormwood Scrubs reception"),
         )
-        assoc.register(
-            Via.bidir,
-            assoc.search(label="Wormwood Scrubs prison wing").pop(),
-            *assoc.search(label="Wormwood Scrubs reception")
-        )
         lookup = self.associations.lookup
         self.assertTrue([i for i in lookup if i.id == 1])
         self.assertTrue([i for i in lookup if i.id == 2])
-        self.assertIn(
-            Via.bidir,
-            lookup[next(i for i in lookup if i.id == 1)],
-        )
