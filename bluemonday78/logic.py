@@ -121,17 +121,7 @@ ray = SceneScript.Folder(
         "ray_19780116_retires/transfer.rst",
         "ray_19780116_retires/escape.rst",
     ],
-    interludes=[
-        GoldenPath.locate_to_karen,
-        GoldenPath.locate_to_karen,
-        GoldenPath.locate_to_karen,
-        GoldenPath.locate_to_ray,
-        GoldenPath.locate_to_ray,
-        GoldenPath.locate_to_ray,
-        GoldenPath.locate_to_karen,
-        GoldenPath.locate_to_ray,
-        GoldenPath.stop,
-    ]
+    interludes=itertools.repeat(None)
 )
 
 plotlines = (justin, ray)
