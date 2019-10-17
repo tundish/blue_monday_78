@@ -25,7 +25,6 @@ from turberfield.dialogue.types import Player
 
 from bluemonday78 import __version__ as version # noqa
 from bluemonday78.associations import Associations
-from bluemonday78.paths import GoldenPath
 from bluemonday78.types import Barman
 from bluemonday78.types import Character
 from bluemonday78.types import Hipster

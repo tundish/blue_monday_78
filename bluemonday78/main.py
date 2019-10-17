@@ -17,331 +17,261 @@
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
-import collections
-import logging
-from numbers import Number
+import asyncio
+from collections import deque
+from collections import namedtuple
+import functools
+import math
+import random
 import sys
-import textwrap
 
-import tkinter as tk
-from tkinter.font import Font
-from tkinter.scrolledtext import ScrolledText
+from aiohttp import web
+import pkg_resources
 
-from turberfield.dialogue.handlers import TerminalHandler
+from turberfield.dialogue.matcher import Matcher
+from turberfield.dialogue.model import Model
 from turberfield.dialogue.performer import Performer
-from turberfield.utils.misc import log_setup
 
-from bluemonday78 import logic
-from bluemonday78 import __version__
-
-
-DEFAULT_PAUSE = 1.2
-DEFAULT_DWELL = 0.3
+import bluemonday78.logic
+import bluemonday78.render
 
 
-class GUIHandler(TerminalHandler):
+class Presentation:
 
-    @staticmethod
-    def register_fonts(widget):
-        fonts = {
-            "direction": Font(family="Helvetica", size=12),
-            "titles": Font(family="Helvetica", size=12, weight="bold"),
-            "narrator": Font(family="Courier", size=12, slant="italic"),
-            "speaker": Font(family="Courier", size=12, weight="normal"),
-            "speech": Font(family="Courier", size=12, weight="bold"),
-        }
-        for k, v in fonts.items():
-            widget.tag_config(k, font=v)
-        return fonts
+    Element = namedtuple(
+        "Element",
+        ["source", "dialogue", "shot", "offset", "duration"]
+    )
 
     @staticmethod
-    def display(widget, text="", tags=()):
-        widget.configure(state="normal")
-        if not tags:
-            widget.insert(tk.END, text)
+    def build_frames(source, seq, dwell, pause):
+        """Generate a new Frame on each Shot and FX item"""
+        shot = None
+        frame = []
+        offset = 0
+        for item in seq:
+            if isinstance(item, (Model.Audio, Model.Shot)):
+                if frame and shot and shot != item:
+                    yield frame
+                    frame = []
+                    offset = 0
+
+                if isinstance(item, Model.Shot):
+                    shot = item
+                else:
+                    frame.append(Presentation.Element(
+                        source, item, shot,
+                        item.offset / 1000,
+                        item.duration / 1000
+                    ))
+
+            elif isinstance(item, Model.Line):
+                durn = pause + dwell * item.text.count(" ")
+                frame.append(Presentation.Element(
+                    source, item, shot, offset, durn
+                ))
+                offset += durn
+            elif not isinstance(item, Model.Condition):
+                frame.append(Presentation.Element(
+                    source, item, shot, offset, 0
+                ))
         else:
-            widget.insert(tk.END, text, tags)
-        widget.insert(tk.END, "\n")
-        widget.configure(state="disabled")
-        widget.see(tk.END)
+            if any(
+                isinstance(
+                    i.dialogue, (Model.Audio, Model.Line)
+                )
+                for i in frame
+            ):
+                yield frame
 
     @staticmethod
-    def announce(speaker):
-        if isinstance(speaker, logic.Player):
-            return "{0.firstname} {0.surname}".format(speaker.name)
-        else:
-            try:
-                return speaker.name.firstname
-            except AttributeError:
-                return ""
+    def next_frame(session, entities, dwell=0.3, pause=1):
+        while not session["frames"]:
+            location = session["state"].area
+            matcher = Matcher(bluemonday78.sbluemonday78y.episodes)
+            folders = list(matcher.options(session["metadata"]))
+            performer = Performer(folders, entities)
+            folder, index, script, selection, interlude = performer.next(
+                folders, entities
+            )
+            scene = performer.run(react=False)
+            frames = list(Presentation.build_frames(
+                folder.paths[index], scene,
+                dwell=dwell, pause=pause
+            ))
+            session["frames"].extend(frames)
+
+        return session["frames"].popleft()
 
     @staticmethod
-    def parse_command(cmd):
+    def react(session, frame):
+        for element in frame:
+            event = element.dialogue
+            if (
+                isinstance(event, Model.Property) and
+                event.object is not None
+            ):
+                setattr(event.object, event.attr, event.val)
+
+            yield element
+
+    @staticmethod
+    def refresh(frame, min_val=8):
         try:
-            return cmd.strip().split(" ")[-1][0].lower()
-        except Exception:
+            return max(
+                [min_val] +
+                [i.offset + i.duration for i in frame if i.duration]
+            )
+        except ValueError:
             return None
 
-    def __init__(self, widget, references, *args, **kwargs):
-        self.widget = widget
-        self.references = references
-        self.buf = collections.deque()
-        self.speaker = None
-        try:
-            super().__init__(None, *args, **kwargs)
-        except UserWarning:
-            # NOTE: dev on 12.04
-            pass
 
-    def handle_property(self, obj):
-        if obj.object is not None:
-            try:
-                setattr(obj.object, obj.attr, obj.val)
-                self.log.debug("Property {0}.{1} set to {2}.".format(
-                    obj.object, obj.attr, obj.val
-                ))
-            except AttributeError as e:
-                self.log.error(". ".join(getattr(e, "args", e) or e))
-        return 0
-
-    def handle_scenescript(self, obj):
-        return 1
-
-    def handle_scene(self, obj):
-        self.display(self.widget, obj.scene.capitalize(), tags=("titles",))
-        self.display(self.widget, tags=("titles",))
-        self.speaker = None
-        return self.pause
-
-    def handle_shot(self, obj):
-        self.display(self.widget)
-        return self.pause
-
-    def handle_line(self, obj):
-        if obj.persona is None:
-            return 0
-
-        # TODO: Fix this properly in turberfield-dialogue
-        text = obj.text.replace("   ", " ").replace("  ", " ")
-        if self.speaker is not obj.persona:
-            self.speaker = obj.persona
-            self.display(
-                self.widget,
-                textwrap.indent(
-                    self.announce(self.speaker),
-                    " " * 2
-                ),
-                tags=("speaker",)
-            )
-
-        tags = ("narrator",) if isinstance(self.speaker, logic.Narrator) else ("speech",)
-
-        self.display(
-            self.widget,
-            textwrap.indent(textwrap.fill(text, width=60), " " * 10),
-            tags=tags
-        )
-        self.display(self.widget)
-        return self.pause + self.dwell * text.count(" ")
-
-
-class Presenter:
-
-    titles = [(
-        textwrap.dedent(
-            """
-                Blue Monday '78.
-            """
-        ), "titles"),
-        ("    Version {version}".format(version=__version__), "direction"),
-        (textwrap.dedent(
-            """
-            An interactive dialogue test piece.
-            Written during the Summer Novel Festival 2017 Game Jam.
-            """
-        ).format(version=__version__), "titles"),
-        (
-        "    All characters are fictional.\n"
-        "    Contains strong language.", "direction"),
-        (textwrap.dedent("""
-        First, pick a name for the main character.
-        Type it as 'title firstname surname', eg:
-        """), "titles"),
-        ("    Mr Maurice Micklewhite", "narrator"),
+async def get_frame(request):
+    session = request.app.session
+    #location = session["state"].area
+    player = bluemonday78.logic.Player(
+        name="Mr William Billy McCarthy",
+    ).set_state(bluemonday78.logic.Spot.w12_ducane_prison)
+    entities = [
+        i for i in bluemonday78.story.ensemble
+        if getattr(i, "area", location) == location
     ]
+    narrator = next(i for i in entities if isinstance(i, Narrator))
+    narrator.state = session["state"]
+    for character in (i for i in entities if isinstance(i, Character)):
+        character.set_state(random.randrange(10))
 
-    credits = textwrap.indent(textwrap.dedent(
-        """
-
-        Programming:
-
-                  tundish
-
-        Soundtrack:
-
-            JunkDLC featuring P'role
-
-        Written and produced by:
-
-                 D Haynes
-
-
-
-                 © MMXVII
-
-        """), " " * 16)
-
-    def __init__(self, args, textarea, entry):
-        self.args = args
-        self.textarea = textarea
-        self.entry = entry
-        self.log = logging.getLogger("bluemonday")
-        self.handler = None
-        self.player = None
-        self.buf = collections.deque()
-        self.seq = collections.deque()
-        self.ensemble = list(logic.associations().ensemble())
-        self.folder = logic.ray
-        self.state = None
-        self.interlude = None
-        self.prompt = None
-        self.entry.bind("<Return>", self.on_input)
-        self.performer = Performer(logic.schedule, self.ensemble)
-
-        root = self.textarea.master
-        root.after(200, self.play)
-
-    @staticmethod
-    def blocked(ensemble):
-        hipster = next(i for i in ensemble if isinstance(i, logic.Narrator))
-        return hipster.get_state() == 19780118
-
-    @property
-    def autoplay(self):
-        return not self.blocked(self.ensemble)
-
-    def play(self):
-        secs = getattr(self.handler, "pause", 1)
-        root = self.textarea.master
-        if self.seq:
-            item = self.seq.popleft()
-            rv = list(self.handler(item, loop=root))
-            secs = rv[0] if rv and isinstance(rv[0], Number) else secs
-            self.log.debug(secs)
-        elif self.performer.stopped:
-            self.handler.display(self.textarea, self.credits, tags=("titles",))
-            return
-        elif self.player and self.handler and self.prompt is None:
-            self.prompt = "Press return."
-            self.handler.display(self.textarea, self.prompt)
-        root.after(int(secs * 1000), self.play)
-
-    def run(self, reload=False):
-        root = self.textarea.master
-        if not self.handler:
-            self.handler = GUIHandler(
-                self.textarea,
-                logic.references,
-                dbPath=self.args.db,
-                pause=self.args.pause,
-                dwell=self.args.dwell,
-                log=self.log
+    frame = Presentation.next_frame(session, entities)
+    buys = ["Spend 1c", "Spend 2c", "Spend 3c"] if location == "butcher" else []
+    cuts = ["Cut less", "Cut same", "Cut more"] if location == "chamber" else []
+    hops = bluemonday78.rules.topology[location]
+    elements = list(Presentation.react(session, frame))
+    return web.Response(
+        text = bluemonday78.render.base_to_html(
+            #refresh=math.ceil(Presentation.refresh(frame))
+            refresh=None
+        ).format(
+            bluemonday78.render.body_to_html(session["state"], frame=frame).format(
+                "\n".join(
+                    bluemonday78.render.element_as_list_item(element)
+                    for element in frame
+                ),
+                "\n".join(
+                    bluemonday78.render.option_as_list_item(n, option, path="/hop/")
+                    for n, option in enumerate(hops)
+                ),
+                "\n".join(
+                    bluemonday78.render.option_as_list_item(n + 1, option, path="/buy/")
+                    for n, option in enumerate(buys)
+                ),
+                "\n".join(
+                    bluemonday78.render.option_as_list_item(n, option, path="/cut/")
+                    for n, option in enumerate(cuts)
+                ),
             )
-            try:
-                list(self.handler(logic.references, loop=root))
-            except AttributeError:
-                # NOTE: dev on 12.04
-                pass
-            root.after(1, self.run)
-            return
-        elif not self.seq:
-            self.seq.extend(list(self.performer.run(react=False)))
+        ),
+        content_type="text/html"
+    )
 
-    def on_input(self, event):
-        widget = event.widget
-        try:
-            val = widget.get().strip()
-            self.buf.append(val)
-            GUIHandler.display(self.textarea, val, ("narrator",))
-            GUIHandler.display(self.textarea)
-            if not self.player:
-                self.player = logic.Player(name=val).set_state(logic.Spot.w12_ducane_prison)
-                try:
-                    player = next(i for i in self.ensemble if isinstance(i, logic.Player))
-                    self.ensemble.remove(player)
-                except (StopIteration, ValueError) as e:
-                    self.log.debug(e)
-                finally:
-                    self.ensemble.append(self.player)
-                    self.log.debug(self.player)
-                self.buf.clear()
-                widget.master.after(1, self.run)
-            elif self.prompt:
-                cmd = "\n".join(self.buf)
-                self.log.debug(cmd)
-                self.buf.clear()
-                self.prompt = None
-                widget.master.after(200, self.run)
-        finally:
-            widget.delete(0, tk.END)
+
+async def post_buy(request):
+    buy = request.match_info["buy"]
+    if not bluemonday78.rules.choice_validabluemonday78.match(buy):
+        raise web.HTTPUnauthorized(reason="User sent invalid buy code.")
+    else:
+        session = request.app.session
+        session["frames"].clear()
+        rv = bluemonday78.rules.apply_rules(
+            None, None, None, bluemonday78.rules.Settings, session["state"], buy=int(buy)
+        )
+        session["state"] = bluemonday78.rules.State(**rv)
+        raise web.HTTPFound("/")
+
+
+async def post_cut(request):
+    cut = request.match_info["cut"]
+    if not bluemonday78.rules.choice_validabluemonday78.match(cut):
+        raise web.HTTPUnauthorized(reason="User sent invalid cut code.")
+    else:
+        session = request.app.session
+        session["frames"].clear()
+        cut_d = {
+            0: -bluemonday78.rules.Settings.CUT_D,
+            1: 0,
+            2: bluemonday78.rules.Settings.CUT_D,
+        }.get(int(cut), bluemonday78.rules.Settings.CUT_D)
+
+        rv = bluemonday78.rules.apply_rules(
+            None, None, None, bluemonday78.rules.Settings, session["state"], cut=cut_d
+        )
+        session["state"] = bluemonday78.rules.State(**rv)
+        raise web.HTTPFound("/")
+
+
+async def post_hop(request):
+    hop = request.match_info["hop"]
+    if not bluemonday78.rules.choice_validabluemonday78.match(hop):
+        raise web.HTTPUnauthorized(reason="User sent invalid hop.")
+    else:
+        index = int(hop)
+        session = request.app.session
+        location = session["state"].area
+        destination = bluemonday78.rules.topology[location][index]
+        session["metadata"]["area"] = destination
+        session["state"] = session["state"]._replace(area=destination)
+        session["frames"].clear()
+        if destination not in ("butcher", "chamber"):
+            rv = bluemonday78.rules.apply_rules(
+                None, None, None, bluemonday78.rules.Settings, session["state"]
+            )
+            if not rv:
+                print("Game Over", file=sys.stderr)
+                rapunzel = next(
+                    i for i in bluemonday78.sbluemonday78y.ensemble
+                    if isinstance(i, Rapunzel)
+                )
+                rapunzel.set_state(At.club)
+            else:
+                session["state"] = bluemonday78.rules.State(**rv)
+        raise web.HTTPFound("/")
+
+
+def build_app(args):
+    app = web.Application()
+    app.add_routes([
+        web.get("/", get_frame),
+        #web.post("/buy/{{buy:{0}}}".format(bluemonday78.rules.choice_validabluemonday78.pattern), post_buy),
+        #web.post("/cut/{{cut:{0}}}".format(bluemonday78.rules.choice_validabluemonday78.pattern), post_cut),
+        #web.post("/hop/{{hop:{0}}}".format(bluemonday78.rules.choice_validabluemonday78.pattern), post_hop),
+    ])
+    app.router.add_static(
+        "/css/",
+        pkg_resources.resource_filename("bluemonday78", "static/css")
+    )
+    app.session = {
+        "metadata": {"area": "balcony"},
+        "frames": deque([])
+    }
+    return app
 
 
 def main(args):
-    log = logging.getLogger(log_setup(args, "bluemonday"))
-
-    root = tk.Tk()
-    root.title("Blue Monday '78")
-
-    entry = tk.Entry()
-    entry.pack(side=tk.BOTTOM, fill=tk.X)
-
-    widget = ScrolledText(root)
-    width = GUIHandler.register_fonts(widget)["speech"].measure("0" * 76)
-    widget.focus_set()
-    widget.pack(fill=tk.BOTH, expand=True)
-
-    root.geometry("{0}x400".format(int(width)))
-    log.debug("{0} wide.".format(width))
-
-    for text, tag in Presenter.titles:
-        GUIHandler.display(widget, text, tags=(tag,))
-    GUIHandler.display(widget)
-    GUIHandler.display(widget, "Enter your player name: ", tags=("direction",))
-
-    Presenter(args, widget, entry)
-    tk.mainloop()
-
+    app = build_app(args)
+    return web.run_app(app, host=args.host, port=args.port)
 
 def parser(description=__doc__):
-    rv = argparse.ArgumentParser(
-        description,
-        fromfile_prefix_chars="@"
-    )
+    rv = argparse.ArgumentParser(description)
     rv.add_argument(
         "--version", action="store_true", default=False,
-        help="Print the current version number")
+        help="Print the current version number.")
     rv.add_argument(
-        "-v", "--verbose", required=False,
-        action="store_const", dest="log_level",
-        const=logging.DEBUG, default=logging.INFO,
-        help="Increase the verbosity of output")
-    rv.add_argument(
-        "--log", default=None, dest="log_path",
-        help="Set a file path for log output")
-    rv.add_argument(
-        "--pause", type=float, default=DEFAULT_PAUSE,
-        help="Time in seconds [{0:0.3}] to pause after a line.".format(DEFAULT_PAUSE)
+        "--host", default="127.0.0.1",
+        help="Set an interface on which to serve."
     )
     rv.add_argument(
-        "--dwell", type=float, default=DEFAULT_DWELL,
-        help="Time in seconds [{0:0.3}] to dwell on each word.".format(DEFAULT_DWELL)
+        "--port", default=8080, type=int,
+        help="Set a port on which to serve."
     )
-    rv.add_argument(
-        "--db", required=False, default=None,
-        help="Database URL.")
-    rv.add_argument(
-        "--session", required=False, default="",
-        help="Session id (internal use only)")
     return rv
 
 
@@ -351,7 +281,7 @@ def run():
 
     rv = 0
     if args.version:
-        sys.stdout.write(__version__)
+        sys.stdout.write(bluemonday78.__version__)
         sys.stdout.write("\n")
     else:
         rv = main(args)
