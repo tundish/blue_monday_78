@@ -69,60 +69,20 @@ def associations():
 references = list(associations().ensemble())
 
 
-local = SceneScript.Folder(
-    pkg="bluemonday78",
-    description="Location-specific elaboration.",
-    metadata={"timestamp": blue_monday},
-    paths=[
-        "w12_19780116_local/w12_latimer_arches_19780116.rst",
-        "w12_19780116_local/w12_latimer_arches_19780117.rst",
-    ],
-    interludes=itertools.repeat(None)
-)
-
-
-justin = SceneScript.Folder(
-    pkg="bluemonday78",
-    description="Justin Delcroix has just got the sack.",
-    metadata={"timestamp": blue_monday},
-    paths=[
-        "justin_19780116_fired/sorrows.rst",
-        "justin_19780116_fired/anguish.rst",
-        "justin_19780116_fired/desparation.rst"
-    ],
-    interludes=itertools.repeat(None)
-)
-
-ray = SceneScript.Folder(
+curtain = SceneScript.Folder(
     pkg="bluemonday78",
     description="It's Ray Farington's last day.",
     metadata={"timestamp": blue_monday},
     paths=[
-        "ray_19780116_retires/admin.rst",
-        "ray_19780116_retires/escape.rst",
-        "ray_19780116_retires/homecoming.rst",
+        "dialogue/w12_ducane/prison/step_forward.rst",
+        "dialogue/w12_ducane/prison/getting_here.rst",
+        "dialogue/w12_ducane/prison/hows_work.rst",
+        "dialogue/w12_ducane/prison/these_keys.rst",
+        "dialogue/w12_ducane/prison/pocket_fax.rst",
+        "dialogue/w12_ducane/prison/admin.rst",
+        "dialogue/w12_ducane/prison/frankly.rst",
+        "dialogue/w12_ducane/prison/transfer.rst",
+        "dialogue/w12_ducane/prison/escape.rst",
     ],
     interludes=itertools.repeat(None)
 )
-
-ray = SceneScript.Folder(
-    pkg="bluemonday78",
-    description="It's Ray Farington's last day.",
-    metadata={"timestamp": blue_monday},
-    paths=[
-        "ray_19780116_retires/step_forward.rst",
-        "ray_19780116_retires/getting_here.rst",
-        "ray_19780116_retires/hows_work.rst",
-        "ray_19780116_retires/these_keys.rst",
-        "ray_19780116_retires/pocket_fax.rst",
-        "ray_19780116_retires/admin.rst",
-        "ray_19780116_retires/frankly.rst",
-        "ray_19780116_retires/transfer.rst",
-        "ray_19780116_retires/escape.rst",
-    ],
-    interludes=itertools.repeat(None)
-)
-
-plotlines = (justin, ray)
-schedule = collections.deque([local])
-schedule.extendleft(plotlines)

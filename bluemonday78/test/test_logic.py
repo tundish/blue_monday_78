@@ -25,11 +25,10 @@ from turberfield.dialogue.model import Model
 from turberfield.dialogue.performer import Performer
 from turberfield.utils.misc import group_by_type
 
-from bluemonday78.logic import associations
-from bluemonday78.logic import ray
+import bluemonday78.logic
 from bluemonday78.logic import Spot
 
-class RaySequenceTests(unittest.TestCase):
+class SequenceTests(unittest.TestCase):
 
     def make_association(obj, associations):
         if isinstance(obj, Model.Memory) and obj.object:
@@ -37,9 +36,9 @@ class RaySequenceTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.asscns = associations()
+        cls.asscns = bluemonday78.logic.associations()
         cls.ensemble = cls.asscns.ensemble()
-        cls.dialogue = [copy.deepcopy(ray)]
+        cls.dialogue = [copy.deepcopy(bluemonday78.logic.curtain)]
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
         }
