@@ -57,5 +57,5 @@ class SceneTests(unittest.TestCase):
         ]
 
     def test_folders(self):
-        model = Presenter.dialogue(self.folders, self.ensemble)
-        print(*list(model), sep="\n")
+        dialogue = Presenter.dialogue(self.folders, self.ensemble)
+        print(*dialogue.shots, sep="\n")
