@@ -2,6 +2,7 @@ import itertools
 import unittest
 
 from turberfield.dialogue.model import SceneScript
+from turberfield.dialogue.performer import Performer
 from turberfield.dialogue.types import Player
 
 
@@ -17,25 +18,6 @@ class Presenter:
                         return dialogue.cast(selection).run()
                     elif not strict and any(selection.values()):
                         return dialogue.cast(selection).run()
-
-
-    @staticmethod
-    def run(model, react=True):
-        for shot, item in model:
-
-            if self.condition is not False:
-                yield shot
-                yield item
-
-            if not self.shots or self.shots[-1][:2] != shot[:2]:
-                self.shots.append(shot._replace(items=self.script.fP))
-                self.condition = None
-
-            if isinstance(item, Model.Condition):
-                self.condition = self.allows(item)
-
-            if react:
-                self.react(item)
 
 
 class SceneTests(unittest.TestCase):
@@ -58,4 +40,6 @@ class SceneTests(unittest.TestCase):
 
     def test_folders(self):
         dialogue = Presenter.dialogue(self.folders, self.ensemble)
+        print(*dialogue.scenes, sep="\n")
         print(*dialogue.shots, sep="\n")
+        print(Performer.allows)
