@@ -10,7 +10,7 @@
 :version: |VERSION|
 
 .. entity:: VOICE
-   :types: bluemonday78.logic.Player
+   :types: turberfield.dialogue.types.Player
    :states: 1
 
 Scene One
@@ -28,7 +28,7 @@ Prologue
 Option 0
 --------
 
-.. condition:: RAPUNZEL.state 10
+.. condition:: VOICE.state 10
 
 [VOICE]_
 
@@ -37,7 +37,7 @@ Option 0
 Option 1
 --------
 
-.. condition:: RAPUNZEL.state 11
+.. condition:: VOICE.state 11
 
 [VOICE]_
 
@@ -50,6 +50,6 @@ Epilogue
 
     Goodbye from |VOICE_SURNAME|.
 
-.. property:: VOICE.state 0
+.. property:: VOICE.state 20
 
 .. |VOICE_SURNAME| property:: VOICE.name.surname

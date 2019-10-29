@@ -39,14 +39,11 @@ setup(
     packages=["bluemonday78", "bluemonday78.test"],
     package_data={
         "bluemonday78": [
-            "justin_19780116_fired/*",
-            "ray_19780116_retires/*",
-            "w12_19780116_local/*",
+            "dialogue/*/*/*.rst",
         ]
     },
     install_requires=[
-        "turberfield-dialogue[audio]>=0.18.0",
-        "turberfield-utils>=0.33.0",
+        "turberfield-dialogue[audio]>=0.19.0",
     ],
     zip_safe=True,
     entry_points={}
