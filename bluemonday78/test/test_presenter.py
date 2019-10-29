@@ -2,11 +2,10 @@ import itertools
 import unittest
 
 from turberfield.dialogue.model import SceneScript
-from turberfield.dialogue.performer import Performer
 from turberfield.dialogue.types import Player
 
 
-class Presenter(Performer):
+class Presenter:
 
     @staticmethod
     def dialogue(folders, ensemble, strict=True, roles=1):
