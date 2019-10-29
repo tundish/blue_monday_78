@@ -5,6 +5,40 @@ from turberfield.dialogue.model import SceneScript
 from turberfield.dialogue.performer import Performer
 from turberfield.dialogue.types import Player
 
+
+class Presenter(Performer):
+
+    @staticmethod
+    def dialogue(folders, ensemble, strict=True, roles=1):
+        for folder in folders:
+            for script in SceneScript.scripts(**folder._asdict()):
+                with script as dialogue:
+                    selection = dialogue.select(ensemble, roles=roles)
+                    if selection and all(selection.values()):
+                        return dialogue.cast(selection).run()
+                    elif not strict and any(selection.values()):
+                        return dialogue.cast(selection).run()
+
+
+    @staticmethod
+    def run(model, react=True):
+        for shot, item in model:
+
+            if self.condition is not False:
+                yield shot
+                yield item
+
+            if not self.shots or self.shots[-1][:2] != shot[:2]:
+                self.shots.append(shot._replace(items=self.script.fP))
+                self.condition = None
+
+            if isinstance(item, Model.Condition):
+                self.condition = self.allows(item)
+
+            if react:
+                self.react(item)
+
+
 class SceneTests(unittest.TestCase):
 
     def setUp(self):
@@ -24,5 +58,5 @@ class SceneTests(unittest.TestCase):
         ]
 
     def test_folders(self):
-        performer = Performer(self.folders, self.ensemble)
-        print(*list(performer.run()), sep="\n")
+        model = Presenter.dialogue(self.folders, self.ensemble)
+        print(*list(model), sep="\n")
