@@ -29,7 +29,7 @@ class SceneTests(unittest.TestCase):
                 description="A Spike for Folder patterns.",
                 metadata={"location": "inner"},
                 paths=[
-                    "dialogue/outer/inner/scene_01.rst",
+                    "dialogue/outer/inner/story/scene_01.rst",
                 ],
                 interludes=itertools.repeat(None)
             )

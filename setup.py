@@ -40,6 +40,7 @@ setup(
     package_data={
         "bluemonday78": [
             "dialogue/*/*/*.rst",
+            "dialogue/*/*/*/*.rst",
         ]
     },
     install_requires=[
