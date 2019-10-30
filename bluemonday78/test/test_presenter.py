@@ -1,76 +1,32 @@
-from collections import namedtuple
+#!/usr/bin/env python3
+# encoding: UTF-8
+
+# This file is part of Addison Arches.
+#
+# Addison Arches is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Addison Arches is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
+
 import itertools
 import unittest
 
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.model import SceneScript
-from turberfield.dialogue.performer import Performer
 from turberfield.dialogue.types import Player
-from turberfield.utils.misc import group_by_type
+
+from bluemonday78.presenter import Presenter
 
 
-class Presenter:
-    """
-        #. Display every shot in its entirety. Never split a shot.
-        #. Shot renders; images, audio, dialogue.
-        #, Delay and duration for each line of dialogue
-        #, Offset and duration for each Static
-        #. Refresh media for multishot scenes.
-    """
-
-    Animation = namedtuple("Animation", ["delay", "duration", "element"])
-
-    @staticmethod
-    def dialogue(folders, ensemble, strict=True, roles=1):
-        for folder in folders:
-            for script in SceneScript.scripts(**folder._asdict()):
-                with script as dialogue:
-                    selection = dialogue.select(ensemble, roles=roles)
-                    if selection and all(selection.values()):
-                        return dialogue.cast(selection).run()
-                    elif not strict and any(selection.values()):
-                        return dialogue.cast(selection).run()
-
-    @staticmethod
-    def animate_lines(seq, dwell, pause):
-        offset = 0
-        for line in seq:
-            duration = pause + dwell * line.text.count(" ")
-            yield Presenter.Animation(offset, duration, line)
-            offset += duration
-
-    @staticmethod
-    def animate_stills(seq):
-        yield from (
-            Presenter.Animation(still.offset, still.duration, still)
-            for still in seq
-        )
-
-    def __init__(self, dialogue):
-        self.frames = [group_by_type(i.items) for i in dialogue.shots]
-
-    @property
-    def pending(self):
-        return len([
-            frame for frame in self.frames
-            if all([Performer.allows(i) for i in frame[Model.Condition]])
-        ])
-
-    def frame(self, dwell=0.3, pause=1, react=True):
-        while True:
-            frame = self.frames.pop(0)
-            if all([Performer.allows(i) for i in frame[Model.Condition]]):
-                frame[Model.Line] = list(
-                    self.animate_lines(frame[Model.Line], dwell, pause)
-                )
-                frame[Model.Still] = list(self.animate_stills(frame[Model.Still]))
-                for p in frame[Model.Property]:
-                    if react and p.object is not None:
-                        setattr(p.object, p.attr, p.val)
-                return frame
-
-
-class SceneTests(unittest.TestCase):
+class PresenterTests(unittest.TestCase):
 
     def setUp(self):
         self.folders = [
@@ -105,6 +61,53 @@ class SceneTests(unittest.TestCase):
         dialogue = Presenter.dialogue(self.folders, self.ensemble)
         presenter = Presenter(dialogue)
         frame = presenter.frame()
-        print(frame)
-        print(presenter.pending)
-        print(*presenter.frames, sep="\n")
+        self.assertEqual(3, len(frame[Model.Still]))
+        self.assertEqual(0, len(frame[Model.Audio]))
+        self.assertTrue(
+            all(isinstance(i, Presenter.Animation) for i in frame[Model.Still])
+        )
+        self.assertTrue(
+            all(isinstance(i.element, Model.Still) for i in frame[Model.Still])
+        )
+        self.assertEqual(1, len(frame[Model.Line]))
+        self.assertTrue(
+            all(isinstance(i, Presenter.Animation) for i in frame[Model.Line])
+        )
+        self.assertTrue(
+            all(isinstance(i.element, Model.Line) for i in frame[Model.Line])
+        )
+
+    def test_option_0(self):
+        dialogue = Presenter.dialogue(self.folders, self.ensemble)
+        presenter = Presenter(dialogue)
+        while presenter.pending != 1:
+            frame = presenter.frame()
+        self.assertEqual(0, len(frame[Model.Still]))
+        self.assertEqual(1, len(frame[Model.Line]))
+        self.assertEqual(0, len(frame[Model.Audio]))
+        self.assertTrue(
+            all(isinstance(i, Presenter.Animation) for i in frame[Model.Line])
+        )
+        self.assertTrue(
+            all(isinstance(i.element, Model.Line) for i in frame[Model.Line])
+        )
+        self.assertEqual("On.", frame[Model.Line][0].element.text)
+
+    def test_epilogue(self):
+        dialogue = Presenter.dialogue(self.folders, self.ensemble)
+        presenter = Presenter(dialogue)
+        while presenter.pending:
+            frame = presenter.frame()
+        self.assertEqual(0, len(frame[Model.Still]))
+        self.assertEqual(1, len(frame[Model.Line]))
+        self.assertEqual(1, len(frame[Model.Audio]))
+        self.assertTrue(
+            all(isinstance(i, Presenter.Animation) for i in frame[Model.Line])
+        )
+        self.assertTrue(
+            all(isinstance(i.element, Model.Line) for i in frame[Model.Line])
+        )
+        self.assertEqual(
+            "Goodbye from  Actor .",
+            frame[Model.Line][0].element.text
+        )
