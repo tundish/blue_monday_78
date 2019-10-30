@@ -37,8 +37,6 @@ Prologue
    :loop: 1
 
 
-
-
 [VOICE]_
 
     Hello from |VOICE_SURNAME|.
@@ -50,7 +48,7 @@ Option 0
 
 [VOICE]_
 
-    Off.
+    On.
 
 Option 1
 --------
@@ -59,7 +57,7 @@ Option 1
 
 [VOICE]_
 
-    On.
+    Off.
 
 Epilogue
 --------
