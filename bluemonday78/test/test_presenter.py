@@ -31,6 +31,21 @@ class Presenter:
                     elif not strict and any(selection.values()):
                         return dialogue.cast(selection).run()
 
+    @staticmethod
+    def animate_lines(seq, dwell, pause):
+        offset = 0
+        for line in seq:
+            duration = pause + dwell * line.text.count(" ")
+            yield Presenter.Animation(offset, duration, line)
+            offset += duration
+
+    @staticmethod
+    def animate_stills(seq):
+        yield from (
+            Presenter.Animation(still.offset, still.duration, still)
+            for still in seq
+        )
+
     def __init__(self, dialogue):
         self.frames = [group_by_type(i.items) for i in dialogue.shots]
 
@@ -45,10 +60,15 @@ class Presenter:
         while True:
             frame = self.frames.pop(0)
             if all([Performer.allows(i) for i in frame[Model.Condition]]):
+                frame[Model.Line] = list(
+                    self.animate_lines(frame[Model.Line], dwell, pause)
+                )
+                frame[Model.Still] = list(self.animate_stills(frame[Model.Still]))
                 for p in frame[Model.Property]:
                     if react and p.object is not None:
                         setattr(p.object, p.attr, p.val)
                 return frame
+
 
 class SceneTests(unittest.TestCase):
 
@@ -84,4 +104,7 @@ class SceneTests(unittest.TestCase):
     def test_prologue(self):
         dialogue = Presenter.dialogue(self.folders, self.ensemble)
         presenter = Presenter(dialogue)
+        frame = presenter.frame()
+        print(frame)
+        print(presenter.pending)
         print(*presenter.frames, sep="\n")

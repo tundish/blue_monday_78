@@ -21,21 +21,17 @@ Scene level text.
 Prologue
 --------
 
-.. fx:: bluemonday78.static.image location_01.jpg
+.. fx:: bluemonday78.static.image   location_01.jpg
    :offset: 0
    :duration: 1000
-   :loop: 1
 
-.. fx:: bluemonday78.static.image location_02.jpg
+.. fx:: bluemonday78.static.image   location_02.jpg
    :offset: 1000
    :duration: 1000
-   :loop: 1
 
-.. fx:: bluemonday78.static.image location_03.jpg
+.. fx:: bluemonday78.static.image   location_03.jpg
    :offset: 3000
    :duration: 20000
-   :loop: 1
-
 
 [VOICE]_
 
@@ -68,7 +64,7 @@ Epilogue
 
 .. property:: VOICE.state 20
 
-.. fx:: bluemonday78.static.audio  transition_01.mp3
+.. fx:: bluemonday78.static.audio   transition_01.mp3
    :offset: 0
    :duration: 19513
    :loop: 1
