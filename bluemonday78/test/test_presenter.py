@@ -26,7 +26,7 @@ from turberfield.dialogue.types import Player
 from bluemonday78.presenter import Presenter
 
 
-class PresenterTests(unittest.TestCase):
+class DialogueLoader:
 
     def setUp(self):
         self.folders = [
@@ -43,6 +43,9 @@ class PresenterTests(unittest.TestCase):
         self.ensemble = [
             Player(name="A Test Actor").set_state(10)
         ]
+
+
+class PresenterTests(DialogueLoader, unittest.TestCase):
 
     def test_frame(self):
         dialogue = Presenter.dialogue(self.folders, self.ensemble)

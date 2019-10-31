@@ -18,7 +18,9 @@
 
 import unittest
 
+from bluemonday78.presenter import Presenter
 import bluemonday78.render
+from bluemonday78.test.test_presenter import DialogueLoader
 
 
 class RenderBaseTests(unittest.TestCase):
@@ -43,3 +45,15 @@ class RenderBaseTests(unittest.TestCase):
         rv = bluemonday78.render.base_to_html().format("<p>Body text</p>", "Error")
         self.assertIn("Body text",rv)
         self.assertNotIn("Error" ,rv)
+
+
+class RenderFrameTests(DialogueLoader, unittest.TestCase):
+
+    def test_frame_for_sanity(self):
+        dialogue = Presenter.dialogue(self.folders, self.ensemble)
+        presenter = Presenter(dialogue)
+        frame = presenter.frame()
+        print(frame)
+        rv = bluemonday78.render.frame_to_html(frame)
+        print(rv)
+

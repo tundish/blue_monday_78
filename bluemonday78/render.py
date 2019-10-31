@@ -19,6 +19,23 @@
 import functools
 
 
+def frame_to_html(frame, ensemble=[]):
+    return f"""
+<main class="grid-front">
+<h1>{frame}</h1>
+<ul class="mod-dialogue">
+{{0}}
+</ul>
+</main>
+<nav class="grid-steer">
+{{1}}
+{{2}}
+{{3}}
+</nav>
+<section class="grid-dash">
+</section>"""
+
+
 @functools.lru_cache()
 def base_to_html(refresh=None):
     return f"""<!DOCTYPE html>
