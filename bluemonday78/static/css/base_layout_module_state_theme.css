@@ -25,45 +25,45 @@ button, input, select, textarea {
 /*  Layout  */
 /*  prefix: grid-   */
 
-.grid-dash {
-grid-area: dash;
+.grid-state {
+grid-area: state;
 }
 
-.grid-front {
-grid-area: front;
+.grid-flash {
+grid-area: flash;
 }
 
-.grid-roof {
-grid-area: roof;
+.grid-blank {
+grid-area: blank;
 }
 
-.grid-steer {
-grid-area: steer;
+.grid-focus {
+grid-area: focus;
 }
 
-.grid-wing {
-grid-area: wing;
+.grid-spare {
+grid-area: spare;
 }
 
 @media (orientation: portrait) {
 body {
 display: grid;
 grid-template-areas:
-"front"
-"front"
-"front"
-"front"
-"steer"
-"steer"
-"dash";
+"flash"
+"flash"
+"study"
+"study"
+"study"
+"focus"
+"state";
 justify-items: center;
 }
 
-.grid-roof {
+.grid-blank {
 display: none;
 }
 
-.grid-wing {
+.grid-spare {
 display: none;
 }
 
@@ -75,12 +75,12 @@ body {
 display: grid;
 grid-template-columns: 2fr 3fr 1fr 2fr;
 grid-template-areas:
-"roof   front   steer   wing"
-"roof   front   steer   wing"
-"roof   front   steer   wing"
-"roof   front   steer   wing"
-"roof   front   steer   wing"
-"roof   front   dash    wing";
+"blank  flash   flash   spare"
+"blank  flash   flash   spare"
+"blank  study   state   spare"
+"blank  study   focus   spare"
+"blank  study   focus   spare"
+"blank  study   focus   spare";
 }
 
 }

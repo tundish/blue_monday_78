@@ -17,22 +17,54 @@
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
 import functools
+from turberfield.dialogue.model import Model
+
+"""
+http://css3.bradshawenterprises.com/cfimg/
+For "n" images You must define:
+a=presentation time for one image
+b=duration for cross fading
+Total animation-duration is of course t=(a+b)*n
+
+animation-delay = t/n or = a+b
+
+Percentage for keyframes:
+
+    0%
+    a/t*100%
+    (a+b)/t*100% = 1/n*100%
+    100%-(b/t*100%)
+    100%
+"""
+
+def animated_line_to_html(anim):
+    return f"""
+<li style="animation-duration: {anim.duration}s; animation-delay: {anim.delay}s">
+<blockquote class="line">
+<header class="{'persona' if hasattr(anim.element.persona, '_name') else ''}">
+{ anim.element.persona._name if hasattr(anim.element.persona, '_name') else ''}
+</header>
+<p class="speech">{ anim.element.text }</p>
+</blockquote>
+</li>"""
 
 
 def frame_to_html(frame, ensemble=[]):
+    player = ensemble[-1] if ensemble else None
+    location = player.get_state(Spot) if player else None
+    dialogue = "\n".join(animated_line_to_html(i) for i in frame[Model.Line])
     return f"""
-<main class="grid-front">
-<h1>{frame}</h1>
+<aside class="grid-flash>
+</aside>
+<main class="grid-study">
+{'<h1>{0}</h1>'.format(location) if location is not None else ''}
 <ul class="mod-dialogue">
-{{0}}
+{dialogue}
 </ul>
 </main>
-<nav class="grid-steer">
-{{1}}
-{{2}}
-{{3}}
+<nav class="grid-focus">
 </nav>
-<section class="grid-dash">
+<section class="grid-state>
 </section>"""
 
 
@@ -45,7 +77,7 @@ def base_to_html(refresh=None):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {'<meta http-equiv="refresh" content="{0}">'.format(refresh) if refresh is not None else ''}
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="/css/blmst.css" />
+<link rel="stylesheet" href="/css/base_layout_module_state_theme.css" />
 </head>
 <body>
 {{0}}
