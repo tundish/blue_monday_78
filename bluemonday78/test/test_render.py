@@ -26,34 +26,36 @@ from bluemonday78.test.test_presenter import DialogueLoader
 class RenderBaseTests(unittest.TestCase):
 
     def test_base_for_sanity(self):
-        rv = bluemonday78.render.base_to_html()
+        rv = bluemonday78.render.body_html()
         self.assertTrue(rv)
         self.assertFalse(rv[0].isspace())
 
     def test_base_cache(self):
-        a = bluemonday78.render.base_to_html()
-        b = bluemonday78.render.base_to_html()
+        a = bluemonday78.render.body_html()
+        b = bluemonday78.render.body_html()
         self.assertIs(a, b)
 
     def test_base_refresh(self):
-        rv = bluemonday78.render.base_to_html()
+        rv = bluemonday78.render.body_html()
         self.assertNotIn('http-equiv="refresh"' ,rv)
-        rv = bluemonday78.render.base_to_html(refresh=12)
+        rv = bluemonday78.render.body_html(refresh=12)
         self.assertIn('http-equiv="refresh"' ,rv)
 
     def test_base_body(self):
-        rv = bluemonday78.render.base_to_html().format("<p>Body text</p>", "Error")
+        rv = bluemonday78.render.body_html().format("<p>Body text</p>", "Error")
         self.assertIn("Body text",rv)
         self.assertNotIn("Error" ,rv)
 
 
 class RenderFrameTests(DialogueLoader, unittest.TestCase):
 
-    def test_frame_for_sanity(self):
+    def test_prologue_frame(self):
         dialogue = Presenter.dialogue(self.folders, self.ensemble)
         presenter = Presenter(dialogue)
         frame = presenter.frame()
-        print(frame)
         rv = bluemonday78.render.frame_to_html(frame)
+        self.assertEqual(1, rv.count('<blockquote class="line">'))
+        self.assertEqual(3, rv.count("<img "))
         print(rv)
+        print(frame)
 

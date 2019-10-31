@@ -52,8 +52,6 @@ class SequenceTests(unittest.TestCase):
         )
 
     def tearDown(self):
-        print("Teardown", self.folder.paths[self.index], file=sys.stderr)
-        print("Interlude", self.interlude, file=sys.stderr)
         if isinstance(self.interlude, Callable):
             metadata = self.interlude(
                 self.folder, self.index, self.ensemble, self.dialogue

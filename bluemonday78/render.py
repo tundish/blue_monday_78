@@ -49,12 +49,21 @@ def animated_line_to_html(anim):
 </li>"""
 
 
+def animated_still_to_html(anim):
+    return f"""
+<div style="animation-duration: {anim.duration}s; animation-delay: {anim.delay}s">
+<img src="/img/{anim.element.resource}" alt="{anim.element.package} {anim.element.resource}" />
+</div>"""
+
+
 def frame_to_html(frame, ensemble=[]):
     player = ensemble[-1] if ensemble else None
     location = player.get_state(Spot) if player else None
     dialogue = "\n".join(animated_line_to_html(i) for i in frame[Model.Line])
+    stills = "\n".join(animated_still_to_html(i) for i in frame[Model.Still])
     return f"""
-<aside class="grid-flash>
+<aside class="grid-flash">
+{stills}
 </aside>
 <main class="grid-study">
 {'<h1>{0}</h1>'.format(location) if location is not None else ''}
@@ -69,7 +78,7 @@ def frame_to_html(frame, ensemble=[]):
 
 
 @functools.lru_cache()
-def base_to_html(refresh=None):
+def body_html(refresh=None):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>

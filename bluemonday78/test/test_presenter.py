@@ -72,6 +72,8 @@ class PresenterTests(DialogueLoader, unittest.TestCase):
         self.assertTrue(
             all(isinstance(i.element, Model.Still) for i in frame[Model.Still])
         )
+        self.assertEqual(20, max(i.duration for i in frame[Model.Still]))
+        self.assertEqual(20000, max(i.element.duration for i in frame[Model.Still]))
         self.assertEqual(1, len(frame[Model.Line]))
         self.assertTrue(
             all(isinstance(i, Presenter.Animation) for i in frame[Model.Line])

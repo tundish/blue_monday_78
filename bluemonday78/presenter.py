@@ -41,7 +41,7 @@ class Presenter:
     def animate_stills(seq):
         """ Generate animations for still images."""
         yield from (
-            Presenter.Animation(still.offset, still.duration, still)
+            Presenter.Animation(still.offset / 1000, still.duration / 1000, still)
             for still in seq
         )
 
