@@ -56,17 +56,26 @@ def animated_still_to_html(anim):
 </div>"""
 
 
+def audio_to_html(elem):
+    return f"""<div>
+<audio src="/audio/{elem.resource}" autoplay="autoplay" preload="auto" >
+</audio>
+</div>"""
+
+
 def frame_to_html(frame, ensemble=[]):
     player = ensemble[-1] if ensemble else None
     location = player.get_state(Spot) if player else None
     dialogue = "\n".join(animated_line_to_html(i) for i in frame[Model.Line])
     stills = "\n".join(animated_still_to_html(i) for i in frame[Model.Still])
+    audio = "\n".join(audio_to_html(i) for i in frame[Model.Audio])
     return f"""
 <aside class="grid-flash">
 {stills}
 </aside>
 <main class="grid-study">
 {'<h1>{0}</h1>'.format(location) if location is not None else ''}
+{audio}
 <ul class="mod-dialogue">
 {dialogue}
 </ul>

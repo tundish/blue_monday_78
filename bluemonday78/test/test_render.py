@@ -56,6 +56,11 @@ class RenderFrameTests(DialogueLoader, unittest.TestCase):
         rv = bluemonday78.render.frame_to_html(frame)
         self.assertEqual(1, rv.count('<blockquote class="line">'))
         self.assertEqual(3, rv.count("<img "))
-        print(rv)
-        print(frame)
 
+    def test_epilogue_frame(self):
+        dialogue = Presenter.dialogue(self.folders, self.ensemble)
+        presenter = Presenter(dialogue)
+        while presenter.pending:
+            frame = presenter.frame()
+        rv = bluemonday78.render.frame_to_html(frame)
+        self.assertEqual(1, rv.count("<audio"))
