@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# encoding: utf-8
+# encoding: UTF-8
 
 # This file is part of Addison Arches.
 #
@@ -17,81 +17,6 @@
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
 import functools
-
-
-def element_as_list_item(element):
-    if hasattr(element.dialogue, "persona"):
-        return f"""
-<li style="animation-duration: {element.duration}s; animation-delay: {element.offset}s">
-<blockquote class="line">
-<header class="{'persona' if hasattr(element.dialogue.persona, '_name') else ''}">
-{ element.dialogue.persona._name if hasattr(element.dialogue.persona, '_name') else ''}
-</header>
-<p class="speech">{ element.dialogue.text }</p>
-</blockquote>
-</li>
-        """
-    elif hasattr(element.dialogue, "loop"):
-        return """
-<li>
-<audio
-    src="/audio/{0.dialogue.resource}"
-    autoplay="autoplay" preload="auto"
->
-</audio>
-</li>""".format(element)
-    else:
-        return ""
-
-
-def option_as_list_item(n, option, path="/"):
-    labels = {
-        "balcony": "Onto the Balcony",
-        "broomer": "Broom shop",
-        "butcher": "Go round the Butcher's",
-        "chamber": "Into the Chamber",
-        "chemist": "Pop to the Chemist",
-        "inbound": "Foot of the Tower",
-        "outward": "Climb down",
-        "stylist": "Visit the Stylist",
-    }
-    return f"""
-<form role="form" action="{path}{n}" method="post" name="choice" >
-    <button type="submit">{labels.get(option, option)}</button>
-</form>"""
-
-
-def body_to_html(state, frame=[], options=[]):
-    labels = {
-        "balcony": "On the Balcony",
-        "broomer": "At the Broom shop",
-        "butcher": "In the Butcher's",
-        "chamber": "The Chamber",
-        "chemist": "The Chemist",
-        "inbound": "Foot of the Tower",
-        "outward": "Foot of the Tower",
-        "stylist": "At the Stylist",
-    }
-    return f"""
-<main class="grid-front">
-<h1>{labels[state.area]}</h1>
-<ul class="mod-dialogue">
-{{0}}
-</ul>
-</main>
-<nav class="grid-steer">
-{{1}}
-{{2}}
-{{3}}
-</nav>
-<section class="grid-dash">
-<dl class="mod-stats">
-<dt>Health</dt>
-<dd>{int(state.health_n)}</dd>
-<dt>Coins</dt>
-<dd>{state.coins_n}</dd>
-</dl>
-</section>"""
 
 
 @functools.lru_cache()
