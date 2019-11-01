@@ -18,6 +18,7 @@
 
 import functools
 from turberfield.dialogue.model import Model
+from bluemonday78.types import Location
 
 """
 http://css3.bradshawenterprises.com/cfimg/
@@ -61,6 +62,39 @@ def audio_to_html(elem):
 <audio src="/audio/{elem.resource}" autoplay="autoplay" preload="auto" >
 </audio>
 </div>"""
+
+
+def location_to_html(locn, path="/"):
+    return f"""
+<form role="form" action="{path}{locn.id.hex}" method="post" name="id" >
+    <button type="submit">{locn.label}</button>
+</form>"""
+
+def ensemble_to_html(ensemble):
+    items = "\n".join(
+        "<li>{0.label}</li>".format(i) for i in ensemble
+        if not isinstance(i, Location)
+    )
+    moves = "\n".join(
+        "<li>{0}</li>".format(location_to_html(i))
+        for i in ensemble
+        if isinstance(i, Location)
+    )
+    return f"""
+<aside class="grid-flash">
+</aside>
+<main class="grid-study">
+<ul class="mod-inventory">
+{items}
+</ul>
+</main>
+<nav class="grid-focus">
+<ul class="mod-moves">
+{moves}
+</ul>
+</nav>
+<section class="grid-state>
+</section>"""
 
 
 def frame_to_html(frame, ensemble=[]):

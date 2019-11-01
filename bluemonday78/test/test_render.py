@@ -21,6 +21,8 @@ import unittest
 from bluemonday78.presenter import Presenter
 import bluemonday78.render
 from bluemonday78.test.test_presenter import DialogueLoader
+from bluemonday78.types import Location
+from bluemonday78.types import Spot
 
 
 class RenderBaseTests(unittest.TestCase):
@@ -64,3 +66,7 @@ class RenderFrameTests(DialogueLoader, unittest.TestCase):
             frame = presenter.frame()
         rv = bluemonday78.render.frame_to_html(frame)
         self.assertEqual(1, rv.count("<audio"))
+
+    def test_map_from_ensemble(self):
+        ensemble = [Location(label=i.name).set_state(i) for i in Spot]
+        print(bluemonday78.render.ensemble_to_html(ensemble))
