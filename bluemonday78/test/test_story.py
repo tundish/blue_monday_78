@@ -25,8 +25,8 @@ from turberfield.dialogue.model import Model
 from turberfield.dialogue.performer import Performer
 from turberfield.utils.misc import group_by_type
 
-import bluemonday78.logic
-from bluemonday78.logic import Spot
+import bluemonday78.story
+from bluemonday78.story import Spot
 
 class SequenceTests(unittest.TestCase):
 
@@ -36,9 +36,9 @@ class SequenceTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.asscns = bluemonday78.logic.associations()
+        cls.asscns = bluemonday78.story.associations()
         cls.ensemble = cls.asscns.ensemble()
-        cls.dialogue = [copy.deepcopy(bluemonday78.logic.curtain)]
+        cls.dialogue = [copy.deepcopy(bluemonday78.story.curtain)]
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
         }

@@ -22,6 +22,7 @@ import string
 from turberfield.dialogue.types import DataObject
 from turberfield.dialogue.types import EnumFactory
 from turberfield.dialogue.types import Persona
+from turberfield.dialogue.types import Player
 from turberfield.dialogue.types import Stateful
 
 

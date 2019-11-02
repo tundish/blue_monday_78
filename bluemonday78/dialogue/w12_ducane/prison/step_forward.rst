@@ -2,7 +2,7 @@
     Scene ~~
     Shot --
 
-.. |VERSION| property:: bluemonday78.logic.version
+.. |VERSION| property:: bluemonday78.story.version
 
 :author: D Haynes
 :date: 2018-01-20
@@ -10,11 +10,11 @@
 :version: |VERSION|
 
 .. entity:: NARRATOR
-   :types: bluemonday78.logic.Narrator
+   :types: bluemonday78.types.Narrator
 
 .. entity:: OFFICER
-   :types: bluemonday78.logic.PrisonOfficer
-   :states: bluemonday78.logic.Spot.w12_ducane_prison_wing
+   :types: bluemonday78.types.PrisonOfficer
+   :states: bluemonday78.types.Spot.w12_ducane_prison_wing
 
    A Prison Officer. We first meet him on the day he retires.
 
@@ -23,12 +23,12 @@
     * Often upset by inefficiency and lack of structure
 
 .. entity:: CELLMATE
-   :types: bluemonday78.logic.Prisoner
+   :types: bluemonday78.types.Prisoner
 
    A small-time offender in his mid forties.
 
 .. entity:: HERO
-   :types: bluemonday78.logic.Player
+   :types: bluemonday78.types.Player
 
    The player entity.
 
@@ -103,9 +103,9 @@ Ray is on the landing
 
     Right, now we will proceed in silence to Visiting Suite. At the double!
 
-.. property:: OFFICER.state bluemonday78.logic.Spot.w12_ducane_prison_release
-.. property:: CELLMATE.state bluemonday78.logic.Spot.w12_ducane_prison_visiting
-.. property:: HERO.state bluemonday78.logic.Spot.w12_ducane_prison_visiting
+.. property:: OFFICER.state bluemonday78.types.Spot.w12_ducane_prison_release
+.. property:: CELLMATE.state bluemonday78.types.Spot.w12_ducane_prison_visiting
+.. property:: HERO.state bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 .. |OFFICER_TITLE| property:: OFFICER.name.title
 .. |OFFICER_SURNAME| property:: OFFICER.name.surname

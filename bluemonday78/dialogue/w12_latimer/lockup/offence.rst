@@ -6,9 +6,9 @@
 :date: 2017-07-23
 
 .. entity:: BARMAN
-   :types:  bluemonday78.logic.Barman
-   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
-            bluemonday78.logic.Attitude.grumpy
+   :types:  bluemonday78.types.Barman
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
+            bluemonday78.types.Attitude.grumpy
 
 Offence
 ~~~~~~~
@@ -22,4 +22,4 @@ A pub in Shepherd's Bush
 
     Because if not, the place for you is outside.
 
-.. property:: BARMAN.state bluemonday78.logic.Attitude.neutral
+.. property:: BARMAN.state bluemonday78.types.Attitude.neutral

@@ -6,26 +6,26 @@
 :date: 2017-07-25
 
 .. entity:: NARRATOR
-   :types: bluemonday78.logic.Narrator
+   :types: bluemonday78.types.Narrator
 
 .. entity:: HERO
-   :types: bluemonday78.logic.Player
-   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
+   :types: bluemonday78.types.Player
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: HIPSTER
-   :types: bluemonday78.logic.Hipster
-   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
+   :types: bluemonday78.types.Hipster
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
             19780118
 
 .. entity:: BARMAN
-   :types: bluemonday78.logic.Barman
-   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
+   :types: bluemonday78.types.Barman
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: DRINKER_1
-   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: DRINKER_2
-   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
 Desparation
 ~~~~~~~~~~~
@@ -192,7 +192,7 @@ A pub in Shepherd's Bush
 
 .. property:: HIPSTER.state 19780119
 .. property:: NARRATOR.state 19780119
-.. property:: HERO.state bluemonday78.logic.Spot.w12_latimer_arches
+.. property:: HERO.state bluemonday78.types.Spot.w12_latimer_arches
 
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |HIPSTER_FIRSTNAME| property:: HIPSTER.name.firstname

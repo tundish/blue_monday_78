@@ -32,8 +32,8 @@ from turberfield.dialogue.matcher import Matcher
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.performer import Performer
 
-import bluemonday78.logic
 import bluemonday78.render
+import bluemonday78.story
 
 
 class Presentation:

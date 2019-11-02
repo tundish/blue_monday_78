@@ -2,7 +2,7 @@
     Scene ~~
     Shot --
 
-.. |VERSION| property:: bluemonday78.logic.version
+.. |VERSION| property:: bluemonday78.story.version
 
 :author: D Haynes
 :date: 2017-07-04
@@ -12,25 +12,25 @@
 .. |HERO| property:: HERO.name.firstname
 
 .. entity:: OFFICER
-   :types: bluemonday78.logic.PrisonOfficer
-   :states: bluemonday78.logic.Spot.w12_ducane_prison_release
+   :types: bluemonday78.types.PrisonOfficer
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
             197801160820
 
 .. entity:: HERO
-   :types: bluemonday78.logic.Player
-   :states: bluemonday78.logic.Spot.w12_ducane_prison_release
+   :types: bluemonday78.types.Player
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
 
    The player entity.
 
 .. entity:: OBJECTIVE
-   :types: bluemonday78.logic.Location
-   :states: bluemonday78.logic.Spot.w12_ducane_prison_visiting
+   :types: bluemonday78.types.Location
+   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 .. entity:: CELLMATE
-   :types: bluemonday78.logic.Prisoner
+   :types: bluemonday78.types.Prisoner
 
 .. entity:: NARRATOR
-   :types: bluemonday78.logic.Narrator
+   :types: bluemonday78.types.Narrator
 
 Guards' Office
 ~~~~~~~~~~~~~~

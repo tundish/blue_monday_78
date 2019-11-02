@@ -6,23 +6,23 @@
 :date: 2017-07-19
 
 .. entity:: HIPSTER
-   :types: bluemonday78.logic.Hipster
-   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
+   :types: bluemonday78.types.Hipster
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
             19780117
 
 .. entity:: BARMAN
-   :types: bluemonday78.logic.Barman
-   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
+   :types: bluemonday78.types.Barman
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: DRINKER_1
-   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: DRINKER_2
-   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: NARRATOR
-   :types: bluemonday78.logic.Narrator
-   :states: bluemonday78.logic.Spot.w12_goldhawk_tavern
+   :types: bluemonday78.types.Narrator
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
 Anguish
 ~~~~~~~
@@ -233,7 +233,7 @@ A pub in Shepherd's Bush
     Ha ha ha ha!
 
 .. property:: HIPSTER.state 19780118
-.. property:: NARRATOR.state bluemonday78.logic.Spot.w12_latimer_arches
+.. property:: NARRATOR.state bluemonday78.types.Spot.w12_latimer_arches
 
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |BARMAN_SURNAME| property:: BARMAN.name.surname

@@ -2,7 +2,7 @@
     Scene ~~
     Shot --
 
-.. |VERSION| property:: bluemonday78.logic.version
+.. |VERSION| property:: bluemonday78.story.version
 
 :author: D Haynes
 :date: 2019-09-29

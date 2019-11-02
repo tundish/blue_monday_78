@@ -21,7 +21,6 @@ import datetime
 import itertools
 
 from turberfield.dialogue.model import SceneScript
-from turberfield.dialogue.types import Player
 
 from bluemonday78 import __version__ as version # noqa
 from bluemonday78.associations import Associations
@@ -31,6 +30,7 @@ from bluemonday78.types import Hipster
 from bluemonday78.types import Location
 from bluemonday78.types import Narrator
 from bluemonday78.types import NoteBook
+from bluemonday78.types import Player
 from bluemonday78.types import Prisoner
 from bluemonday78.types import PrisonOfficer
 from bluemonday78.types import PrisonVisitor

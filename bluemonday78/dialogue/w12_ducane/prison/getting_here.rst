@@ -2,7 +2,7 @@
     Scene ~~
     Shot --
 
-.. |VERSION| property:: bluemonday78.logic.version
+.. |VERSION| property:: bluemonday78.story.version
 
 :author: D Haynes
 :date: 2017-07-04
@@ -14,7 +14,7 @@
 .. |HUSBAND| property:: HUSBAND.name.firstname
 
 .. entity:: WIFE
-   :types: bluemonday78.logic.PrisonVisitor
+   :types: bluemonday78.types.PrisonVisitor
    :states: 197801160800
 
    A beautician in her late forties.
@@ -24,7 +24,7 @@
     * Has always looked after |HUSBAND|.
 
 .. entity:: HUSBAND
-   :types: bluemonday78.logic.Prisoner
+   :types: bluemonday78.types.Prisoner
 
    A small-time offender in his mid forties.
 
@@ -33,13 +33,13 @@
     * Misbehaved at Standford Hill to see less of |WIFE|.
 
 .. entity:: HERO
-   :types: bluemonday78.logic.Player
-   :states: bluemonday78.logic.Spot.w12_ducane_prison_visiting
+   :types: bluemonday78.types.Player
+   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
 
    The player entity.
 
 .. entity:: NARRATOR
-   :types: bluemonday78.logic.Narrator
+   :types: bluemonday78.types.Narrator
 
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~

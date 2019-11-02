@@ -6,11 +6,11 @@
 :date: 2017-07-27
 
 .. entity:: HERO
-   :types: bluemonday78.logic.Player
+   :types: bluemonday78.types.Player
 
 .. entity:: NARRATOR
-   :types:  bluemonday78.logic.Narrator
-   :states: bluemonday78.logic.Spot.w12_latimer_arches
+   :types:  bluemonday78.types.Narrator
+   :states: bluemonday78.types.Spot.w12_latimer_arches
             19780117
 
 Addison Arches
@@ -51,7 +51,7 @@ Day Two
     Camera centres on one of these as it passes. It is labelled 'INOR-8'.
 
 .. property:: NARRATOR.state 19780118
-.. property:: HERO.state bluemonday78.logic.Spot.w12_goldhawk_tavern
+.. property:: HERO.state bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. |HERO_FIRSTNAME| property:: HERO.name.firstname
 .. |HERO_SURNAME| property:: HERO.name.surname

@@ -6,17 +6,17 @@
 :date: 2017-07-23
 
 .. entity:: NARRATOR
-   :types:  bluemonday78.logic.Narrator
-   :states: bluemonday78.logic.Spot.w12_latimer_arches
+   :types:  bluemonday78.types.Narrator
+   :states: bluemonday78.types.Spot.w12_latimer_arches
             19780119
 
 .. entity:: OFFICER
-   :types: bluemonday78.logic.PrisonOfficer
+   :types: bluemonday78.types.PrisonOfficer
    :states: 19780118
 
 .. entity:: HERO
-   :types: bluemonday78.logic.Player
-   :states: bluemonday78.logic.Spot.w12_latimer_arches
+   :types: bluemonday78.types.Player
+   :states: bluemonday78.types.Spot.w12_latimer_arches
 
 A chance encounter
 ~~~~~~~~~~~~~~~~~~
@@ -26,7 +26,7 @@ Morning outside the warehouse.
 On the approach
 ---------------
 
-.. property:: OFFICER.state bluemonday78.logic.Spot.w12_latimer_arches
+.. property:: OFFICER.state bluemonday78.types.Spot.w12_latimer_arches
 
 [NARRATOR]_
 

@@ -2,7 +2,7 @@
     Scene ~~
     Shot --
 
-.. |VERSION| property:: bluemonday78.logic.version
+.. |VERSION| property:: bluemonday78.story.version
 
 :author: D Haynes
 :date: 2018-02-14
@@ -12,8 +12,8 @@
 .. |HERO| property:: HERO.name.firstname
 
 .. entity:: OFFICER
-   :types: bluemonday78.logic.PrisonOfficer
-   :states: bluemonday78.logic.Spot.w12_ducane_prison_release
+   :types: bluemonday78.types.PrisonOfficer
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
             197801160800
 
    A Prison Officer. We first meet him on the day he retires.
@@ -23,16 +23,16 @@
     * Often upset by inefficiency and lack of structure
 
 .. entity:: HERO
-   :types: bluemonday78.logic.Player
-   :states: bluemonday78.logic.Spot.w12_ducane_prison_release
+   :types: bluemonday78.types.Player
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
 
    The player entity.
 
 .. entity:: NARRATOR
-   :types: bluemonday78.logic.Narrator
+   :types: bluemonday78.types.Narrator
 
 .. entity:: NOTEBOOK
-   :types: bluemonday78.logic.NoteBook
+   :types: bluemonday78.types.NoteBook
 
 Guards' Office
 ~~~~~~~~~~~~~~

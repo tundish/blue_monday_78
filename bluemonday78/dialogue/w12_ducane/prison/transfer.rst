@@ -2,7 +2,7 @@
     Scene ~~
     Shot --
 
-.. |VERSION| property:: bluemonday78.logic.version
+.. |VERSION| property:: bluemonday78.story.version
 
 :author: D Haynes
 :date: 2017-07-04
@@ -10,26 +10,26 @@
 :version: |VERSION|
 
 .. entity:: WIFE
-   :types: bluemonday78.logic.PrisonVisitor
+   :types: bluemonday78.types.PrisonVisitor
    :states: 197801160830
 
 .. entity:: CELLMATE
-   :types: bluemonday78.logic.Prisoner
+   :types: bluemonday78.types.Prisoner
 
 .. entity:: HERO
-   :types: bluemonday78.logic.Player
-   :states: bluemonday78.logic.Spot.w12_ducane_prison_visiting
+   :types: bluemonday78.types.Player
+   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 .. entity:: NARRATOR
-   :types: bluemonday78.logic.Narrator
+   :types: bluemonday78.types.Narrator
 
 .. entity:: OBJECTIVE
-   :types: bluemonday78.logic.Location
-   :states: bluemonday78.logic.Spot.w12_latimer_arches
+   :types: bluemonday78.types.Location
+   :states: bluemonday78.types.Spot.w12_latimer_arches
 
 .. entity:: EXIT
-   :types: bluemonday78.logic.Location
-   :states: bluemonday78.logic.Spot.w12_ducane_prison_release
+   :types: bluemonday78.types.Location
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
 
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~

@@ -6,8 +6,8 @@
 :date: 2017-08-24
 
 .. entity:: NARRATOR
-   :types:  bluemonday78.logic.Narrator
-   :states: bluemonday78.logic.Spot.w12_latimer_arches
+   :types:  bluemonday78.types.Narrator
+   :states: bluemonday78.types.Spot.w12_latimer_arches
             19780116
 
 Addison Arches
@@ -24,4 +24,4 @@ Day One
     alongside Addison Arches.
 
 .. property:: NARRATOR.state 19780117
-.. property:: NARRATOR.state bluemonday78.logic.Spot.w12_ducane_prison_release
+.. property:: NARRATOR.state bluemonday78.types.Spot.w12_ducane_prison_release

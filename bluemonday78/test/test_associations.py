@@ -19,7 +19,7 @@
 import unittest
 
 from bluemonday78.associations import Associations
-from bluemonday78.logic import Location
+from bluemonday78.story import Location
 
 class AssociationTests(unittest.TestCase):
 
