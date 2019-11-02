@@ -32,8 +32,10 @@ from turberfield.dialogue.matcher import Matcher
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.performer import Performer
 
+from bluemonday78.presenter import Presenter
 import bluemonday78.render
 import bluemonday78.story
+from bluemonday78.types import Location
 
 
 class Presentation:
@@ -174,6 +176,19 @@ async def get_frame(request):
     )
 
 
+async def get_map(request):
+    presenter = request.app.presenter
+    ensemble = request.app.ensemble
+    frame = presenter.frame()
+    return web.Response(
+        text = bluemonday78.render.body_html(
+            #refresh=math.ceil(Presentation.refresh(frame))
+            refresh=None
+        #).format(bluemonday78.render.frame_to_html(frame)),
+        ).format(bluemonday78.render.ensemble_to_html([i for i in ensemble if isinstance(i, Location)])),
+        content_type="text/html"
+    )
+
 async def post_buy(request):
     buy = request.match_info["buy"]
     if not bluemonday78.rules.choice_validabluemonday78.match(buy):
@@ -240,6 +255,7 @@ def build_app(args):
     app = web.Application()
     app.add_routes([
         web.get("/", get_frame),
+        web.get("/map", get_map),
         #web.post("/buy/{{buy:{0}}}".format(bluemonday78.rules.choice_validabluemonday78.pattern), post_buy),
         #web.post("/cut/{{cut:{0}}}".format(bluemonday78.rules.choice_validabluemonday78.pattern), post_cut),
         #web.post("/hop/{{hop:{0}}}".format(bluemonday78.rules.choice_validabluemonday78.pattern), post_hop),
@@ -257,6 +273,13 @@ def build_app(args):
 
 def main(args):
     app = build_app(args)
+    app.ensemble = list(bluemonday78.story.associations().ensemble())
+    # TODO: Move to game screen. Create player.
+    dialogue = Presenter.dialogue(
+        [bluemonday78.story.curtain],
+        app.ensemble
+    )
+    app.presenter = Presenter(dialogue)
     return web.run_app(app, host=args.host, port=args.port)
 
 def parser(description=__doc__):
