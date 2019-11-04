@@ -72,7 +72,12 @@ references = list(associations().ensemble())
 curtain = SceneScript.Folder(
     pkg="bluemonday78",
     description="It's Ray Farington's last day.",
-    metadata={"timestamp": blue_monday},
+    metadata={
+        "area": "w12_ducane",
+        # "progress": 0,
+        # "timestamp": blue_monday,
+        "zone": "prison"
+    },
     paths=[
         "dialogue/w12_ducane/prison/step_forward.rst",
         "dialogue/w12_ducane/prison/getting_here.rst",
