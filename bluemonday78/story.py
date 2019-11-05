@@ -89,5 +89,5 @@ curtain = SceneScript.Folder(
         "dialogue/w12_ducane/prison/transfer.rst",
         "dialogue/w12_ducane/prison/escape.rst",
     ],
-    interludes=itertools.repeat(None)
+    interludes=None
 )

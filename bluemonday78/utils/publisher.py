@@ -63,20 +63,25 @@ def find_locations(path):
             print("Bad uuid at '", id_path, "'.", sep="", file=sys.stderr)
             continue
         else:
-            for script in sorted(id_path.parent.glob("*.rst")):
-                yield uid, script
+            for script_path in sorted(id_path.parent.glob("*.rst")):
+                yield uid, script_path
 
-def format_folder(uid, files, **kwargs):
-    pass
+def format_folder(uid, path, entries):
+    metadata = {"uid": uid.hex, "path": path}
+    locations = {}
+    primaries = [i for i in entries if not i.is_symlink()]
+    return (metadata, primaries)
 
 def main(args):
-    folders = defaultdict(list)
     for path in args.paths:
-        for key, value in find_locations(path):
-            metadata = {}
-            folders[key].append((metadata, value))
-    print(folders)
-    return 0
+        folders = defaultdict(list)
+        locations = set()
+        for uid, script_path in find_locations(path):
+            locations.add(script_path.parent.parent.relative_to(path).parts)
+            if not script_path.parent.is_symlink():
+                folders[uid].append(script_path.relative_to(path))
+        print(folders)
+        print(locations)
 
 def parser(description=__doc__):
     rv = argparse.ArgumentParser(
