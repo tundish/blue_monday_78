@@ -44,7 +44,7 @@ setup(
         ]
     },
     install_requires=[
-        "turberfield-dialogue[audio]>=0.19.0",
+        "turberfield-dialogue>=0.20.0",
     ],
     zip_safe=True,
     entry_points={}
