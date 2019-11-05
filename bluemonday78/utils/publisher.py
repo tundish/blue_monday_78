@@ -18,6 +18,7 @@
 
 import argparse
 from collections import defaultdict
+import glob
 import pathlib
 import sys
 import uuid
@@ -54,14 +55,15 @@ FOLDERS_TEMPLATE = """
 """
 
 def find_locations(path):
-    for id_location in path.glob("**/uuid.hex"):
+    for id_location in glob.glob("**/uuid.hex", recursive=True):
         try:
-            uid = uuid.UUID(hex=id_location.read_text().strip())
+            id_path = pathlib.Path(id_location)
+            uid = uuid.UUID(hex=id_path.read_text().strip())
         except (ValueError, OSError):
-            print("Bad uuid at '", id_location, "'.", sep="", file=sys.stderr)
+            print("Bad uuid at '", id_path, "'.", sep="", file=sys.stderr)
             continue
         else:
-            for script in sorted(id_location.parent.glob("*.rst")):
+            for script in sorted(id_path.parent.glob("*.rst")):
                 yield uid, script
 
 def format_folder(uid, files, **kwargs):
