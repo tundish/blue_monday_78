@@ -18,12 +18,15 @@
 
 from turberfield.dialogue.matcher import Matcher
 
+
 class PathwayMatcher(Matcher):
 
     def options(self, data):
         arc = data.get("arc", None)
+        pathways = data.get("pathways", set())
         yield from (
             i for i in self.folders
             if arc is not None and i.metadata.get("arc") == arc
+            or i.metadata.get("pathways", set()).intersection(pathways)
         )
 

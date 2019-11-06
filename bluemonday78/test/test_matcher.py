@@ -25,8 +25,8 @@ from bluemonday78.matcher import PathwayMatcher
 
 class MatcherTests(unittest.TestCase):
 
-    def test_match_by_arc(self):
-        folders = [
+    def setUp(self):
+        self.folders = [
             SceneScript.Folder(
                 pkg=None,
                 description=None,
@@ -38,26 +38,39 @@ class MatcherTests(unittest.TestCase):
                 {
                     "arc": "a_01",
                     "pathways": frozenset((
-                        ("w12_ducane", "prison"),
+                        ("w12_latimer", "lockup"),
                     ))
                 },
                 {
                     "arc": "a_10",
                     "pathways": frozenset((
-                        ("w12_ducane", "prison"),
+                        ("w12_latimer", "tavern"),
                     ))
                 },
                 {
                     "arc": "a_11",
                     "pathways": frozenset((
-                        ("w12_ducane", "prison"),
+                        ("w12_latimer", "lockup"),
+                        ("w12_latimer", "tavern"),
                     ))
                 },
             ]
         ]
-        matcher = PathwayMatcher(folders)
+
+    def test_match_by_arc(self):
+        matcher = PathwayMatcher(self.folders)
 
         rv = list(matcher.options({"arc": "a_11"}))
         self.assertEqual(1, len(rv), rv)
         self.assertEqual("a_11", rv[0].metadata["arc"])
+
+    def test_match_by_pathway(self):
+        matcher = PathwayMatcher(self.folders)
+
+        rv = list(matcher.options(
+            {"pathways": set([("w12_latimer", "lockup")])}
+        ))
+        self.assertEqual(2, len(rv), rv)
+        self.assertEqual("a_01", rv[0].metadata["arc"])
+        self.assertEqual("a_11", rv[1].metadata["arc"])
 
