@@ -130,20 +130,17 @@ class Presentation:
 
 async def get_frame(request):
     session = request.app.session
+    ensemble = request.app.ensemble
     #location = session["state"].area
-    player = bluemonday78.logic.Player(
+    player = bluemonday78.types.Player(
         name="Mr William Billy McCarthy",
-    ).set_state(bluemonday78.logic.Spot.w12_ducane_prison)
-    entities = [
-        i for i in bluemonday78.story.ensemble
-        if getattr(i, "area", location) == location
-    ]
-    narrator = next(i for i in entities if isinstance(i, Narrator))
+    ).set_state(bluemonday78.types.Spot.w12_ducane_prison)
+    narrator = next(i for i in ensemble if isinstance(i, Narrator))
     narrator.state = session["state"]
-    for character in (i for i in entities if isinstance(i, Character)):
+    for character in (i for i in ensemble if isinstance(i, Character)):
         character.set_state(random.randrange(10))
 
-    frame = Presentation.next_frame(session, entities)
+    frame = Presentation.next_frame(session, ensemble)
     buys = ["Spend 1c", "Spend 2c", "Spend 3c"] if location == "butcher" else []
     cuts = ["Cut less", "Cut same", "Cut more"] if location == "chamber" else []
     hops = bluemonday78.rules.topology[location]
@@ -273,10 +270,13 @@ def build_app(args):
 
 def main(args):
     app = build_app(args)
-    app.ensemble = list(bluemonday78.story.associations().ensemble())
     # TODO: Move to game screen. Create player.
+    app.ensemble = list(bluemonday78.story.associations().ensemble())
+    app.ensemble.append(bluemonday78.types.Player(
+        name="Mr William Billy McCarthy",
+    ).set_state(bluemonday78.types.Spot.w12_ducane_prison))
     dialogue = Presenter.dialogue(
-        bluemonday78.story.folders,
+        bluemonday78.story.folders(),
         app.ensemble
     )
     app.presenter = Presenter(dialogue)

@@ -40,20 +40,20 @@ class SequenceTests(unittest.TestCase):
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
         }
-        cls.performer = Performer(bluemonday78.story.folders, cls.ensemble)
+        cls.performer = Performer(bluemonday78.story.folders(), cls.ensemble)
 
     def setUp(self):
         self.assertEqual(16, len(self.ensemble))
         (self.folder, self.index, self.script, self.selection,
          self.interlude) = self.performer.next(
-            bluemonday78.story.folders, self.ensemble, strict=True, roles=1
+            self.performer.folders, self.ensemble, strict=True, roles=1
         )
 
     def tearDown(self):
         if isinstance(self.interlude, Callable):
             metadata = self.interlude(
                 self.folder, self.index,
-                self.ensemble, bluemonday78.story.folders
+                self.ensemble, self.performer.folders
             )
             self.assertIn(metadata, (None, self.folder.metadata))
 

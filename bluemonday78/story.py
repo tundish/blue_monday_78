@@ -71,25 +71,20 @@ def associations():
     return rv
 
 
-references = list(associations().ensemble())
-
-path = pathlib.Path(
-    pkg_resources.resource_filename(
-        "bluemonday78", "dialogue"
-    )
-)
-folders = [
-    SceneScript.Folder(
-        pkg="bluemonday78",
-        description="Arc: '{0}'".format(asset.arc.capitalize()),
-        metadata={
-            "id": asset.id,
-            "arc": asset.arc,
-            "pathways": asset.pathways
-        },
-        paths=[os.path.join(path.name, i) for i in asset.scripts],
-        interludes=None
-    )
-    for asset in
-    bluemonday78.utils.publisher.find_assets(path)
-]
+def folders(pkg="bluemonday78", path="dialogue"):
+    root_path = pathlib.Path(pkg_resources.resource_filename(pkg, path))
+    return [
+        SceneScript.Folder(
+            pkg="bluemonday78",
+            description="Story arc: '{0}'".format(asset.arc.capitalize()),
+            metadata={
+                "id": asset.id,
+                "arc": asset.arc,
+                "pathways": asset.pathways
+            },
+            paths=[os.path.join(root_path.name, i) for i in asset.scripts],
+            interludes=None
+        )
+        for asset in
+        bluemonday78.utils.publisher.find_assets(root_path)
+    ]
