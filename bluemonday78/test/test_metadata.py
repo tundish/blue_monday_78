@@ -21,6 +21,15 @@ import unittest
 from turberfield.dialogue.matcher import Matcher
 from turberfield.dialogue.model import SceneScript
 
+class LocationMatcher(Matcher):
+
+    def options(self, data):
+        arc = data.get("arc", None)
+        yield from (
+            i for i in self.folders
+            if arc is not None and i.metadata.get("arc") == arc
+        )
+
 class MetadataTests(unittest.TestCase):
 
     def test_change_location(self):
@@ -34,18 +43,28 @@ class MetadataTests(unittest.TestCase):
             )
             for i in [
                 {
-                    "area": "w12_ducane",
-                    "id": "01",
-                    "progress": 0,
-                    "zone": "prison"
+                    "arc": "a_01",
+                    "pathways": frozenset((
+                        ("w12_ducane", "prison"),
+                    ))
                 },
                 {
-                    "area": "w12_ducane",
-                    "id": "02",
-                    "progress": 1,
-                    "zone": "prison"
+                    "arc": "a_10",
+                    "pathways": frozenset((
+                        ("w12_ducane", "prison"),
+                    ))
+                },
+                {
+                    "arc": "a_11",
+                    "pathways": frozenset((
+                        ("w12_ducane", "prison"),
+                    ))
                 },
             ]
         ]
-        matcher = Matcher(folders)
-        print(list(matcher.options({"progress": 1})))
+        matcher = LocationMatcher(folders)
+
+        rv = list(matcher.options({"arc": "a_11"}))
+        self.assertEqual(1, len(rv), rv)
+        self.assertEqual("a_11", rv[0].metadata["arc"])
+

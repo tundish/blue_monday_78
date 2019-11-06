@@ -117,4 +117,3 @@ folders = [
     for asset in
     bluemonday78.utils.publisher.find_assets(path)
 ]
-print(folders)
