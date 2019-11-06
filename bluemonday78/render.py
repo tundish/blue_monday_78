@@ -116,7 +116,7 @@ def frame_to_html(frame, ensemble=[]):
 </main>
 <nav class="grid-focus">
 </nav>
-<section class="grid-state>
+<section class="grid-state">
 </section>"""
 
 
