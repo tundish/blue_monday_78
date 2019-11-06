@@ -28,10 +28,10 @@ import sys
 from aiohttp import web
 import pkg_resources
 
-from turberfield.dialogue.matcher import Matcher
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.performer import Performer
 
+from bluemonday78.matcher import PathwayMatcher
 from bluemonday78.presenter import Presenter
 import bluemonday78.render
 import bluemonday78.story
@@ -90,7 +90,7 @@ class Presentation:
     def next_frame(session, entities, dwell=0.3, pause=1):
         while not session["frames"]:
             location = session["state"].area
-            matcher = Matcher(bluemonday78.sbluemonday78y.episodes)
+            matcher = PathwayMatcher(self.folders)
             folders = list(matcher.options(session["metadata"]))
             performer = Performer(folders, entities)
             folder, index, script, selection, interlude = performer.next(
@@ -129,46 +129,19 @@ class Presentation:
 
 
 async def get_frame(request):
-    session = request.app.session
     ensemble = request.app.ensemble
+    folders = request.app.folders
+    if not request.app.presenter.pending:
+        dialogue = Presenter.dialogue(folders, ensemble)
+        request.app.presenter = Presenter(dialogue)
     #location = session["state"].area
-    player = bluemonday78.types.Player(
-        name="Mr William Billy McCarthy",
-    ).set_state(bluemonday78.types.Spot.w12_ducane_prison)
-    narrator = next(i for i in ensemble if isinstance(i, Narrator))
-    narrator.state = session["state"]
-    for character in (i for i in ensemble if isinstance(i, Character)):
-        character.set_state(random.randrange(10))
-
-    frame = Presentation.next_frame(session, ensemble)
-    buys = ["Spend 1c", "Spend 2c", "Spend 3c"] if location == "butcher" else []
-    cuts = ["Cut less", "Cut same", "Cut more"] if location == "chamber" else []
-    hops = bluemonday78.rules.topology[location]
-    elements = list(Presentation.react(session, frame))
+    frame = request.app.presenter.frame()
+    #elements = list(Presentation.react(session, frame))
     return web.Response(
-        text = bluemonday78.render.base_to_html(
+        text = bluemonday78.render.body_html(
             #refresh=math.ceil(Presentation.refresh(frame))
             refresh=None
-        ).format(
-            bluemonday78.render.body_to_html(session["state"], frame=frame).format(
-                "\n".join(
-                    bluemonday78.render.element_as_list_item(element)
-                    for element in frame
-                ),
-                "\n".join(
-                    bluemonday78.render.option_as_list_item(n, option, path="/hop/")
-                    for n, option in enumerate(hops)
-                ),
-                "\n".join(
-                    bluemonday78.render.option_as_list_item(n + 1, option, path="/buy/")
-                    for n, option in enumerate(buys)
-                ),
-                "\n".join(
-                    bluemonday78.render.option_as_list_item(n, option, path="/cut/")
-                    for n, option in enumerate(cuts)
-                ),
-            )
-        ),
+        ).format(bluemonday78.render.frame_to_html(frame)),
         content_type="text/html"
     )
 
@@ -261,24 +234,18 @@ def build_app(args):
         "/css/",
         pkg_resources.resource_filename("bluemonday78", "static/css")
     )
-    app.session = {
-        "metadata": {"area": "balcony"},
-        "frames": deque([])
-    }
+    app.ensemble = list(bluemonday78.story.associations().ensemble())
+    app.folders = bluemonday78.story.folders()
     return app
 
 
 def main(args):
     app = build_app(args)
     # TODO: Move to game screen. Create player.
-    app.ensemble = list(bluemonday78.story.associations().ensemble())
     app.ensemble.append(bluemonday78.types.Player(
         name="Mr William Billy McCarthy",
     ).set_state(bluemonday78.types.Spot.w12_ducane_prison))
-    dialogue = Presenter.dialogue(
-        bluemonday78.story.folders(),
-        app.ensemble
-    )
+    dialogue = Presenter.dialogue(app.folders, app.ensemble)
     app.presenter = Presenter(dialogue)
     return web.run_app(app, host=args.host, port=args.port)
 
