@@ -87,7 +87,10 @@ def find_assets(path):
             if not script_path.parent.is_symlink():
                 arc_name = arc_path.name
                 scripts.add(script_path.relative_to(path))
-        yield Assets(uid, pathways, arc_name, sorted(scripts))
+        yield Assets(
+            uid, frozenset(pathways),
+            arc_name, tuple(sorted(scripts))
+        )
 
 
 def main(args):

@@ -19,11 +19,16 @@
 import collections
 import datetime
 import itertools
+import os.path
+import pathlib
+
+import pkg_resources
 
 from turberfield.dialogue.model import SceneScript
 
 from bluemonday78 import __version__ as version # noqa
 from bluemonday78.associations import Associations
+import bluemonday78.utils.publisher
 from bluemonday78.types import Barman
 from bluemonday78.types import Character
 from bluemonday78.types import Hipster
@@ -91,3 +96,25 @@ curtain = SceneScript.Folder(
     ],
     interludes=None
 )
+
+path = pathlib.Path(
+    pkg_resources.resource_filename(
+        "bluemonday78", "dialogue"
+    )
+)
+folders = [
+    SceneScript.Folder(
+        pkg="bluemonday78",
+        description="Arc: '{0}'".format(asset.arc.capitalize()),
+        metadata={
+            "id": asset.id,
+            "arc": asset.arc,
+            "pathways": asset.pathways
+        },
+        paths=[os.path.join(path.name, i) for i in asset.scripts],
+        interludes=None
+    )
+    for asset in
+    bluemonday78.utils.publisher.find_assets(path)
+]
+print(folders)
