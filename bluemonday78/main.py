@@ -38,105 +38,13 @@ import bluemonday78.story
 from bluemonday78.types import Location
 
 
-class Presentation:
-
-    Element = namedtuple(
-        "Element",
-        ["source", "dialogue", "shot", "offset", "duration"]
-    )
-
-    @staticmethod
-    def build_frames(source, seq, dwell, pause):
-        """Generate a new Frame on each Shot and FX item"""
-        shot = None
-        frame = []
-        offset = 0
-        for item in seq:
-            if isinstance(item, (Model.Audio, Model.Shot)):
-                if frame and shot and shot != item:
-                    yield frame
-                    frame = []
-                    offset = 0
-
-                if isinstance(item, Model.Shot):
-                    shot = item
-                else:
-                    frame.append(Presentation.Element(
-                        source, item, shot,
-                        item.offset / 1000,
-                        item.duration / 1000
-                    ))
-
-            elif isinstance(item, Model.Line):
-                durn = pause + dwell * item.text.count(" ")
-                frame.append(Presentation.Element(
-                    source, item, shot, offset, durn
-                ))
-                offset += durn
-            elif not isinstance(item, Model.Condition):
-                frame.append(Presentation.Element(
-                    source, item, shot, offset, 0
-                ))
-        else:
-            if any(
-                isinstance(
-                    i.dialogue, (Model.Audio, Model.Line)
-                )
-                for i in frame
-            ):
-                yield frame
-
-    @staticmethod
-    def next_frame(session, entities, dwell=0.3, pause=1):
-        while not session["frames"]:
-            location = session["state"].area
-            matcher = PathwayMatcher(self.folders)
-            folders = list(matcher.options(session["metadata"]))
-            performer = Performer(folders, entities)
-            folder, index, script, selection, interlude = performer.next(
-                folders, entities
-            )
-            scene = performer.run(react=False)
-            frames = list(Presentation.build_frames(
-                folder.paths[index], scene,
-                dwell=dwell, pause=pause
-            ))
-            session["frames"].extend(frames)
-
-        return session["frames"].popleft()
-
-    @staticmethod
-    def react(session, frame):
-        for element in frame:
-            event = element.dialogue
-            if (
-                isinstance(event, Model.Property) and
-                event.object is not None
-            ):
-                setattr(event.object, event.attr, event.val)
-
-            yield element
-
-    @staticmethod
-    def refresh(frame, min_val=8):
-        try:
-            return max(
-                [min_val] +
-                [i.offset + i.duration for i in frame if i.duration]
-            )
-        except ValueError:
-            return None
-
-
 async def get_frame(request):
     ensemble = request.app.ensemble
     folders = request.app.folders
     if not request.app.presenter.pending:
         dialogue = Presenter.dialogue(folders, ensemble)
         request.app.presenter = Presenter(dialogue)
-    #location = session["state"].area
     frame = request.app.presenter.frame()
-    #elements = list(Presentation.react(session, frame))
     return web.Response(
         text = bluemonday78.render.body_html(
             #refresh=math.ceil(Presentation.refresh(frame))
