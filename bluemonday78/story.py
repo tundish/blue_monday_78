@@ -73,30 +73,6 @@ def associations():
 
 references = list(associations().ensemble())
 
-
-curtain = SceneScript.Folder(
-    pkg="bluemonday78",
-    description="It's Ray Farington's last day.",
-    metadata={
-        "area": "w12_ducane",
-        # "progress": 0,
-        # "timestamp": blue_monday,
-        "zone": "prison"
-    },
-    paths=[
-        "dialogue/w12_ducane/prison/step_forward.rst",
-        "dialogue/w12_ducane/prison/getting_here.rst",
-        "dialogue/w12_ducane/prison/hows_work.rst",
-        "dialogue/w12_ducane/prison/these_keys.rst",
-        "dialogue/w12_ducane/prison/pocket_fax.rst",
-        "dialogue/w12_ducane/prison/admin.rst",
-        "dialogue/w12_ducane/prison/frankly.rst",
-        "dialogue/w12_ducane/prison/transfer.rst",
-        "dialogue/w12_ducane/prison/escape.rst",
-    ],
-    interludes=None
-)
-
 path = pathlib.Path(
     pkg_resources.resource_filename(
         "bluemonday78", "dialogue"

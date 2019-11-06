@@ -17,7 +17,6 @@
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
 from collections.abc import Callable
-import copy
 import sys
 import unittest
 
@@ -38,23 +37,23 @@ class SequenceTests(unittest.TestCase):
     def setUpClass(cls):
         cls.asscns = bluemonday78.story.associations()
         cls.ensemble = cls.asscns.ensemble()
-        cls.dialogue = [copy.deepcopy(bluemonday78.story.curtain)]
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
         }
-        cls.performer = Performer(cls.dialogue, cls.ensemble)
+        cls.performer = Performer(bluemonday78.story.folders, cls.ensemble)
 
     def setUp(self):
         self.assertEqual(16, len(self.ensemble))
         (self.folder, self.index, self.script, self.selection,
          self.interlude) = self.performer.next(
-            self.dialogue, self.ensemble, strict=True, roles=1
+            bluemonday78.story.folders, self.ensemble, strict=True, roles=1
         )
 
     def tearDown(self):
         if isinstance(self.interlude, Callable):
             metadata = self.interlude(
-                self.folder, self.index, self.ensemble, self.dialogue
+                self.folder, self.index,
+                self.ensemble, bluemonday78.story.folders
             )
             self.assertIn(metadata, (None, self.folder.metadata))
 
