@@ -1,5 +1,6 @@
 include LICENSE
 recursive-include . *.cfg
 recursive-include . *.cli
+recursive-include . *.hex
+recursive-include . *.mp3
 recursive-include . *.rst
-recursive-include . *.wav

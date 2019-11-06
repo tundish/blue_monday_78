@@ -18,21 +18,14 @@
 
 import unittest
 
-from turberfield.dialogue.matcher import Matcher
 from turberfield.dialogue.model import SceneScript
 
-class LocationMatcher(Matcher):
+from bluemonday78.matcher import PathwayMatcher
 
-    def options(self, data):
-        arc = data.get("arc", None)
-        yield from (
-            i for i in self.folders
-            if arc is not None and i.metadata.get("arc") == arc
-        )
 
-class MetadataTests(unittest.TestCase):
+class MatcherTests(unittest.TestCase):
 
-    def test_change_location(self):
+    def test_match_by_arc(self):
         folders = [
             SceneScript.Folder(
                 pkg=None,
@@ -62,7 +55,7 @@ class MetadataTests(unittest.TestCase):
                 },
             ]
         ]
-        matcher = LocationMatcher(folders)
+        matcher = PathwayMatcher(folders)
 
         rv = list(matcher.options({"arc": "a_11"}))
         self.assertEqual(1, len(rv), rv)

@@ -18,7 +18,7 @@ Main focus:
 * Introduce graphical elements
 * Introduce music
 
-Intention is to size a folder to the scale of a single plot point.
+Intention is to size a folder to the scale of a story arc.
 Organise dialogue folders within directories according to location.
 Share folders across directories using symlinks.
 
