@@ -18,8 +18,11 @@
 
 import argparse
 from collections import defaultdict
+from collections import namedtuple
 import glob
+import os.path
 import pathlib
+import pprint
 import sys
 import uuid
 
@@ -28,6 +31,8 @@ Generate Python code to describe SceneScript folders from a directory
 structure.
 
 """
+
+Assets = namedtuple("Assets", ["id", "pathways", "arc", "scripts"])
 
 FOLDERS_HEADER = """
 
@@ -54,8 +59,8 @@ FOLDERS_TEMPLATE = """
     ),
 """
 
-def find_locations(path):
-    for id_location in glob.glob("**/uuid.hex", recursive=True):
+def find_scripts(path):
+    for id_location in glob.glob(os.path.join(path, "**/uuid.hex"), recursive=True):
         try:
             id_path = pathlib.Path(id_location)
             uid = uuid.UUID(hex=id_path.read_text().strip())
@@ -66,22 +71,29 @@ def find_locations(path):
             for script_path in sorted(id_path.parent.glob("*.rst")):
                 yield uid, script_path
 
-def format_folder(uid, path, entries):
-    metadata = {"uid": uid.hex, "path": path}
-    locations = {}
-    primaries = [i for i in entries if not i.is_symlink()]
-    return (metadata, primaries)
+
+def find_assets(path):
+    locations = defaultdict(list)
+    for uid, script_path in find_scripts(path):
+        locations[uid].append(script_path)
+
+    for uid, script_paths in locations.items():
+        arc_name = None
+        pathways = set()
+        scripts = set()
+        for script_path in script_paths:
+            arc_path = script_path.parent
+            pathways.add(arc_path.parent.relative_to(path).parts)
+            if not script_path.parent.is_symlink():
+                arc_name = arc_path.name
+                scripts.add(script_path.relative_to(path))
+        yield Assets(uid, pathways, arc_name, sorted(scripts))
+
 
 def main(args):
-    for path in args.paths:
-        folders = defaultdict(list)
-        locations = set()
-        for uid, script_path in find_locations(path):
-            locations.add(script_path.parent.parent.relative_to(path).parts)
-            if not script_path.parent.is_symlink():
-                folders[uid].append(script_path.relative_to(path))
-        print(folders)
-        print(locations)
+    assets = [i for path in args.paths for i in find_assets(path)]
+    pprint.pprint(assets)
+
 
 def parser(description=__doc__):
     rv = argparse.ArgumentParser(
