@@ -29,6 +29,14 @@ import uuid
 __doc__ = """
 Identify assets related to SceneScript folders.
 
+NB: In order to reference a story arc from a different pathway, do `ln -s`, eg::
+
+    ln -rs -t bluemonday78/dialogue/w12_ducane/prison_wing \
+    bluemonday78/dialogue/w12_ducane/prison_office/release
+
+This creates a relative soft link in `prison_wing` which will point to
+`prison_office/release`.
+
 """
 
 Assets = namedtuple("Assets", ["id", "pathways", "arc", "scripts"])

@@ -39,7 +39,6 @@ setup(
     packages=["bluemonday78", "bluemonday78.test"],
     package_data={
         "bluemonday78": [
-            "dialogue/*/*/*.rst",
             "dialogue/*/*/*/*.rst",
         ]
     },

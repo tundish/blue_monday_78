@@ -276,7 +276,7 @@ def main(args):
     app.ensemble = list(bluemonday78.story.associations().ensemble())
     # TODO: Move to game screen. Create player.
     dialogue = Presenter.dialogue(
-        [bluemonday78.story.curtain],
+        bluemonday78.story.folders,
         app.ensemble
     )
     app.presenter = Presenter(dialogue)
