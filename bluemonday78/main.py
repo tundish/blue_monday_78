@@ -24,6 +24,7 @@ import functools
 import math
 import random
 import sys
+import uuid
 
 from aiohttp import web
 import pkg_resources
@@ -38,13 +39,18 @@ import bluemonday78.story
 from bluemonday78.types import Location
 
 
+async def get_demo(request):
+    player = next(iter(request.app.sessions.values())).ensemble[-1]
+    raise web.HTTPFound("/{0.id.hex}".format(player))
+
 async def get_frame(request):
-    ensemble = request.app.ensemble
+    uid = uuid.UUID(hex=request.match_info["session"])
+    presenter = request.app.sessions[uid]
     folders = request.app.folders
-    if not request.app.presenter.pending:
-        dialogue = Presenter.dialogue(folders, ensemble)
-        request.app.presenter = Presenter(dialogue)
-    frame = request.app.presenter.frame()
+    if not presenter.pending:
+        dialogue = Presenter.dialogue(folders, presenter.ensemble)
+        request.app.sessions[uid] = Presenter(dialogue, presenter.ensemble)
+    frame = presenter.frame()
     return web.Response(
         text = bluemonday78.render.body_html(
             #refresh=math.ceil(Presentation.refresh(frame))
@@ -132,7 +138,13 @@ async def post_hop(request):
 def build_app(args):
     app = web.Application()
     app.add_routes([
-        web.get("/", get_frame),
+        web.get("/demo", get_demo),
+        web.get(
+            "/{{session:{0}}}".format(
+                Presenter.validation["session"].pattern
+            ),
+            get_frame
+        ),
         web.get("/map", get_map),
         #web.post("/buy/{{buy:{0}}}".format(bluemonday78.rules.choice_validabluemonday78.pattern), post_buy),
         #web.post("/cut/{{cut:{0}}}".format(bluemonday78.rules.choice_validabluemonday78.pattern), post_cut),
@@ -142,7 +154,7 @@ def build_app(args):
         "/css/",
         pkg_resources.resource_filename("bluemonday78", "static/css")
     )
-    app.ensemble = list(bluemonday78.story.associations().ensemble())
+    app.sessions = {}
     app.folders = bluemonday78.story.folders()
     return app
 
@@ -150,11 +162,13 @@ def build_app(args):
 def main(args):
     app = build_app(args)
     # TODO: Move to game screen. Create player.
-    app.ensemble.append(bluemonday78.types.Player(
+    player = bluemonday78.types.Player(
         name="Mr William Billy McCarthy",
-    ).set_state(bluemonday78.types.Spot.w12_ducane_prison))
-    dialogue = Presenter.dialogue(app.folders, app.ensemble)
-    app.presenter = Presenter(dialogue)
+    ).set_state(bluemonday78.types.Spot.w12_ducane_prison)
+    ensemble = list(bluemonday78.story.associations().ensemble())
+    ensemble.append(player)
+    dialogue = Presenter.dialogue(app.folders, ensemble)
+    app.sessions[player.id] = Presenter(dialogue, ensemble)
     return web.run_app(app, host=args.host, port=args.port)
 
 def parser(description=__doc__):

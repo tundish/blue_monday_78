@@ -22,6 +22,7 @@ import unittest
 
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.performer import Performer
+from turberfield.dialogue.types import Player
 from turberfield.utils.misc import group_by_type
 
 import bluemonday78.story
@@ -36,7 +37,10 @@ class SequenceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.asscns = bluemonday78.story.associations()
-        cls.ensemble = cls.asscns.ensemble()
+        cls.ensemble = list(cls.asscns.ensemble())
+        cls.ensemble.append(
+            Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison_wing)
+        )
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
         }

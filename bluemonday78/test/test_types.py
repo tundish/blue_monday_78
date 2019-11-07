@@ -19,10 +19,16 @@
 import unittest
 
 from bluemonday78.types import Keys
+from bluemonday78.types import Player
 
 
-class ObjectiveTests(unittest.TestCase):
+class CreationTests(unittest.TestCase):
 
     def test_keys(self):
         state = Keys.factory(name="waiting")
         self.assertEqual(Keys.waiting, state)
+
+    def test_player(self):
+        player = Player(name="Test")
+        self.assertTrue(hasattr(player, "id"))
+        self.assertTrue(hasattr(player, "name"))

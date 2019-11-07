@@ -50,7 +50,6 @@ def associations():
             i.set_state(int(blue_monday.strftime("%Y%m%d0800")))
             for i in (
                 Narrator().set_state(Spot.w12_ducane_prison_visiting),
-                Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison_wing),
                 Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
                 Hipster(name="Mr Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
                 PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_wing),

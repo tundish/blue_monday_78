@@ -17,6 +17,7 @@
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
 from collections import namedtuple
+import re
 
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.model import SceneScript
@@ -27,6 +28,18 @@ from turberfield.utils.misc import group_by_type
 class Presenter:
 
     Animation = namedtuple("Animation", ["delay", "duration", "element"])
+
+    validation = {
+        "email": re.compile(
+            "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]"
+            "+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9]"
+            "(?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+"
+            # http://www.w3.org/TR/html5/forms.html#valid-e-mail-address
+        ),
+        "location": re.compile("[0-9a-f]{32}"),
+        "name": re.compile("[A-Z a-z]{2,42}"),
+        "session": re.compile("[0-9a-f]{32}"),
+    }
 
     @staticmethod
     def animate_lines(seq, dwell, pause):
@@ -57,8 +70,9 @@ class Presenter:
                     elif not strict and any(selection.values()):
                         return dialogue.cast(selection).run()
 
-    def __init__(self, dialogue):
+    def __init__(self, dialogue, ensemble=None):
         self.frames = [group_by_type(i.items) for i in dialogue.shots]
+        self.ensemble = ensemble
 
     @property
     def pending(self) -> int:
