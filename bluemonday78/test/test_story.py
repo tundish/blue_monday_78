@@ -77,9 +77,9 @@ class SequenceTests(unittest.TestCase):
 
         list(self.performer.run())
         self.assertTrue(self.performer.script.fP.endswith("step_forward.rst"))
-        self.assertEqual(1, len(self.performer.shots))
+        self.assertEqual(3, len(self.performer.shots))
         self.assertEqual(
-            "ray is on the landing",
+            "ray joins them on the balcony",
             self.performer.shots[-1].name
         )
 
@@ -112,7 +112,7 @@ class SequenceTests(unittest.TestCase):
         )
         list(self.performer.run())
         self.assertTrue(self.performer.script.fP.endswith("getting_here.rst"))
-        self.assertEqual(2, len(self.performer.shots))
+        self.assertEqual(4, len(self.performer.shots))
         self.assertEqual(
             "in the visiting suite",
             self.performer.shots[-1].scene
@@ -132,7 +132,7 @@ class SequenceTests(unittest.TestCase):
 
         list(self.performer.run())
         self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"))
-        self.assertEqual(3, len(self.performer.shots))
+        self.assertEqual(5, len(self.performer.shots))
         self.assertEqual(
             "in the visiting suite",
             self.performer.shots[-1].scene
@@ -145,7 +145,7 @@ class SequenceTests(unittest.TestCase):
 
         list(self.performer.run())
         self.assertTrue(self.performer.script.fP.endswith("these_keys.rst"))
-        self.assertEqual(4, len(self.performer.shots))
+        self.assertEqual(6, len(self.performer.shots))
         self.assertEqual(
             "in the visiting suite",
             self.performer.shots[-1].scene

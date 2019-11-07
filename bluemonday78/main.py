@@ -54,88 +54,42 @@ async def get_frame(request):
         dialogue = Presenter.dialogue(folders, presenter.ensemble)
         request.app.sessions[uid] = Presenter(dialogue, presenter.ensemble)
     frame = presenter.frame()
+    pending = presenter.pending
     return web.Response(
         text = bluemonday78.render.body_html(
-            refresh=Presenter.refresh_animations(frame) if presenter.pending else None,
-        ).format(bluemonday78.render.frame_to_html(frame)),
+            refresh=Presenter.refresh_animations(frame) if pending else None,
+        ).format(bluemonday78.render.frame_to_html(
+            frame, presenter.ensemble if not pending else []
+        )),
         content_type="text/html"
     )
 
 
 async def get_map(request):
-    presenter = request.app.presenter
-    ensemble = request.app.ensemble
-    frame = presenter.frame()
+    uid = uuid.UUID(hex=request.match_info["session"])
+    try:
+        presenter = request.app.sessions[uid]
+    except KeyError:
+        raise web.HTTPUnauthorized(reason="Session {0!s} not found.".format(uid))
     return web.Response(
         text = bluemonday78.render.body_html(
             refresh=None
-        ).format(bluemonday78.render.ensemble_to_html(
-            [i for i in ensemble if isinstance(i, Location)])
-        ),
+        ).format(bluemonday78.render.ensemble_to_html(presenter.ensemble)),
         content_type="text/html"
     )
 
 
-async def post_buy(request):
-    buy = request.match_info["buy"]
-    if not bluemonday78.rules.choice_validabluemonday78.match(buy):
-        raise web.HTTPUnauthorized(reason="User sent invalid buy code.")
-    else:
-        session = request.app.session
-        session["frames"].clear()
-        rv = bluemonday78.rules.apply_rules(
-            None, None, None, bluemonday78.rules.Settings, session["state"], buy=int(buy)
-        )
-        session["state"] = bluemonday78.rules.State(**rv)
-        raise web.HTTPFound("/")
-
-
-async def post_cut(request):
-    cut = request.match_info["cut"]
-    if not bluemonday78.rules.choice_validabluemonday78.match(cut):
-        raise web.HTTPUnauthorized(reason="User sent invalid cut code.")
-    else:
-        session = request.app.session
-        session["frames"].clear()
-        cut_d = {
-            0: -bluemonday78.rules.Settings.CUT_D,
-            1: 0,
-            2: bluemonday78.rules.Settings.CUT_D,
-        }.get(int(cut), bluemonday78.rules.Settings.CUT_D)
-
-        rv = bluemonday78.rules.apply_rules(
-            None, None, None, bluemonday78.rules.Settings, session["state"], cut=cut_d
-        )
-        session["state"] = bluemonday78.rules.State(**rv)
-        raise web.HTTPFound("/")
-
-
 async def post_hop(request):
-    hop = request.match_info["hop"]
-    if not bluemonday78.rules.choice_validabluemonday78.match(hop):
-        raise web.HTTPUnauthorized(reason="User sent invalid hop.")
-    else:
-        index = int(hop)
-        session = request.app.session
-        location = session["state"].area
-        destination = bluemonday78.rules.topology[location][index]
-        session["metadata"]["area"] = destination
-        session["state"] = session["state"]._replace(area=destination)
-        session["frames"].clear()
-        if destination not in ("butcher", "chamber"):
-            rv = bluemonday78.rules.apply_rules(
-                None, None, None, bluemonday78.rules.Settings, session["state"]
-            )
-            if not rv:
-                print("Game Over", file=sys.stderr)
-                rapunzel = next(
-                    i for i in bluemonday78.sbluemonday78y.ensemble
-                    if isinstance(i, Rapunzel)
-                )
-                rapunzel.set_state(At.club)
-            else:
-                session["state"] = bluemonday78.rules.State(**rv)
-        raise web.HTTPFound("/")
+    uid = uuid.UUID(hex=request.match_info["session"])
+    try:
+        presenter = request.app.sessions[uid]
+    except KeyError:
+        raise web.HTTPUnauthorized(reason="Session {0!s} not found.".format(uid))
+    data = await request.post()
+    location_id = uuid.UUID(hex=data["location_id"])
+    location = next(i for i in presenter.ensemble if getattr(i, "id", None) == location_id)
+    print(location)
+    raise web.HTTPFound("/{0.hex}".format(uid))
 
 
 def build_app(args):
@@ -148,7 +102,18 @@ def build_app(args):
             ),
             get_frame
         ),
-        web.get("/map", get_map),
+        web.get(
+            "/{{session:{0}}}/map".format(
+                Presenter.validation["session"].pattern
+            ),
+            get_map
+        ),
+        web.post(
+            "/{{session:{0}}}/hop".format(
+                Presenter.validation["session"].pattern,
+            ),
+            post_hop
+        ),
         #web.post("/buy/{{buy:{0}}}".format(bluemonday78.rules.choice_validabluemonday78.pattern), post_buy),
         #web.post("/cut/{{cut:{0}}}".format(bluemonday78.rules.choice_validabluemonday78.pattern), post_cut),
         #web.post("/hop/{{hop:{0}}}".format(bluemonday78.rules.choice_validabluemonday78.pattern), post_hop),

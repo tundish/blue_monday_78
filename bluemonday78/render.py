@@ -19,6 +19,8 @@
 import functools
 from turberfield.dialogue.model import Model
 from bluemonday78.types import Location
+from bluemonday78.types import Persona
+from bluemonday78.types import Spot
 
 """
 http://css3.bradshawenterprises.com/cfimg/
@@ -66,17 +68,20 @@ def audio_to_html(elem):
 
 def location_to_html(locn, path="/"):
     return f"""
-<form role="form" action="{path}{locn.id.hex}" method="post" name="id" >
+<form role="form" action="{path}hop" method="post" name="{locn.id.hex}" >
+    <input id="hop-{locn.id.hex}" name="location_id" type="hidden" value="{locn.id.hex}" />
     <button type="submit">{locn.label}</button>
 </form>"""
 
+
 def ensemble_to_html(ensemble):
+    player = ensemble[-1]
     items = "\n".join(
         "<li>{0.label}</li>".format(i) for i in ensemble
-        if not isinstance(i, Location)
+        if not isinstance(i, (Location, Persona)) and hasattr(i, "label")
     )
     moves = "\n".join(
-        "<li>{0}</li>".format(location_to_html(i))
+        "<li>{0}</li>".format(location_to_html(i, path="/{0.id.hex}/".format(player)))
         for i in ensemble
         if isinstance(i, Location)
     )
@@ -93,13 +98,13 @@ def ensemble_to_html(ensemble):
 {moves}
 </ul>
 </nav>
-<section class="grid-state>
+<section class="grid-state">
 </section>"""
 
 
 def frame_to_html(frame, ensemble=[]):
     player = ensemble[-1] if ensemble else None
-    location = player.get_state(Spot) if player else None
+    spot = player.get_state(Spot) if player else None
     dialogue = "\n".join(animated_line_to_html(i) for i in frame[Model.Line])
     stills = "\n".join(animated_still_to_html(i) for i in frame[Model.Still])
     audio = "\n".join(audio_to_html(i) for i in frame[Model.Audio])
@@ -108,13 +113,14 @@ def frame_to_html(frame, ensemble=[]):
 {stills}
 </aside>
 <main class="grid-study">
-{'<h1>{0}</h1>'.format(location) if location is not None else ''}
+{'<h1>{0}</h1>'.format(spot.name.capitalize()) if spot is not None else ''}
 {audio}
 <ul class="mod-dialogue">
 {dialogue}
 </ul>
 </main>
 <nav class="grid-focus">
+{'<a href="/{0.id.hex}/map">Go</a>'.format(player) if player is not None else ''}
 </nav>
 <section class="grid-state">
 </section>"""
