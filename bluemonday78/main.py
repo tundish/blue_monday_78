@@ -45,7 +45,11 @@ async def get_demo(request):
 
 async def get_frame(request):
     uid = uuid.UUID(hex=request.match_info["session"])
-    presenter = request.app.sessions[uid]
+    try:
+        presenter = request.app.sessions[uid]
+    except KeyError:
+        raise web.HTTPUnauthorized(reason="Session {0!s} not found.".format(uid))
+
     folders = request.app.folders
     if not presenter.pending:
         dialogue = Presenter.dialogue(folders, presenter.ensemble)
@@ -68,8 +72,9 @@ async def get_map(request):
         text = bluemonday78.render.body_html(
             #refresh=math.ceil(Presentation.refresh(frame))
             refresh=None
-        #).format(bluemonday78.render.frame_to_html(frame)),
-        ).format(bluemonday78.render.ensemble_to_html([i for i in ensemble if isinstance(i, Location)])),
+        ).format(bluemonday78.render.ensemble_to_html(
+            [i for i in ensemble if isinstance(i, Location)])
+        ),
         content_type="text/html"
     )
 
