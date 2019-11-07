@@ -53,7 +53,13 @@ async def get_frame(request):
     if not presenter.pending:
         dialogue = Presenter.dialogue(folders, presenter.ensemble)
         request.app.sessions[uid] = Presenter(dialogue, presenter.ensemble)
-    frame = presenter.frame()
+
+    try:
+        frame = presenter.frame()
+    except IndexError:
+        print("Presenter has no more frames", file=sys.stderr)
+        raise web.HTTPFound("/{0.hex}/map".format(uid))
+
     pending = presenter.pending
     return web.Response(
         text = bluemonday78.render.body_html(
@@ -88,7 +94,13 @@ async def post_hop(request):
     data = await request.post()
     location_id = uuid.UUID(hex=data["location_id"])
     location = next(i for i in presenter.ensemble if getattr(i, "id", None) == location_id)
-    print(location)
+    matcher = PathwayMatcher(request.app.folders)
+    folders = list(matcher.options(
+        {"pathways": set([("w12_latimer", "lockup")])}
+    ))
+    print(folders)
+    #dialogue = Presenter.dialogue(request.app.folders, presenter.ensemble)
+    #app.sessions[player.id] = Presenter(dialogue, presenter.ensemble)
     raise web.HTTPFound("/{0.hex}".format(uid))
 
 
