@@ -60,6 +60,9 @@ Ray is on the landing
 
     Good luck on the outside.
 
+Ray enters
+----------
+
 [OFFICER]_
 
     Prisoner |HERO_SURNAME| step forward. Prisoner |CELLMATE_SURNAME| step forward.
@@ -93,6 +96,9 @@ Ray is on the landing
 
     |CELLMATE_SURNAME| and |HERO_SURNAME| step out of the cell onto the narrow
     balcony.
+
+Ray joins them on the balcony
+-----------------------------
 
 [OFFICER]_
 

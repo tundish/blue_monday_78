@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
+import math
 from collections import namedtuple
 import re
 
@@ -57,6 +58,17 @@ class Presenter:
             Presenter.Animation(still.offset / 1000, still.duration / 1000, still)
             for still in seq
         )
+
+    @staticmethod
+    def refresh_animations(frame, min_val=8):
+        rv = min_val
+        for typ in (Model.Line, Model.Still, Model.Audio):
+            try:
+                last_anim = frame[typ][-1]
+                rv = max(rv, math.ceil(last_anim.delay + last_anim.duration))
+            except IndexError:
+                continue
+        return rv
 
     @staticmethod
     def dialogue(folders, ensemble, strict=True, roles=1):

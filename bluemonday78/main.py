@@ -21,7 +21,6 @@ import asyncio
 from collections import deque
 from collections import namedtuple
 import functools
-import math
 import random
 import sys
 import uuid
@@ -57,8 +56,7 @@ async def get_frame(request):
     frame = presenter.frame()
     return web.Response(
         text = bluemonday78.render.body_html(
-            #refresh=math.ceil(Presentation.refresh(frame))
-            refresh=None
+            refresh=Presenter.refresh_animations(frame) if presenter.pending else None,
         ).format(bluemonday78.render.frame_to_html(frame)),
         content_type="text/html"
     )
@@ -70,13 +68,13 @@ async def get_map(request):
     frame = presenter.frame()
     return web.Response(
         text = bluemonday78.render.body_html(
-            #refresh=math.ceil(Presentation.refresh(frame))
             refresh=None
         ).format(bluemonday78.render.ensemble_to_html(
             [i for i in ensemble if isinstance(i, Location)])
         ),
         content_type="text/html"
     )
+
 
 async def post_buy(request):
     buy = request.match_info["buy"]
