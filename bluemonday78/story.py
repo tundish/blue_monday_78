@@ -99,16 +99,19 @@ def entity_states(folder):
             for entity in entities:
                 yield from entity["options"].get("states", [])
 
-def decorate_folder(folder, min_t, max_t):
+def parse_timespan(text):
     formats = {
         8: ("%Y%m%d", datetime.timedelta(days=1)),
         10: ("%Y%m%d%H", datetime.timedelta(hours=1)),
         12: ("%Y%m%d%H%M", datetime.timedelta(minutes=1)),
         14: ("%Y%m%d%H%M%S", datetime.timedelta(seconds=1)),
     }
+    format_string, span = formats[len(text)]
+    return datetime.datetime.strptime(text, format_string), span
+
+def decorate_folder(folder, min_t, max_t):
     for entity_state in (i for i in entity_states(folder) if i.isdigit()):
-        format_string, span = formats[len(entity_state)]
-        t = datetime.datetime.strptime(entity_state, format_string)
+        t, span = parse_timespan(entity_state)
         min_t = min(min_t, t) if min_t is not None else t
         max_t = max(max_t, t + span) if max_t is not None else t + span
     folder.metadata["min_t"] = min_t
