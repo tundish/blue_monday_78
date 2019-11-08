@@ -43,6 +43,7 @@ async def get_demo(request):
     player = next(iter(request.app.sessions.values())).ensemble[-1]
     raise web.HTTPFound("/{0.id.hex}".format(player))
 
+
 async def get_frame(request):
     uid = uuid.UUID(hex=request.match_info["session"])
     try:
@@ -97,12 +98,10 @@ async def post_hop(request):
     location = next(i for i in presenter.ensemble if getattr(i, "id", None) == location_id)
     pathway = location.get_state(Spot).value
     matcher = PathwayMatcher(request.app.folders)
-    folders = list(matcher.options(
-        {"pathways": set([pathway])}
-    ))
-    print(folders)
-    #dialogue = Presenter.dialogue(request.app.folders, presenter.ensemble)
-    #app.sessions[player.id] = Presenter(dialogue, presenter.ensemble)
+    folders = list(matcher.options({"pathways": set([pathway])}))
+    dialogue = Presenter.dialogue(folders, presenter.ensemble)
+    if dialogue is not None:
+        request.app.sessions[uid] = Presenter(dialogue, presenter.ensemble)
     raise web.HTTPFound("/{0.hex}".format(uid))
 
 
@@ -128,9 +127,6 @@ def build_app(args):
             ),
             post_hop
         ),
-        #web.post("/buy/{{buy:{0}}}".format(bluemonday78.rules.choice_validabluemonday78.pattern), post_buy),
-        #web.post("/cut/{{cut:{0}}}".format(bluemonday78.rules.choice_validabluemonday78.pattern), post_cut),
-        #web.post("/hop/{{hop:{0}}}".format(bluemonday78.rules.choice_validabluemonday78.pattern), post_hop),
     ])
     app.router.add_static(
         "/css/",

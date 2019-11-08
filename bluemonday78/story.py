@@ -66,7 +66,6 @@ def associations():
         ),
         NoteBook(),
         Location(label="Addison Arches 18A").set_state(Spot.w12_latimer_arches),
-        #Location(label="Wormwood Scrubs").set_state(Spot.w12_ducane_prison),
         Location(label="Wormwood Scrubs visiting").set_state(Spot.w12_ducane_prison_visiting),
         Location(label="Wormwood Scrubs reception").set_state(Spot.w12_ducane_prison_release),
         Location(label="Wormwood Scrubs prison wing").set_state(Spot.w12_ducane_prison_wing),
