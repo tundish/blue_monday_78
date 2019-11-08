@@ -74,7 +74,7 @@ def associations():
     return rv
 
 
-def generate_folders(pkg="bluemonday78", path="dialogue"):
+def generate_folders(pkg, path):
     root_path = pathlib.Path(pkg_resources.resource_filename(pkg, path))
     yield from (
         SceneScript.Folder(
@@ -99,7 +99,7 @@ def entity_states(folder):
             for entity in entities:
                 yield from entity["options"].get("states", [])
 
-def decorate_folder(folder, min_t=None, max_t=None):
+def decorate_folder(folder, min_t, max_t):
     formats = {
         8: ("%Y%m%d", datetime.timedelta(days=1)),
         10: ("%Y%m%d%H", datetime.timedelta(hours=1)),
@@ -115,9 +115,12 @@ def decorate_folder(folder, min_t=None, max_t=None):
     folder.metadata["max_t"] = max_t
     return folder
 
+def prepare_folders(pkg="bluemonday78", path="dialogue", min_t=None, max_t=None):
+    return [decorate_folder(f, min_t, max_t) for f in generate_folders(pkg, path)]
+
 if __name__ == "__main__":
     then = time.perf_counter()
-    results = [decorate_folder(f) for f in generate_folders()]
+    results = prepare_folders()
     print(*results, sep="\n", file=sys.stdout)
     now = time.perf_counter()
     print("Processed {0} folders in {1:.3f}s.".format(len(results), now - then), file=sys.stderr)

@@ -137,7 +137,7 @@ def build_app(args):
         pkg_resources.resource_filename("bluemonday78", "static/css")
     )
     app.sessions = {}
-    app.folders = bluemonday78.story.folders()
+    app.folders = bluemonday78.story.prepare_folders()
     return app
 
 

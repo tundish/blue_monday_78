@@ -45,7 +45,7 @@ class SequenceTests(unittest.TestCase):
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
         }
         cls.performer = Performer(
-            list(bluemonday78.story.generate_folders()),
+            list(bluemonday78.story.prepare_folders()),
             cls.ensemble
         )
 
