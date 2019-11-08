@@ -100,9 +100,15 @@ def entity_states(folder):
                 yield from entity["options"].get("states", [])
 
 def decorate_folder(folder, min_t=None, max_t=None):
-    formats = {8: "%Y%m%d", 10: "%Y%m%d%H", 12: "%Y%m%d%H%M", 14: "%Y%m%d%H%M%S"}
+    formats = {
+        8: ("%Y%m%d", datetime.timedelta(0)),
+        10: ("%Y%m%d%H", datetime.timedelta(0)),
+        12: ("%Y%m%d%H%M", datetime.timedelta(0)),
+        14: ("%Y%m%d%H%M%S", datetime.timedelta(0)),
+    }
     for entity_state in (i for i in entity_states(folder) if i.isdigit()):
-        t = datetime.datetime.strptime(entity_state, formats[len(entity_state)])
+        format_string, span = formats[len(entity_state)]
+        t = datetime.datetime.strptime(entity_state, format_string)
         print(entity_state, t)
         min_t = min(min_t, t) if min_t is not None else t
         max_t = max(max_t, t) if max_t is not None else t
