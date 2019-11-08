@@ -27,6 +27,8 @@ import sys
 import pkg_resources
 
 from turberfield.dialogue.model import SceneScript
+from turberfield.dialogue.directives import Entity
+from turberfield.utils.misc import group_by_type
 
 from bluemonday78 import __version__ as version # noqa
 from bluemonday78.associations import Associations
@@ -90,7 +92,22 @@ def generate_folders(pkg="bluemonday78", path="dialogue"):
         bluemonday78.utils.publisher.find_assets(root_path)
     )
 
-def decorate_folder(folder):
+def entity_states(folder):
+    for script in SceneScript.scripts(**folder._asdict()):
+        with script as dialogue:
+            entities = group_by_type(dialogue.doc)[Entity.Declaration]
+            for entity in entities:
+                yield from entity["options"].get("states", [])
+
+def decorate_folder(folder, min_t=None, max_t=None):
+    formats = {8: "%Y%m%d", 10: "%Y%m%d%H", 12: "%Y%m%d%H%M", 14: "%Y%m%d%H%M%S"}
+    for entity_state in (i for i in entity_states(folder) if i.isdigit()):
+        t = datetime.datetime.strptime(entity_state, formats[len(entity_state)])
+        print(entity_state, t)
+        min_t = min(min_t, t) if min_t is not None else t
+        max_t = max(max_t, t) if max_t is not None else t
+    folder.metadata["min_t"] = min_t
+    folder.metadata["max_t"] = max_t
     return folder
 
 if __name__ == "__main__":
