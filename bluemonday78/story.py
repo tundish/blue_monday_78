@@ -101,17 +101,16 @@ def entity_states(folder):
 
 def decorate_folder(folder, min_t=None, max_t=None):
     formats = {
-        8: ("%Y%m%d", datetime.timedelta(0)),
-        10: ("%Y%m%d%H", datetime.timedelta(0)),
-        12: ("%Y%m%d%H%M", datetime.timedelta(0)),
-        14: ("%Y%m%d%H%M%S", datetime.timedelta(0)),
+        8: ("%Y%m%d", datetime.timedelta(days=1)),
+        10: ("%Y%m%d%H", datetime.timedelta(hours=1)),
+        12: ("%Y%m%d%H%M", datetime.timedelta(minutes=1)),
+        14: ("%Y%m%d%H%M%S", datetime.timedelta(seconds=1)),
     }
     for entity_state in (i for i in entity_states(folder) if i.isdigit()):
         format_string, span = formats[len(entity_state)]
         t = datetime.datetime.strptime(entity_state, format_string)
-        print(entity_state, t)
         min_t = min(min_t, t) if min_t is not None else t
-        max_t = max(max_t, t) if max_t is not None else t
+        max_t = max(max_t, t + span) if max_t is not None else t + span
     folder.metadata["min_t"] = min_t
     folder.metadata["max_t"] = max_t
     return folder
@@ -119,6 +118,6 @@ def decorate_folder(folder, min_t=None, max_t=None):
 if __name__ == "__main__":
     then = time.perf_counter()
     results = [decorate_folder(f) for f in generate_folders()]
-    print(*results, sep="\n")
+    print(*results, sep="\n", file=sys.stdout)
     now = time.perf_counter()
     print("Processed {0} folders in {1:.3f}s.".format(len(results), now - then), file=sys.stderr)
