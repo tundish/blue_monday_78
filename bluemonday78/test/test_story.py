@@ -44,7 +44,10 @@ class SequenceTests(unittest.TestCase):
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
         }
-        cls.performer = Performer(bluemonday78.story.folders(), cls.ensemble)
+        cls.performer = Performer(
+            list(bluemonday78.story.generate_folders()),
+            cls.ensemble
+        )
 
     def setUp(self):
         self.assertEqual(15, len(self.ensemble))

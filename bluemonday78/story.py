@@ -21,6 +21,8 @@ import datetime
 import itertools
 import os.path
 import pathlib
+import time
+import sys
 
 import pkg_resources
 
@@ -70,9 +72,9 @@ def associations():
     return rv
 
 
-def folders(pkg="bluemonday78", path="dialogue"):
+def generate_folders(pkg="bluemonday78", path="dialogue"):
     root_path = pathlib.Path(pkg_resources.resource_filename(pkg, path))
-    return [
+    yield from (
         SceneScript.Folder(
             pkg="bluemonday78",
             description="Story arc: '{0}'".format(asset.arc.capitalize()),
@@ -86,4 +88,14 @@ def folders(pkg="bluemonday78", path="dialogue"):
         )
         for asset in
         bluemonday78.utils.publisher.find_assets(root_path)
-    ]
+    )
+
+def decorate_folder(folder):
+    return folder
+
+if __name__ == "__main__":
+    then = time.perf_counter()
+    results = [decorate_folder(f) for f in generate_folders()]
+    print(*results, sep="\n")
+    now = time.perf_counter()
+    print("Processed {0} folders in {1:.3f}s.".format(len(results), now - then), file=sys.stderr)
