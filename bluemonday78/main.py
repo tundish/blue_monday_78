@@ -36,6 +36,7 @@ from bluemonday78.presenter import Presenter
 import bluemonday78.render
 import bluemonday78.story
 from bluemonday78.types import Location
+from bluemonday78.types import Spot
 
 
 async def get_demo(request):
@@ -94,9 +95,10 @@ async def post_hop(request):
     data = await request.post()
     location_id = uuid.UUID(hex=data["location_id"])
     location = next(i for i in presenter.ensemble if getattr(i, "id", None) == location_id)
+    pathway = location.get_state(Spot).value
     matcher = PathwayMatcher(request.app.folders)
     folders = list(matcher.options(
-        {"pathways": set([("w12_latimer", "lockup")])}
+        {"pathways": set([pathway])}
     ))
     print(folders)
     #dialogue = Presenter.dialogue(request.app.folders, presenter.ensemble)
@@ -144,7 +146,9 @@ def main(args):
     # TODO: Move to game screen. Create player.
     player = bluemonday78.types.Player(
         name="Mr William Billy McCarthy",
-    ).set_state(bluemonday78.types.Spot.w12_ducane_prison)
+    ).set_state(
+        bluemonday78.types.Spot.w12_ducane_prison_wing
+    )
     ensemble = list(bluemonday78.story.associations().ensemble())
     ensemble.append(player)
     dialogue = Presenter.dialogue(app.folders, ensemble)
