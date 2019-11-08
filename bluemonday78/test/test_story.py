@@ -47,7 +47,7 @@ class SequenceTests(unittest.TestCase):
         cls.performer = Performer(bluemonday78.story.folders(), cls.ensemble)
 
     def setUp(self):
-        self.assertEqual(16, len(self.ensemble))
+        self.assertEqual(15, len(self.ensemble))
         (self.folder, self.index, self.script, self.selection,
          self.interlude) = self.performer.next(
             self.performer.folders, self.ensemble, strict=True, roles=1

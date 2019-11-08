@@ -35,13 +35,13 @@ class Objective(EnumFactory, enum.Enum):
 Keys = Objective("Keys", Objective.states(), module=__name__)
 
 class Spot(EnumFactory, enum.Enum):
-    w12_ducane_prison = "gcpv4d"
-    w12_ducane_prison_visiting = "gcpv4d252v5y"
-    w12_ducane_prison_release = "gcpv4d1qmdzb"
-    w12_ducane_prison_wing = "gcpv4d675t07"
+    w12_ducane_prison_release = ("w12_ducane", "prison_office")
+    w12_ducane_prison_visiting = ("w12_ducane", "prison_visiting")
+    w12_ducane_prison_wing = ("w12_ducane", "prison_wing")
     w12_goldhawk_cafe = "gcpufzg2512x"
-    w12_goldhawk_tavern = "gcpufzbd8x5d"
-    w12_latimer_arches = "gcpv4cxb3dh4"
+    w12_goldhawk_tavern = ("w12_latimer", "tavern")
+    w12_latimer_lockup = ("w12_latimer", "lockup")
+    w12_latimer_arches = ("w12_latimer", "arches")
 
 
 class Narrator(Stateful): pass
