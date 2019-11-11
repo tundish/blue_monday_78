@@ -99,6 +99,7 @@ def ensemble_to_html(ensemble):
 </ul>
 </nav>
 <section class="grid-state">
+<dl><dt>Time</dt><dd>?</dd></dl>
 </section>"""
 
 
@@ -138,6 +139,8 @@ def body_html(refresh=None):
 <link rel="stylesheet" href="/css/base_layout_module_state_theme.css" />
 </head>
 <body>
+<div class="grid-blank"></div>
 {{0}}
+<div class="grid-spare"></div>
 </body>
 </html>"""
