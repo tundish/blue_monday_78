@@ -17,6 +17,7 @@
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
 import math
+from collections import deque
 from collections import namedtuple
 import re
 
@@ -105,4 +106,11 @@ class Presenter:
                 for p in frame[Model.Property]:
                     if react and p.object is not None:
                         setattr(p.object, p.attr, p.val)
+                for m in frame[Model.Memory]:
+                    if react and m.object is None:
+                        m.subject.set_state(m.state)
+                    try:
+                        m.subject.memories.append(m)
+                    except AttributeError:
+                        m.subject.memories = deque([m])
                 return frame

@@ -109,6 +109,11 @@ Ray joins them on the balcony
 
     Right, now we will proceed in silence to Visiting Suite. At the double!
 
+.. memory:: 197801160800
+   :subject: HERO
+
+   |HERO_FIRSTNAME| |HERO_SURNAME| gets out of Prison today.
+
 .. property:: OFFICER.state bluemonday78.types.Spot.w12_ducane_prison_release
 .. property:: CELLMATE.state bluemonday78.types.Spot.w12_ducane_prison_visiting
 .. property:: HERO.state bluemonday78.types.Spot.w12_ducane_prison_visiting

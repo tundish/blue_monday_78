@@ -76,6 +76,7 @@ def location_to_html(locn, path="/"):
 
 def ensemble_to_html(ensemble):
     player = ensemble[-1]
+    dialogue = "\n".join(i.html for i in player.memories)
     items = "\n".join(
         "<li>{0.label}</li>".format(i) for i in ensemble
         if not isinstance(i, (Location, Persona)) and hasattr(i, "label")
@@ -88,17 +89,20 @@ def ensemble_to_html(ensemble):
     return f"""
 <aside class="grid-flash">
 </aside>
-<main class="grid-study">
-<ul class="mod-inventory">
-{items}
-</ul>
-</main>
-<nav class="grid-focus">
+<nav class="grid-study">
 <ul class="mod-moves">
 {moves}
 </ul>
 </nav>
-<section class="grid-state">
+<main class="grid-state">
+<ul class="mod-dialogue">
+{dialogue}
+</ul>
+<ul class="mod-inventory">
+{items}
+</ul>
+</main>
+<section class="grid-focus">
 <dl><dt>Time</dt><dd>?</dd></dl>
 </section>"""
 
