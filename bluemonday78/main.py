@@ -39,11 +39,6 @@ from bluemonday78.types import Location
 from bluemonday78.types import Spot
 
 
-async def get_demo(request):
-    player = next(iter(request.app.sessions.values())).ensemble[-1]
-    raise web.HTTPFound("/{0.id.hex}".format(player))
-
-
 async def get_frame(request):
     uid = uuid.UUID(hex=request.match_info["session"])
     try:
@@ -87,6 +82,28 @@ async def get_map(request):
     )
 
 
+async def get_titles(request):
+    return web.Response(
+        text = bluemonday78.render.body_html(refresh=None).format(
+            bluemonday78.render.titles_to_html()
+        ),
+        content_type="text/html"
+    )
+
+
+async def post_titles(request):
+    data = await request.post()
+    name = data["playername"]
+    if not Presenter.validation["name"].match(name):
+        raise web.HTTPUnauthorized(reason="User input invalid name.")
+
+    presenter = build_first_presenter(name, request.app.folders)
+    player = presenter.ensemble[-1]
+    print(player)
+    request.app.sessions[player.id] = presenter
+    raise web.HTTPFound("/{0.id.hex}".format(player))
+
+
 async def post_hop(request):
     uid = uuid.UUID(hex=request.match_info["session"])
     try:
@@ -105,10 +122,21 @@ async def post_hop(request):
     raise web.HTTPFound("/{0.hex}".format(uid))
 
 
+def build_first_presenter(name, folders):
+    ensemble = list(bluemonday78.story.associations().ensemble())
+    player = bluemonday78.types.Player(name=name).set_state(
+        bluemonday78.types.Spot.w12_ducane_prison_wing
+    )
+    ensemble.append(player)
+    dialogue = Presenter.dialogue(folders, ensemble)
+    return Presenter(dialogue, ensemble)
+
+
 def build_app(args):
     app = web.Application()
     app.add_routes([
-        web.get("/demo", get_demo),
+        web.get("/", get_titles),
+        web.post("/", post_titles),
         web.get(
             "/{{session:{0}}}".format(
                 Presenter.validation["session"].pattern
@@ -140,15 +168,6 @@ def build_app(args):
 def main(args):
     app = build_app(args)
     # TODO: Move to game screen. Create player.
-    player = bluemonday78.types.Player(
-        name="Mr William Billy McCarthy",
-    ).set_state(
-        bluemonday78.types.Spot.w12_ducane_prison_wing
-    )
-    ensemble = list(bluemonday78.story.associations().ensemble())
-    ensemble.append(player)
-    dialogue = Presenter.dialogue(app.folders, ensemble)
-    app.sessions[player.id] = Presenter(dialogue, ensemble)
     return web.run_app(app, host=args.host, port=args.port)
 
 def parser(description=__doc__):

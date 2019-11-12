@@ -43,6 +43,8 @@ class Presenter:
         "session": re.compile("[0-9a-f]{32}"),
     }
 
+    default_name="Mr William Billy McCarthy"
+
     @staticmethod
     def animate_lines(seq, dwell, pause):
         """ Generate animations for lines of dialogue."""

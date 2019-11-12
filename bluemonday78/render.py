@@ -18,6 +18,7 @@
 
 import functools
 from turberfield.dialogue.model import Model
+from bluemonday78.presenter import Presenter
 from bluemonday78.types import Location
 from bluemonday78.types import Persona
 from bluemonday78.types import Player
@@ -131,6 +132,37 @@ def frame_to_html(frame, ensemble=[]):
 </nav>
 <section class="grid-state">
 </section>"""
+
+
+def titles_to_html():
+    return f"""
+<form role="form" action="/" method="POST" name="titles" class="grid-flash mod-titles">
+  <h1>Start a new story.</h1>
+    <fieldset>
+    <label for="player-name" id="player-name-tip">Choose a character name</label>
+    <input
+    name="playername"
+    type="text"
+    id="player-name"
+    required="required"
+    aria-describedby="player-name-tip"
+    placeholder="?"
+    pattern="{Presenter.validation["name"].pattern}"
+    >
+    <button type="submit">Enter</button>
+    </fieldset>
+    <!-- <fieldset>
+    <label for="email">Email</label>
+    <input
+    name="email"
+    id="email"
+    placeholder="@"
+    aria-describedby="email-tip"
+    pattern="{{ validation["email"].pattern }}"
+    >
+    <small id="email-tip">optional</small>
+    </fieldset> -->
+</form>"""
 
 
 @functools.lru_cache()
