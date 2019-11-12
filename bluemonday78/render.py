@@ -105,7 +105,7 @@ def ensemble_to_html(ensemble):
 </ul>
 </main>
 <section class="grid-focus">
-<dl><dt>Time</dt><dd>?</dd></dl>
+<dl class="mod-stats"><dt>Time</dt><dd>?</dd></dl>
 </section>"""
 
 

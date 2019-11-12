@@ -18,15 +18,15 @@
 
 import unittest
 
-from bluemonday78.types import Keys
 from bluemonday78.types import Player
+from bluemonday78.types import Spot
 
 
 class CreationTests(unittest.TestCase):
 
     def test_keys(self):
-        state = Keys.factory(name="waiting")
-        self.assertEqual(Keys.waiting, state)
+        state = Spot.factory(name="w12_goldhawk_cafe")
+        self.assertEqual(Spot.w12_goldhawk_cafe, state)
 
     def test_player(self):
         player = Player(name="Test")
