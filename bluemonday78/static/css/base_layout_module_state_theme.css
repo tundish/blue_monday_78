@@ -73,7 +73,7 @@ display: none;
 
 body {
 display: grid;
-grid-template-columns: 2fr 3fr 1fr 2fr;
+grid-template-columns: 1fr 3fr 2fr 1fr;
 grid-template-areas:
 "blank  flash   flash   spare"
 "blank  flash   flash   spare"
@@ -176,13 +176,31 @@ nav ul li{
 list-style-type: none;
 }
 
-nav button {
-font-size: 1em;
-font-weight: bold;
+nav a {
+background-color: hsl(0, 0%, 57%, 1.0);
+color: hsl(0, 50%, 17%, 1.0);
+font-style: bold;
 margin-bottom: 0.2em;
 margin-top: 0.2em;
-padding: 0.6em;
+padding: 0.4em;
 text-align: center;
-width: 12rem;
+text-decoration: none;
+width: 4rem;
 }
 
+nav button {
+border: 2px solid transparent;
+color: hsl(0, 50%, 17%, 1.0);
+font-size: 1em;
+font-weight: normal;
+margin-bottom: 0.2em;
+margin-top: 0.2em;
+padding: 0.4em;
+text-align: center;
+width: 24rem;
+}
+
+nav button:hover {
+border: 2px solid white;
+color: hsl(0, 50%, 100%, 1.0);
+}

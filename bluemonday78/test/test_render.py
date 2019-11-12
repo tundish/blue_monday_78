@@ -22,6 +22,7 @@ from bluemonday78.presenter import Presenter
 import bluemonday78.render
 from bluemonday78.test.test_presenter import DialogueLoader
 from bluemonday78.types import Location
+from bluemonday78.types import Player
 from bluemonday78.types import Spot
 
 
@@ -69,5 +70,6 @@ class RenderFrameTests(DialogueLoader, unittest.TestCase):
 
     def test_map_from_ensemble(self):
         ensemble = [Location(label=i.name).set_state(i) for i in Spot]
+        ensemble.append(Player(name="test"))
         rv = bluemonday78.render.ensemble_to_html(ensemble)
         self.assertEqual(7, rv.count("<form"))

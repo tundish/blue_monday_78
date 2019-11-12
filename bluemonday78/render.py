@@ -20,6 +20,7 @@ import functools
 from turberfield.dialogue.model import Model
 from bluemonday78.types import Location
 from bluemonday78.types import Persona
+from bluemonday78.types import Player
 from bluemonday78.types import Spot
 
 """
@@ -76,7 +77,8 @@ def location_to_html(locn, path="/"):
 
 def ensemble_to_html(ensemble):
     player = ensemble[-1]
-    dialogue = "\n".join(i.html for i in player.memories)
+    assert isinstance(player, Player)
+    dialogue = "\n".join(i.html for i in getattr(player, "memories", []))
     items = "\n".join(
         "<li>{0.label}</li>".format(i) for i in ensemble
         if not isinstance(i, (Location, Persona)) and hasattr(i, "label")
@@ -118,7 +120,7 @@ def frame_to_html(frame, ensemble=[]):
 {stills}
 </aside>
 <main class="grid-study">
-{'<h1>{0}</h1>'.format(spot.name.capitalize()) if spot is not None else ''}
+{'<h1>{0}</h1>'.format(spot.value[-1].capitalize().replace("_", " ")) if spot is not None else ''}
 {audio}
 <ul class="mod-dialogue">
 {dialogue}
