@@ -99,7 +99,8 @@ async def post_titles(request):
 
     presenter = build_first_presenter(name, request.app.folders)
     player = presenter.ensemble[-1]
-    print(player)
+    player.set_state(int(blue_monday.story.blue_monday.strftime("%Y%m%d0800")))
+    print(player, file=sys.stderr)
     request.app.sessions[player.id] = presenter
     raise web.HTTPFound("/{0.id.hex}".format(player))
 

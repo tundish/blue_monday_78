@@ -50,20 +50,16 @@ blue_monday = datetime.date(1978, 1, 16)
 def associations():
     rv = Associations()
     rv.register(
-        None, *(
-            i.set_state(int(blue_monday.strftime("%Y%m%d0800")))
-            for i in (
-                Narrator().set_state(Spot.w12_ducane_prison_visiting),
-                Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
-                Hipster(name="Mr Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
-                PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_wing),
-                Prisoner(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison_wing),
-                PrisonVisitor(name="Mrs Karen Sheppey").set_state(Spot.w12_ducane_prison_visiting),
-                Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
-                Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
-                Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),
-            )
-        ),
+        None,
+        Narrator().set_state(Spot.w12_ducane_prison_visiting),
+        Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
+        Hipster(name="Mr Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
+        PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_wing),
+        Prisoner(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison_wing),
+        PrisonVisitor(name="Mrs Karen Sheppey").set_state(Spot.w12_ducane_prison_visiting),
+        Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
+        Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
+        Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),
         NoteBook(),
         Location(label="Addison Arches 18A").set_state(Spot.w12_latimer_arches),
         Location(label="Wormwood Scrubs visiting").set_state(Spot.w12_ducane_prison_visiting),

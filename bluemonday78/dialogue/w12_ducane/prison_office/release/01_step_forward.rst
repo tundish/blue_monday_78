@@ -116,7 +116,7 @@ Ray joins them on the balcony
 
 .. property:: OFFICER.state bluemonday78.types.Spot.w12_ducane_prison_release
 .. property:: CELLMATE.state bluemonday78.types.Spot.w12_ducane_prison_visiting
-.. property:: HERO.state bluemonday78.types.Spot.w12_ducane_prison_visiting
+.. property:: HERO.state bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. |OFFICER_TITLE| property:: OFFICER.name.title
 .. |OFFICER_SURNAME| property:: OFFICER.name.surname

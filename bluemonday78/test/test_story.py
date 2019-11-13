@@ -109,10 +109,6 @@ class SequenceTests(unittest.TestCase):
             self.asscns.search(_name="Mr Martin Sheppey").pop().get_state(Spot)
         )
         self.assertEqual(
-            197801160800,
-            self.characters["PrisonOfficer"][0].get_state()
-        )
-        self.assertEqual(
             Spot.w12_ducane_prison_wing,
             self.characters["PrisonOfficer"][0].get_state(Spot)
         )
@@ -126,10 +122,6 @@ class SequenceTests(unittest.TestCase):
         )
 
         self.assertEqual(
-            197801160800,
-            self.characters["PrisonOfficer"][0].get_state()
-        )
-        self.assertEqual(
             Spot.w12_ducane_prison_release,
             self.characters["PrisonOfficer"][0].get_state(Spot)
         )
@@ -139,10 +131,6 @@ class SequenceTests(unittest.TestCase):
         )
 
     def test_002(self):
-        self.assertEqual(
-            197801160800,
-            self.characters["PrisonVisitor"][0].get_state()
-        )
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
             self.characters["Hipster"][0].get_state(Spot)
@@ -161,17 +149,11 @@ class SequenceTests(unittest.TestCase):
         )
 
         self.assertEqual(
-            197801160810,
-            self.characters["PrisonVisitor"][0].get_state()
-        )
-        self.assertEqual(
             Spot.w12_goldhawk_tavern,
             self.characters["Hipster"][0].get_state(Spot)
         )
 
     def test_003(self):
-        self.assertEqual(197801160810, self.characters["PrisonVisitor"][0].get_state())
-
         list(self.performer.run())
         self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"))
         self.assertEqual(5, len(self.performer.shots))
@@ -180,11 +162,7 @@ class SequenceTests(unittest.TestCase):
             self.performer.shots[-1].scene
         )
 
-        self.assertEqual(197801160820, self.characters["PrisonVisitor"][0].get_state())
-
     def test_004(self):
-        self.assertEqual(197801160820, self.characters["PrisonVisitor"][0].get_state())
-
         list(self.performer.run())
         self.assertTrue(self.performer.script.fP.endswith("these_keys.rst"))
         self.assertEqual(6, len(self.performer.shots))
@@ -192,5 +170,3 @@ class SequenceTests(unittest.TestCase):
             "in the visiting suite",
             self.performer.shots[-1].scene
         )
-
-        self.assertEqual(197801160830, self.characters["PrisonVisitor"][0].get_state())

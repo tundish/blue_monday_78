@@ -14,7 +14,6 @@
 .. entity:: OFFICER
    :types: bluemonday78.types.PrisonOfficer
    :states: bluemonday78.types.Spot.w12_ducane_prison_release
-            197801160800
 
    A Prison Officer. We first meet him on the day he retires.
 
