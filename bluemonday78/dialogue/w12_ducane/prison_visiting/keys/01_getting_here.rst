@@ -110,8 +110,6 @@ Karen talks of the journey
 
     A shame.
 
-.. property:: WIFE.state 197801160810
-
 .. |HUSBAND_FIRSTNAME| property:: HUSBAND.name.firstname
 .. |HERO_TITLE| property:: HERO.name.title
 .. |HERO_FIRSTNAME| property:: HERO.name.firstname

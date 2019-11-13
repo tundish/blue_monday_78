@@ -8,11 +8,9 @@
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
    :states: bluemonday78.types.Spot.w12_latimer_arches
-            19780119
 
 .. entity:: OFFICER
    :types: bluemonday78.types.PrisonOfficer
-   :states: 19780118
 
 .. entity:: HERO
    :types: bluemonday78.types.Player

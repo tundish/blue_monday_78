@@ -11,7 +11,6 @@
 
 .. entity:: WIFE
    :types: bluemonday78.types.PrisonVisitor
-   :states: 197801160810
 
 .. entity:: HUSBAND
    :types: bluemonday78.types.Prisoner
@@ -88,8 +87,6 @@ Karen talks of her work
 
     Mandy had it all the time she was there so fair's fair.
 
-
-.. property:: WIFE.state 197801160820
 
 [HUSBAND]_
 
