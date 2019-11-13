@@ -9,21 +9,15 @@ Change Log
 0.4.0
 =====
 
-This branch captures some of the learnings from my `PyWeek 28 entry`.
-Main focus:
+This release captures some of the learnings from my `PyWeek 28 entry`.
 
+* Migrate to a Web interface
+* Organise dialogue folders within directories according to location.
+* Share folders across directories using symlinks.
+* Programmatically create metadata to enable fast matching of dialogue
+* Instant travel via a map
 * Clearer organisation of story and state
-* Move to Web GUI
-* Instant travel via map
-* Introduce graphical elements
-* Introduce music
-
-Intention is to size a folder to the scale of a story arc.
-Organise dialogue folders within directories according to location.
-Share folders across directories using symlinks.
-
-Write out summaries of plot points to identify `Objectives`.
-Create metadata to enable in/out matching of objective states.
+* Use Memory declarations to summarise story progress
 
 0.3.0
 =====
