@@ -130,7 +130,7 @@ word-break: break-word;
 
 form.mod-titles label {
 font-size: 1.2em;
-font-weight: bold;
+font-weight: normal;
 margin: 1rem;
 }
 
@@ -143,6 +143,7 @@ padding: 0.2rem 0.2rem 0.2rem 1rem;
 }
 
 form.mod-titles button {
+float: right;
 border: 2px solid transparent;
 font-size: 1em;
 font-weight: bold;
@@ -198,6 +199,20 @@ main {
     padding: 0.5rem;
 }
 
+p {
+padding: 0.4em;
+}
+
+a {
+color: hsl(0, 0%, 57%, 1.0);
+margin-bottom: 0.2em;
+margin-top: 0.2em;
+padding: 0.4em;
+text-align: center;
+text-decoration: none;
+width: 4rem;
+}
+
 .persona {
 color: grey;
 font-family: var(--font-family-sans-serif);
@@ -222,12 +237,6 @@ nav a {
 background-color: hsl(0, 0%, 57%, 1.0);
 color: hsl(0, 50%, 17%, 1.0);
 font-style: bold;
-margin-bottom: 0.2em;
-margin-top: 0.2em;
-padding: 0.4em;
-text-align: center;
-text-decoration: none;
-width: 4rem;
 }
 
 nav button {

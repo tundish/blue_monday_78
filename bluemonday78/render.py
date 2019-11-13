@@ -162,7 +162,9 @@ def titles_to_html():
     >
     <small id="email-tip">optional</small>
     </fieldset> -->
-</form>"""
+</form>
+<p>You can get the code for this story from
+<a href="https://github.com/tundish/blue_monday_78">GitHub</a>.</p>"""
 
 
 @functools.lru_cache()
