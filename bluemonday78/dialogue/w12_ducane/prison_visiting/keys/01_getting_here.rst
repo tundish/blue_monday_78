@@ -34,7 +34,7 @@
 
 .. entity:: HERO
    :types: bluemonday78.types.Player
-   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
 
    The player entity.
 
