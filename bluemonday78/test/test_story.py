@@ -75,9 +75,7 @@ class SequenceTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.asscns = bluemonday78.story.associations()
-        cls.ensemble = list(cls.asscns.ensemble())
-        cls.ensemble.append(
+        cls.ensemble = bluemonday78.story.ensemble(
             Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison_wing)
         )
         cls.characters = {
@@ -106,7 +104,11 @@ class SequenceTests(unittest.TestCase):
     def test_001(self):
         self.assertEqual(
             Spot.w12_ducane_prison_wing,
-            self.asscns.search(_name="Mr Martin Sheppey").pop().get_state(Spot)
+            next(
+                i for i in self.performer.ensemble
+                if getattr(i, "_name", None) == "Mr Martin Sheppey"
+            ).get_state(Spot),
+            self.performer.ensemble
         )
         self.assertEqual(
             Spot.w12_ducane_prison_wing,

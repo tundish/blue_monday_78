@@ -97,9 +97,8 @@ async def post_titles(request):
     if not Presenter.validation["name"].match(name):
         raise web.HTTPUnauthorized(reason="User input invalid name.")
 
-    ensemble = list(bluemonday78.story.associations().ensemble())
     player = bluemonday78.story.build_player(name)
-    ensemble.append(player)
+    ensemble = bluemonday78.story.ensemble(player)
     dialogue = Presenter.dialogue(request.app.folders, ensemble)
     presenter = Presenter(dialogue, ensemble)
     print(player, file=sys.stderr)

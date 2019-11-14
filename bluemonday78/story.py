@@ -31,7 +31,6 @@ from turberfield.dialogue.directives import Entity
 from turberfield.utils.misc import group_by_type
 
 from bluemonday78 import __version__ as version # noqa
-from bluemonday78.associations import Associations
 import bluemonday78.utils.publisher
 from bluemonday78.types import Barman
 from bluemonday78.types import Character
@@ -47,10 +46,8 @@ from bluemonday78.types import Spot
 
 blue_monday = datetime.date(1978, 1, 16)
 
-def associations():
-    rv = Associations()
-    rv.register(
-        None,
+def ensemble(player=None):
+    rv = [
         Narrator().set_state(Spot.w12_ducane_prison_visiting),
         Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
         Hipster(name="Mr Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
@@ -65,7 +62,9 @@ def associations():
         Location(label="Wormwood Scrubs visiting").set_state(Spot.w12_ducane_prison_visiting),
         Location(label="Wormwood Scrubs reception").set_state(Spot.w12_ducane_prison_release),
         Location(label="Wormwood Scrubs prison wing").set_state(Spot.w12_ducane_prison_wing),
-    )
+    ]
+    if player is not None:
+        rv.append(player)
     return rv
 
 
