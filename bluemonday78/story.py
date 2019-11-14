@@ -69,6 +69,13 @@ def associations():
     return rv
 
 
+def build_player(name):
+    return Player(name=name).set_state(
+        Spot.w12_ducane_prison_wing
+    ).set_state(
+        int(blue_monday.strftime("%Y%m%d0800"))
+    )
+
 def generate_folders(pkg, path):
     root_path = pathlib.Path(pkg_resources.resource_filename(pkg, path))
     yield from (
@@ -101,8 +108,12 @@ def parse_timespan(text):
         12: ("%Y%m%d%H%M", datetime.timedelta(minutes=1)),
         14: ("%Y%m%d%H%M%S", datetime.timedelta(seconds=1)),
     }
-    format_string, span = formats[len(text)]
-    return datetime.datetime.strptime(text, format_string), span
+    try:
+        format_string, span = formats[len(text)]
+    except KeyError:
+        return text, ""
+    else:
+        return datetime.datetime.strptime(text, format_string), span
 
 def decorate_folder(folder, min_t, max_t):
     for entity_state in (i for i in entity_states(folder) if i.isdigit()):

@@ -97,9 +97,11 @@ async def post_titles(request):
     if not Presenter.validation["name"].match(name):
         raise web.HTTPUnauthorized(reason="User input invalid name.")
 
-    presenter = build_first_presenter(name, request.app.folders)
-    player = presenter.ensemble[-1]
-    player.set_state(int(bluemonday78.story.blue_monday.strftime("%Y%m%d0800")))
+    ensemble = list(bluemonday78.story.associations().ensemble())
+    player = bluemonday78.story.build_player(name)
+    ensemble.append(player)
+    dialogue = Presenter.dialogue(request.app.folders, ensemble)
+    presenter = Presenter(dialogue, ensemble)
     print(player, file=sys.stderr)
     request.app.sessions[player.id] = presenter
     raise web.HTTPFound("/{0.id.hex}".format(player))
@@ -121,16 +123,6 @@ async def post_hop(request):
     if dialogue is not None:
         request.app.sessions[uid] = Presenter(dialogue, presenter.ensemble)
     raise web.HTTPFound("/{0.hex}".format(uid))
-
-
-def build_first_presenter(name, folders):
-    ensemble = list(bluemonday78.story.associations().ensemble())
-    player = bluemonday78.types.Player(name=name).set_state(
-        bluemonday78.types.Spot.w12_ducane_prison_wing
-    )
-    ensemble.append(player)
-    dialogue = Presenter.dialogue(folders, ensemble)
-    return Presenter(dialogue, ensemble)
 
 
 def build_app(args):
