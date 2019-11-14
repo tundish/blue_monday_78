@@ -16,11 +16,51 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
+import datetime
+
+from turberfield.dialogue.directives import Entity
 from turberfield.dialogue.matcher import Matcher
+from turberfield.dialogue.model import SceneScript
+from turberfield.utils.misc import group_by_type
 
-# TODO: Add matching over defined game timieframe
+# TODO: Add matching over defined game timeframe
 
-class PathwayMatcher(Matcher):
+class MultiMatcher(Matcher):
+
+    @staticmethod
+    def parse_timespan(text):
+        formats = {
+            8: ("%Y%m%d", datetime.timedelta(days=1)),
+            10: ("%Y%m%d%H", datetime.timedelta(hours=1)),
+            12: ("%Y%m%d%H%M", datetime.timedelta(minutes=1)),
+            14: ("%Y%m%d%H%M%S", datetime.timedelta(seconds=1)),
+        }
+        try:
+            format_string, span = formats[len(text)]
+        except KeyError:
+            return text, ""
+        else:
+            return datetime.datetime.strptime(text, format_string), span
+
+    @staticmethod
+    def entity_states(folder):
+        for script in SceneScript.scripts(**folder._asdict()):
+            with script as dialogue:
+                entities = group_by_type(dialogue.doc)[Entity.Declaration]
+                for entity in entities:
+                    yield from entity["options"].get("states", [])
+
+    @staticmethod
+    def decorate_folder(folder, min_t, max_t):
+        for entity_state in (
+            i for i in MultiMatcher.entity_states(folder) if i.isdigit()
+        ):
+            t, span = MultiMatcher.parse_timespan(entity_state)
+            min_t = min(min_t, t) if min_t is not None else t
+            max_t = max(max_t, t + span) if max_t is not None else t + span
+        folder.metadata["min_t"] = min_t
+        folder.metadata["max_t"] = max_t
+        return folder
 
     def options(self, data):
         arc = data.get("arc", None)
@@ -30,4 +70,3 @@ class PathwayMatcher(Matcher):
             if arc is not None and i.metadata.get("arc") == arc
             or i.metadata.get("pathways", set()).intersection(pathways)
         )
-

@@ -20,7 +20,7 @@ import unittest
 
 from turberfield.dialogue.model import SceneScript
 
-from bluemonday78.matcher import PathwayMatcher
+from bluemonday78.matcher import MultiMatcher
 
 
 class MatcherTests(unittest.TestCase):
@@ -58,14 +58,14 @@ class MatcherTests(unittest.TestCase):
         ]
 
     def test_match_by_arc(self):
-        matcher = PathwayMatcher(self.folders)
+        matcher = MultiMatcher(self.folders)
 
         rv = list(matcher.options({"arc": "a_11"}))
         self.assertEqual(1, len(rv), rv)
         self.assertEqual("a_11", rv[0].metadata["arc"])
 
     def test_match_by_pathway(self):
-        matcher = PathwayMatcher(self.folders)
+        matcher = MultiMatcher(self.folders)
 
         rv = list(matcher.options(
             {"pathways": set([("w12_latimer", "lockup")])}

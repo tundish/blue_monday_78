@@ -31,7 +31,7 @@ import pkg_resources
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.performer import Performer
 
-from bluemonday78.matcher import PathwayMatcher
+from bluemonday78.matcher import MultiMatcher
 from bluemonday78.presenter import Presenter
 import bluemonday78.render
 import bluemonday78.story
@@ -116,7 +116,7 @@ async def post_hop(request):
     location_id = uuid.UUID(hex=data["location_id"])
     location = next(i for i in presenter.ensemble if getattr(i, "id", None) == location_id)
     pathway = location.get_state(Spot).value
-    matcher = PathwayMatcher(request.app.folders)
+    matcher = MultiMatcher(request.app.folders)
     folders = list(matcher.options({"pathways": set([pathway])}))
     dialogue = Presenter.dialogue(folders, presenter.ensemble)
     if dialogue is not None:
@@ -159,8 +159,8 @@ def build_app(args):
 
 def main(args):
     app = build_app(args)
-    # TODO: Move to game screen. Create player.
     return web.run_app(app, host=args.host, port=args.port)
+
 
 def parser(description=__doc__):
     rv = argparse.ArgumentParser(description)

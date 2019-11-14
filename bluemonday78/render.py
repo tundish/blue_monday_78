@@ -18,8 +18,9 @@
 
 import functools
 from turberfield.dialogue.model import Model
+
 from bluemonday78.presenter import Presenter
-from bluemonday78.story import parse_timespan
+from bluemonday78.matcher import MultiMatcher
 from bluemonday78.types import Location
 from bluemonday78.types import Persona
 from bluemonday78.types import Player
@@ -108,7 +109,7 @@ def ensemble_to_html(ensemble):
 </main>
 <section class="grid-focus">
 <dl class="mod-stats"><dt>Time</dt>
-<dd>{parse_timespan(str(player.state))[0].ctime()}</dd>
+<dd>{MultiMatcher.parse_timespan(str(player.state))[0].ctime()}</dd>
 </dl>
 </section>"""
 

@@ -27,11 +27,9 @@ import sys
 import pkg_resources
 
 from turberfield.dialogue.model import SceneScript
-from turberfield.dialogue.directives import Entity
-from turberfield.utils.misc import group_by_type
 
 from bluemonday78 import __version__ as version # noqa
-import bluemonday78.utils.publisher
+from bluemonday78.matcher import MultiMatcher
 from bluemonday78.types import Barman
 from bluemonday78.types import Character
 from bluemonday78.types import Hipster
@@ -43,6 +41,7 @@ from bluemonday78.types import Prisoner
 from bluemonday78.types import PrisonOfficer
 from bluemonday78.types import PrisonVisitor
 from bluemonday78.types import Spot
+import bluemonday78.utils.publisher
 
 blue_monday = datetime.date(1978, 1, 16)
 
@@ -93,38 +92,12 @@ def generate_folders(pkg, path):
         bluemonday78.utils.publisher.find_assets(root_path)
     )
 
-def entity_states(folder):
-    for script in SceneScript.scripts(**folder._asdict()):
-        with script as dialogue:
-            entities = group_by_type(dialogue.doc)[Entity.Declaration]
-            for entity in entities:
-                yield from entity["options"].get("states", [])
-
-def parse_timespan(text):
-    formats = {
-        8: ("%Y%m%d", datetime.timedelta(days=1)),
-        10: ("%Y%m%d%H", datetime.timedelta(hours=1)),
-        12: ("%Y%m%d%H%M", datetime.timedelta(minutes=1)),
-        14: ("%Y%m%d%H%M%S", datetime.timedelta(seconds=1)),
-    }
-    try:
-        format_string, span = formats[len(text)]
-    except KeyError:
-        return text, ""
-    else:
-        return datetime.datetime.strptime(text, format_string), span
-
-def decorate_folder(folder, min_t, max_t):
-    for entity_state in (i for i in entity_states(folder) if i.isdigit()):
-        t, span = parse_timespan(entity_state)
-        min_t = min(min_t, t) if min_t is not None else t
-        max_t = max(max_t, t + span) if max_t is not None else t + span
-    folder.metadata["min_t"] = min_t
-    folder.metadata["max_t"] = max_t
-    return folder
 
 def prepare_folders(pkg="bluemonday78", path="dialogue", min_t=None, max_t=None):
-    return [decorate_folder(f, min_t, max_t) for f in generate_folders(pkg, path)]
+    return [
+        MultiMatcher.decorate_folder(f, min_t, max_t)
+        for f in generate_folders(pkg, path)
+    ]
 
 if __name__ == "__main__":
     then = time.perf_counter()
