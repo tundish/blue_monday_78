@@ -128,7 +128,7 @@ def frame_to_html(frame, ensemble=[]):
 {stills}
 </aside>
 <main class="grid-study">
-{'<h1>{0}</h1>'.format(spot.value[-1].capitalize().replace("_", " ")) if spot is not None else ''}
+<!-- {'<h1>{0}</h1>'.format(spot.value[-1].capitalize().replace("_", " ")) if spot is not None else ''} -->
 {audio}
 <ul class="mod-dialogue">
 {dialogue}
