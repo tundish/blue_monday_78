@@ -41,6 +41,7 @@ from bluemonday78.types import Prisoner
 from bluemonday78.types import PrisonOfficer
 from bluemonday78.types import PrisonVisitor
 from bluemonday78.types import Spot
+from bluemonday78.types import Page
 import bluemonday78.utils.publisher
 
 blue_monday = datetime.date(1978, 1, 16)
@@ -57,10 +58,18 @@ def ensemble(player=None):
         Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
         Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),
         NoteBook(),
-        Location(label="Addison Arches 18A").set_state(Spot.w12_latimer_arches),
-        Location(label="Wormwood Scrubs visiting").set_state(Spot.w12_ducane_prison_visiting),
-        Location(label="Wormwood Scrubs reception").set_state(Spot.w12_ducane_prison_release),
-        Location(label="Wormwood Scrubs prison wing").set_state(Spot.w12_ducane_prison_wing),
+        Location(
+            label="Addison Arches 18A"
+        ).set_state(Spot.w12_latimer_arches).set_state(Page.closed),
+        Location(
+            label="Visiting Suite"
+        ).set_state(Spot.w12_ducane_prison_visiting).set_state(Page.closed),
+        Location(
+            label="Reception area"
+        ).set_state(Spot.w12_ducane_prison_release).set_state(Page.closed),
+        Location(
+            label="Prison wing"
+        ).set_state(Spot.w12_ducane_prison_wing).set_state(Page.opened),
     ]
     if player is not None:
         rv.append(player)

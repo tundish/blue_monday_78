@@ -36,6 +36,12 @@ class Spot(EnumFactory, enum.Enum):
     w12_latimer_arches = ("w12_latimer", "arches")
 
 
+class Page(EnumFactory, enum.Enum):
+    closed = 0
+    opened = 1
+    marked = 2
+
+
 class Narrator(Stateful): pass
 class NoteBook(Stateful): pass
 class PrisonOfficer(Stateful, Persona): pass

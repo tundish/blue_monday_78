@@ -32,6 +32,14 @@
 
    The player entity.
 
+.. entity:: OBJECTIVE
+   :types: bluemonday78.types.Location
+   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
+
+.. entity:: HERE
+   :types: bluemonday78.types.Location
+   :states: bluemonday78.types.Spot.w12_ducane_prison_wing
+
 A Prison Wing
 ~~~~~~~~~~~~~
 
@@ -107,7 +115,9 @@ Ray joins them on the balcony
 
     |HERO_SURNAME| you are with me while I sign you off for release.
 
-    Right, now we will proceed in silence to Visiting Suite. At the double!
+    Right, now we will proceed in silence to the |OBJECTIVE_LABEL|.
+
+    At the double!
 
 .. memory:: 197801160800
    :subject: HERO
@@ -117,7 +127,10 @@ Ray joins them on the balcony
 .. property:: OFFICER.state bluemonday78.types.Spot.w12_ducane_prison_release
 .. property:: CELLMATE.state bluemonday78.types.Spot.w12_ducane_prison_visiting
 .. property:: HERO.state bluemonday78.types.Spot.w12_ducane_prison_release
+.. property:: OBJECTIVE.state bluemonday78.types.Page.opened
+.. property:: HERE.state bluemonday78.types.Page.closed
 
+.. |OBJECTIVE_LABEL| property:: OBJECTIVE.label
 .. |OFFICER_TITLE| property:: OFFICER.name.title
 .. |OFFICER_SURNAME| property:: OFFICER.name.surname
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname

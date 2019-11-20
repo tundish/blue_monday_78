@@ -25,6 +25,7 @@ from bluemonday78.types import Location
 from bluemonday78.types import Persona
 from bluemonday78.types import Player
 from bluemonday78.types import Spot
+from bluemonday78.types import Page
 
 """
 http://css3.bradshawenterprises.com/cfimg/
@@ -80,6 +81,7 @@ def location_to_html(locn, path="/"):
 
 def ensemble_to_html(ensemble):
     player = ensemble[-1]
+    spot = player.get_state(Spot)
     assert isinstance(player, Player)
     dialogue = "\n".join(i.html for i in getattr(player, "memories", []))
     items = "\n".join(
@@ -89,7 +91,8 @@ def ensemble_to_html(ensemble):
     moves = "\n".join(
         "<li>{0}</li>".format(location_to_html(i, path="/{0.id.hex}/".format(player)))
         for i in ensemble
-        if isinstance(i, Location)
+        if isinstance(i, Location) and
+        i.get_state(Page) != Page.closed
     )
     return f"""
 <aside class="grid-flash">
