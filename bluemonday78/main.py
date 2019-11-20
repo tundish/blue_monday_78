@@ -62,7 +62,7 @@ async def get_frame(request):
         text = bluemonday78.render.body_html(
             refresh=Presenter.refresh_animations(frame) if pending else None,
         ).format(bluemonday78.render.frame_to_html(
-            frame, presenter.ensemble
+            frame, presenter.ensemble, not pending
         )),
         content_type="text/html"
     )

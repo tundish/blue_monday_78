@@ -117,7 +117,7 @@ def ensemble_to_html(ensemble):
 </section>"""
 
 
-def frame_to_html(frame, ensemble=[]):
+def frame_to_html(frame, ensemble=[], final=False):
     player = ensemble[-1] if ensemble else None
     spot = player.get_state(Spot) if player else None
     dialogue = "\n".join(animated_line_to_html(i) for i in frame[Model.Line])
@@ -135,7 +135,7 @@ def frame_to_html(frame, ensemble=[]):
 </ul>
 </main>
 <nav class="grid-focus">
-{'<a href="/{0.id.hex}/map">Go</a>'.format(player) if player is not None else ''}
+{'<a href="/{0.id.hex}/map">Go</a>'.format(player) if player and final else ''}
 </nav>
 <section class="grid-state">
 </section>"""
