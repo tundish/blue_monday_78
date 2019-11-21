@@ -69,14 +69,10 @@ class TimeSpanTests(unittest.TestCase):
 
 class SequenceTests(unittest.TestCase):
 
-    def make_association(obj, associations):
-        if isinstance(obj, Model.Memory) and obj.object:
-            associations.register(obj.state, obj.subject, obj.object)
-
     @classmethod
     def setUpClass(cls):
         cls.ensemble = bluemonday78.story.ensemble(
-            Player(name="Mr Likely Story").set_state(Spot.w12_ducane_prison_wing)
+            bluemonday78.story.build_player("Mr Likely Story")
         )
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
@@ -117,7 +113,7 @@ class SequenceTests(unittest.TestCase):
 
         list(self.performer.run())
         self.assertTrue(self.performer.script.fP.endswith("step_forward.rst"))
-        self.assertEqual(3, len(self.performer.shots))
+        self.assertEqual(4, len(self.performer.shots))
         self.assertEqual(
             "ray joins them on the balcony",
             self.performer.shots[-1].name
@@ -128,7 +124,7 @@ class SequenceTests(unittest.TestCase):
             self.characters["PrisonOfficer"][0].get_state(Spot)
         )
         self.assertEqual(
-            Spot.w12_ducane_prison_visiting,
+            Spot.w12_ducane_prison_release,
             self.characters["Player"][0].get_state(Spot)
         )
 
