@@ -36,7 +36,7 @@
 
 .. entity:: OBJECTIVE
    :types: bluemonday78.types.Location
-   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. entity:: HERE
    :types: bluemonday78.types.Location

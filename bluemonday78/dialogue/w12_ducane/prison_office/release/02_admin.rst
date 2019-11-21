@@ -18,6 +18,10 @@
    :states: bluemonday78.types.Spot.w12_ducane_prison_release
             197801160805
 
+.. entity:: OBJECTIVE
+   :types: bluemonday78.types.Location
+   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
+
 .. entity:: CELLMATE
    :types: bluemonday78.types.Prisoner
 
@@ -57,13 +61,14 @@ Ray unlocks the office
 .. memory:: 197801160811
    :subject: HERO
 
-   |HERO_FIRSTNAME| |HERO_SURNAME| is waiting for
-    |OFFICER_SURNAME| to get back.
+   |HERO_FIRSTNAME| |HERO_SURNAME| is waiting for |OFFICER_SURNAME| to get back.
 
+.. property:: OBJECTIVE.state bluemonday78.types.Page.opened
 
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
 .. |CELLMATE_SURNAME| property:: CELLMATE.name.surname
 .. |HERO_TITLE| property:: HERO.name.title
+.. |HERO_FIRSTNAME| property:: HERO.name.firstname
 .. |HERO_SURNAME| property:: HERO.name.surname
 .. |OFFICER_TITLE| property:: OFFICER.name.title
 .. |OFFICER_FIRSTNAME| property:: OFFICER.name.firstname
