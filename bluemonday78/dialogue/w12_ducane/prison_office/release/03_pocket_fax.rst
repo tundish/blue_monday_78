@@ -99,6 +99,13 @@ Ray shares a memory
 
     Help yourself to a pencil, though.
 
+[OFFICER]_
+
+    It isn't usual to read a form B107 to its subject,
+    |HERO_TITLE| |HERO_SURNAME|, but it looks like you've been playing it
+    straight.
+
+    That's what we like to see, eh?
 
 .. property:: OFFICER.state 197801160810
 

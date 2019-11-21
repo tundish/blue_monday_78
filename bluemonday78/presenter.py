@@ -114,5 +114,5 @@ class Presenter:
                     try:
                         m.subject.memories.append(m)
                     except AttributeError:
-                        m.subject.memories = deque([m])
+                        m.subject.memories = deque([m], maxlen=2)
                 return frame

@@ -83,7 +83,10 @@ def ensemble_to_html(ensemble):
     player = ensemble[-1]
     spot = player.get_state(Spot)
     assert isinstance(player, Player)
-    dialogue = "\n".join(i.html for i in getattr(player, "memories", []))
+    notes = "\n".join(
+        "<li>{0.html}</li>".format(i)
+        for i in getattr(player, "memories", [])
+    )
     items = "\n".join(
         "<li>{0.label}</li>".format(i) for i in ensemble
         if not isinstance(i, (Location, Persona)) and hasattr(i, "label")
@@ -104,7 +107,7 @@ def ensemble_to_html(ensemble):
 </nav>
 <main class="grid-state">
 <ul class="mod-dialogue">
-{dialogue}
+{notes}
 </ul>
 <ul class="mod-inventory">
 {items}
