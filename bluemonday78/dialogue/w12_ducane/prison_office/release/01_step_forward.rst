@@ -29,6 +29,8 @@
 
 .. entity:: HERO
    :types: bluemonday78.types.Player
+   :states: bluemonday78.types.Spot.w12_ducane_prison_wing
+            197801160800
 
    The player entity.
 
@@ -92,9 +94,8 @@ Ray enters
 
     This cell is scheduled for a contraband search.
 
-    You will both vacate this cell immediately.
-
-    You will touch nothing on your way out.
+The prisoners leave
+-------------------
 
 [CELLMATE]_
 
@@ -110,16 +111,11 @@ Ray joins them on the balcony
 
 [OFFICER]_
 
-    |CELLMATE_SURNAME|, your lady wife has arrived outside. So you will have
-    thirty minutes visiting time until 09:00.
+    Right, now we will proceed to the |OBJECTIVE_LABEL|.
 
-    |HERO_SURNAME| you are with me while I sign you off for release.
+    At the double, and in silence!
 
-    Right, now we will proceed in silence to the |OBJECTIVE_LABEL|.
-
-    At the double!
-
-.. memory:: 197801160800
+.. memory:: 197801160805
    :subject: HERO
 
    |HERO_FIRSTNAME| |HERO_SURNAME| gets out of Prison today.

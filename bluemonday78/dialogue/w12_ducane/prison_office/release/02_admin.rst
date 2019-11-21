@@ -12,11 +12,14 @@
 .. entity:: OFFICER
    :types: bluemonday78.types.PrisonOfficer
    :states: bluemonday78.types.Spot.w12_ducane_prison_release
-            197801160810
 
 .. entity:: HERO
    :types: bluemonday78.types.Player
    :states: bluemonday78.types.Spot.w12_ducane_prison_release
+            197801160805
+
+.. entity:: CELLMATE
+   :types: bluemonday78.types.Prisoner
 
 .. entity:: NARRATOR
    :types: bluemonday78.types.Narrator
@@ -26,30 +29,40 @@ Guards' Office
 
 HM Prison Wormwood Scrubs.
 
-Ray does the paperwork
+Ray splits them up
+------------------
+
+[OFFICER]_
+
+    |CELLMATE_SURNAME|, your lady wife has arrived outside. So you will have
+    visiting time until 09:00.
+
+[CELLMATE]_
+
+    Yes, |OFFICER_TITLE| |OFFICER_SURNAME|.
+
+Ray unlocks the office
 ----------------------
 
-.. Ray teaches the PC a phrase.
+[OFFICER]_
+
+    |HERO_SURNAME| you stay here while I unlock the Office.
 
 [OFFICER]_
 
-    Don't think for a second I want you hanging around here, |HERO_SURNAME|.
+    I'll be back in five minutes.
+
+    There'll be no nonsense while my back is turned, |HERO_SURNAME|.
+
+.. memory:: 197801160811
+   :subject: HERO
+
+   |HERO_FIRSTNAME| |HERO_SURNAME| is waiting for
+    |OFFICER_SURNAME| to get back.
 
 
-[OFFICER]_
-
-    It isn't usual to read a form B107 to its subject,
-    |HERO_TITLE| |HERO_SURNAME|, but it looks like you've been playing it
-    straight.
-
-    That's what we like to see, eh?
-
-[OFFICER]_
-
-    *show yourself*
-
-.. property:: OFFICER.state 197801160820
-
+.. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
+.. |CELLMATE_SURNAME| property:: CELLMATE.name.surname
 .. |HERO_TITLE| property:: HERO.name.title
 .. |HERO_SURNAME| property:: HERO.name.surname
 .. |OFFICER_TITLE| property:: OFFICER.name.title
