@@ -8,7 +8,6 @@
 .. entity:: HIPSTER
    :types: bluemonday78.types.Hipster
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
-            19780116
 
 .. entity:: BARMAN
    :types: bluemonday78.types.Barman
@@ -24,6 +23,9 @@
 
 .. entity:: NARRATOR
    :types: bluemonday78.types.Narrator
+
+.. entity:: PUB
+   :types: bluemonday78.types.Location
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
 Sorrows

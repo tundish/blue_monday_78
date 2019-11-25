@@ -83,7 +83,7 @@ class SequenceTests(unittest.TestCase):
         )
 
     def setUp(self):
-        self.assertEqual(15, len(self.ensemble))
+        self.assertEqual(16, len(self.ensemble))
         (self.folder, self.index, self.script, self.selection,
          self.interlude) = self.performer.next(
             self.performer.folders, self.ensemble, strict=True, roles=1

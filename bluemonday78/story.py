@@ -70,6 +70,9 @@ def ensemble(player=None):
         Location(
             label="Prison wing"
         ).set_state(Spot.w12_ducane_prison_wing).set_state(Page.opened),
+        Location(
+            label="The Goldhawk Tavern"
+        ).set_state(Spot.w12_goldhawk_tavern).set_state(Page.opened),
     ]
     if player is not None:
         rv.append(player)
