@@ -36,8 +36,11 @@ A pub in Shepherd's Bush
 
 [NARRATOR]_
 
-    Monday afternoon. Just two hours ago, Stiff Records fired their
-    most junior runner. He ran off with a Sony Pressman TC-D5 and is
+    Monday afternoon.
+
+    Just two hours ago, Stiff Records fired their most junior runner.
+
+    He ran off with a Sony Pressman TC-D5 and is
     now in the Goldhawk Tavern, Shepherd's Bush.
 
 [BARMAN]_
@@ -53,94 +56,65 @@ A pub in Shepherd's Bush
     I'm guessing by the tape recorder and the early and expeditious application 
     of my best whisky that you may be a journalist.
 
+Justin pipes up
+---------------
+
 [HIPSTER]_
 
-    No, I'm in music. Or I was until this morning. Got my marching orders.
+    I'm in music. Or I was until this morning. Got my marching orders.
 
 [BARMAN]_
 
     Oh dear. Trouble?
 
-[HIPSTER]_
-
-    Well I made the mistake of booking a tour bus with Bulldog Coaches.
-
-[BARMAN]_
-
-    Bulldog Coaches? The white ones with the red stripes?
+What not to do
+--------------
 
 [HIPSTER]_
 
-    Yes.
+    I made the mistake of booking a tour bus with Bulldog Coaches.
+
+    You know, the white ones with the red stripes?
+
+    And a big bulldog on the side.
 
 [BARMAN]_
 
-    And a big snarling bulldog painted on the side.
-
-[HIPSTER]_
-
-    Yes.
-
-[BARMAN]_
-
-    Trailing a broken chain from a studded collar and wrapped in a Union Flag.
+    Trailing a broken chain from a studded collar and wrapped in a Union Flag?
 
 [HIPSTER]_
 
     That's the one.
 
-[BARMAN]_
-
-    That would be Victor Yeoman's outfit then.
-
-[DRINKER_1]_
-
-    I remember Victor way, way back. He used to do the Ramsgate run every weekend in the summer.
-
-[DRINKER_2]_
-
-    And all winter. Christmas Eve, too.
-
-[DRINKER_1]_
-
-    Do you remember? We used to go out to Ramsgate when we were kids.
+There's your mistake
+--------------------
 
 [BARMAN]_
 
-    Much business in Ramsgate over the Winter?
+    That would be Victor Yeoman's company then.
 
-[DRINKER_2]_
+    I don't think he really likes passengers to be honest.
 
-    There was for Vic. He used to move stuff back and forth. All sorts of gear.
-    Regular. All year round.
-
-    I don't think he really wanted passengers to be honest.
-    Just his little crew of mates. He does football tours too. 
-    So long as it's Holland or Spain.
-
-[BARMAN]_
-
-    Very much a patriot, is Vic. Of the old school variety. And some of his circle can be a bit...
+    He just goes back and forth to Holland or Spain.
 
 [HIPSTER]_
 
-    A bit right wing?
+    Do you find him a bit right wing?
 
 [BARMAN]_
 
     I'd say a bit right wing, yes.
 
+Not alone though
+----------------
+
 [DRINKER_1]_
 
-    I remember those Ramsgate trips could be rather...
-
-    Tense.
-
-    Too much for some people.
+    Those Ramsgate trips could be rather tense.
 
 [HIPSTER]_
 
-    Too much for Elvis Costello, certainly.
+    Not what Elvis Costello was after, certainly.
 
 [DRINKER_2]_
 
