@@ -86,7 +86,7 @@ class Presenter:
                         return dialogue.cast(selection).run()
 
     def __init__(self, dialogue, ensemble=None):
-        self.frames = [group_by_type(i.items) for i in dialogue.shots]
+        self.frames = [group_by_type(i.items) for i in getattr(dialogue, "shots", [])]
         self.ensemble = ensemble
 
     @property

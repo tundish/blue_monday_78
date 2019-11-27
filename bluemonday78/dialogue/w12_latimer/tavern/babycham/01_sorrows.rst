@@ -120,5 +120,3 @@ Not alone though
 
     Who?
 
-.. property:: HIPSTER.state 19780117
-.. property:: NARRATOR.state bluemonday78.types.Spot.w12_latimer_arches

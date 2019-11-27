@@ -46,10 +46,13 @@ async def get_frame(request):
     except KeyError:
         raise web.HTTPUnauthorized(reason="Session {0!s} not found.".format(uid))
 
-    folders = request.app.folders
     if not presenter.pending:
+        player = presenter.ensemble[-1]
+        pathway = player.get_state(Spot).value
+        matcher = MultiMatcher(request.app.folders)
+        folders = list(matcher.options({"pathways": set([pathway])}))
         dialogue = Presenter.dialogue(folders, presenter.ensemble)
-        request.app.sessions[uid] = Presenter(dialogue, presenter.ensemble)
+        request.app.sessions[uid] = presenter = Presenter(dialogue, presenter.ensemble)
 
     try:
         frame = presenter.frame()
@@ -101,6 +104,7 @@ async def post_titles(request):
     ensemble = bluemonday78.story.ensemble(player)
     dialogue = Presenter.dialogue(request.app.folders, ensemble)
     presenter = Presenter(dialogue, ensemble)
+    presenter = Presenter(None, ensemble)
     print(player, file=sys.stderr)
     request.app.sessions[player.id] = presenter
     raise web.HTTPFound("/{0.id.hex}".format(player))
