@@ -53,7 +53,9 @@ def ensemble(player=None):
         Hipster(name="Mr Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
         PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_wing),
         Prisoner(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison_wing),
-        PrisonVisitor(name="Mrs Karen Sheppey").set_state(Spot.w12_ducane_prison_visiting),
+        PrisonVisitor(
+            name="Mrs Karen Sheppey"
+        ).set_state(Spot.w12_ducane_prison_visiting).set_state(1),
         Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
         Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
         Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),

@@ -15,7 +15,7 @@
 
 .. entity:: WIFE
    :types: bluemonday78.types.PrisonVisitor
-   :states: 197801160800
+   :states: 1
 
    A beautician in her late forties.
 
@@ -51,10 +51,11 @@ Karen talks of the journey
 
 [NARRATOR]_
 
-    The Visiting Suite is not much more than a long hall with small tables arranged
+    The Visiting Suite is a long hall with small tables arranged
     in a grid.
 
-    |HERO_FIRSTNAME| |HERO_SURNAME| hangs back in a corner by the door. 
+Tables
+------
 
 [WIFE]_
 
@@ -63,6 +64,9 @@ Karen talks of the journey
 [HUSBAND]_
 
     No, let's sit here again.
+
+Too early
+---------
 
 [WIFE]_
 
@@ -90,6 +94,9 @@ Karen talks of the journey
 
     Oh.
 
+Why here?
+---------
+
 [WIFE]_
 
     I really don't know why they had to move you up here. Standford Hill was much
@@ -109,6 +116,8 @@ Karen talks of the journey
     No, it's...
 
     A shame.
+
+.. property:: WIFE.state 2
 
 .. |HUSBAND_FIRSTNAME| property:: HUSBAND.name.firstname
 .. |HERO_TITLE| property:: HERO.name.title

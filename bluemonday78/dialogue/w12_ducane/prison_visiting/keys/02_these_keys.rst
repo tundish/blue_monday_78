@@ -15,6 +15,7 @@
 
 .. entity:: WIFE
    :types: bluemonday78.types.PrisonVisitor
+   :states: 2
 
    A beautician in her late forties.
 

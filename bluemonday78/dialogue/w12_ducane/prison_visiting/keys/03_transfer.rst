@@ -11,7 +11,7 @@
 
 .. entity:: WIFE
    :types: bluemonday78.types.PrisonVisitor
-   :states: 197801160830
+   :states: 2
 
 .. entity:: CELLMATE
    :types: bluemonday78.types.Prisoner

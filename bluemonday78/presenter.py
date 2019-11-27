@@ -20,6 +20,7 @@ import math
 from collections import deque
 from collections import namedtuple
 import re
+import sys
 
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.model import SceneScript

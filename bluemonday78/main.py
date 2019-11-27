@@ -123,7 +123,9 @@ async def post_hop(request):
     matcher = MultiMatcher(request.app.folders)
     folders = list(matcher.options({"pathways": set([pathway])}))
     dialogue = Presenter.dialogue(folders, presenter.ensemble)
-    if dialogue is not None:
+    if dialogue is None:
+        print("No new dialogue cast. Check selection.", file=sys.stderr)
+    else:
         request.app.sessions[uid] = Presenter(dialogue, presenter.ensemble)
     raise web.HTTPFound("/{0.hex}".format(uid))
 
