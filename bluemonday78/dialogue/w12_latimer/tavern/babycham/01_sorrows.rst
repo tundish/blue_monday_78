@@ -121,9 +121,9 @@ There's your mistake
 
 [BARMAN]_
 
-    I don't think Victor really likes passengers to be honest.
+    Victor goes back and forth a lot to Holland and Spain.
 
-    He just goes back and forth to Holland or Spain.
+    I don't think he really likes taking passengers though, to be honest.
 
 [HIPSTER]_
 
