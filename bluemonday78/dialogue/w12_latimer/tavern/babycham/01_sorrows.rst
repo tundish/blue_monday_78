@@ -110,7 +110,7 @@ What not to do
 
     That would be Victor Yeoman's yard then.
 
-    On Commonwealth Avenue.
+    On Depot Road.
 
 [HIPSTER]_
 
@@ -127,7 +127,7 @@ There's your mistake
 
 [HIPSTER]_
 
-    Do you find him a bit right wing?
+    Do you find him slighty right wing?
 
 [BARMAN]_
 
