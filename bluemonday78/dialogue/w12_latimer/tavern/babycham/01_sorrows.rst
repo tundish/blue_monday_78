@@ -13,14 +13,6 @@
    :types: bluemonday78.types.Barman
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
-.. entity:: DRINKER_1
-   :types: bluemonday78.types.Character
-   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
-
-.. entity:: DRINKER_2
-   :types: bluemonday78.types.Character
-   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
-
 .. entity:: NARRATOR
    :types: bluemonday78.types.Narrator
 
@@ -30,6 +22,9 @@
 
 Sorrows
 ~~~~~~~
+
+..  Stiff Records' first office was at 32 Alexander St, Bayswater.
+    Quite walkable from Shepherd's Bush.
 
 A pub in Shepherd's Bush
 ------------------------
@@ -49,38 +44,73 @@ A pub in Shepherd's Bush
 
 [HIPSTER]_
 
-    What?
+    What paper?
 
 [BARMAN]_
 
-    I'm guessing by the tape recorder and the early and expeditious application 
-    of my best whisky that you may be a journalist.
+    I'm looking at your tape recorder.
+
+    And I'm noting the early and expeditious application
+    of my best whisky.
+
+    So I'm going to guess you may be a journalist.
 
 Justin pipes up
 ---------------
 
 [HIPSTER]_
 
-    I'm in music. Or I was until this morning. Got my marching orders.
+    I'm in the music industry.
+
+    Or I was until today.
+
+    Got my marching orders this morning.
 
 [BARMAN]_
 
-    Oh dear. Trouble?
+    Oh dear. Did they pay you off though?
+
+[HIPSTER]_
+
+    Yes, I've got it right here.
+
+[BARMAN]_
+
+    Ah, good.
+ 
+He's on the phone
+-----------------
+
+[HIPSTER]_
+
+    They told me to go out and hire a tour bus.
+
+    It was all very last minute.
+
+[BARMAN]_
+
+    Did you look in the Yellow Pages?
+
+[HIPSTER]_
+
+    No point.
+
+    There's only one phone in the office and I could never get on it.
+
+    So I went round to a place near here. It's on my way home.
 
 What not to do
 --------------
 
 [HIPSTER]_
 
-    I made the mistake of booking a tour bus with Bulldog Coaches.
-
-    You know, the white ones with the red stripes?
-
-    And a big bulldog on the side.
+    Bulldog coaches, do you know them?
 
 [BARMAN]_
 
-    Trailing a broken chain from a studded collar and wrapped in a Union Flag?
+    That would be Victor Yeoman's yard then.
+
+    On Commonwealth Avenue.
 
 [HIPSTER]_
 
@@ -91,9 +121,7 @@ There's your mistake
 
 [BARMAN]_
 
-    That would be Victor Yeoman's company then.
-
-    I don't think he really likes passengers to be honest.
+    I don't think Victor really likes passengers to be honest.
 
     He just goes back and forth to Holland or Spain.
 
@@ -105,18 +133,18 @@ There's your mistake
 
     I'd say a bit right wing, yes.
 
-Not alone though
-----------------
-
-[DRINKER_1]_
-
-    Those Ramsgate trips could be rather tense.
+Not what I asked for
+--------------------
 
 [HIPSTER]_
 
-    Not what Elvis Costello was after, certainly.
+    So the coach turned up covered in England flags and smelling of sick.
 
-[DRINKER_2]_
+[BARMAN]_
 
-    Who?
+    And that's why you got the sack.
+
+[HIPSTER]_
+
+    Not what Elvis Costello wanted at all.
 
