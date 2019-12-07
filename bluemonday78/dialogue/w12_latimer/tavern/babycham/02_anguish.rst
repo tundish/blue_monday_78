@@ -39,6 +39,9 @@ A pub in Shepherd's Bush
     His gaze is attracted, like a magpie, to an object on the bar. It is
     the well-stuffed wallet of |HIPSTER_FIRSTNAME| |HIPSTER_SURNAME|.
 
+Hospitality
+-----------
+
 [BARMAN]_
 
     Get you another double, er...
@@ -58,6 +61,9 @@ A pub in Shepherd's Bush
 [BARMAN]_
 
     Thankyou.
+
+Just a tourist
+--------------
 
 [DRINKER_1]_
 
@@ -79,6 +85,9 @@ A pub in Shepherd's Bush
 
     No, actually.
 
+Where you from?
+---------------
+
 [BARMAN]_
 
     Where's home for you then, |HIPSTER_FIRSTNAME|?
@@ -90,6 +99,9 @@ A pub in Shepherd's Bush
 [DRINKER_2]_
 
     Where?
+
+What's your name?
+-----------------
 
 [HIPSTER]_
 
@@ -118,6 +130,9 @@ A pub in Shepherd's Bush
 
     Ha ha ha ha!
 
+Global downturn
+---------------
+
 [HIPSTER]_
 
     You're not going to get any money out of my Uncle. He's not doing too well
@@ -135,6 +150,9 @@ A pub in Shepherd's Bush
     and he said he couldn't pay them any more.
 
     So I dropped out.
+
+No money
+--------
 
 [BARMAN]_
 
@@ -162,6 +180,9 @@ A pub in Shepherd's Bush
 
     Ha ha ha ha!
 
+Pay me
+------
+
 [HIPSTER]_
 
     So I got the job at the record company.
@@ -187,6 +208,9 @@ A pub in Shepherd's Bush
 
     Oh behave, |BARMAN_FIRSTNAME|. I'm a loyal customer.
 
+Seriously, pay me
+-----------------
+
 [BARMAN]_
 
     |DRINKER_2_FIRSTNAME|, my business partners recognise the importance of
@@ -208,6 +232,9 @@ A pub in Shepherd's Bush
 [DRINKER_2]_
 
     Oh come on, |BARMAN_FIRSTNAME|!
+
+The kindness of strangers
+-------------------------
 
 [BARMAN]_
 

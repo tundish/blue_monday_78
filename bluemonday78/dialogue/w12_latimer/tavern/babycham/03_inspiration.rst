@@ -73,6 +73,9 @@ A pub in Shepherd's Bush
 
     Maybe you need to read a little wider.
 
+Needs to make his mark
+----------------------
+
 [HIPSTER]_
 
     What I need is to get some band nights going.
@@ -110,6 +113,9 @@ A pub in Shepherd's Bush
 
     No, I'm sorry, |HIPSTER_FIRSTNAME|. That's not going to fly.
 
+What about premises?
+--------------------
+
 [DRINKER_1]_
 
     Plenty of empty places around here. You won't have to pay
@@ -126,6 +132,9 @@ A pub in Shepherd's Bush
 [HIPSTER]_
 
     Yeah, I could get an old warehouse or something.
+
+Who's doing your catering?
+--------------------------
 
 [BARMAN]_
 
@@ -152,6 +161,9 @@ A pub in Shepherd's Bush
 [HIPSTER]_
 
     That's not a bad idea.
+
+What's your poison?
+-------------------
 
 [NARRATOR]_
 
