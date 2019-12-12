@@ -28,6 +28,7 @@ from turberfield.utils.misc import group_by_type
 from bluemonday78.matcher import MultiMatcher
 import bluemonday78.story
 from bluemonday78.story import Spot
+from bluemonday78.types import Location
 
 
 class TimeSpanTests(unittest.TestCase):
@@ -65,6 +66,26 @@ class TimeSpanTests(unittest.TestCase):
         self.assertEqual(11, start.month)
         self.assertEqual(8, start.day)
         self.assertEqual(1, span.days)
+
+
+class SearchTests(unittest.TestCase):
+
+    def setUp(self):
+        self.ensemble = bluemonday78.story.ensemble()
+
+    def test_search_none(self):
+        rv = bluemonday78.story.search(
+            self.ensemble, Player
+        )
+        self.assertIsInstance(rv, set)
+        self.assertFalse(rv)
+
+    def test_search_many(self):
+        rv = bluemonday78.story.search(
+            self.ensemble, Location
+        )
+        self.assertIsInstance(rv, set)
+        self.assertEqual(5, len(rv))
 
 
 class SequenceTests(unittest.TestCase):

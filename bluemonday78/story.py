@@ -113,6 +113,18 @@ def prepare_folders(pkg="bluemonday78", path="dialogue", min_t=None, max_t=None)
         for f in generate_folders(pkg, path)
     ]
 
+
+def search(seq, typ=None, **kwargs):
+    return set(
+        i for i in seq
+        if isinstance(i, typ or object)
+        and not kwargs or any(
+            getattr(i, k, None) == v
+            for k, v in kwargs.items()
+        )
+    )
+
+
 if __name__ == "__main__":
     then = time.perf_counter()
     results = prepare_folders()
