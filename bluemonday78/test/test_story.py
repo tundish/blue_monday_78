@@ -87,6 +87,22 @@ class SearchTests(unittest.TestCase):
         self.assertIsInstance(rv, set)
         self.assertEqual(5, len(rv))
 
+    def test_search_single(self):
+        rv = bluemonday78.story.search(
+            self.ensemble, Location,
+            label="Visiting Suite"
+        )
+        self.assertIsInstance(rv, set)
+        self.assertEqual(1, len(rv))
+
+    def test_search_empty(self):
+        rv = bluemonday78.story.search(
+            self.ensemble, Player,
+            label="Visiting Suite"
+        )
+        self.assertIsInstance(rv, set)
+        self.assertEqual(1, len(rv))
+
 
 class SequenceTests(unittest.TestCase):
 
