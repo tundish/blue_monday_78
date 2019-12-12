@@ -115,6 +115,13 @@ def prepare_folders(pkg="bluemonday78", path="dialogue", min_t=None, max_t=None)
 
 
 def search(seq, typ=None, **kwargs):
+    """ Search the sequence for objects matching criteria.
+
+    If typ is specified, only instances of that type are
+    matched. Any keyword arguments match an object by
+    attribute.
+
+    """
     return set(
         i for i in seq
         if isinstance(i, typ or object)
