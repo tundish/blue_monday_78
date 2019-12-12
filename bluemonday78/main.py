@@ -42,17 +42,17 @@ from bluemonday78.types import Spot
 async def get_frame(request):
     uid = uuid.UUID(hex=request.match_info["session"])
     try:
-        presenter = request.app.sessions[uid]
+        presenter = request.app["sessions"][uid]
     except KeyError:
         raise web.HTTPUnauthorized(reason="Session {0!s} not found.".format(uid))
 
     if not presenter.pending:
         player = presenter.ensemble[-1]
         pathway = player.get_state(Spot).value
-        matcher = MultiMatcher(request.app.folders)
+        matcher = MultiMatcher(request.app["folders"])
         folders = list(matcher.options({"pathways": set([pathway])}))
         dialogue = Presenter.dialogue(folders, presenter.ensemble)
-        request.app.sessions[uid] = presenter = Presenter(dialogue, presenter.ensemble)
+        request.app["sessions"][uid] = presenter = Presenter(dialogue, presenter.ensemble)
 
     try:
         frame = presenter.frame()
@@ -74,7 +74,7 @@ async def get_frame(request):
 async def get_map(request):
     uid = uuid.UUID(hex=request.match_info["session"])
     try:
-        presenter = request.app.sessions[uid]
+        presenter = request.app["sessions"][uid]
     except KeyError:
         raise web.HTTPUnauthorized(reason="Session {0!s} not found.".format(uid))
     return web.Response(
@@ -102,31 +102,31 @@ async def post_titles(request):
 
     player = bluemonday78.story.build_player(name)
     ensemble = bluemonday78.story.ensemble(player)
-    dialogue = Presenter.dialogue(request.app.folders, ensemble)
+    dialogue = Presenter.dialogue(request.app["folders"], ensemble)
     presenter = Presenter(dialogue, ensemble)
     presenter = Presenter(None, ensemble)
     print(player, file=sys.stderr)
-    request.app.sessions[player.id] = presenter
+    request.app["sessions"][player.id] = presenter
     raise web.HTTPFound("/{0.id.hex}".format(player))
 
 
 async def post_hop(request):
     uid = uuid.UUID(hex=request.match_info["session"])
     try:
-        presenter = request.app.sessions[uid]
+        presenter = request.app["sessions"][uid]
     except KeyError:
         raise web.HTTPUnauthorized(reason="Session {0!s} not found.".format(uid))
     data = await request.post()
     location_id = uuid.UUID(hex=data["location_id"])
     location = next(i for i in presenter.ensemble if getattr(i, "id", None) == location_id)
     pathway = location.get_state(Spot).value
-    matcher = MultiMatcher(request.app.folders)
+    matcher = MultiMatcher(request.app["folders"])
     folders = list(matcher.options({"pathways": set([pathway])}))
     dialogue = Presenter.dialogue(folders, presenter.ensemble)
     if dialogue is None:
         print("No new dialogue cast. Check selection.", file=sys.stderr)
     else:
-        request.app.sessions[uid] = Presenter(dialogue, presenter.ensemble)
+        request.app["sessions"][uid] = Presenter(dialogue, presenter.ensemble)
     raise web.HTTPFound("/{0.hex}".format(uid))
 
 
@@ -158,8 +158,9 @@ def build_app(args):
         "/css/",
         pkg_resources.resource_filename("bluemonday78", "static/css")
     )
-    app.sessions = {}
-    app.folders = bluemonday78.story.prepare_folders()
+    app["args"] = args
+    app["sessions"] = {}
+    app["folders"] = bluemonday78.story.prepare_folders()
     return app
 
 
