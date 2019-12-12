@@ -101,7 +101,7 @@ class SearchTests(unittest.TestCase):
             label="Visiting Suite"
         )
         self.assertIsInstance(rv, set)
-        self.assertEqual(1, len(rv))
+        self.assertFalse(rv)
 
 
 class SequenceTests(unittest.TestCase):
