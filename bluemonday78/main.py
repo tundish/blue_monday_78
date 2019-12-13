@@ -122,11 +122,9 @@ async def post_titles(request):
         folders = list(matcher.options({"pathways": set([spot.value])}))
         dialogue = Presenter.dialogue(folders, ensemble)
         presenter = Presenter(dialogue, ensemble)
-        print(dialogue.fP, file=sys.stderr)
         while presenter.pending:
             frame = presenter.frame(react=True)
-            print(frame["name"], file=sys.stderr)
-            print(frame["scene"], file=sys.stderr)
+            print(dialogue.fP, frame["name"], file=sys.stderr)
 
     presenter = Presenter(None, ensemble)
     print(player, file=sys.stderr)
