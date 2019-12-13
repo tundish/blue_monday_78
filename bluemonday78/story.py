@@ -122,7 +122,7 @@ def search(seq, typ=None, **kwargs):
     attribute.
 
     """
-    return set(
+    return (
         i for i in seq
         if isinstance(i, typ or object)
         and (not kwargs or any(

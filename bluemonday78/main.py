@@ -16,6 +16,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+Hop to spots for debugging::
+
+    python3 -m bluemonday78.main --spot w12_ducane_prison_wing --spot w12_ducane_prison_visiting
+
+"""
+
 import argparse
 import asyncio
 from collections import deque
@@ -102,8 +109,25 @@ async def post_titles(request):
 
     player = bluemonday78.story.build_player(name)
     ensemble = bluemonday78.story.ensemble(player)
-    dialogue = Presenter.dialogue(request.app["folders"], ensemble)
-    presenter = Presenter(dialogue, ensemble)
+    for hop in request.app["args"].hops:
+        try:
+            spot = Spot[hop]
+        except KeyError:
+            print("Invalid hop: ", hop, file=sys.stderr)
+            continue
+        else:
+            print("Hop to ", spot, file=sys.stderr)
+
+        matcher = MultiMatcher(request.app["folders"])
+        folders = list(matcher.options({"pathways": set([spot.value])}))
+        dialogue = Presenter.dialogue(folders, ensemble)
+        presenter = Presenter(dialogue, ensemble)
+        print(dialogue.fP, file=sys.stderr)
+        while presenter.pending:
+            frame = presenter.frame(react=True)
+            print(frame["name"], file=sys.stderr)
+            print(frame["scene"], file=sys.stderr)
+
     presenter = Presenter(None, ensemble)
     print(player, file=sys.stderr)
     request.app["sessions"][player.id] = presenter
@@ -118,7 +142,7 @@ async def post_hop(request):
         raise web.HTTPUnauthorized(reason="Session {0!s} not found.".format(uid))
     data = await request.post()
     location_id = uuid.UUID(hex=data["location_id"])
-    location = next(i for i in presenter.ensemble if getattr(i, "id", None) == location_id)
+    location = next(bluemonday78.story.search(presenter.ensemble, id=location_id))
     pathway = location.get_state(Spot).value
     matcher = MultiMatcher(request.app["folders"])
     folders = list(matcher.options({"pathways": set([pathway])}))
@@ -181,6 +205,10 @@ def parser(description=__doc__):
     rv.add_argument(
         "--port", default=8080, type=int,
         help="Set a port on which to serve."
+    )
+    rv.add_argument(
+        "--spot", action="append", dest="hops", default=[],
+        help="Specify spots to hop to."
     )
     return rv
 

@@ -17,15 +17,16 @@
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
 import math
+from collections import defaultdict
 from collections import deque
 from collections import namedtuple
+import itertools
 import re
 import sys
 
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.model import SceneScript
 from turberfield.dialogue.performer import Performer
-from turberfield.utils.misc import group_by_type
 
 
 class Presenter:
@@ -87,7 +88,13 @@ class Presenter:
                         return dialogue.cast(selection).run()
 
     def __init__(self, dialogue, ensemble=None):
-        self.frames = [group_by_type(i.items) for i in getattr(dialogue, "shots", [])]
+        self.frames = [
+            defaultdict(list, dict(
+                {k: list(v) for k, v in itertools.groupby(i.items, key=type)},
+                name=i.name, scene=i.scene
+            ))
+            for i in getattr(dialogue, "shots", [])
+        ]
         self.ensemble = ensemble
 
     @property

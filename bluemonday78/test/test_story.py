@@ -74,41 +74,36 @@ class SearchTests(unittest.TestCase):
         self.ensemble = bluemonday78.story.ensemble()
 
     def test_search_none(self):
-        rv = bluemonday78.story.search(
+        rv = set(bluemonday78.story.search(
             self.ensemble, Player
-        )
-        self.assertIsInstance(rv, set)
+        ))
         self.assertFalse(rv)
 
     def test_search_many(self):
-        rv = bluemonday78.story.search(
+        rv = set(bluemonday78.story.search(
             self.ensemble, Location
-        )
-        self.assertIsInstance(rv, set)
+        ))
         self.assertEqual(5, len(rv))
 
     def test_search_single(self):
-        rv = bluemonday78.story.search(
+        rv = set(bluemonday78.story.search(
             self.ensemble, Location,
             label="Visiting Suite"
-        )
-        self.assertIsInstance(rv, set)
+        ))
         self.assertEqual(1, len(rv))
 
     def test_search_empty(self):
-        rv = bluemonday78.story.search(
+        rv = set(bluemonday78.story.search(
             self.ensemble, Player,
             label="Visiting Suite"
-        )
-        self.assertIsInstance(rv, set)
+        ))
         self.assertFalse(rv)
 
     def test_search_attribute(self):
-        rv = bluemonday78.story.search(
+        rv = set(bluemonday78.story.search(
             self.ensemble,
             label="Visiting Suite"
-        )
-        self.assertIsInstance(rv, set)
+        ))
         self.assertEqual(1, len(rv))
 
 
