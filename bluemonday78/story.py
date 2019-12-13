@@ -125,7 +125,7 @@ def search(seq, typ=None, **kwargs):
     return set(
         i for i in seq
         if isinstance(i, typ or object)
-        and (not kwargs or typ and any(
+        and (not kwargs or any(
             getattr(i, k, None) == v
             for k, v in kwargs.items()
         ))

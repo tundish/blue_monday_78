@@ -103,6 +103,14 @@ class SearchTests(unittest.TestCase):
         self.assertIsInstance(rv, set)
         self.assertFalse(rv)
 
+    def test_search_attribute(self):
+        rv = bluemonday78.story.search(
+            self.ensemble,
+            label="Visiting Suite"
+        )
+        self.assertIsInstance(rv, set)
+        self.assertEqual(1, len(rv))
+
 
 class SequenceTests(unittest.TestCase):
 
