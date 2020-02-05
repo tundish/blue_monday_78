@@ -180,6 +180,10 @@ def build_app(args):
         "/css/",
         pkg_resources.resource_filename("bluemonday78", "static/css")
     )
+    app.router.add_static(
+        "/img/",
+        pkg_resources.resource_filename("bluemonday78", "static/img")
+    )
     app["args"] = args
     app["sessions"] = {}
     app["folders"] = bluemonday78.story.prepare_folders()

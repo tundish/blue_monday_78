@@ -51,6 +51,11 @@ HM Prison Wormwood Scrubs.
 Ray is on the landing
 ---------------------
 
+.. fx:: bluemonday78 DSCF0433.jpg
+   :offset: 0
+   :duration: 30
+   :loop: 1
+
 [NARRATOR]_
 
     We fade in to the sound of keys in an iron door.
