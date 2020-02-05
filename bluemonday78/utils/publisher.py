@@ -22,6 +22,7 @@ from collections import namedtuple
 import glob
 import os.path
 import pathlib
+import platform
 import pprint
 import sys
 import uuid
@@ -59,6 +60,24 @@ def find_assets(path):
     locations = defaultdict(list)
     for uid, script_path in find_scripts(path):
         locations[uid].append(script_path)
+
+    if "windows" in platform.system().lower():
+        # Find soft links explicitly because MS OS fails to do it
+        # within the source repository
+        links = set([
+            (pathlib.Path(f), pathlib.Path(f).read_text())
+            for folder in locations.values()
+            for script in folder
+            for f in glob.glob(os.path.join(
+                path, "{0}/{1}".format("**", script.parent.name)),
+                recursive=True)
+            if pathlib.Path(f).is_file() and
+            0 < pathlib.Path(f).stat().st_size < 128
+        ])
+        print("Links", links)
+        for base, hop in links:
+            target = base.parent.joinpath(hop).resolve()
+            print(target)
 
     for uid, script_paths in locations.items():
         arc_name = None
