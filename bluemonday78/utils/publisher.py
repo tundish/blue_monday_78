@@ -61,24 +61,6 @@ def find_assets(path):
     for uid, script_path in find_scripts(path):
         locations[uid].append(script_path)
 
-    if "windows" in platform.system().lower():
-        # Find soft links explicitly because MS OS fails to do it
-        # within the source repository
-        links = set([
-            (pathlib.Path(f), pathlib.Path(f).read_text())
-            for folder in locations.values()
-            for script in folder
-            for f in glob.glob(os.path.join(
-                path, "{0}/{1}".format("**", script.parent.name)),
-                recursive=True)
-            if pathlib.Path(f).is_file() and
-            0 < pathlib.Path(f).stat().st_size < 128
-        ])
-        print("Links", links)
-        for base, hop in links:
-            target = base.parent.joinpath(hop).resolve()
-            print(target)
-
     for uid, script_paths in locations.items():
         arc_name = None
         pathways = set()
@@ -86,9 +68,26 @@ def find_assets(path):
         for script_path in script_paths:
             arc_path = script_path.parent
             pathways.add(arc_path.parent.relative_to(path).parts)
-            if not script_path.parent.is_symlink():
+            if not arc_path.is_symlink():
                 arc_name = arc_path.name
                 scripts.add(script_path.relative_to(path))
+
+        if "windows" in platform.system().lower():
+            # Find soft links explicitly because MS OS fails to do it
+            # within the source repository
+            links = set([
+                (pathlib.Path(f).parent, pathlib.Path(f).read_text())
+                for script in script_paths
+                for f in glob.glob(os.path.join(
+                    path, "{0}/{1}".format("**", script.parent.name)),
+                    recursive=True)
+                if pathlib.Path(f).is_file() and
+                0 < pathlib.Path(f).stat().st_size < 128
+            ])
+            for parent, hop in links:
+                if parent.joinpath(hop).resolve() == arc_path:
+                    pathways.add(parent.relative_to(path).parts)
+
         yield Assets(
             uid, frozenset(pathways),
             arc_name, tuple(sorted(scripts))
