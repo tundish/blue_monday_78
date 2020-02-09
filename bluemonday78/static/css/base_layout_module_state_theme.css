@@ -5,6 +5,10 @@
   --font-family-serif: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+ --teak-hue: 35;
+ --teak-lite: hsl(var(--teak-hue), 82%, 61%, 1.0);
+ --teak-deep: hsl(var(--teak-hue), 21%, 30%, 1.0);
 }
 
 * {
@@ -14,8 +18,8 @@ margin: 0;
 }
 
 body {
-background-color: hsl(11, 50%, 17%, 1.0);
-color: linen;
+background-color: var(--teak-deep);
+color: var(--teak-lite);
 }
 
 button, input, select, textarea {
