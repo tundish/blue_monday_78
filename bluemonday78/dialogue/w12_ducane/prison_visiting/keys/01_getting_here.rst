@@ -49,6 +49,16 @@ HM Prison Wormwood Scrubs.
 Karen talks of the journey
 --------------------------
 
+.. fx:: bluemonday78 karen/rejects-01.jpg
+   :offset: 0
+   :duration: 30
+   :loop: 1
+
+.. fx:: bluemonday78 karen/rejects-02.jpg
+   :offset: 0
+   :duration: 30
+   :loop: 1
+
 [NARRATOR]_
 
     The Visiting Suite is a long hall with small tables arranged
