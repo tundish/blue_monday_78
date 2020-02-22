@@ -1,0 +1,128 @@
+<html>
+<head>
+</head>
+<body>
+<style type="text/css">
+/* Write root from code so variables can be set from config */
+:root {
+
+--red-hue: 13;
+--yellow-hue: 50;
+--green-hue: 76;
+
+--creamy: hsl(var(--yellow-hue), 0%, 100%, 1.0);
+--pebble: hsl(var(--red-hue), 0%, 30%, 1.0);
+--claret: hsl(var(--red-hue), 80%, 55%, 1.0);
+--banana: hsl(var(--yellow-hue), 80%, 55%, 1.0);
+--collie: hsl(var(--green-hue), 80%, 55%, 1.0);
+
+/* https://www.archetypo.xyz/paro/ */
+--titles: "AA Paro", sans-serif;
+}
+
+* {
+box-sizing: border-box;
+border: 0;
+font: inherit;
+font-size: 100%;
+line-height: 1.2em;
+margin: 0;
+outline: 0;
+padding: 0;
+text-decoration: none;
+vertical-align: baseline;
+}
+
+h1 {
+color: var(--pebble);
+}
+
+p {
+color: var(--collie);
+}
+
+body {
+border: 6rem solid var(--creamy);
+display: grid;
+grid-template-columns: 3fr 1fr 5fr;
+grid-template-areas:
+"banner  photos  lyrics";
+height: 100vh;
+}
+
+.grid-banner {
+background-color: var(--creamy);
+font-family: var(--titles);
+grid-area: banner;
+}
+
+.grid-photos {
+background-color: var(--pebble);
+grid-area: photos;
+min-width: 128px;
+}
+
+.grid-lyrics {
+background-color: var(--banana);
+border-left: 1rem solid var(--creamy);
+grid-area: lyrics;
+}
+
+@media screen and (max-width: 1024px) {
+
+body {
+display: grid;
+grid-template-columns: 1fr 5fr;
+grid-template-areas:
+"photos  lyrics"
+}
+
+.grid-banner {
+display: none;
+}
+
+p {
+color: var(--claret);
+}
+}
+
+.grid-banner h1 {
+display: flex inline;
+flex-direction: column;
+font-size: 7rem;
+margin: 1rem 0 1rem 0;
+}
+
+.grid-banner h1 span:nth-child(1) {
+color: var(--pebble);
+}
+
+.grid-banner h1 span:nth-child(2) {
+color: var(--claret);
+}
+
+.grid-banner h1 span:nth-child(3) {
+color: var(--collie);
+}
+
+.grid-banner h2 {
+color: var(--banana);
+font-size: 5rem;
+}
+</style>
+
+<section class="grid-banner">
+<h1><span>Blue</span><span>Monday</span><span>78</span></h1>
+<h2>Pilot Episode</h2>
+</section>
+<section class="grid-photos">
+<h1>Photos</h1>
+<p>Text.</p>
+</section>
+<section class="grid-lyrics">
+<h1>Lyrics</h1>
+<p>Text.</p>
+</section>
+</section>
+</body>
+</html>

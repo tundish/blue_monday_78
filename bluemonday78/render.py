@@ -179,6 +179,7 @@ def titles_to_html():
 
 @functools.lru_cache()
 def body_html(refresh=None):
+    # TODO: Add style tag for css content
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
