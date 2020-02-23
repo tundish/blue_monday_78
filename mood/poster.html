@@ -1,5 +1,6 @@
 <html>
 <head>
+<title>Blue Monday 78: Pilot episode</title>
 </head>
 <body>
 <style type="text/css">
@@ -61,7 +62,10 @@ grid-area: banner;
 }
 
 .grid-photos {
+align-items: center;
 background-color: var(--pebble);
+display: flex;
+flex-direction: column;
 grid-area: photos;
 min-width: 128px;
 }
@@ -88,6 +92,11 @@ display: none;
 p {
 color: var(--claret);
 }
+}
+
+img {
+padding: 0.5rem;
+width: 100%;
 }
 
 .grid-banner h1 {
@@ -118,13 +127,11 @@ color: var(--banana);
 <h2>Pilot Episode</h2>
 </section>
 <section class="grid-photos">
-<h1>Photos</h1>
-<p>Text.</p>
+<img src="../bluemonday78/static/img/ray/instructs-01.jpg" alt="An edgy scene with two characters">
 </section>
 <section class="grid-lyrics">
 <h1>Lyrics</h1>
 <p>Text.</p>
-</section>
 </section>
 </body>
 </html>
