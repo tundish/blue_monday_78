@@ -68,6 +68,8 @@ min-width: 128px;
 .grid-lyrics {
 background-color: var(--banana);
 border-left: 1rem solid var(--creamy);
+display: flex;
+flex-direction: column;
 grid-area: lyrics;
 }
 
@@ -105,6 +107,15 @@ padding: 0.35rem 0.7rem 0.35rem 0.7rem;
 width: 100%;
 }
 
+button {
+background-color: var(--collie);
+color: var(--creamy);
+font-size: 1.2rem;
+margin: 1rem;
+padding: 1rem;
+width: 5rem;
+}
+
 .grid-banner h1 {
 display: flex inline;
 flex-direction: column;
@@ -140,6 +151,7 @@ color: var(--banana);
 <section class="grid-lyrics">
 <h1>Lyrics</h1>
 <p>Text.</p>
+<button>Go</button>
 </section>
 </body>
 </html>
