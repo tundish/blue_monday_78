@@ -1,5 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blue Monday 78: Pilot episode</title>
 </head>
 <body>
@@ -19,6 +22,10 @@
 
 /* https://www.archetypo.xyz/paro/ */
 --titles: "AA Paro", sans-serif;
+
+/* https://fontlibrary.org/en/font/inknut-antiqua */
+--detail: "Inknut Antiqua", sans-serif;
+
 }
 
 * {
@@ -32,18 +39,6 @@ outline: 0;
 padding: 0;
 text-decoration: none;
 vertical-align: baseline;
-}
-
-h1, h2 {
-color: var(--pebble);
-letter-spacing: 0.125rem;
-font-family: var(--titles);
-font-size: 4rem;
-margin: 1rem 0 1rem 1rem;
-}
-
-p {
-color: var(--collie);
 }
 
 body {
@@ -89,13 +84,24 @@ grid-template-areas:
 display: none;
 }
 
-p {
-color: var(--claret);
 }
+
+h1, h2 {
+color: var(--pebble);
+letter-spacing: 0.125rem;
+font-family: var(--titles);
+font-size: 4rem;
+margin: 1rem 0 1rem 1rem;
+}
+
+p {
+color: var(--creamy);
+font-family: var(--detail);
+font-size: 2rem;
 }
 
 img {
-padding: 0.5rem;
+padding: 0.35rem 0.7rem 0.35rem 0.7rem;
 width: 100%;
 }
 
@@ -128,6 +134,8 @@ color: var(--banana);
 </section>
 <section class="grid-photos">
 <img src="../bluemonday78/static/img/ray/instructs-01.jpg" alt="An edgy scene with two characters">
+<img src="../bluemonday78/static/img/ray/instructs-02.jpg" alt="An edgy scene with two characters">
+<img src="../bluemonday78/static/img/ray/instructs-03.jpg" alt="An edgy scene with two characters">
 </section>
 <section class="grid-lyrics">
 <h1>Lyrics</h1>
