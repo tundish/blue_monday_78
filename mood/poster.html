@@ -25,7 +25,8 @@
 
 /* https://fontlibrary.org/en/font/inknut-antiqua */
 --detail: "Inknut Antiqua", sans-serif;
-
+--system: "MS Comic Sans", cursive, sans-serif;
+--detail: MyHelvetica;
 }
 
 * {
@@ -49,6 +50,14 @@ vertical-align: baseline;
     font-weight: normal;
     font-style: normal;
 
+}
+
+@font-face {
+  font-family: MyHelvetica;
+  src: local("Helvetica Neue Bold"),
+       local("HelveticaNeue-Bold"),
+       url(MgOpenModernaBold.ttf);
+  font-weight: bold;
 }
 
 body {
@@ -81,6 +90,16 @@ border-left: 1rem solid var(--creamy);
 display: flex;
 flex-direction: column;
 grid-area: lyrics;
+}
+
+.grid-lyrics section {
+flex-grow: 1;
+}
+
+.grid-lyrics nav {
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
 }
 
 @media screen and (max-width: 1024px) {
@@ -158,10 +177,14 @@ color: var(--banana);
 <img src="../bluemonday78/static/img/ray/instructs-02.jpg" alt="An edgy scene with two characters">
 <img src="../bluemonday78/static/img/ray/instructs-03.jpg" alt="An edgy scene with two characters">
 </section>
-<section class="grid-lyrics">
+<div class="grid-lyrics">
+<section>
 <h1>Lyrics</h1>
 <p>Text.</p>
-<button>Go</button>
 </section>
+<nav>
+<button>Go</button>
+</nav>
+</div>
 </body>
 </html>
