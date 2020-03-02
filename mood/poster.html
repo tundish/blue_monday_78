@@ -54,9 +54,9 @@ vertical-align: baseline;
 body {
 border: 6rem solid var(--creamy);
 display: grid;
-grid-template-columns: 3fr 1fr 5fr;
+grid-template-columns: 3fr 5fr 1fr;
 grid-template-areas:
-"banner  photos  lyrics";
+"banner  lyrics  photos";
 height: 100vh;
 }
 
@@ -69,6 +69,7 @@ grid-area: banner;
 .grid-photos {
 align-items: center;
 background-color: var(--pebble);
+border-left: 1rem solid var(--creamy);
 display: flex;
 flex-direction: column;
 grid-area: photos;
@@ -77,7 +78,6 @@ min-width: 128px;
 
 .grid-lyrics {
 background-color: var(--banana);
-border-left: 1rem solid var(--creamy);
 display: flex;
 flex-direction: column;
 grid-area: lyrics;
@@ -87,9 +87,9 @@ grid-area: lyrics;
 
 body {
 display: grid;
-grid-template-columns: 1fr 5fr;
+grid-template-columns: 5fr 1fr;
 grid-template-areas:
-"photos  lyrics"
+"lyrics  photos"
 }
 
 .grid-banner {
