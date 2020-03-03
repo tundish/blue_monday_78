@@ -45,7 +45,11 @@ class RenderBaseTests(unittest.TestCase):
         self.assertIn('http-equiv="refresh"' ,rv)
 
     def test_base_body(self):
-        rv = bluemonday78.render.body_html().format("<p>Body text</p>", "Error")
+        rv = bluemonday78.render.body_html().format(
+            "",
+            "<p>Body text</p>",
+            "Error"
+        )
         self.assertIn("Body text",rv)
         self.assertNotIn("Error" ,rv)
 
@@ -73,3 +77,30 @@ class RenderFrameTests(DialogueLoader, unittest.TestCase):
         ensemble.append(bluemonday78.story.build_player("test"))
         rv = bluemonday78.render.ensemble_to_html(ensemble)
         self.assertEqual(7, rv.count("<form"))
+
+
+class RenderStyleTests(DialogueLoader, unittest.TestCase):
+
+    def test_blank(self):
+        rv = bluemonday78.render.vars_to_html()
+        self.assertEqual(":root {\n\n}", rv)
+
+    def test_strings(self):
+        rv = bluemonday78.render.vars_to_html(dict(apple="monospace"))
+        self.assertEqual(":root {--apple: monospace;}", rv.replace("\n", ""))
+
+    def test_numbers(self):
+        data = {"color-hue": 35}
+        rv = bluemonday78.render.vars_to_html(data)
+        self.assertEqual(":root {--color-hue: 35;}", rv.replace("\n", ""))
+
+    def test_compund(self):
+        data = {
+            "yellow-hue": 50,
+            "creamy": "hsl(var(--yellow-hue), 0%, 100%, 1.0)",
+        }
+        rv = bluemonday78.render.vars_to_html(data)
+        self.assertEqual(
+            ":root {--yellow-hue: 50;--creamy: hsl(var(--yellow-hue), 0%, 100%, 1.0);}",
+            rv.replace("\n", "")
+        )

@@ -177,6 +177,14 @@ def titles_to_html():
 <a href="https://github.com/tundish/blue_monday_78">GitHub</a>.</p>"""
 
 
+def vars_to_html(definitions=None):
+    definitions = definitions or {}
+    entries = "\n".join("--{0}: {1};".format(k, v) for k, v in definitions.items())
+
+    return f""":root {{
+{entries}
+}}"""
+
 @functools.lru_cache()
 def body_html(refresh=None):
     # TODO: Add style tag for css content
@@ -187,11 +195,14 @@ def body_html(refresh=None):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {'<meta http-equiv="refresh" content="{0}">'.format(refresh) if refresh is not None else ''}
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="/css/base_layout_module_state_theme.css" />
+<link rel="stylesheet" href="/css/blomt.css" />
 </head>
 <body>
-<div class="grid-blank"></div>
+<style type="text/css">
 {{0}}
+</style>
+<div class="grid-blank"></div>
+{{1}}
 <div class="grid-spare"></div>
 </body>
 </html>"""

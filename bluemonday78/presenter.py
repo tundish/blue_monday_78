@@ -45,7 +45,22 @@ class Presenter:
         "session": re.compile("[0-9a-f]{32}"),
     }
 
-    default_name="Mr William Billy McCarthy"
+    default_name = "Mr William Billy McCarthy"
+
+    definitions = {
+        "creamy": "hsl(50, 0%, 100%, 1.0)",
+        "pebble": "hsl(13, 0%, 30%, 1.0)",
+        "claret": "hsl(13, 80%, 55%, 1.0)",
+        "banana": "hsl(50, 80%, 55%, 1.0)",
+        "collie": "hsl(76, 80%, 55%, 1.0)",
+        "titles": '"AA Paro", sans-serif',
+        "detail": '"Inknut Antiqua", sans-serif',
+        "system": ", ".join([
+            "BlinkMacSystemFont", '"Segoe UI"', "Roboto", '"Helvetica Neue"',
+            '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"',
+            "Arial", "sans-serif"
+        ]),
+    }
 
     @staticmethod
     def animate_lines(seq, dwell, pause):

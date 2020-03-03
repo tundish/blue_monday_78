@@ -52,7 +52,7 @@ vertical-align: baseline;
 }
 
 body {
-border: 6rem solid var(--creamy);
+border: 6rem solid var(--creamy, white);
 display: grid;
 grid-template-columns: 3fr 5fr 1fr;
 grid-template-areas:
@@ -61,8 +61,8 @@ height: 100vh;
 }
 
 .grid-banner {
-background-color: var(--creamy);
-border-left: 0.25rem solid var(--pebble);
+background-color: var(--creamy, white);
+border-left: 0.25rem solid var(--pebble, grey);
 font-family: var(--titles);
 grid-area: banner;
 padding-left: 1.0rem;
@@ -70,8 +70,8 @@ padding-left: 1.0rem;
 
 .grid-photos {
 align-items: center;
-background-color: var(--pebble);
-border-left: 1rem solid var(--creamy);
+background-color: var(--pebble, grey);
+border-left: 1rem solid var(--creamy, white);
 display: flex;
 flex-direction: column;
 grid-area: photos;
@@ -101,7 +101,7 @@ display: none;
 }
 
 h1, h2 {
-color: var(--pebble);
+color: var(--pebble, grey);
 letter-spacing: 0.125rem;
 font-family: var(--titles);
 font-size: 4rem;
@@ -120,7 +120,7 @@ justify-content: flex-end;
 }
 
 p {
-color: var(--creamy);
+color: var(--creamy, white);
 font-family: var(--detail);
 font-size: 2rem;
 }
@@ -131,8 +131,8 @@ width: 100%;
 }
 
 button {
-background-color: var(--collie);
-color: var(--creamy);
+background-color: var(--collie, limegreen);
+color: var(--creamy, white);
 letter-spacing: 0.125rem;
 font-family: var(--titles);
 font-size: 1.6rem;
@@ -148,19 +148,19 @@ font-size: 7rem;
 }
 
 .grid-banner h1 span:nth-child(1) {
-color: var(--pebble);
+color: var(--pebble, grey);
 }
 
 .grid-banner h1 span:nth-child(2) {
-color: var(--claret);
+color: var(--claret, crimson);
 }
 
 .grid-banner h1 span:nth-child(3) {
-color: var(--collie);
+color: var(--collie, limegreen);
 }
 
 .grid-banner h2 {
-color: var(--banana);
+color: var(--banana, gold);
 }
 
 /* From main */
@@ -186,7 +186,7 @@ animation-name: fadein;
 /*  Theme   */
 
 .persona {
-color: var(--creamy);
+color: var(--creamy, white);
 font-family: var(--system);
 font-size: 1.1rem;
 font-weight: lighter;

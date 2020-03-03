@@ -71,9 +71,12 @@ async def get_frame(request):
     return web.Response(
         text = bluemonday78.render.body_html(
             refresh=Presenter.refresh_animations(frame) if pending else None,
-        ).format(bluemonday78.render.frame_to_html(
-            frame, presenter.ensemble, not pending
-        )),
+        ).format(
+            bluemonday78.render.vars_to_html(presenter.definitions),
+            bluemonday78.render.frame_to_html(
+                frame, presenter.ensemble, not pending
+            )
+        ),
         content_type="text/html"
     )
 
@@ -87,7 +90,10 @@ async def get_map(request):
     return web.Response(
         text = bluemonday78.render.body_html(
             refresh=None
-        ).format(bluemonday78.render.ensemble_to_html(presenter.ensemble)),
+        ).format(
+            bluemonday78.render.vars_to_html(presenter.definitions),
+            bluemonday78.render.ensemble_to_html(presenter.ensemble)
+        ),
         content_type="text/html"
     )
 
@@ -95,6 +101,7 @@ async def get_map(request):
 async def get_titles(request):
     return web.Response(
         text = bluemonday78.render.body_html(refresh=None).format(
+            bluemonday78.render.vars_to_html(Presenter.definitions),
             bluemonday78.render.titles_to_html()
         ),
         content_type="text/html"
