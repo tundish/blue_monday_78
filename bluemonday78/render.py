@@ -48,11 +48,11 @@ Percentage for keyframes:
 def animated_line_to_html(anim):
     return f"""
 <li style="animation-delay: {anim.delay:.2f}s; animation-duration: {anim.duration:.2f}s">
-<blockquote class="line">
-<header class="{'persona' if hasattr(anim.element.persona, '_name') else ''}">
+<blockquote class="obj-line">
+<header class="{'obj-persona' if hasattr(anim.element.persona, '_name') else ''}">
 { '{0.firstname} {0.surname}'.format(anim.element.persona.name) if hasattr(anim.element.persona, 'name') else ''}
 </header>
-<p class="speech">{ anim.element.text }</p>
+<p class="obj-speech">{ anim.element.text }</p>
 </blockquote>
 </li>"""
 
