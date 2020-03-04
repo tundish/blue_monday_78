@@ -127,21 +127,25 @@ def frame_to_html(frame, ensemble=[], final=False):
     stills = "\n".join(animated_still_to_html(i) for i in frame[Model.Still])
     audio = "\n".join(audio_to_html(i) for i in frame[Model.Audio])
     return f"""
-<aside class="grid-flash">
+{audio}
+<section class="lay-banner">
+<h1><span>Blue</span><span>Monday</span><span>78</span></h1>
+<h2>Pilot Episode</h2>
+</section>
+<aside class="lay-photos">
 {stills}
 </aside>
-<main class="grid-study">
-<!-- {'<h1>{0}</h1>'.format(spot.value[-1].capitalize().replace("_", " ")) if spot is not None else ''} -->
-{audio}
-<ul class="mod-dialogue">
+<div class="lay-speech">
+<main>
+{'<h1>{0}</h1>'.format(spot.value[-1].capitalize().replace("_", " ")) if spot is not None else ''}
+<ul class="obj-dialogue">
 {dialogue}
 </ul>
 </main>
-<nav class="grid-focus">
+<nav>
 {'<a href="/{0.id.hex}/map">Go</a>'.format(player) if player and final else ''}
 </nav>
-<section class="grid-state">
-</section>"""
+</div>"""
 
 
 def titles_to_html():
@@ -195,14 +199,13 @@ def body_html(refresh=None):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {'<meta http-equiv="refresh" content="{0}">'.format(refresh) if refresh is not None else ''}
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Blue Monday 78: Pilot episode</title>
 <link rel="stylesheet" href="/css/blomt.css" />
 </head>
 <body>
 <style type="text/css">
 {{0}}
 </style>
-<div class="grid-blank"></div>
 {{1}}
-<div class="grid-spare"></div>
 </body>
 </html>"""

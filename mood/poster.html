@@ -56,11 +56,11 @@ border: 6rem solid var(--creamy, white);
 display: grid;
 grid-template-columns: 3fr 5fr 1fr;
 grid-template-areas:
-"banner  lyrics  photos";
+"banner  speech  photos";
 height: 100vh;
 }
 
-.grid-banner {
+.lay-banner {
 background-color: var(--creamy, white);
 border-left: 0.25rem solid var(--pebble, grey);
 font-family: var(--titles);
@@ -68,7 +68,7 @@ grid-area: banner;
 padding-left: 1.0rem;
 }
 
-.grid-photos {
+.lay-photos {
 align-items: center;
 background-color: var(--pebble, grey);
 border-left: 1rem solid var(--creamy, white);
@@ -78,11 +78,11 @@ grid-area: photos;
 min-width: 128px;
 }
 
-.grid-lyrics {
+.lay-speech {
 background-color: var(--banana);
 display: flex;
 flex-direction: column;
-grid-area: lyrics;
+grid-area: speech;
 }
 
 @media screen and (max-width: 1024px) {
@@ -91,21 +91,13 @@ body {
 display: grid;
 grid-template-columns: 5fr 1fr;
 grid-template-areas:
-"lyrics  photos"
+"speech  photos"
 }
 
-.grid-banner {
+.lay-banner {
 display: none;
 }
 
-}
-
-h1, h2 {
-color: var(--pebble, grey);
-letter-spacing: 0.125rem;
-font-family: var(--titles);
-font-size: 4rem;
-margin: 1rem 0 1rem 1rem;
 }
 
 main {
@@ -117,6 +109,76 @@ nav {
 display: flex;
 flex-direction: row;
 justify-content: flex-end;
+}
+
+.lay-banner h1 {
+display: flex inline;
+flex-direction: column;
+font-size: 7rem;
+}
+
+.lay-banner h1 span:nth-child(1) {
+color: var(--pebble, grey);
+}
+
+.lay-banner h1 span:nth-child(2) {
+color: var(--claret, crimson);
+}
+
+.lay-banner h1 span:nth-child(3) {
+color: var(--collie, limegreen);
+}
+
+.lay-banner h2 {
+color: var(--banana, gold);
+}
+
+/* From main */
+
+/*  Module  */
+/*  prefix: obj-    */
+
+.obj-persona {
+color: var(--creamy, white);
+font-family: var(--system);
+font-size: 1.1rem;
+font-weight: lighter;
+margin: 0.25rem 0 0.25rem 0;
+}
+
+.obj-persona:after{
+content: ":";
+}
+
+.obj-speech {
+font-family: var(--detail);
+font-size: 1.3rem;
+}
+
+ul.obj-dialogue {
+padding: 0.5rem;
+}
+
+ul.obj-dialogue li {
+animation-name: fadeinout;
+animation-fill-mode: both;
+list-style-type: none;
+padding-bottom: 1.3rem;
+}
+
+ul.obj-dialogue li:last-of-type {
+animation-name: fadein;
+}
+
+/*  Theme   */
+
+
+h1, h2 {
+color: var(--pebble, grey);
+letter-spacing: 0.125rem;
+font-family: var(--titles);
+font-size: 4rem;
+margin: 1rem 0 1rem 1rem;
 }
 
 p {
@@ -141,98 +203,37 @@ padding: 0.6rem;
 width: 5rem;
 }
 
-.grid-banner h1 {
-display: flex inline;
-flex-direction: column;
-font-size: 7rem;
-}
-
-.grid-banner h1 span:nth-child(1) {
-color: var(--pebble, grey);
-}
-
-.grid-banner h1 span:nth-child(2) {
-color: var(--claret, crimson);
-}
-
-.grid-banner h1 span:nth-child(3) {
-color: var(--collie, limegreen);
-}
-
-.grid-banner h2 {
-color: var(--banana, gold);
-}
-
-/* From main */
-
-/*  Module  */
-/*  prefix: mod-    */
-
-ul.mod-dialogue {
-padding: 0.5rem;
-}
-
-ul.mod-dialogue li {
-animation-name: fadeinout;
-animation-fill-mode: both;
-list-style-type: none;
-padding-bottom: 1.3rem;
-}
-
-ul.mod-dialogue li:last-of-type {
-animation-name: fadein;
-}
-
-/*  Theme   */
-
-.persona {
-color: var(--creamy, white);
-font-family: var(--system);
-font-size: 1.1rem;
-font-weight: lighter;
-margin: 0.25rem 0 0.25rem 0;
-}
-
-.persona:after{
-content: ":";
-}
-
-.speech {
-font-family: var(--detail);
-font-size: 1.3rem;
-}
-
 </style>
 
-<section class="grid-banner">
+<section class="lay-banner">
 <h1><span>Blue</span><span>Monday</span><span>78</span></h1>
 <h2>Pilot Episode</h2>
 </section>
-<section class="grid-photos">
+<aside class="lay-photos">
 <img src="../bluemonday78/static/img/ray/instructs-01.jpg" alt="An edgy scene with two characters">
 <img src="../bluemonday78/static/img/ray/instructs-02.jpg" alt="An edgy scene with two characters">
 <img src="../bluemonday78/static/img/ray/instructs-03.jpg" alt="An edgy scene with two characters">
-</section>
-<div class="grid-lyrics">
+</aside>
+<div class="lay-speech">
 <main>
 <h1>Lyrics</h1>
-<ul class="mod-dialogue">
+<ul class="obj-dialogue">
 
 <li style="animation-delay: 0.00s; animation-duration: 4.00s">
-<blockquote class="line">
-<header class="persona">
+<blockquote class="obj-line">
+<header class="obj-persona">
 Ray Farington
 </header>
-<p class="speech">Right, now we will proceed to the  Reception area .</p>
+<p class="obj-speech">Right, now we will proceed to the  Reception area .</p>
 </blockquote>
 </li>
 
 <li style="animation-delay: 4.00s; animation-duration: 2.50s">
-<blockquote class="line">
-<header class="persona">
+<blockquote class="obj-line">
+<header class="obj-persona">
 Ray Farington
 </header>
-<p class="speech">At the double, and in silence!</p>
+<p class="obj-speech">At the double, and in silence!</p>
 </blockquote>
 </li>
 </ul>
