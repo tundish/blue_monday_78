@@ -82,16 +82,16 @@ class RenderFrameTests(DialogueLoader, unittest.TestCase):
 class RenderStyleTests(DialogueLoader, unittest.TestCase):
 
     def test_blank(self):
-        rv = bluemonday78.render.vars_to_html()
+        rv = bluemonday78.render.dict_to_css()
         self.assertEqual(":root {\n\n}", rv)
 
     def test_strings(self):
-        rv = bluemonday78.render.vars_to_html(dict(apple="monospace"))
+        rv = bluemonday78.render.dict_to_css(dict(apple="monospace"))
         self.assertEqual(":root {--apple: monospace;}", rv.replace("\n", ""))
 
     def test_numbers(self):
         data = {"color-hue": 35}
-        rv = bluemonday78.render.vars_to_html(data)
+        rv = bluemonday78.render.dict_to_css(data)
         self.assertEqual(":root {--color-hue: 35;}", rv.replace("\n", ""))
 
     def test_compund(self):
@@ -99,7 +99,7 @@ class RenderStyleTests(DialogueLoader, unittest.TestCase):
             "yellow-hue": 50,
             "creamy": "hsl(var(--yellow-hue), 0%, 100%, 1.0)",
         }
-        rv = bluemonday78.render.vars_to_html(data)
+        rv = bluemonday78.render.dict_to_css(data)
         self.assertEqual(
             ":root {--yellow-hue: 50;--creamy: hsl(var(--yellow-hue), 0%, 100%, 1.0);}",
             rv.replace("\n", "")

@@ -28,7 +28,7 @@ import asyncio
 from collections import deque
 from collections import namedtuple
 import functools
-import random
+import logging
 import sys
 import uuid
 
@@ -72,7 +72,7 @@ async def get_frame(request):
         text = bluemonday78.render.body_html(
             refresh=Presenter.refresh_animations(frame) if pending else None,
         ).format(
-            bluemonday78.render.vars_to_html(presenter.definitions),
+            bluemonday78.render.dict_to_css(presenter.definitions),
             bluemonday78.render.frame_to_html(
                 frame, presenter.ensemble, not pending
             )
@@ -91,7 +91,7 @@ async def get_map(request):
         text = bluemonday78.render.body_html(
             refresh=None
         ).format(
-            bluemonday78.render.vars_to_html(presenter.definitions),
+            bluemonday78.render.dict_to_css(presenter.definitions),
             bluemonday78.render.ensemble_to_html(presenter.ensemble)
         ),
         content_type="text/html"
@@ -101,7 +101,7 @@ async def get_map(request):
 async def get_titles(request):
     return web.Response(
         text = bluemonday78.render.body_html(refresh=None).format(
-            bluemonday78.render.vars_to_html(Presenter.definitions),
+            bluemonday78.render.dict_to_css(Presenter.definitions),
             bluemonday78.render.titles_to_html()
         ),
         content_type="text/html"
@@ -110,7 +110,7 @@ async def get_titles(request):
 
 async def post_titles(request):
     data = await request.post()
-    name = data["playername"]
+    name = data.get("playername", Presenter.default_name)
     if not Presenter.validation["name"].match(name):
         raise web.HTTPUnauthorized(reason="User input invalid name.")
 
@@ -199,6 +199,7 @@ def build_app(args):
 
 def main(args):
     app = build_app(args)
+    logging.basicConfig(level=logging.INFO)
     return web.run_app(app, host=args.host, port=args.port)
 
 

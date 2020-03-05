@@ -150,42 +150,28 @@ def frame_to_html(frame, ensemble=[], final=False):
 
 def titles_to_html():
     return f"""
-<form role="form" action="/" method="POST" name="titles" class="grid-flash mod-titles">
-  <h1>Start a new story.</h1>
-    <fieldset>
-    <label for="player-name" id="player-name-tip">Choose a character name</label>
-    <input
-    name="playername"
-    type="text"
-    id="player-name"
-    required="required"
-    aria-describedby="player-name-tip"
-    placeholder="?"
-    pattern="{Presenter.validation["name"].pattern}"
-    >
-    <button type="submit">Enter</button>
-    </fieldset>
-    <!-- <fieldset>
-    <label for="email">Email</label>
-    <input
-    name="email"
-    id="email"
-    placeholder="@"
-    aria-describedby="email-tip"
-    pattern="{{ validation["email"].pattern }}"
-    >
-    <small id="email-tip">optional</small>
-    </fieldset> -->
-</form>
+<section class="lay-banner">
+<h1><span>Blue</span><span>Monday</span><span>78</span></h1>
+<h2>Pilot Episode</h2>
+</section>
+<div class="lay-speech">
+<main>
+<h1>Start a new story.</h1>
 <p>You can get the code for this story from
-<a href="https://github.com/tundish/blue_monday_78">GitHub</a>.</p>"""
+<a href="https://github.com/tundish/blue_monday_78">GitHub</a>.</p>
+</main>
+<nav>
+<form role="form" action="/" method="POST" name="titles" class="grid-flash mod-titles">
+<button type="submit">Go</button>
+</form>
+</nav>
+</div>"""
 
 
-def vars_to_html(definitions=None):
-    definitions = definitions or {}
-    entries = "\n".join("--{0}: {1};".format(k, v) for k, v in definitions.items())
-
-    return f""":root {{
+def dict_to_css(mapping=None, tag=":root"):
+    mapping = mapping or {}
+    entries = "\n".join("--{0}: {1};".format(k, v) for k, v in mapping.items())
+    return f"""{tag} {{
 {entries}
 }}"""
 
