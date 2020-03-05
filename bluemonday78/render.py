@@ -157,7 +157,7 @@ def titles_to_html():
 <div class="lay-speech">
 <main>
 <h1>Start a new story.</h1>
-<p>You can get the code for this story from
+<p class="obj-speech">You can get the code for this story from
 <a href="https://github.com/tundish/blue_monday_78">GitHub</a>.</p>
 </main>
 <nav>
