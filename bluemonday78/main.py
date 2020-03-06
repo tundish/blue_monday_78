@@ -183,6 +183,8 @@ def build_app(args):
             post_hop
         ),
     ])
+
+    # TODO: Optional config for dev only.
     app.router.add_static(
         "/css/",
         pkg_resources.resource_filename("bluemonday78", "static/css")
@@ -190,6 +192,10 @@ def build_app(args):
     app.router.add_static(
         "/img/",
         pkg_resources.resource_filename("bluemonday78", "static/img")
+    )
+    app.router.add_static(
+        "/fonts/",
+        pkg_resources.resource_filename("bluemonday78", "static/fonts")
     )
     app["args"] = args
     app["sessions"] = {}

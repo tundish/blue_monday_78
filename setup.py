@@ -40,11 +40,21 @@ setup(
     package_data={
         "bluemonday78": [
             "dialogue/*/*/*/*.rst",
+            #"static/audio/*.mp3",
+            "static/css/*.css",
+            "static/fonts/*.otf",
+            "static/fonts/*.woff",
+            "static/fonts/*.woff2",
+            "static/img/*/*.jpg",
         ]
     },
     install_requires=[
         "turberfield-dialogue>=0.21.0",
     ],
     zip_safe=True,
-    entry_points={}
+    entry_points={
+        "console_scripts": [
+            "carmen-web = bluemonday78.main:run",
+        ],
+    }
 )
