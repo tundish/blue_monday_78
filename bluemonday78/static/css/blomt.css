@@ -158,7 +158,6 @@ animation-name: fadein;
 }
 
 .obj-persona {
-color: var(--creamy, white);
 font-family: var(--system);
 font-size: 1.1rem;
 font-weight: lighter;
@@ -209,18 +208,17 @@ opacity: 0.6;
 
 body {
 border: 6rem solid var(--creamy, white);
+color: var(--pebble, grey);
 }
 
 h1, h2 {
-color: var(--pebble, grey);
 letter-spacing: 0.125rem;
 font-family: var(--titles);
-font-size: 4rem;
+font-size: 3rem;
 margin: 1rem 0 1rem 1rem;
 }
 
 p {
-color: var(--creamy, white);
 font-family: var(--detail);
 font-size: 2rem;
 }

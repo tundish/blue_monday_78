@@ -27,23 +27,6 @@ from bluemonday78.types import Player
 from bluemonday78.types import Spot
 from bluemonday78.types import Page
 
-"""
-http://css3.bradshawenterprises.com/cfimg/
-For "n" images You must define:
-a=presentation time for one image
-b=duration for cross fading
-Total animation-duration is of course t=(a+b)*n
-
-animation-delay = t/n or = a+b
-
-Percentage for keyframes:
-
-    0%
-    a/t*100%
-    (a+b)/t*100% = 1/n*100%
-    100%-(b/t*100%)
-    100%
-"""
 
 def animated_line_to_html(anim):
     return f"""
@@ -143,7 +126,9 @@ def frame_to_html(frame, ensemble=[], final=False):
 </ul>
 </main>
 <nav>
-{'<a href="/{0.id.hex}/map">Go</a>'.format(player) if player and final else ''}
+<form role="form" action="{player.id.hex}/map" method="GET" name="titles">
+{'<button action="submit">Go</button>'.format(player) if player and final else ''}
+</form>
 </nav>
 </div>"""
 
@@ -174,6 +159,7 @@ def dict_to_css(mapping=None, tag=":root"):
     return f"""{tag} {{
 {entries}
 }}"""
+
 
 @functools.lru_cache()
 def body_html(refresh=None):
