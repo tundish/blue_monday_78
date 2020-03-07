@@ -81,26 +81,25 @@ def ensemble_to_html(ensemble):
         i.get_state(Page) != Page.closed
     )
     return f"""
-<aside class="grid-flash">
-</aside>
-<nav class="grid-study">
-<ul class="mod-moves">
-{moves}
-</ul>
-</nav>
-<main class="grid-state">
-<ul class="mod-dialogue">
+<section class="lay-banner">
+<h1><span>Blue</span><span>Monday</span><span>78</span></h1>
+<h2>{MultiMatcher.parse_timespan(str(player.state))[0].strftime("%H:%M:%S %p, %a %d %b")}</h2>
+</section>
+<div class="lay-speech">
+<main>
+<ul class="obj-dialogue">
 {notes}
 </ul>
-<ul class="mod-inventory">
+<ul class="obj-inventory">
 {items}
 </ul>
 </main>
-<section class="grid-focus">
-<dl class="mod-stats"><dt>Time</dt>
-<dd>{MultiMatcher.parse_timespan(str(player.state))[0].ctime()}</dd>
-</dl>
-</section>"""
+<nav>
+<ul class="obj-move">
+{moves}
+</ul>
+</nav>
+</div>"""
 
 
 def frame_to_html(frame, ensemble=[], final=False):
