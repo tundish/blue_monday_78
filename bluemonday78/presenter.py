@@ -52,7 +52,7 @@ class Presenter:
         "pebble": "hsl(13, 0%, 30%, 1.0)",
         "claret": "hsl(13, 80%, 55%, 1.0)",
         "banana": "hsl(50, 80%, 55%, 1.0)",
-        "collie": "hsl(76, 80%, 55%, 1.0)",
+        "collie": "hsl(76, 80%, 35%, 1.0)",
         "titles": '"AA Paro", sans-serif',
         "detail": '"Inknut Antiqua", sans-serif',
         "system": ", ".join([

@@ -18,7 +18,7 @@
 --pebble: hsl(var(--red-hue), 0%, 30%, 1.0);
 --claret: hsl(var(--red-hue), 80%, 55%, 1.0);
 --banana: hsl(var(--yellow-hue), 80%, 55%, 1.0);
---collie: hsl(var(--green-hue), 80%, 55%, 1.0);
+--collie: hsl(var(--green-hue), 80%, 35%, 1.0);
 
 /* https://www.archetypo.xyz/paro/ */
 --titles: "AA Paro", sans-serif;
@@ -159,7 +159,7 @@ flex-grow: 1;
 padding: 0.5rem;
 }
 
-nav {
+nav ul {
 display: flex;
 flex-direction: row;
 justify-content: flex-end;
@@ -246,13 +246,19 @@ width: 100%;
 
 button {
 background-color: var(--collie, limegreen);
+border: 2px solid var(--pebble, grey);
 color: var(--creamy, white);
 letter-spacing: 0.125rem;
 font-family: var(--titles);
 font-size: 1.6rem;
 margin: 1rem;
+min-width: 6rem;
 padding: 0.6rem;
-width: 5rem;
+width: fit-content(15rem);
+}
+
+button:hover {
+border: 2px solid var(--creamy, white);
 }
 
 </style>
@@ -291,7 +297,10 @@ Ray Farington
 </ul>
 </main>
 <nav>
-<button>Go</button>
+<ul class="obj-move">
+<li> <button>Stop</button> </li>
+<li> <button>Go</button> </li>
+</ul>
 </nav>
 </div>
 </body>

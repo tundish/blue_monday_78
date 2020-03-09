@@ -135,7 +135,7 @@ flex-grow: 1;
 padding: 0.5rem;
 }
 
-nav {
+nav ul {
 display: flex;
 flex-direction: row;
 justify-content: flex-end;
@@ -231,13 +231,19 @@ width: 100%;
 
 button {
 background-color: var(--collie, limegreen);
+border: 2px solid var(--pebble, grey);
 color: var(--creamy, white);
 letter-spacing: 0.125rem;
 font-family: var(--titles);
 font-size: 1.6rem;
 margin: 1rem;
+min-width: 6rem;
 padding: 0.6rem;
-width: 5rem;
+width: fit-content(15rem);
+}
+
+button:hover {
+border: 2px solid var(--creamy, white);
 }
 
 .lay-banner h1 {

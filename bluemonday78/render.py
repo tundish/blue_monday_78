@@ -66,6 +66,7 @@ def ensemble_to_html(ensemble):
     player = ensemble[-1]
     spot = player.get_state(Spot)
     assert isinstance(player, Player)
+    ts = MultiMatcher.parse_timespan(str(player.state))[0]
     notes = "\n".join(
         "<li>{0.html}</li>".format(i)
         for i in getattr(player, "memories", [])
@@ -83,7 +84,8 @@ def ensemble_to_html(ensemble):
     return f"""
 <section class="lay-banner">
 <h1><span>Blue</span><span>Monday</span><span>78</span></h1>
-<h2>{MultiMatcher.parse_timespan(str(player.state))[0].strftime("%H:%M:%S %p, %a %d %b")}</h2>
+<h2>{ts.strftime("%H:%M:%S %p")}</h2>
+<h2>{ts.strftime("%a %d %b")}</h2>
 </section>
 <div class="lay-speech">
 <main>
@@ -112,7 +114,7 @@ def frame_to_html(frame, ensemble=[], final=False):
 {audio}
 <section class="lay-banner">
 <h1><span>Blue</span><span>Monday</span><span>78</span></h1>
-<h2>Pilot Episode</h2>
+<h2>An Addison Arches episode</h2>
 </section>
 <aside class="lay-photos">
 {stills}
@@ -125,9 +127,11 @@ def frame_to_html(frame, ensemble=[], final=False):
 </ul>
 </main>
 <nav>
-<form role="form" action="{player.id.hex}/map" method="GET" name="titles">
+<ul>
+<li><form role="form" action="{player.id.hex}/map" method="GET" name="titles">
 {'<button action="submit">Go</button>'.format(player) if player and final else ''}
-</form>
+</form></li>
+</ul>
 </nav>
 </div>"""
 
@@ -136,7 +140,7 @@ def titles_to_html():
     return f"""
 <section class="lay-banner">
 <h1><span>Blue</span><span>Monday</span><span>78</span></h1>
-<h2>Pilot Episode</h2>
+<h2>An Addison Arches episode</h2>
 </section>
 <div class="lay-speech">
 <main>
@@ -145,9 +149,11 @@ def titles_to_html():
 <a href="https://github.com/tundish/blue_monday_78">GitHub</a>.</p>
 </main>
 <nav>
-<form role="form" action="/" method="POST" name="titles" class="grid-flash mod-titles">
+<ul>
+<li><form role="form" action="/" method="POST" name="titles" class="grid-flash mod-titles">
 <button type="submit">Go</button>
-</form>
+</form></li>
+</ul>
 </nav>
 </div>"""
 
