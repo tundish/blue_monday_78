@@ -58,7 +58,7 @@ Ray is on the landing
 
 [NARRATOR]_
 
-    We fade in to the sound of keys in an iron door.
+    The sound of keys in an iron door.
 
 [CELLMATE]_
 

@@ -68,7 +68,7 @@ def ensemble_to_html(ensemble):
     assert isinstance(player, Player)
     ts = MultiMatcher.parse_timespan(str(player.state))[0]
     notes = "\n".join(
-        "<li>{0.html}</li>".format(i)
+        "<li><p>{0.html}</p></li>".format(i)
         for i in getattr(player, "memories", [])
     )
     items = "\n".join(
@@ -89,7 +89,7 @@ def ensemble_to_html(ensemble):
 </section>
 <div class="lay-speech">
 <main>
-<ul class="obj-dialogue">
+<ul class="obj-memory">
 {notes}
 </ul>
 <ul class="obj-inventory">
@@ -168,7 +168,6 @@ def dict_to_css(mapping=None, tag=":root"):
 
 @functools.lru_cache()
 def body_html(refresh=None):
-    # TODO: Add style tag for css content
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
