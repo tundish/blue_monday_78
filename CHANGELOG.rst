@@ -6,6 +6,16 @@
 Change Log
 ::::::::::
 
+0.5.0
+=====
+
+This release focuses on styling. Notably:
+
+* Simplify page layout to resemble an album-cover
+* Focus on two key fonts and serve them locally
+* Organise CSS base variable definitions so they can be defined from code
+* A first experiment with images for mood
+
 0.4.0
 =====
 
