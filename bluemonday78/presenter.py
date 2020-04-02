@@ -27,6 +27,7 @@ import sys
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.model import SceneScript
 from turberfield.dialogue.performer import Performer
+from turberfield.utils.assembly import Assembly
 
 
 class Presenter:
@@ -118,6 +119,10 @@ class Presenter:
             frame for frame in self.frames
             if all([Performer.allows(i) for i in frame[Model.Condition]])
         ])
+
+    @property
+    def assembly(self):
+        return Assembly.dumps(self.ensemble)
 
     def frame(self, dwell=0.3, pause=1, react=True):
         """ Return the next shot of dialogue as an animated frame."""

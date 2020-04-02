@@ -24,6 +24,7 @@ from turberfield.dialogue.types import EnumFactory
 from turberfield.dialogue.types import Persona
 from turberfield.dialogue.types import Player
 from turberfield.dialogue.types import Stateful
+from turberfield.utils.assembly import Assembly
 
 
 class Spot(EnumFactory, enum.Enum):
@@ -51,3 +52,9 @@ class Barman(Stateful, Persona): pass
 class Hipster(Stateful, Persona): pass
 class Character(Stateful, Persona): pass
 class Location(Stateful, DataObject): pass
+
+
+Assembly.register(
+    Narrator, Spot, PrisonOfficer, Prisoner, PrisonVisitor, Barman, Hipster, Character, Location,
+    NoteBook, Page, Player
+)

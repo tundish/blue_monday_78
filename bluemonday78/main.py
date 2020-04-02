@@ -160,6 +160,16 @@ async def post_hop(request):
     raise web.HTTPFound("/{0.hex}".format(uid))
 
 
+async def get_assembly(request):
+    uid = uuid.UUID(hex=request.match_info["session"])
+    try:
+        presenter = request.app["sessions"][uid]
+    except KeyError:
+        raise web.HTTPUnauthorized(reason="Session {0!s} not found.".format(uid))
+    else:
+        return web.Response(text=presenter.assembly, content_type="application/json")
+
+
 async def get_metricz(request):
     data = {
         "host": {"name": socket.gethostname()},
@@ -178,6 +188,7 @@ def build_app(args):
     app.add_routes([
         web.get("/", get_titles),
         web.post("/", post_titles),
+        web.get("/metricz", get_metricz),
         web.get(
             "/{{session:{0}}}".format(
                 Presenter.validation["session"].pattern
@@ -196,7 +207,12 @@ def build_app(args):
             ),
             post_hop
         ),
-        web.get("/metricz", get_metricz),
+        web.get(
+            "/{{session:{0}}}/assembly".format(
+                Presenter.validation["session"].pattern
+            ),
+            get_assembly
+        ),
     ])
 
     # TODO: Optional config for dev only.
