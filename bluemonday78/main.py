@@ -29,6 +29,7 @@ from collections import deque
 from collections import namedtuple
 import functools
 import logging
+import socket
 import sys
 import uuid
 
@@ -159,6 +160,19 @@ async def post_hop(request):
     raise web.HTTPFound("/{0.hex}".format(uid))
 
 
+async def get_metricz(request):
+    data = {
+        "host": {"name": socket.gethostname()},
+        "sessions": [
+            {
+                "uid": str(uid),
+            }
+            for uid, presenter in request.app["sessions"].items()
+        ]
+    }
+    return web.json_response(data)
+
+
 def build_app(args):
     app = web.Application()
     app.add_routes([
@@ -182,6 +196,7 @@ def build_app(args):
             ),
             post_hop
         ),
+        web.get("/metricz", get_metricz),
     ])
 
     # TODO: Optional config for dev only.
