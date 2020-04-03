@@ -38,6 +38,7 @@ import pkg_resources
 
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.performer import Performer
+from turberfield.utils.assembly import Assembly
 
 from bluemonday78.matcher import MultiMatcher
 from bluemonday78.presenter import Presenter
@@ -65,7 +66,7 @@ async def get_frame(request):
     try:
         frame = presenter.frame()
     except IndexError:
-        print("Presenter has no more frames", file=sys.stderr)
+        request.app["log"].info("Presenter has no more frames")
         raise web.HTTPFound("/{0.hex}/map".format(uid))
 
     pending = presenter.pending
@@ -121,10 +122,10 @@ async def post_titles(request):
         try:
             spot = Spot[hop]
         except KeyError:
-            print("Invalid hop: ", hop, file=sys.stderr)
+            request.app["log"].info("Invalid hop: {0}".format(hop))
             continue
         else:
-            print("Hop to ", spot, file=sys.stderr)
+            request.app["log"].info("Hop to {0}".format(spot))
 
         matcher = MultiMatcher(request.app["folders"])
         folders = list(matcher.options({"pathways": set([spot.value])}))
@@ -132,10 +133,10 @@ async def post_titles(request):
         presenter = Presenter(dialogue, ensemble)
         while presenter.pending:
             frame = presenter.frame(react=True)
-            print(dialogue.fP, frame["name"], file=sys.stderr)
+            request.app["log"].info("{0} {1}".format(dialogue.fP, frame["name"]))
 
     presenter = Presenter(None, ensemble)
-    print(player, file=sys.stderr)
+    request.app["log"].info(player)
     request.app["sessions"][player.id] = presenter
     raise web.HTTPFound("/{0.id.hex}".format(player))
 
@@ -154,7 +155,7 @@ async def post_hop(request):
     folders = list(matcher.options({"pathways": set([pathway])}))
     dialogue = Presenter.dialogue(folders, presenter.ensemble)
     if dialogue is None:
-        print("No new dialogue cast. Check selection.", file=sys.stderr)
+        request.app["log"].info("No new dialogue cast. Check selection.")
     else:
         request.app["sessions"][uid] = Presenter(dialogue, presenter.ensemble)
     raise web.HTTPFound("/{0.hex}".format(uid))
@@ -167,7 +168,10 @@ async def get_assembly(request):
     except KeyError:
         raise web.HTTPUnauthorized(reason="Session {0!s} not found.".format(uid))
     else:
-        return web.Response(text=presenter.assembly, content_type="application/json")
+        return web.Response(
+            text=Assembly.dumps(presenter.assembly),
+            content_type="application/json"
+        )
 
 
 async def get_metricz(request):
@@ -229,6 +233,7 @@ def build_app(args):
         pkg_resources.resource_filename("bluemonday78", "static/fonts")
     )
     app["args"] = args
+    app["log"] = logging.getLogger("app")
     app["sessions"] = {}
     app["folders"] = bluemonday78.story.prepare_folders()
     return app
@@ -236,7 +241,10 @@ def build_app(args):
 
 def main(args):
     app = build_app(args)
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(
+        format="%(asctime)s %(levelname)-8s|%(name)s|%(message)s",
+        level=logging.INFO
+    )
     return web.run_app(app, host=args.host, port=args.port)
 
 
@@ -256,6 +264,9 @@ def parser(description=__doc__):
     rv.add_argument(
         "--spot", action="append", dest="hops", default=[],
         help="Specify spots to hop to."
+    )
+    rv.add_argument(
+        "--config", default=None, help="Specify a config file"
     )
     return rv
 

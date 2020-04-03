@@ -16,18 +16,22 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
-import math
 from collections import defaultdict
 from collections import deque
 from collections import namedtuple
+import copy
+from datetime import datetime
 import itertools
+import math
 import re
 import sys
 
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.model import SceneScript
 from turberfield.dialogue.performer import Performer
-from turberfield.utils.assembly import Assembly
+import turberfield.utils
+
+import bluemonday78
 
 
 class Presenter:
@@ -112,6 +116,7 @@ class Presenter:
             for i in getattr(dialogue, "shots", [])
         ]
         self.ensemble = ensemble
+        self.ts = datetime.utcnow()
 
     @property
     def pending(self) -> int:
@@ -122,7 +127,29 @@ class Presenter:
 
     @property
     def assembly(self):
-        return Assembly.dumps(self.ensemble)
+        ensemble = [copy.copy(i) for i in self.ensemble]
+        for obj in ensemble:
+            if hasattr(obj, "memories"):
+                obj.memories = [
+                    i._replace(
+                        subject=getattr(i.subject, "id", None),
+                        object=getattr(i.object, "id", None)
+                    )
+                    for i in obj.memories
+                ]
+        return {
+            "tooling": {
+                i.__name__: i.__version__
+                for i in (
+                    turberfield.utils, turberfield.dialogue, bluemonday78
+                )
+            },
+            "history": {
+                "incept": self.ts,
+                "extract": datetime.utcnow(),
+            },
+            "ensemble": ensemble,
+        }
 
     def frame(self, dwell=0.3, pause=1, react=True):
         """ Return the next shot of dialogue as an animated frame."""
