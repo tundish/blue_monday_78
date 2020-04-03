@@ -116,3 +116,25 @@ class PresenterTests(DialogueLoader, unittest.TestCase):
             "Goodbye from  Actor .",
             frame[Model.Line][0].element.text
         )
+
+
+class ValidationTests(unittest.TestCase):
+
+    def test_allowed(self):
+        for text in (
+            "http://foo.com/blah_blah",
+            "http://foo.com/blah_blah/",
+            "http://www.example.com/wpstyle/?p=364",
+            "http://142.42.1.1/",
+            "http://142.42.1.1:8080/",
+        ):
+            with self.subTest(text=text):
+                self.assertTrue(Presenter.validation["url"].match(text))
+
+    def test_blocked(self):
+        for text in (
+            "http://.www.foo.bar/",
+            "h://test",
+        ):
+            with self.subTest(text=text):
+                self.assertFalse(Presenter.validation["url"].match(text))

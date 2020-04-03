@@ -45,6 +45,7 @@ class Presenter:
             "(?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+"
             # http://www.w3.org/TR/html5/forms.html#valid-e-mail-address
         ),
+        "url": re.compile("(https?|ftp)://(-\.)?([^\s/?\.#-]+\.?)+(/[^\s]*)?$"),
         "location": re.compile("[0-9a-f]{32}"),
         "name": re.compile("[A-Z a-z]{2,42}"),
         "session": re.compile("[0-9a-f]{32}"),
