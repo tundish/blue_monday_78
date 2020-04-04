@@ -33,6 +33,7 @@ import socket
 import sys
 import uuid
 
+import aiohttp
 from aiohttp import web
 import pkg_resources
 
@@ -191,6 +192,7 @@ async def get_metricz(request):
 
 
 def build_app(args):
+    tracer = aiohttp.TraceConfig() # TODO: Add logging to callbacks
     app = web.Application()
     app.add_routes([
         web.get("/", get_titles),
@@ -237,6 +239,12 @@ def build_app(args):
     )
     app["args"] = args
     app["log"] = logging.getLogger("app")
+    # TODO: Call from async
+    app["client"] = aiohttp.ClientSession(
+        timeout=aiohttp.ClientTimeout(connect=1.0, total=6.0),
+        trace_configs=[tracer],
+        trust_env=True
+    )
     app["sessions"] = {}
     app["folders"] = bluemonday78.story.prepare_folders()
     return app
@@ -248,7 +256,10 @@ def main(args):
         format="%(asctime)s %(levelname)-8s|%(name)s|%(message)s",
         level=logging.INFO
     )
-    return web.run_app(app, host=args.host, port=args.port)
+    try:
+        return web.run_app(app, host=args.host, port=args.port)
+    finally:
+        app["client"].close()
 
 
 def parser(description=__doc__):
