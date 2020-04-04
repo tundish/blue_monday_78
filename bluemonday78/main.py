@@ -191,6 +191,10 @@ async def get_metricz(request):
     return web.json_response(data)
 
 
+async def on_shutdown(app):
+    app["client"].close()
+
+
 def build_app(args):
     tracer = aiohttp.TraceConfig() # TODO: Add logging to callbacks
     app = web.Application()
@@ -239,27 +243,37 @@ def build_app(args):
     )
     app["args"] = args
     app["log"] = logging.getLogger("app")
+
     # TODO: Call from async
     app["client"] = aiohttp.ClientSession(
         timeout=aiohttp.ClientTimeout(connect=1.0, total=6.0),
         trace_configs=[tracer],
         trust_env=True
     )
+    app.on_shutdown.append(on_shutdown)
+
     app["sessions"] = {}
     app["folders"] = bluemonday78.story.prepare_folders()
     return app
 
 
-def main(args):
+def main(args, loop=None):
+    loop = loop or asyncio.get_event_loop()
+    asyncio.set_event_loop(loop)
+
     app = build_app(args)
+    """
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, 'localhost', 8080)
+    await site.start()
+    """
+
     logging.basicConfig(
         format="%(asctime)s %(levelname)-8s|%(name)s|%(message)s",
         level=logging.INFO
     )
-    try:
-        return web.run_app(app, host=args.host, port=args.port)
-    finally:
-        app["client"].close()
+    return web.run_app(app, host=args.host, port=args.port)
 
 
 def parser(description=__doc__):
