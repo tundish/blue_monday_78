@@ -306,7 +306,8 @@ color: var(--collie, limegreen);
 
 .lay-banner h2 {
 color: var(--banana, gold);
-text-shadow: var(--pebble, grey) 0rem 0.1rem 0.15rem, var(--pebble, grey) 0rem -0.1rem 0.15rem,
-             var(--pebble, grey) 0.1rem 0rem 0.15rem, var(--pebble, grey) -0.1rem 0rem 0.15rem;
+letter-spacing: 0.225rem;
+text-shadow: var(--pebble, grey) 0rem 0.1rem 0.05rem, var(--pebble, grey) 0rem -0.1rem 0.05rem,
+             var(--pebble, grey) 0.1rem 0rem 0.25rem, var(--pebble, grey) -0.1rem 0rem 0.25rem;
 }
 

@@ -106,6 +106,7 @@ def ensemble_to_html(ensemble):
 
 def frame_to_html(frame, ensemble=[], final=False):
     player = ensemble[-1] if ensemble else None
+    ts = MultiMatcher.parse_timespan(str(player.state))[0]
     spot = player.get_state(Spot) if player else None
     dialogue = "\n".join(animated_line_to_html(i) for i in frame[Model.Line])
     stills = "\n".join(animated_still_to_html(i) for i in frame[Model.Still])
@@ -114,7 +115,8 @@ def frame_to_html(frame, ensemble=[], final=False):
 {audio}
 <section class="lay-banner">
 <h1><span>Blue</span><span>Monday</span><span>78</span></h1>
-<h2>An Addison Arches episode</h2>
+<h2>{ts.strftime("%H:%M:%S %p")}</h2>
+<h2>{ts.strftime("%a %d %b")}</h2>
 </section>
 <aside class="lay-photos">
 {stills}

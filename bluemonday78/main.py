@@ -112,11 +112,14 @@ async def get_titles(request):
 
 async def post_titles(request):
     data = await request.post()
-    name = data.get("playername", Presenter.default_name)
-    if not Presenter.validation["name"].match(name):
-        raise web.HTTPUnauthorized(reason="User input invalid name.")
+    assembly_url = data.get("assembly_url")
+    if assembly_url:
+        if not Presenter.validation["url"].match(assembly_url):
+            raise web.HTTPUnauthorized(reason="User input invalid URL.")
+        else:
+            request.app["log"].info(assembly_url)
 
-    player = bluemonday78.story.build_player(name)
+    player = bluemonday78.story.build_player(name=Presenter.default_name)
     ensemble = bluemonday78.story.ensemble(player)
     for hop in request.app["args"].hops:
         try:
