@@ -234,6 +234,41 @@ padding: 0.35rem 0.7rem 0.35rem 0.7rem;
 width: 100%;
 }
 
+input {
+font-family: var(--system);
+font-size: 0.70rem;
+letter-spacing: 0.035rem;
+}
+
+input:invalid {
+color: var(--claret, crimson);
+}
+
+input:valid {
+color: var(--pebble, grey);
+}
+
+#input-assembly-url {
+height: 1.6rem;
+min-width: 24rem;
+margin: 0.6rem;
+padding-left: 0.6rem;
+}
+
+label {
+color: var(--creamy, white);
+font-family: var(--system);
+font-size: 0.9rem;
+font-weight: bolder;
+letter-spacing: 0.025rem;
+margin: 0.2rem;
+padding-left: 0.6rem;
+}
+
+label:after {
+content: ": ";
+}
+
 button {
 background-color: var(--collie, limegreen);
 border: 2px solid var(--pebble, grey);
@@ -271,5 +306,7 @@ color: var(--collie, limegreen);
 
 .lay-banner h2 {
 color: var(--banana, gold);
+text-shadow: var(--pebble, grey) 0rem 0.1rem 0.15rem, var(--pebble, grey) 0rem -0.1rem 0.15rem,
+             var(--pebble, grey) 0.1rem 0rem 0.15rem, var(--pebble, grey) -0.1rem 0rem 0.15rem;
 }
 

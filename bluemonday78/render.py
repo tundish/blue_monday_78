@@ -136,7 +136,7 @@ def frame_to_html(frame, ensemble=[], final=False):
 </div>"""
 
 
-def titles_to_html():
+def titles_to_html(url_pattern=Presenter.validation["url"].pattern):
     return f"""
 <section class="lay-banner">
 <h1><span>Blue</span><span>Monday</span><span>78</span></h1>
@@ -151,7 +151,19 @@ def titles_to_html():
 <nav>
 <ul>
 <li><form role="form" action="/" method="POST" name="titles" class="grid-flash mod-titles">
-<button type="submit">Go</button>
+    <fieldset>
+    <label for="input-assembly-url" id="tip-assembly-url">Turberfield Assembly URL</label>
+    <input
+    name="assembly_url"
+    type="url"
+    id="input-assembly-url"
+    aria-describedby="tip-assembly-url"
+    placeholder="http://"
+    pattern="{ url_pattern }"
+    title="This server can import JSON data from a URL endpoint. If correctly formatted, that data will be used to initialise your story."
+    >
+    <button type="submit">Go</button>
+    </fieldset>
 </form></li>
 </ul>
 </nav>
