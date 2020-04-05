@@ -134,6 +134,7 @@ async def post_titles(request):
                 request.app["log"].error(e)
                 raise web.HTTPUnauthorized(reason="Invalid data.")
 
+    # TODO: Generate new uid for existing player
     player = next(
         (i for i in reversed(ensemble) if isinstance(i, bluemonday78.story.Player)),
         bluemonday78.story.build_player(name=Presenter.default_name)
