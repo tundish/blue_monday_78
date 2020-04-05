@@ -16,14 +16,18 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
+import collections
 from collections.abc import Callable
+import enum
 import sys
 import unittest
 
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.performer import Performer
+from turberfield.dialogue.types import EnumFactory
 from turberfield.dialogue.types import Player
 from turberfield.utils.misc import group_by_type
+from turberfield.utils.assembly import Assembly
 
 from bluemonday78.matcher import MultiMatcher
 import bluemonday78.story
@@ -208,3 +212,40 @@ class SequenceTests(unittest.TestCase):
             "in the visiting suite",
             self.performer.shots[-1].scene
         )
+
+
+class AssemblyTests(unittest.TestCase):
+
+    class ForeignState(EnumFactory, enum.Enum):
+        friendly = 0
+        hostile = 1
+
+    def test_ready_player_01(self):
+        Assembly.register(AssemblyTests.ForeignState)
+        player = bluemonday78.story.build_player("Mr Dick Turpin").set_state(AssemblyTests.ForeignState.hostile)
+        self.assertTrue(hasattr(player, "memories"))
+        self.assertIsInstance(player.memories, collections.deque)
+        player.memories.extend(range(4))
+        self.assertEqual(4, len(player.memories))
+        self.assertEqual(3, len(player._states))
+
+        text = Assembly.dumps(player)
+        clone = Assembly.loads(text)
+        self.assertEqual(player.id, clone.id)
+        self.assertTrue(hasattr(clone, "memories"))
+        self.assertIsInstance(clone.memories, list)
+        self.assertEqual(4, len(clone.memories))
+        self.assertEqual(3, len(player._states))
+
+        result = bluemonday78.story.build_player(
+            clone.name,
+            id=None,
+            memories=clone.memories,
+            _states=clone._states
+        )
+        self.assertNotEqual(clone.id, result.id)
+        self.assertTrue(hasattr(result, "memories"))
+        self.assertIsInstance(result.memories, collections.deque)
+        self.assertEqual(4, len(result.memories))
+        self.assertEqual(3, len(result._states))
+        self.assertEqual(AssemblyTests.ForeignState.hostile, result.get_state(AssemblyTests.ForeignState))

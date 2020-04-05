@@ -81,8 +81,13 @@ def ensemble(player=None):
     return rv
 
 
-def build_player(name):
-    return Player(name=name).set_state(
+def build_player(name, **kwargs):
+    memories = kwargs.pop("memories", [])
+    return Player(
+        name=name,
+        memories=collections.deque(memories, maxlen=max(6, len(memories))),
+        **kwargs
+    ).set_state(
         Spot.w12_ducane_prison_wing
     ).set_state(
         int(blue_monday.strftime("%Y%m%d0800"))
