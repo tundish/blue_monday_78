@@ -117,11 +117,17 @@ async def post_titles(request):
     if assembly_url:
         if not Presenter.validation["url"].match(assembly_url):
             raise web.HTTPUnauthorized(reason="User input invalid URL.")
-        else:
-            request.app["log"].info(assembly_url)
 
-    player = bluemonday78.story.build_player(name=Presenter.default_name)
-    ensemble = bluemonday78.story.ensemble(player)
+        request.app["log"].info(assembly_url)
+        async with request.app["client"].get(assembly_url) as response:
+            request.app["log"].info(response.status)
+            text = await(response.text())
+            assembly = Assembly.loads(text)
+            ensemble = assembly.get("ensemble")
+    else:
+        player = bluemonday78.story.build_player(name=Presenter.default_name)
+        ensemble = bluemonday78.story.ensemble(player)
+
     for hop in request.app["args"].hops:
         try:
             spot = Spot[hop]
@@ -195,7 +201,7 @@ async def on_shutdown(app):
     await app["client"].close()
 
 
-def create_app_attributes(args):
+def build_app(args):
     app = web.Application()
     app.add_routes([
         web.get("/", get_titles),
@@ -246,9 +252,14 @@ def create_app_attributes(args):
     app["sessions"] = {}
     app["folders"] = bluemonday78.story.prepare_folders()
 
+    return app
+
+
+async def register_app_handlers(app, args, loop=None):
     tracer = aiohttp.TraceConfig() # TODO: Add logging to callbacks
 
-    # TODO: Call from async
+    # TODO: Add kill signal handlers
+
     app["client"] = aiohttp.ClientSession(
         timeout=aiohttp.ClientTimeout(connect=1.0, total=6.0),
         trace_configs=[tracer],
@@ -256,13 +267,10 @@ def create_app_attributes(args):
     )
     app.on_shutdown.append(on_shutdown)
 
-    return app
-
-
-async def register_app_handlers(app, args, loop=None):
     runner = web.AppRunner(app)
     await runner.setup()
-    site = web.TCPSite(runner, 'localhost', 8080)
+    site = web.TCPSite(runner, args.host, args.port)
+
     return runner, site
 
 
@@ -273,18 +281,23 @@ def main(args, loop=None):
     )
 
     loop = loop or asyncio.get_event_loop()
-    # TODO: Add kill signal handlers
     asyncio.set_event_loop(loop)
 
-    app = create_app_attributes(args)
+    app = build_app(args)
 
     runner, site = loop.run_until_complete(register_app_handlers(app, args))
     try:
+        logging.info("Serving from {0._host} on port {0._port}".format(site))
         loop.run_until_complete(site.start())
         loop.run_forever()
+    except KeyboardInterrupt:
+        logging.info("Caught keyboard interrupt.")
+        pass
     finally:
+        logging.info("Tidying up...")
         loop.run_until_complete(runner.cleanup())
         loop.close()
+        logging.info("Complete.")
 
 
 def parser(description=__doc__):
