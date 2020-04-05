@@ -45,6 +45,8 @@ from bluemonday78.types import Page
 import bluemonday78.utils.publisher
 
 blue_monday = datetime.date(1978, 1, 16)
+player_name = "Mr William Billy McCarthy"
+
 
 def ensemble(player=None):
     rv = [

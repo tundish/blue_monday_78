@@ -51,8 +51,6 @@ class Presenter:
         "session": re.compile("[0-9a-f]{32}"),
     }
 
-    default_name = "Mr William Billy McCarthy"
-
     definitions = {
         "creamy": "hsl(50, 0%, 100%, 1.0)",
         "pebble": "hsl(13, 0%, 30%, 1.0)",
