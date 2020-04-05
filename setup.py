@@ -49,7 +49,7 @@ setup(
         ]
     },
     install_requires=[
-        "turberfield-dialogue>=0.21.0",
+        "turberfield-dialogue>=0.22.0",
     ],
     zip_safe=True,
     entry_points={
