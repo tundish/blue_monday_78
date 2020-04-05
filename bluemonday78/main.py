@@ -192,11 +192,10 @@ async def get_metricz(request):
 
 
 async def on_shutdown(app):
-    app["client"].close()
+    await app["client"].close()
 
 
-def build_app(args):
-    tracer = aiohttp.TraceConfig() # TODO: Add logging to callbacks
+def create_app_attributes(args):
     app = web.Application()
     app.add_routes([
         web.get("/", get_titles),
@@ -244,6 +243,11 @@ def build_app(args):
     app["args"] = args
     app["log"] = logging.getLogger("app")
 
+    app["sessions"] = {}
+    app["folders"] = bluemonday78.story.prepare_folders()
+
+    tracer = aiohttp.TraceConfig() # TODO: Add logging to callbacks
+
     # TODO: Call from async
     app["client"] = aiohttp.ClientSession(
         timeout=aiohttp.ClientTimeout(connect=1.0, total=6.0),
@@ -252,28 +256,35 @@ def build_app(args):
     )
     app.on_shutdown.append(on_shutdown)
 
-    app["sessions"] = {}
-    app["folders"] = bluemonday78.story.prepare_folders()
     return app
 
 
-def main(args, loop=None):
-    loop = loop or asyncio.get_event_loop()
-    asyncio.set_event_loop(loop)
-
-    app = build_app(args)
-    """
+async def register_app_handlers(app, args, loop=None):
     runner = web.AppRunner(app)
     await runner.setup()
     site = web.TCPSite(runner, 'localhost', 8080)
-    await site.start()
-    """
+    return runner, site
 
+
+def main(args, loop=None):
     logging.basicConfig(
         format="%(asctime)s %(levelname)-8s|%(name)s|%(message)s",
         level=logging.INFO
     )
-    return web.run_app(app, host=args.host, port=args.port)
+
+    loop = loop or asyncio.get_event_loop()
+    # TODO: Add kill signal handlers
+    asyncio.set_event_loop(loop)
+
+    app = create_app_attributes(args)
+
+    runner, site = loop.run_until_complete(register_app_handlers(app, args))
+    try:
+        loop.run_until_complete(site.start())
+        loop.run_forever()
+    finally:
+        loop.run_until_complete(runner.cleanup())
+        loop.close()
 
 
 def parser(description=__doc__):
