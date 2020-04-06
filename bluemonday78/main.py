@@ -16,12 +16,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
-"""
-Hop to spots for debugging::
-
-    python3 -m bluemonday78.main --spot w12_ducane_prison_wing --spot w12_ducane_prison_visiting
-
-"""
 
 import argparse
 import asyncio
