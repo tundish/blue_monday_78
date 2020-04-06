@@ -207,20 +207,16 @@ async def get_metricz(request):
     return web.json_response(data)
 
 
-async def on_shutdown(app):
-    await app["client"].close()
-
-
 class Config:
 
-    @staticmethod
-    def parser():
+    @classmethod
+    def parser(cls):
         cfg = configparser.ConfigParser(interpolation=configparser.ExtendedInterpolation())
         cfg.optionxform = str
         return cfg
 
-    @staticmethod
-    def read_config(path):
+    @classmethod
+    def read_config(cls, path):
         if path.is_file():
             text = path.read_text()
             src = path.resolve()
@@ -228,13 +224,21 @@ class Config:
             text = importlib.resources.read_text("bluemonday78", "default.cfg")
             src = "default.cfg"
 
-        cfg = Config.parser()
+        cfg = cls.parser()
         cfg.read_string(text, source=src)
         return src, cfg
 
-    @staticmethod
-    def load_config(app, path):
-        pass
+    @classmethod
+    def load_config(cls, app, path):
+        log = logging.getLogger("")
+        log.info("Trying to load '{0}' ...".format(path))
+        src, cfg = cls.read_config(path)
+        log.info("Accepted '{0}'".format(src))
+        try:
+            app["config"].append(cfg)
+        except (AttributeError, KeyError):
+            log.warning("Failed to store config")
+        return src, cfg
         
     @staticmethod
     def build_app(cfg):
@@ -282,20 +286,20 @@ class Config:
             "/fonts/",
             pkg_resources.resource_filename("bluemonday78", "static/fonts")
         )
-        #app["args"] = args
         app["log"] = logging.getLogger("app")
+        app["config"] = deque([cfg], maxlen=2)
 
         app["sessions"] = {}
         app["folders"] = bluemonday78.story.prepare_folders()
 
         return app
 
-    @staticmethod
-    def load_config(app, path):
-        pass
+    @classmethod
+    async def on_shutdown(cls, app):
+        await app["client"].close()
 
-    @staticmethod
-    async def register_app_handlers(app, args, loop=None):
+    @classmethod
+    async def register_app_handlers(cls, app, host:str, port:int, loop=None):
         tracer = aiohttp.TraceConfig() # TODO: Add logging to callbacks
 
         # TODO: Add kill signal handlers
@@ -305,11 +309,11 @@ class Config:
             trace_configs=[tracer],
             trust_env=True
         )
-        app.on_shutdown.append(on_shutdown)
+        app.on_shutdown.append(cls.on_shutdown)
 
         runner = web.AppRunner(app)
         await runner.setup()
-        site = web.TCPSite(runner, args.host, args.port)
+        site = web.TCPSite(runner, host, port)
 
         return runner, site
 
@@ -333,12 +337,11 @@ def main(args, loop=None):
             signal.SIGHUP, functools.partial(loop.call_soon, Config.load_config, app, args.config)
         )
     except NotImplementedError:
-        # No signals available on Windows
-        pass
+        logging.warning("No signal handlers are available")
     finally:
         asyncio.set_event_loop(loop)
 
-    runner, site = loop.run_until_complete(Config.register_app_handlers(app, args))
+    runner, site = loop.run_until_complete(Config.register_app_handlers(app, args.host, args.port))
     try:
         logging.info("Serving from {0._host} on port {0._port}".format(site))
         loop.run_until_complete(site.start())
@@ -346,6 +349,8 @@ def main(args, loop=None):
     except KeyboardInterrupt:
         logging.info("Caught keyboard interrupt.")
         pass
+    except Exception as e:
+        logging.exception(e)
     finally:
         logging.info("Tidying up...")
         loop.run_until_complete(runner.cleanup())
