@@ -27,9 +27,12 @@ import argparse
 import asyncio
 from collections import deque
 from collections import namedtuple
+import configparser
 import functools
+import importlib.resources
 import logging
 import pathlib
+import signal
 import socket
 import sys
 import uuid
@@ -208,77 +211,107 @@ async def on_shutdown(app):
     await app["client"].close()
 
 
-def build_app(args):
-    app = web.Application()
-    app.add_routes([
-        web.get("/", get_titles),
-        web.post("/", post_titles),
-        web.get("/metricz", get_metricz),
-        web.get(
-            "/{{session:{0}}}".format(
-                Presenter.validation["session"].pattern
+class Config:
+
+    @staticmethod
+    def parser():
+        cfg = configparser.ConfigParser(interpolation=configparser.ExtendedInterpolation())
+        cfg.optionxform = str
+        return cfg
+
+    @staticmethod
+    def read_config(path):
+        if path.is_file():
+            text = path.read_text()
+            src = path.resolve()
+        else:
+            text = importlib.resources.read_text("bluemonday78", "default.cfg")
+            src = "default.cfg"
+
+        cfg = Config.parser()
+        cfg.read_string(text, source=src)
+        return src, cfg
+
+    @staticmethod
+    def load_config(app, path):
+        pass
+        
+    @staticmethod
+    def build_app(cfg):
+        app = web.Application()
+        app.add_routes([
+            web.get("/", get_titles),
+            web.post("/", post_titles),
+            web.get("/metricz", get_metricz),
+            web.get(
+                "/{{session:{0}}}".format(
+                    Presenter.validation["session"].pattern
+                ),
+                get_frame
             ),
-            get_frame
-        ),
-        web.get(
-            "/{{session:{0}}}/map".format(
-                Presenter.validation["session"].pattern
+            web.get(
+                "/{{session:{0}}}/map".format(
+                    Presenter.validation["session"].pattern
+                ),
+                get_map
             ),
-            get_map
-        ),
-        web.post(
-            "/{{session:{0}}}/hop".format(
-                Presenter.validation["session"].pattern,
+            web.post(
+                "/{{session:{0}}}/hop".format(
+                    Presenter.validation["session"].pattern,
+                ),
+                post_hop
             ),
-            post_hop
-        ),
-        web.get(
-            "/{{session:{0}}}/assembly".format(
-                Presenter.validation["session"].pattern
+            web.get(
+                "/{{session:{0}}}/assembly".format(
+                    Presenter.validation["session"].pattern
+                ),
+                get_assembly
             ),
-            get_assembly
-        ),
-    ])
+        ])
 
-    # TODO: Optional config for dev only.
-    app.router.add_static(
-        "/css/",
-        pkg_resources.resource_filename("bluemonday78", "static/css")
-    )
-    app.router.add_static(
-        "/img/",
-        pkg_resources.resource_filename("bluemonday78", "static/img")
-    )
-    app.router.add_static(
-        "/fonts/",
-        pkg_resources.resource_filename("bluemonday78", "static/fonts")
-    )
-    app["args"] = args
-    app["log"] = logging.getLogger("app")
+        # TODO: Optional config for dev only.
+        app.router.add_static(
+            "/css/",
+            pkg_resources.resource_filename("bluemonday78", "static/css")
+        )
+        app.router.add_static(
+            "/img/",
+            pkg_resources.resource_filename("bluemonday78", "static/img")
+        )
+        app.router.add_static(
+            "/fonts/",
+            pkg_resources.resource_filename("bluemonday78", "static/fonts")
+        )
+        #app["args"] = args
+        app["log"] = logging.getLogger("app")
 
-    app["sessions"] = {}
-    app["folders"] = bluemonday78.story.prepare_folders()
+        app["sessions"] = {}
+        app["folders"] = bluemonday78.story.prepare_folders()
 
-    return app
+        return app
 
+    @staticmethod
+    def load_config(app, path):
+        pass
 
-async def register_app_handlers(app, args, loop=None):
-    tracer = aiohttp.TraceConfig() # TODO: Add logging to callbacks
+    @staticmethod
+    async def register_app_handlers(app, args, loop=None):
+        tracer = aiohttp.TraceConfig() # TODO: Add logging to callbacks
 
-    # TODO: Add kill signal handlers
+        # TODO: Add kill signal handlers
 
-    app["client"] = aiohttp.ClientSession(
-        timeout=aiohttp.ClientTimeout(connect=1.0, total=6.0),
-        trace_configs=[tracer],
-        trust_env=True
-    )
-    app.on_shutdown.append(on_shutdown)
+        app["client"] = aiohttp.ClientSession(
+            timeout=aiohttp.ClientTimeout(connect=1.0, total=6.0),
+            trace_configs=[tracer],
+            trust_env=True
+        )
+        app.on_shutdown.append(on_shutdown)
 
-    runner = web.AppRunner(app)
-    await runner.setup()
-    site = web.TCPSite(runner, args.host, args.port)
+        runner = web.AppRunner(app)
+        await runner.setup()
+        site = web.TCPSite(runner, args.host, args.port)
 
-    return runner, site
+        return runner, site
 
 
 def main(args, loop=None):
@@ -287,12 +320,25 @@ def main(args, loop=None):
         level=logging.INFO
     )
 
+    src, cfg = Config.read_config(args.config)
+    logging.info("Accepting config file {0}".format(src))
+
+    app = Config.build_app(cfg)
+
     loop = loop or asyncio.get_event_loop()
-    asyncio.set_event_loop(loop)
+    try:
+        loop.add_signal_handler(signal.SIGINT, functools.partial(loop.call_soon, loop.stop))
+        loop.add_signal_handler(signal.SIGTERM, functools.partial(loop.call_soon, loop.stop))
+        loop.add_signal_handler(
+            signal.SIGHUP, functools.partial(loop.call_soon, Config.load_config, app, args.config)
+        )
+    except NotImplementedError:
+        # No signals available on Windows
+        pass
+    finally:
+        asyncio.set_event_loop(loop)
 
-    app = build_app(args)
-
-    runner, site = loop.run_until_complete(register_app_handlers(app, args))
+    runner, site = loop.run_until_complete(Config.register_app_handlers(app, args))
     try:
         logging.info("Serving from {0._host} on port {0._port}".format(site))
         loop.run_until_complete(site.start())
