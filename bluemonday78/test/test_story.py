@@ -220,12 +220,25 @@ class AssemblyTests(unittest.TestCase):
         friendly = 0
         hostile = 1
 
+    def test_assembly(self):
+        player = bluemonday78.story.build_player("Mr Dick Turpin")
+        ensemble = bluemonday78.story.ensemble(player)
+        text = Assembly.dumps(ensemble)
+        clone = Assembly.loads(text)
+
+        self.assertEqual(
+            set(group_by_type(ensemble).keys()),
+            set(group_by_type(clone).keys()),
+            "Check all ensemble classes permit re-assembly (DataObject)"
+        )
+
     def test_ready_player_01(self):
         Assembly.register(AssemblyTests.ForeignState)
         player = bluemonday78.story.build_player("Mr Dick Turpin").set_state(AssemblyTests.ForeignState.hostile)
         self.assertTrue(hasattr(player, "memories"))
         self.assertIsInstance(player.memories, collections.deque)
         player.memories.extend(range(4))
+        self.assertEqual(197801160800, player.state)
         self.assertEqual(4, len(player.memories))
         self.assertEqual(3, len(player._states))
 
@@ -237,6 +250,10 @@ class AssemblyTests(unittest.TestCase):
         self.assertEqual(4, len(clone.memories))
         self.assertEqual(3, len(player._states))
 
+        # Check state transfer
+        self.assertEqual(197801160800, clone.state)
+        clone.state = 0
+
         result = bluemonday78.story.build_player(
             clone.name,
             id=None,
@@ -247,5 +264,6 @@ class AssemblyTests(unittest.TestCase):
         self.assertTrue(hasattr(result, "memories"))
         self.assertIsInstance(result.memories, collections.deque)
         self.assertEqual(4, len(result.memories))
+        self.assertEqual(0, result.state)
         self.assertEqual(3, len(result._states))
         self.assertEqual(AssemblyTests.ForeignState.hostile, result.get_state(AssemblyTests.ForeignState))

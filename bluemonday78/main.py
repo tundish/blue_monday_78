@@ -57,6 +57,7 @@ async def get_frame(request):
         raise web.HTTPUnauthorized(reason="Session {0!s} not found.".format(uid))
 
     if not presenter.pending:
+        presenter.log.debug("No frames pending. Finding new dialogue.")
         player = presenter.ensemble[-1]
         pathway = player.get_state(Spot).value
         matcher = MultiMatcher(request.app["folders"])
@@ -67,7 +68,6 @@ async def get_frame(request):
     try:
         frame = presenter.frame()
     except IndexError:
-        request.app["log"].info("Presenter has no more frames")
         raise web.HTTPFound("/{0.hex}/map".format(uid))
 
     pending = presenter.pending

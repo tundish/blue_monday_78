@@ -85,15 +85,20 @@ def ensemble(player=None):
 
 def build_player(name, **kwargs):
     memories = kwargs.pop("memories", [])
-    return Player(
+    rv = Player(
         name=name,
         memories=collections.deque(memories, maxlen=max(6, len(memories))),
         **kwargs
-    ).set_state(
-        Spot.w12_ducane_prison_wing
-    ).set_state(
-        int(blue_monday.strftime("%Y%m%d0800"))
     )
+    if not kwargs:
+        return rv.set_state(
+            Spot.w12_ducane_prison_wing
+        ).set_state(
+            int(blue_monday.strftime("%Y%m%d0800"))
+        )
+    else:
+        return rv
+
 
 def generate_folders(pkg, path):
     root_path = pathlib.Path(pkg_resources.resource_filename(pkg, path))

@@ -22,6 +22,7 @@ from collections import namedtuple
 import copy
 from datetime import datetime
 import itertools
+import logging
 import math
 import re
 import sys
@@ -115,6 +116,7 @@ class Presenter:
             for i in getattr(dialogue, "shots", [])
         ]
         self.ensemble = ensemble
+        self.log = logging.getLogger(str(getattr(ensemble[-1], "id", "")) if ensemble else "")
         self.ts = datetime.utcnow()
 
     @property
@@ -153,7 +155,12 @@ class Presenter:
     def frame(self, dwell=0.3, pause=1, react=True):
         """ Return the next shot of dialogue as an animated frame."""
         while True:
-            frame = self.frames.pop(0)
+            try:
+                frame = self.frames.pop(0)
+            except IndexError:
+                self.log.debug("No more frames.")
+                raise
+
             if all([Performer.allows(i) for i in frame[Model.Condition]]):
                 frame[Model.Line] = list(
                     self.animate_lines(frame[Model.Line], dwell, pause)

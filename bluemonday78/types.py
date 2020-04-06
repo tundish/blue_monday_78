@@ -43,8 +43,8 @@ class Page(EnumFactory, enum.Enum):
     marked = 2
 
 
-class Narrator(Stateful): pass
-class NoteBook(Stateful): pass
+class Narrator(Stateful, DataObject): pass
+class NoteBook(Stateful, DataObject): pass
 class PrisonOfficer(Stateful, Persona): pass
 class Prisoner(Stateful, Persona): pass
 class PrisonVisitor(Stateful, Persona): pass
