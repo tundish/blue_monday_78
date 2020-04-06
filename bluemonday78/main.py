@@ -217,6 +217,7 @@ class Config:
 
     @classmethod
     def read_config(cls, path):
+        log = logging.getLogger("")
         if path.is_file():
             text = path.read_text()
             src = path.resolve()
@@ -225,23 +226,16 @@ class Config:
             src = "default.cfg"
 
         cfg = cls.parser()
-        cfg.read_string(text, source=src)
-        return src, cfg
+        try:
+            cfg.read_string(text, source=src)
+        except Exception as e:
+            log.exception(e)
+            log.warning("Bad config")
+        finally:
+            return src, cfg
 
     @classmethod
-    def load_config(cls, app, path):
-        log = logging.getLogger("")
-        log.info("Trying to load '{0}' ...".format(path))
-        src, cfg = cls.read_config(path)
-        log.info("Accepted '{0}'".format(src))
-        try:
-            app["config"].append(cfg)
-        except (AttributeError, KeyError):
-            log.warning("Failed to store config")
-        return src, cfg
-        
-    @staticmethod
-    def build_app(cfg):
+    def build_app(cls, cfg):
         app = web.Application()
         app.add_routes([
             web.get("/", get_titles),
@@ -273,7 +267,6 @@ class Config:
             ),
         ])
 
-        # TODO: Optional config for dev only.
         app.router.add_static(
             "/css/",
             pkg_resources.resource_filename("bluemonday78", "static/css")
@@ -286,6 +279,7 @@ class Config:
             "/fonts/",
             pkg_resources.resource_filename("bluemonday78", "static/fonts")
         )
+
         app["log"] = logging.getLogger("app")
         app["config"] = deque([cfg], maxlen=2)
 
@@ -295,14 +289,24 @@ class Config:
         return app
 
     @classmethod
+    def load_config(cls, app, path):
+        log = logging.getLogger("")
+        log.info("Trying to load '{0}' ...".format(path))
+        src, cfg = cls.read_config(path)
+        log.info("Processed '{0}'".format(src))
+        try:
+            app["config"].append(cfg)
+        except (AttributeError, KeyError):
+            log.warning("Failed to store config")
+        return src, cfg
+
+    @classmethod
     async def on_shutdown(cls, app):
         await app["client"].close()
 
     @classmethod
     async def register_app_handlers(cls, app, host:str, port:int, loop=None):
         tracer = aiohttp.TraceConfig() # TODO: Add logging to callbacks
-
-        # TODO: Add kill signal handlers
 
         app["client"] = aiohttp.ClientSession(
             timeout=aiohttp.ClientTimeout(connect=1.0, total=6.0),
@@ -325,7 +329,7 @@ def main(args, loop=None):
     )
 
     src, cfg = Config.read_config(args.config)
-    logging.info("Accepting config file {0}".format(src))
+    logging.info("Processed config file {0}".format(src))
 
     app = Config.build_app(cfg)
 
@@ -343,7 +347,7 @@ def main(args, loop=None):
 
     runner, site = loop.run_until_complete(Config.register_app_handlers(app, args.host, args.port))
     try:
-        logging.info("Serving from {0._host} on port {0._port}".format(site))
+        logging.info("Serving from {0.host} on port {0.port}".format(args))
         loop.run_until_complete(site.start())
         loop.run_forever()
     except KeyboardInterrupt:
