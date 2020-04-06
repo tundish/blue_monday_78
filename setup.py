@@ -40,6 +40,7 @@ setup(
     package_data={
         "bluemonday78": [
             "dialogue/*/*/*/*.rst",
+            "static/*.cfg",
             #"static/audio/*.mp3",
             "static/css/*.css",
             "static/fonts/*.otf",

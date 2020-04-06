@@ -29,6 +29,7 @@ from collections import deque
 from collections import namedtuple
 import functools
 import logging
+import pathlib
 import socket
 import sys
 import uuid
@@ -150,23 +151,6 @@ async def post_titles(request):
     if not ensemble:
         player = bluemonday78.story.build_player(name=bluemonday78.story.player_name)
         ensemble = bluemonday78.story.ensemble(player)
-
-    for hop in request.app["args"].hops:
-        try:
-            spot = Spot[hop]
-        except KeyError:
-            request.app["log"].info("Invalid hop: {0}".format(hop))
-            continue
-        else:
-            request.app["log"].info("Hop to {0}".format(spot))
-
-        matcher = MultiMatcher(request.app["folders"])
-        folders = list(matcher.options({"pathways": set([spot.value])}))
-        dialogue = Presenter.dialogue(folders, ensemble)
-        presenter = Presenter(dialogue, ensemble)
-        while presenter.pending:
-            frame = presenter.frame(react=True)
-            request.app["log"].info("{0} {1}".format(dialogue.fP, frame["name"]))
 
     presenter = Presenter(None, ensemble)
     request.app["log"].info(player)
@@ -337,11 +321,8 @@ def parser(description=__doc__):
         help="Set a port on which to serve."
     )
     rv.add_argument(
-        "--spot", action="append", dest="hops", default=[],
-        help="Specify spots to hop to."
-    )
-    rv.add_argument(
-        "--config", default=None, help="Specify a config file"
+        "--config", default=None, type=pathlib.Path,
+        help="Specify a config file."
     )
     return rv
 
