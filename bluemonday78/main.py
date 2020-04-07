@@ -103,23 +103,26 @@ async def get_titles(request):
     return web.Response(
         text = bluemonday78.render.body_html(refresh=None).format(
             bluemonday78.render.dict_to_css(Presenter.definitions),
-            bluemonday78.render.titles_to_html()
+            bluemonday78.render.titles_to_html(
+                config=next(iter(request.app["config"]), None)
+            )
         ),
         content_type="text/html"
     )
 
 
 async def post_titles(request):
+    config=next(iter(request.app["config"]), None)
     data = await request.post()
     assembly_url = data.get("assembly_url")
     ensemble = []
-    if assembly_url:
+    if assembly_url and config and config.getboolean("assembly", "enable_load", fallback=False):
         if not Presenter.validation["url"].match(assembly_url):
             raise web.HTTPUnauthorized(reason="User requested invalid URL.")
 
-        request.app["log"].info(assembly_url)
-        async with request.app["client"].get(assembly_url) as response:
-            request.app["log"].info(response.status)
+        async with request.app["client"].get(
+            assembly_url, trace_request_ctx={"log_name": "app.client"}
+        ) as response:
 
             if response.status != 200:
                 raise web.HTTPUnauthorized(reason=response.reason)
@@ -148,10 +151,13 @@ async def post_titles(request):
     if not ensemble:
         player = bluemonday78.story.build_player(name=bluemonday78.story.player_name)
         ensemble = bluemonday78.story.ensemble(player)
+    else:
+        request.app["log"].info("Load successful from assembly")
 
     presenter = Presenter(None, ensemble)
-    request.app["log"].info(player)
+    request.app["log"].debug(player)
     request.app["sessions"][player.id] = presenter
+    request.app["log"].info("session: {0.id.hex}".format(player))
     raise web.HTTPFound("/{0.id.hex}".format(player))
 
 
@@ -176,6 +182,10 @@ async def post_hop(request):
 
 
 async def get_assembly(request):
+    config=next(iter(request.app["config"]), None)
+    if not (config and config.getboolean("assembly", "enable_dump", fallback=False)):
+        raise web.HTTPUnauthorized(reason="Operation not enabled.")
+
     uid = uuid.UUID(hex=request.match_info["session"])
     try:
         presenter = request.app["sessions"][uid]
@@ -204,32 +214,7 @@ async def get_metricz(request):
 class Config:
 
     @classmethod
-    def parser(cls):
-        cfg = configparser.ConfigParser(interpolation=configparser.ExtendedInterpolation())
-        cfg.optionxform = str
-        return cfg
-
-    @classmethod
-    def read_config(cls, path):
-        log = logging.getLogger("")
-        if path.is_file():
-            text = path.read_text()
-            src = path.resolve()
-        else:
-            text = importlib.resources.read_text("bluemonday78", "default.cfg")
-            src = "default.cfg"
-
-        cfg = cls.parser()
-        try:
-            cfg.read_string(text, source=src)
-        except Exception as e:
-            log.exception(e)
-            log.warning("Bad config")
-        finally:
-            return src, cfg
-
-    @classmethod
-    def build_app(cls, cfg):
+    def build_app(cls):
         app = web.Application()
         app.add_routes([
             web.get("/", get_titles),
@@ -275,7 +260,6 @@ class Config:
         )
 
         app["log"] = logging.getLogger("app")
-        app["config"] = deque([cfg], maxlen=2)
 
         app["sessions"] = {}
         app["folders"] = bluemonday78.story.prepare_folders()
@@ -283,16 +267,73 @@ class Config:
         return app
 
     @classmethod
-    def load_config(cls, app, path):
+    def parser(cls):
+        cfg = configparser.ConfigParser(interpolation=configparser.ExtendedInterpolation())
+        cfg.optionxform = str
+        return cfg
+
+    @classmethod
+    def read_config(cls, path=None):
+        log = logging.getLogger("")
+        if path and path.is_file():
+            text = path.read_text()
+            src = path.resolve()
+        else:
+            text = importlib.resources.read_text("bluemonday78", "default.cfg")
+            src = "default.cfg"
+
+        cfg = cls.parser()
+        try:
+            cfg.read_string(text, source=src)
+        except Exception as e:
+            log.exception(e)
+            log.warning("Bad config")
+        finally:
+            return src, cfg
+
+    @classmethod
+    def load_config(cls, app, path, default_cfg):
         log = logging.getLogger("")
         log.info("Trying to load '{0}' ...".format(path))
         src, cfg = cls.read_config(path)
         log.info("Processed '{0}'".format(src))
-        try:
-            app["config"].append(cfg)
-        except (AttributeError, KeyError):
-            log.warning("Failed to store config")
-        return src, cfg
+        missing_sections = set(default_cfg.sections()).difference(set(cfg.sections()))
+        if missing_sections:
+            for section_name in missing_sections:
+                log.warning("Missing section '{0}'".format(section_name))
+            return src, None
+        else:
+            try:
+                app["config"].append(cfg)
+            except (AttributeError, KeyError):
+                app["config"] = deque([cfg], maxlen=1)
+                log.debug("First config is stored.")
+            finally:
+                return src, cfg
+
+    @classmethod
+    async def on_request_start(cls, session, trace_config_ctx, params):
+        log = logging.getLogger(
+            getattr(trace_config_ctx, "trace_request_ctx", {}).get("log_name", "")
+        )
+        log.info("{0.method} {0.url}".format(params))
+        trace_config_ctx.start = asyncio.get_event_loop().time()
+
+    @classmethod
+    async def on_request_redirect(cls, session, trace_config_ctx, params):
+        log = logging.getLogger(
+            getattr(trace_config_ctx, "trace_request_ctx", {}).get("log_name", "")
+        )
+        log.warning("redirectd: {0}".format(params))
+
+    @classmethod
+    async def on_request_end(cls, session, trace_config_ctx, params):
+        elapsed = asyncio.get_event_loop().time() - trace_config_ctx.start
+        log = logging.getLogger(
+            getattr(trace_config_ctx, "trace_request_ctx", {}).get("log_name", "")
+        )
+        log.info("status: {0.response.status}".format(params))
+        log.info("elapsed time: {0}".format(elapsed))
 
     @classmethod
     async def on_shutdown(cls, app):
@@ -300,11 +341,14 @@ class Config:
 
     @classmethod
     async def register_app_handlers(cls, app, host:str, port:int, loop=None):
-        tracer = aiohttp.TraceConfig() # TODO: Add logging to callbacks
+        trace_config = aiohttp.TraceConfig()
+        trace_config.on_request_start.append(cls.on_request_start)
+        trace_config.on_request_redirect.append(cls.on_request_redirect)
+        trace_config.on_request_end.append(cls.on_request_end)
 
         app["client"] = aiohttp.ClientSession(
             timeout=aiohttp.ClientTimeout(connect=1.0, total=6.0),
-            trace_configs=[tracer],
+            trace_configs=[trace_config],
             trust_env=True
         )
         app.on_shutdown.append(cls.on_shutdown)
@@ -322,17 +366,24 @@ def main(args, loop=None):
         level=logging.INFO
     )
 
-    src, cfg = Config.read_config(args.config)
-    logging.info("Processed config file {0}".format(src))
+    app = Config.build_app()
 
-    app = Config.build_app(cfg)
+    src, default_cfg = Config.read_config()
+    src, cfg = Config.load_config(app, args.config, default_cfg)
+    if not cfg:
+        logging.error("Bad config file '{0}'".format(src))
+        return 1
+    else:
+        logging.info("Accepted config file '{0}'".format(src))
 
     loop = loop or asyncio.get_event_loop()
     try:
         loop.add_signal_handler(signal.SIGINT, functools.partial(loop.call_soon, loop.stop))
         loop.add_signal_handler(signal.SIGTERM, functools.partial(loop.call_soon, loop.stop))
         loop.add_signal_handler(
-            signal.SIGHUP, functools.partial(loop.call_soon, Config.load_config, app, args.config)
+            signal.SIGHUP, functools.partial(
+                loop.call_soon, Config.load_config, app, args.config, default_cfg
+            )
         )
     except NotImplementedError:
         logging.warning("No signal handlers are available")

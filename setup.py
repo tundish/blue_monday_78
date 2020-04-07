@@ -39,8 +39,8 @@ setup(
     packages=["bluemonday78", "bluemonday78.test"],
     package_data={
         "bluemonday78": [
+            "*.cfg",
             "dialogue/*/*/*/*.rst",
-            "static/*.cfg",
             #"static/audio/*.mp3",
             "static/css/*.css",
             "static/fonts/*.otf",
