@@ -6,6 +6,18 @@
 Change Log
 ::::::::::
 
+0.6.0
+=====
+
+* Add an `assembly` endpoint for JSON output of an ensemble
+* Permit a `url` parameter on the POST for a new story
+* Add a client to retrieve assembly JSON from a remote host
+* Upgrade to `turberfield-dialogue>=0.22.0`
+* Load a new story ensemble from assembly JSON
+* Add a configuration file option to enable assembly features
+* Implement config reload on HUP signal
+* Better error handling and logging
+
 0.5.0
 =====
 
