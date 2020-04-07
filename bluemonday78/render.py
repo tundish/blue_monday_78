@@ -140,7 +140,7 @@ def frame_to_html(frame, ensemble=[], final=False):
 
 def titles_to_html(config=None, url_pattern=Presenter.validation["url"].pattern):
     assembly_widget = f"""
-    <label for="input-assembly-url" id="tip-assembly-url">Turberfield Assembly URL</label>
+    <label for="input-assembly-url" id="tip-assembly-url">Assembly URL</label>
     <input
     name="assembly_url"
     type="url"
