@@ -6,7 +6,7 @@ Billy McCarthy
 ==============
 
 Homeless since the age of 16, Billy has been living in a succession
-of squats, most recently in (?), Kensington.
+of squats, most recently in Huntley Street, Bloomsbury.
 
 He is in prison for assaulting a Police Officer during an eviction
 operation to clear the building.
