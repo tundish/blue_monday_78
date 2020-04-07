@@ -120,20 +120,27 @@ async def post_titles(request):
         if not Presenter.validation["url"].match(assembly_url):
             raise web.HTTPUnauthorized(reason="User requested invalid URL.")
 
-        async with request.app["client"].get(
-            assembly_url, trace_request_ctx={"log_name": "app.client"}
-        ) as response:
+        try:
+            async with request.app["client"].get(
+                assembly_url, trace_request_ctx={"log_name": "app.client"}
+            ) as response:
 
-            if response.status != 200:
-                raise web.HTTPUnauthorized(reason=response.reason)
+                if response.status != 200:
+                    raise web.HTTPUnauthorized(reason=response.reason)
 
-            text = await(response.text())
-            try:
-                assembly = Assembly.loads(text)
-                ensemble = assembly.get("ensemble")
-            except Exception as e:
-                request.app["log"].error(e)
-                raise web.HTTPUnauthorized(reason="Invalid data.")
+                text = await(response.text())
+                try:
+                    assembly = Assembly.loads(text)
+                    ensemble = assembly.get("ensemble")
+                except Exception as e:
+                    request.app["log"].error(e)
+                    raise web.HTTPUnauthorized(reason="Invalid data.")
+
+        except (
+            aiohttp.ClientResponseError, aiohttp.ClientConnectionError, aiohttp.ClientPayloadError,
+            asyncio.TimeoutError,
+        ) as e:
+            request.app["log"].error(e)
 
         try:
             clone = next(i for i in reversed(ensemble) if isinstance(i, bluemonday78.story.Player))
@@ -347,7 +354,7 @@ class Config:
         trace_config.on_request_end.append(cls.on_request_end)
 
         app["client"] = aiohttp.ClientSession(
-            timeout=aiohttp.ClientTimeout(connect=1.0, total=6.0),
+            timeout=aiohttp.ClientTimeout(connect=6.0, total=8.0),
             trace_configs=[trace_config],
             trust_env=True
         )
