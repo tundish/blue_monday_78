@@ -23,7 +23,7 @@ from bluemonday78.presenter import Presenter
 from bluemonday78.matcher import MultiMatcher
 from bluemonday78.types import Location
 from bluemonday78.types import Persona
-from bluemonday78.types import Player
+from bluemonday78.types import Narrator
 from bluemonday78.types import Spot
 from bluemonday78.types import Page
 
@@ -63,20 +63,20 @@ def location_to_html(locn, path="/"):
 
 
 def ensemble_to_html(ensemble):
-    player = ensemble[-1]
-    spot = player.get_state(Spot)
-    assert isinstance(player, Player)
-    ts = MultiMatcher.parse_timespan(str(player.state))[0]
+    narrator = ensemble[-1]
+    spot = narrator.get_state(Spot)
+    assert isinstance(narrator, Narrator)
+    ts = MultiMatcher.parse_timespan(str(narrator.state))[0]
     notes = "\n".join(
         "<li><p>{0.html}</p></li>".format(i)
-        for i in getattr(player, "memories", [])
+        for i in getattr(narrator, "memories", [])
     )
     items = "\n".join(
         "<li>{0.label}</li>".format(i) for i in ensemble
         if not isinstance(i, (Location, Persona)) and hasattr(i, "label")
     )
     moves = "\n".join(
-        "<li>{0}</li>".format(location_to_html(i, path="/{0.id.hex}/".format(player)))
+        "<li>{0}</li>".format(location_to_html(i, path="/{0.id.hex}/".format(narrator)))
         for i in ensemble
         if isinstance(i, Location) and
         i.get_state(Page) != Page.closed
@@ -105,9 +105,9 @@ def ensemble_to_html(ensemble):
 
 
 def frame_to_html(frame, ensemble=[], final=False):
-    player = ensemble[-1] if ensemble else None
-    ts = MultiMatcher.parse_timespan(str(player.state))[0]
-    spot = player.get_state(Spot) if player else None
+    narrator = ensemble[-1] if ensemble else None
+    ts = MultiMatcher.parse_timespan(str(narrator.state))[0]
+    spot = narrator.get_state(Spot) if narrator else None
     dialogue = "\n".join(animated_line_to_html(i) for i in frame[Model.Line])
     stills = "\n".join(animated_still_to_html(i) for i in frame[Model.Still])
     audio = "\n".join(audio_to_html(i) for i in frame[Model.Audio])
@@ -130,8 +130,8 @@ def frame_to_html(frame, ensemble=[], final=False):
 </main>
 <nav>
 <ul>
-<li><form role="form" action="{player.id.hex}/map" method="GET" name="titles">
-{'<button action="submit">Go</button>'.format(player) if player and final else ''}
+<li><form role="form" action="{narrator.id.hex}/map" method="GET" name="titles">
+{'<button action="submit">Go</button>'.format(narrator) if narrator and final else ''}
 </form></li>
 </ul>
 </nav>

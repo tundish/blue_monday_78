@@ -18,7 +18,7 @@
 
 import unittest
 
-from bluemonday78.types import Player
+from bluemonday78.types import Narrator
 from bluemonday78.types import Spot
 
 
@@ -29,6 +29,6 @@ class CreationTests(unittest.TestCase):
         self.assertEqual(Spot.w12_goldhawk_cafe, state)
 
     def test_player(self):
-        player = Player(name="Test")
+        player = Narrator(name="Test")
         self.assertTrue(hasattr(player, "id"))
         self.assertTrue(hasattr(player, "name"))

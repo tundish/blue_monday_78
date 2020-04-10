@@ -25,7 +25,6 @@ import unittest
 from turberfield.dialogue.model import Model
 from turberfield.dialogue.performer import Performer
 from turberfield.dialogue.types import EnumFactory
-from turberfield.dialogue.types import Player
 from turberfield.utils.misc import group_by_type
 from turberfield.utils.assembly import Assembly
 
@@ -33,6 +32,7 @@ from bluemonday78.matcher import MultiMatcher
 import bluemonday78.story
 from bluemonday78.story import Spot
 from bluemonday78.types import Location
+from bluemonday78.types import Narrator
 
 
 class TimeSpanTests(unittest.TestCase):
@@ -79,7 +79,7 @@ class SearchTests(unittest.TestCase):
 
     def test_search_none(self):
         rv = set(bluemonday78.story.search(
-            self.ensemble, Player
+            self.ensemble, Narrator
         ))
         self.assertFalse(rv)
 
@@ -98,7 +98,7 @@ class SearchTests(unittest.TestCase):
 
     def test_search_empty(self):
         rv = set(bluemonday78.story.search(
-            self.ensemble, Player,
+            self.ensemble, Narrator,
             label="Visiting Suite"
         ))
         self.assertFalse(rv)
@@ -169,7 +169,7 @@ class SequenceTests(unittest.TestCase):
         )
         self.assertEqual(
             Spot.w12_ducane_prison_release,
-            self.characters["Player"][0].get_state(Spot)
+            self.characters["Narrator"][0].get_state(Spot)
         )
 
     def test_002(self):
@@ -221,8 +221,8 @@ class AssemblyTests(unittest.TestCase):
         hostile = 1
 
     def test_assembly(self):
-        player = bluemonday78.story.build_story("Mr Dick Turpin")
-        ensemble = bluemonday78.story.ensemble(player)
+        narrator = bluemonday78.story.build_story("Mr Dick Turpin")
+        ensemble = bluemonday78.story.ensemble(narrator)
         text = Assembly.dumps(ensemble)
         clone = Assembly.loads(text)
 
@@ -232,23 +232,23 @@ class AssemblyTests(unittest.TestCase):
             "Check all ensemble classes permit re-assembly (DataObject)"
         )
 
-    def test_ready_player_01(self):
+    def test_ready_narrator_01(self):
         Assembly.register(AssemblyTests.ForeignState)
-        player = bluemonday78.story.build_story("Mr Dick Turpin").set_state(AssemblyTests.ForeignState.hostile)
-        self.assertTrue(hasattr(player, "memories"))
-        self.assertIsInstance(player.memories, collections.deque)
-        player.memories.extend(range(4))
-        self.assertEqual(197801160800, player.state)
-        self.assertEqual(4, len(player.memories))
-        self.assertEqual(3, len(player._states))
+        narrator = bluemonday78.story.build_story("Mr Dick Turpin").set_state(AssemblyTests.ForeignState.hostile)
+        self.assertTrue(hasattr(narrator, "memories"))
+        self.assertIsInstance(narrator.memories, collections.deque)
+        narrator.memories.extend(range(4))
+        self.assertEqual(197801160800, narrator.state)
+        self.assertEqual(4, len(narrator.memories))
+        self.assertEqual(3, len(narrator._states))
 
-        text = Assembly.dumps(player)
+        text = Assembly.dumps(narrator)
         clone = Assembly.loads(text)
-        self.assertEqual(player.id, clone.id)
+        self.assertEqual(narrator.id, clone.id)
         self.assertTrue(hasattr(clone, "memories"))
         self.assertIsInstance(clone.memories, list)
         self.assertEqual(4, len(clone.memories))
-        self.assertEqual(3, len(player._states))
+        self.assertEqual(3, len(narrator._states))
 
         # Check state transfer
         self.assertEqual(197801160800, clone.state)
