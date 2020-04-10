@@ -27,6 +27,16 @@ from turberfield.dialogue.types import Stateful
 from turberfield.utils.assembly import Assembly
 
 
+@enum.unique
+class Alignment(EnumFactory, enum.Enum):
+    healer = 0
+    guardian = 1
+    thief = 2
+    merchant = 3
+    bard = 4
+    politician = 5
+
+
 class Spot(EnumFactory, enum.Enum):
     w12_ducane_prison_release = ("w12_ducane", "prison_office")
     w12_ducane_prison_visiting = ("w12_ducane", "prison_visiting")
@@ -36,22 +46,24 @@ class Spot(EnumFactory, enum.Enum):
     w12_latimer_lockup = ("w12_latimer", "lockup")
     w12_latimer_arches = ("w12_latimer", "arches")
 
+class Character(Stateful, Persona): pass
+class Location(Stateful, DataObject): pass
+class Narrator(Stateful, DataObject): pass
 
+
+# TODO: Get rid
 class Page(EnumFactory, enum.Enum):
     closed = 0
     opened = 1
     marked = 2
 
-
-class Narrator(Stateful, DataObject): pass
+# TODO:: Get rid
 class NoteBook(Stateful, DataObject): pass
 class PrisonOfficer(Stateful, Persona): pass
 class Prisoner(Stateful, Persona): pass
 class PrisonVisitor(Stateful, Persona): pass
 class Barman(Stateful, Persona): pass
 class Hipster(Stateful, Persona): pass
-class Character(Stateful, Persona): pass
-class Location(Stateful, DataObject): pass
 
 
 Assembly.register(
