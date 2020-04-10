@@ -115,7 +115,9 @@ def generate_folders(pkg, path):
             interludes=None
         )
         for asset in
-        bluemonday78.utils.publisher.find_assets(root_path)
+        bluemonday78.utils.publisher.find_assets(
+            root_path, prefix="{0}.{1}".format(pkg, path.replace("/", "."))
+        )
     )
 
 

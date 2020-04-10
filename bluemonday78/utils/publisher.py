@@ -56,7 +56,7 @@ def find_scripts(path):
                 yield uid, script_path
 
 
-def find_assets(path):
+def find_assets(path, prefix=""):
     locations = defaultdict(list)
     for uid, script_path in find_scripts(path):
         locations[uid].append(script_path)
@@ -70,6 +70,9 @@ def find_assets(path):
             pathways.add(arc_path.parent.relative_to(path).parts)
             if not arc_path.is_symlink():
                 arc_name = arc_path.name
+                arc_name = ".".join((
+                    prefix, str(arc_path.relative_to(path)).replace(os.sep, ".")
+                ))
                 scripts.add(script_path.relative_to(path))
 
         if "windows" in platform.system().lower():
