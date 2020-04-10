@@ -83,7 +83,7 @@ def ensemble(player=None):
     return rv
 
 
-def build_player(name, **kwargs):
+def build_story(name, **kwargs):
     memories = kwargs.pop("memories", [])
     rv = Player(
         name=name,

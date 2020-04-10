@@ -116,7 +116,7 @@ class SequenceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.ensemble = bluemonday78.story.ensemble(
-            bluemonday78.story.build_player("Mr Likely Story")
+            bluemonday78.story.build_story("Mr Likely Story")
         )
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
@@ -221,7 +221,7 @@ class AssemblyTests(unittest.TestCase):
         hostile = 1
 
     def test_assembly(self):
-        player = bluemonday78.story.build_player("Mr Dick Turpin")
+        player = bluemonday78.story.build_story("Mr Dick Turpin")
         ensemble = bluemonday78.story.ensemble(player)
         text = Assembly.dumps(ensemble)
         clone = Assembly.loads(text)
@@ -234,7 +234,7 @@ class AssemblyTests(unittest.TestCase):
 
     def test_ready_player_01(self):
         Assembly.register(AssemblyTests.ForeignState)
-        player = bluemonday78.story.build_player("Mr Dick Turpin").set_state(AssemblyTests.ForeignState.hostile)
+        player = bluemonday78.story.build_story("Mr Dick Turpin").set_state(AssemblyTests.ForeignState.hostile)
         self.assertTrue(hasattr(player, "memories"))
         self.assertIsInstance(player.memories, collections.deque)
         player.memories.extend(range(4))
@@ -254,7 +254,7 @@ class AssemblyTests(unittest.TestCase):
         self.assertEqual(197801160800, clone.state)
         clone.state = 0
 
-        result = bluemonday78.story.build_player(
+        result = bluemonday78.story.build_story(
             clone.name,
             id=None,
             memories=clone.memories,

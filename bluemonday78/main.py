@@ -144,7 +144,7 @@ async def post_titles(request):
 
         try:
             clone = next(i for i in reversed(ensemble) if isinstance(i, bluemonday78.story.Player))
-            player = bluemonday78.story.build_player(
+            player = bluemonday78.story.build_story(
                 clone.name,
                 id=None,
                 memories=clone.memories,
@@ -156,7 +156,7 @@ async def post_titles(request):
             ensemble = None
 
     if not ensemble:
-        player = bluemonday78.story.build_player(name=bluemonday78.story.player_name)
+        player = bluemonday78.story.build_story(name=bluemonday78.story.player_name)
         ensemble = bluemonday78.story.ensemble(player)
     else:
         request.app["log"].info("Load successful from assembly")
