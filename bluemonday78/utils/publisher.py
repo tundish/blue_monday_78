@@ -85,7 +85,7 @@ def find_assets(path):
                 0 < pathlib.Path(f).stat().st_size < 128
             ])
             for parent, hop in links:
-                if parent.joinpath(hop).resolve() == arc_path:
+                if parent.joinpath(hop).resolve() == arc_path.resolve():
                     pathways.add(parent.relative_to(path).parts)
 
         yield Assets(
