@@ -25,7 +25,6 @@ from bluemonday78.types import Location
 from bluemonday78.types import Persona
 from bluemonday78.types import Narrator
 from bluemonday78.types import Spot
-from bluemonday78.types import Page
 
 
 def animated_line_to_html(anim):
@@ -79,7 +78,7 @@ def ensemble_to_html(ensemble):
         "<li>{0}</li>".format(location_to_html(i, path="/{0.id.hex}/".format(narrator)))
         for i in ensemble
         if isinstance(i, Location) and
-        i.get_state(Page) != Page.closed
+        i.get_state(Spot) != spot
     )
     return f"""
 <section class="lay-banner">

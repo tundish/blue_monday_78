@@ -30,62 +30,43 @@ from turberfield.dialogue.model import SceneScript
 
 from bluemonday78 import __version__ as version # noqa
 from bluemonday78.matcher import MultiMatcher
-from bluemonday78.types import Barman
 from bluemonday78.types import Character
-from bluemonday78.types import Hipster
 from bluemonday78.types import Location
 from bluemonday78.types import Narrator
-from bluemonday78.types import NoteBook
-from bluemonday78.types import Player
-from bluemonday78.types import Prisoner
-from bluemonday78.types import PrisonOfficer
-from bluemonday78.types import PrisonVisitor
+from bluemonday78.types import Character
+from bluemonday78.types import Fit
 from bluemonday78.types import Spot
-from bluemonday78.types import Page
 import bluemonday78.utils.publisher
 
 blue_monday = datetime.date(1978, 1, 16)
-player_name = "Mr William Billy McCarthy"
 
 
-def ensemble(player=None):
+def ensemble(narrator=None):
     rv = [
-        Narrator().set_state(Spot.w12_ducane_prison_visiting),
-        Barman(name="Mr Barry Latimer").set_state(Spot.w12_goldhawk_tavern),
-        Hipster(name="Mr Justin Cornelis Delcroix").set_state(Spot.w12_goldhawk_tavern),
-        PrisonOfficer(name="Mr Ray Farington").set_state(Spot.w12_ducane_prison_wing),
-        Prisoner(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison_wing),
-        PrisonVisitor(
+        Character(name="Mr Ray Farington").set_state(Fit.guardian).set_state(Spot.w12_ducane_prison_wing),
+        Character(name="Mr William Billy McCarthy").set_state(Fit.thief).set_state(Spot.w12_ducane_prison_wing),
+        Character(
             name="Mrs Karen Sheppey"
-        ).set_state(Spot.w12_ducane_prison_visiting).set_state(1),
+        ).set_state(Spot.w12_ducane_prison_visiting).set_state(Fit.healer).set_state(1),
+        Character(name="Mr Barry Latimer").set_state(Fit.inkeeper).set_state(Spot.w12_goldhawk_tavern),
         Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
         Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
-        Character(name="Mr Matthew Waladli").set_state(Spot.w12_goldhawk_tavern),
-        NoteBook(),
-        Location(
-            label="Addison Arches 18A"
-        ).set_state(Spot.w12_latimer_arches).set_state(Page.closed),
-        Location(
-            label="Visiting Suite"
-        ).set_state(Spot.w12_ducane_prison_visiting).set_state(Page.closed),
-        Location(
-            label="Reception area"
-        ).set_state(Spot.w12_ducane_prison_release).set_state(Page.closed),
-        Location(
-            label="Prison wing"
-        ).set_state(Spot.w12_ducane_prison_wing).set_state(Page.opened),
-        Location(
-            label="The Goldhawk Tavern"
-        ).set_state(Spot.w12_goldhawk_tavern).set_state(Page.closed),
+        Character(name="Mr Justin Cornelis Delcroix").set_state(Fit.merchant).set_state(Spot.w12_goldhawk_tavern),
+        Character(name="Mr Matthew Waladli").set_state(Fit.bard).set_state(Spot.w12_goldhawk_tavern),
+        Location(label="Addison Arches 18A").set_state(Spot.w12_latimer_arches),
+        Location(label="Visiting Suite").set_state(Spot.w12_ducane_prison_visiting),
+        Location(label="Reception area").set_state(Spot.w12_ducane_prison_release),
+        Location(label="Prison wing").set_state(Spot.w12_ducane_prison_wing),
+        Location(label="The Goldhawk Tavern").set_state(Spot.w12_goldhawk_tavern),
     ]
-    if player is not None:
-        rv.append(player)
+    if narrator is not None:
+        rv.append(narrator)
     return rv
 
 
 def build_story(name, **kwargs):
     memories = kwargs.pop("memories", [])
-    rv = Player(
+    rv = Narrator(
         name=name,
         memories=collections.deque(memories, maxlen=max(6, len(memories))),
         **kwargs

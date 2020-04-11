@@ -23,6 +23,7 @@ from turberfield.dialogue.model import Model
 from turberfield.dialogue.model import SceneScript
 
 from bluemonday78.presenter import Presenter
+from bluemonday78.types import Character
 from bluemonday78.types import Narrator
 
 
@@ -41,7 +42,7 @@ class DialogueLoader:
             )
         ]
         self.ensemble = [
-            Narrator(name="A Test Actor").set_state(10)
+            Character(name="A Test Actor").set_state(10)
         ]
 
 

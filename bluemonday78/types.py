@@ -28,13 +28,14 @@ from turberfield.utils.assembly import Assembly
 
 
 @enum.unique
-class Alignment(EnumFactory, enum.Enum):
-    healer = 0
-    guardian = 1
-    thief = 2
-    merchant = 3
-    bard = 4
-    politician = 5
+class Fit(EnumFactory, enum.Enum):
+    bard = 1
+    guardian = 2
+    healer = 3
+    inkeeper = 4
+    merchant = 5
+    politician = 6
+    thief = 7
 
 
 class Spot(EnumFactory, enum.Enum):
@@ -46,27 +47,10 @@ class Spot(EnumFactory, enum.Enum):
     w12_latimer_lockup = ("w12_latimer", "lockup")
     w12_latimer_arches = ("w12_latimer", "arches")
 
+
 class Character(Stateful, Persona): pass
 class Location(Stateful, DataObject): pass
 class Narrator(Stateful, DataObject): pass
 
 
-# TODO: Get rid
-class Page(EnumFactory, enum.Enum):
-    closed = 0
-    opened = 1
-    marked = 2
-
-# TODO:: Get rid
-class NoteBook(Stateful, DataObject): pass
-class PrisonOfficer(Stateful, Persona): pass
-class Prisoner(Stateful, Persona): pass
-class PrisonVisitor(Stateful, Persona): pass
-class Barman(Stateful, Persona): pass
-class Hipster(Stateful, Persona): pass
-
-
-Assembly.register(
-    Narrator, Spot, PrisonOfficer, Prisoner, PrisonVisitor, Barman, Hipster, Character, Location,
-    NoteBook, Page, Player
-)
+Assembly.register(Fit, Spot, Character, Location, Narrator)

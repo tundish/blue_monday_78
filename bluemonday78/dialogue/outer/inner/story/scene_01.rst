@@ -10,7 +10,7 @@
 :version: |VERSION|
 
 .. entity:: VOICE
-   :types: turberfield.dialogue.types.Player
+   :types: bluemonday78.types.Character
    :states: 1
 
 Scene One
