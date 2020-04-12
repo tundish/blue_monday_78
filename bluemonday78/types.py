@@ -32,7 +32,7 @@ class Fit(EnumFactory, enum.Enum):
     bard = 1
     guardian = 2
     healer = 3
-    inkeeper = 4
+    innkeeper = 4
     merchant = 5
     politician = 6
     thief = 7

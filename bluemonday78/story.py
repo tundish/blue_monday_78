@@ -49,7 +49,7 @@ def ensemble(narrator=None):
             name="Mrs Karen Sheppey"
         ).set_state(Spot.w12_ducane_prison_visiting).set_state(Fit.healer).set_state(1),
         Character(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison_wing),
-        Character(name="Mr Barry Latimer").set_state(Fit.inkeeper).set_state(Spot.w12_goldhawk_tavern),
+        Character(name="Mr Barry Latimer").set_state(Fit.innkeeper).set_state(Spot.w12_goldhawk_tavern),
         Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
         Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
         Character(name="Mr Justin Cornelis Delcroix").set_state(Fit.merchant).set_state(Spot.w12_goldhawk_tavern),

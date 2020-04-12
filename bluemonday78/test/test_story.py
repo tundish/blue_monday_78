@@ -154,7 +154,7 @@ class SequenceTests(unittest.TestCase):
         )
         self.assertEqual(
             Spot.w12_ducane_prison_wing,
-            self.characters["PrisonOfficer"][0].get_state(Spot)
+            self.characters[Fit.guardian].get_state(Spot)
         )
 
         list(self.performer.run())
@@ -167,7 +167,7 @@ class SequenceTests(unittest.TestCase):
 
         self.assertEqual(
             Spot.w12_ducane_prison_release,
-            self.characters[Fit.guardian][0].get_state(Spot)
+            self.characters[Fit.guardian].get_state(Spot)
         )
         self.assertEqual(
             Spot.w12_ducane_prison_release,
@@ -177,7 +177,7 @@ class SequenceTests(unittest.TestCase):
     def test_002(self):
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
-            self.characters[Fit.merchant][0].get_state(Spot)
+            self.characters[Fit.merchant].get_state(Spot)
         )
 
         self.assertFalse(self.performer.stopped)
@@ -194,7 +194,7 @@ class SequenceTests(unittest.TestCase):
 
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
-            self.characters[Fit.merchant][0].get_state(Spot)
+            self.characters[Fit.merchant].get_state(Spot)
         )
 
     def test_003(self):

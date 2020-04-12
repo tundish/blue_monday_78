@@ -6,12 +6,14 @@
 :date: 2017-07-04
 
 .. entity:: HIPSTER
-   :types: bluemonday78.types.Hipster
-   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.merchant
+            bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: BARMAN
-   :types: bluemonday78.types.Barman
-   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
+   :types: bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.innkeeper
+            bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: NARRATOR
    :types: bluemonday78.types.Narrator

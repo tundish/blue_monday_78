@@ -61,7 +61,7 @@ class RenderFrameTests(DialogueLoader, unittest.TestCase):
         presenter = Presenter(dialogue)
         frame = presenter.frame()
         rv = bluemonday78.render.frame_to_html(frame)
-        self.assertEqual(1, rv.count('<blockquote class="line">'))
+        self.assertEqual(1, rv.count('<blockquote class="obj-line">'), rv)
         self.assertEqual(3, rv.count("<img "))
 
     def test_epilogue_frame(self):
@@ -76,7 +76,7 @@ class RenderFrameTests(DialogueLoader, unittest.TestCase):
         ensemble = [Location(label=i.name).set_state(i) for i in Spot]
         ensemble.append(bluemonday78.story.build_narrator())
         rv = bluemonday78.render.ensemble_to_html(ensemble)
-        self.assertEqual(7, rv.count("<form"))
+        self.assertEqual(6, rv.count("<form"), rv)
 
 
 class RenderStyleTests(DialogueLoader, unittest.TestCase):
@@ -95,7 +95,6 @@ class RenderStyleTests(DialogueLoader, unittest.TestCase):
         self.assertEqual(":root {--color-hue: 35;}", rv.replace("\n", ""))
 
     def test_compund(self):
-        print(self.ensemble)
         data = {
             "yellow-hue": 50,
             "creamy": "hsl(var(--yellow-hue), 0%, 100%, 1.0)",
