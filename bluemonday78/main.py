@@ -44,6 +44,7 @@ from bluemonday78.presenter import Presenter
 import bluemonday78.render
 import bluemonday78.story
 from bluemonday78.types import Location
+from bluemonday78.types import Narrator
 from bluemonday78.types import Spot
 
 
@@ -56,8 +57,8 @@ async def get_frame(request):
 
     if not presenter.pending:
         presenter.log.debug("No frames pending. Finding new dialogue.")
-        player = presenter.ensemble[-1]
-        pathway = player.get_state(Spot).value
+        narrator = presenter.ensemble[-1]
+        pathway = narrator.get_state(Spot).value
         matcher = MultiMatcher(request.app["folders"])
         folders = list(matcher.options({"pathways": set([pathway])}))
         dialogue = Presenter.dialogue(folders, presenter.ensemble)
@@ -143,29 +144,28 @@ async def post_titles(request):
             request.app["log"].error(e)
 
         try:
-            clone = next(i for i in reversed(ensemble) if isinstance(i, bluemonday78.story.Player))
-            player = bluemonday78.story.build_story(
-                clone.name,
+            clone = next(i for i in reversed(ensemble) if isinstance(i, Narrator))
+            narrator = bluemonday78.story.build_story(
                 id=None,
                 memories=clone.memories,
                 _states=clone._states
             )
             ensemble.remove(clone)
-            ensemble.append(player)
+            ensemble.append(narrator)
         except:
             ensemble = None
 
     if not ensemble:
-        player = bluemonday78.story.build_story(name=bluemonday78.story.player_name)
-        ensemble = bluemonday78.story.ensemble(player)
+        narrator = bluemonday78.story.build_story()
+        ensemble = bluemonday78.story.ensemble(narrator)
     else:
         request.app["log"].info("Load successful from assembly")
 
     presenter = Presenter(None, ensemble)
-    request.app["log"].debug(player)
-    request.app["sessions"][player.id] = presenter
-    request.app["log"].info("session: {0.id.hex}".format(player))
-    raise web.HTTPFound("/{0.id.hex}".format(player))
+    request.app["log"].debug(narrator)
+    request.app["sessions"][narrator.id] = presenter
+    request.app["log"].info("session: {0.id.hex}".format(narrator))
+    raise web.HTTPFound("/{0.id.hex}".format(narrator))
 
 
 async def post_hop(request):

@@ -83,8 +83,8 @@ def ensemble_to_html(ensemble):
     return f"""
 <section class="lay-banner">
 <h1><span>Blue</span><span>Monday</span><span>78</span></h1>
-<h2>{ts.strftime("%H:%M:%S %p")}</h2>
-<h2>{ts.strftime("%a %d %b")}</h2>
+<h2>{ts.strftime("%H:%M:%S %p") if ts else ""}</h2>
+<h2>{ts.strftime("%a %d %b") if ts else ""}</h2>
 </section>
 <div class="lay-speech">
 <main>
@@ -105,7 +105,7 @@ def ensemble_to_html(ensemble):
 
 def frame_to_html(frame, ensemble=[], final=False):
     narrator = ensemble[-1] if ensemble else None
-    ts = MultiMatcher.parse_timespan(str(narrator.state))[0]
+    ts = narrator and MultiMatcher.parse_timespan(str(narrator.state))[0]
     spot = narrator.get_state(Spot) if narrator else None
     dialogue = "\n".join(animated_line_to_html(i) for i in frame[Model.Line])
     stills = "\n".join(animated_still_to_html(i) for i in frame[Model.Still])
@@ -114,8 +114,8 @@ def frame_to_html(frame, ensemble=[], final=False):
 {audio}
 <section class="lay-banner">
 <h1><span>Blue</span><span>Monday</span><span>78</span></h1>
-<h2>{ts.strftime("%H:%M:%S %p")}</h2>
-<h2>{ts.strftime("%a %d %b")}</h2>
+<h2>{ts.strftime("%H:%M:%S %p") if ts else ""}</h2>
+<h2>{ts.strftime("%a %d %b") if ts else ""}</h2>
 </section>
 <aside class="lay-photos">
 {stills}
@@ -129,7 +129,7 @@ def frame_to_html(frame, ensemble=[], final=False):
 </main>
 <nav>
 <ul>
-<li><form role="form" action="{narrator.id.hex}/map" method="GET" name="titles">
+<li><form role="form" action="{narrator.id.hex if narrator else ""}/map" method="GET" name="titles">
 {'<button action="submit">Go</button>'.format(narrator) if narrator and final else ''}
 </form></li>
 </ul>

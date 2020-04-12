@@ -48,6 +48,7 @@ def ensemble(narrator=None):
         Character(
             name="Mrs Karen Sheppey"
         ).set_state(Spot.w12_ducane_prison_visiting).set_state(Fit.healer).set_state(1),
+        Character(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison_wing),
         Character(name="Mr Barry Latimer").set_state(Fit.inkeeper).set_state(Spot.w12_goldhawk_tavern),
         Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
         Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
@@ -64,10 +65,9 @@ def ensemble(narrator=None):
     return rv
 
 
-def build_story(name, **kwargs):
+def build_story(**kwargs):
     memories = kwargs.pop("memories", [])
     rv = Narrator(
-        name=name,
         memories=collections.deque(memories, maxlen=max(6, len(memories))),
         **kwargs
     )

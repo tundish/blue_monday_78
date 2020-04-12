@@ -10,11 +10,13 @@
 :version: |VERSION|
 
 .. entity:: NARRATOR
-   :types: bluemonday78.types.Narrator
+   :types:  bluemonday78.types.Narrator
+            197801160800
 
 .. entity:: OFFICER
-   :types: bluemonday78.types.PrisonOfficer
+   :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Spot.w12_ducane_prison_wing
+            bluemonday78.types.Fit.guardian
 
    A Prison Officer. We first meet him on the day he retires.
 
@@ -23,23 +25,23 @@
     * Often upset by inefficiency and lack of structure
 
 .. entity:: CELLMATE
-   :types: bluemonday78.types.Prisoner
+   :types:  bluemonday78.types.Character
 
    A small-time offender in his mid forties.
 
 .. entity:: HERO
-   :types: bluemonday78.types.Player
+   :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Spot.w12_ducane_prison_wing
-            197801160800
+            bluemonday78.types.Fit.thief
 
    The player entity.
 
 .. entity:: OBJECTIVE
-   :types: bluemonday78.types.Location
+   :types:  bluemonday78.types.Location
    :states: bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. entity:: HERE
-   :types: bluemonday78.types.Location
+   :types:  bluemonday78.types.Location
    :states: bluemonday78.types.Spot.w12_ducane_prison_wing
 
 A Prison Wing

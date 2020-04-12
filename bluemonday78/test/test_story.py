@@ -116,7 +116,7 @@ class SequenceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.ensemble = bluemonday78.story.ensemble(
-            bluemonday78.story.build_story("Mr Likely Story")
+            bluemonday78.story.build_story()
         )
         cls.characters = {
             k.__name__: v for k, v in group_by_type(cls.ensemble).items()
@@ -127,7 +127,7 @@ class SequenceTests(unittest.TestCase):
         )
 
     def setUp(self):
-        self.assertEqual(16, len(self.ensemble))
+        self.assertEqual(15, len(self.ensemble))
         (self.folder, self.index, self.script, self.selection,
          self.interlude) = self.performer.next(
             self.performer.folders, self.ensemble, strict=True, roles=1
@@ -221,7 +221,7 @@ class AssemblyTests(unittest.TestCase):
         hostile = 1
 
     def test_assembly(self):
-        narrator = bluemonday78.story.build_story("Mr Dick Turpin")
+        narrator = bluemonday78.story.build_story()
         ensemble = bluemonday78.story.ensemble(narrator)
         text = Assembly.dumps(ensemble)
         clone = Assembly.loads(text)
@@ -234,7 +234,7 @@ class AssemblyTests(unittest.TestCase):
 
     def test_ready_narrator_01(self):
         Assembly.register(AssemblyTests.ForeignState)
-        narrator = bluemonday78.story.build_story("Mr Dick Turpin").set_state(AssemblyTests.ForeignState.hostile)
+        narrator = bluemonday78.story.build_story().set_state(AssemblyTests.ForeignState.hostile)
         self.assertTrue(hasattr(narrator, "memories"))
         self.assertIsInstance(narrator.memories, collections.deque)
         narrator.memories.extend(range(4))
@@ -255,7 +255,6 @@ class AssemblyTests(unittest.TestCase):
         clone.state = 0
 
         result = bluemonday78.story.build_story(
-            clone.name,
             id=None,
             memories=clone.memories,
             _states=clone._states
