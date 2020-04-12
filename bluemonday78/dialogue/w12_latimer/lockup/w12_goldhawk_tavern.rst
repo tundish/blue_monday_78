@@ -1,14 +1,16 @@
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
+            19780118
 
 .. entity:: HERO
-   :types: bluemonday78.types.Player
-   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.thief
+            bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: HIPSTER
-   :types: bluemonday78.types.Hipster
-   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
-            19780118
+   :types: bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.merchant
+            bluemonday78.types.Spot.w12_goldhawk_tavern
 
 Goldhawk Tavern
 ~~~~~~~~~~~~~~~

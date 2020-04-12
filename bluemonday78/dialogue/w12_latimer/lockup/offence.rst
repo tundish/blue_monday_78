@@ -6,8 +6,9 @@
 :date: 2017-07-23
 
 .. entity:: BARMAN
-   :types:  bluemonday78.types.Barman
-   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.innkeeper
+            bluemonday78.types.Spot.w12_goldhawk_tavern
             bluemonday78.types.Attitude.grumpy
 
 Offence

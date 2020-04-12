@@ -11,9 +11,13 @@
 
 .. |HERO| property:: HERO.name.firstname
 
+.. entity:: NARRATOR
+   :types: bluemonday78.types.Narrator
+
 .. entity:: OFFICER
-   :types: bluemonday78.types.PrisonOfficer
-   :states: bluemonday78.types.Spot.w12_ducane_prison_release
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.guardian
+            bluemonday78.types.Spot.w12_ducane_prison_release
 
    A Prison Officer. We first meet him on the day he retires.
 
@@ -22,16 +26,12 @@
     * Often upset by inefficiency and lack of structure
 
 .. entity:: HERO
-   :types: bluemonday78.types.Player
-   :states: bluemonday78.types.Spot.w12_ducane_prison_release
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.thief
+            bluemonday78.types.Spot.w12_ducane_prison_release
 
    The player entity.
 
-.. entity:: NARRATOR
-   :types: bluemonday78.types.Narrator
-
-.. entity:: NOTEBOOK
-   :types: bluemonday78.types.NoteBook
 
 Guards' Office
 ~~~~~~~~~~~~~~

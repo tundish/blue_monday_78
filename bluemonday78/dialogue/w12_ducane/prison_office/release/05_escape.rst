@@ -5,20 +5,24 @@
 :author: D Haynes
 :date: 2017-07-15
 
-.. entity:: OFFICER
-   :types: bluemonday78.types.PrisonOfficer
-   :states: bluemonday78.types.Spot.w12_ducane_prison_release
+.. entity:: NARRATOR
+   :types:  bluemonday78.types.Narrator
             197801160830
 
+.. entity:: OFFICER
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.guardian
+            bluemonday78.types.Spot.w12_ducane_prison_release
+
 .. entity:: HERO
-   :types: bluemonday78.types.Player
-   :states: bluemonday78.types.Spot.w12_ducane_prison_release
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.thief
+            bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. entity:: MARTIN
-   :types: bluemonday78.types.Prisoner
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
 
-.. entity:: NARRATOR
-   :types: bluemonday78.types.Narrator
 
 Getting Out
 ~~~~~~~~~~~

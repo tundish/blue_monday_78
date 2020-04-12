@@ -32,13 +32,14 @@ Day One
 :author: D Haynes
 :date: 2017-07-27
 
-.. entity:: HERO
-   :types: bluemonday78.types.Player
-
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
    :states: bluemonday78.types.Spot.w12_latimer_arches
             19780117
+
+.. entity:: HERO
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.thief
 
 Addison Arches
 ~~~~~~~~~~~~~~

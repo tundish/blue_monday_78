@@ -11,26 +11,29 @@
 
 .. |HERO| property:: HERO.name.firstname
 
-.. entity:: OFFICER
-   :types: bluemonday78.types.PrisonOfficer
-   :states: bluemonday78.types.Spot.w12_ducane_prison_release
+.. entity:: NARRATOR
+   :types:  bluemonday78.types.Narrator
             197801160820
 
+.. entity:: OFFICER
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.guardian
+            bluemonday78.types.Spot.w12_ducane_prison_release
+
 .. entity:: HERO
-   :types: bluemonday78.types.Player
-   :states: bluemonday78.types.Spot.w12_ducane_prison_release
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.thief
+            bluemonday78.types.Spot.w12_ducane_prison_release
 
    The player entity.
 
-.. entity:: OBJECTIVE
-   :types: bluemonday78.types.Location
-   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
-
 .. entity:: CELLMATE
-   :types: bluemonday78.types.Prisoner
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
 
-.. entity:: NARRATOR
-   :types: bluemonday78.types.Narrator
+.. entity:: OBJECTIVE
+   :types:  bluemonday78.types.Location
+   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 Guards' Office
 ~~~~~~~~~~~~~~

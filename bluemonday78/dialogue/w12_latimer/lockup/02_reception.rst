@@ -10,11 +10,13 @@
    :states: bluemonday78.types.Spot.w12_latimer_arches
 
 .. entity:: OFFICER
-   :types: bluemonday78.types.PrisonOfficer
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.guardian
 
 .. entity:: HERO
-   :types: bluemonday78.types.Player
-   :states: bluemonday78.types.Spot.w12_latimer_arches
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.thief
+            bluemonday78.types.Spot.w12_latimer_arches
 
 A chance encounter
 ~~~~~~~~~~~~~~~~~~
