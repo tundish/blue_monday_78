@@ -6,13 +6,14 @@
 :date: 2017-07-19
 
 .. entity:: HIPSTER
-   :types: bluemonday78.types.Hipster
-   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
-            19780117
+   :types: bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.merchant
+            bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: BARMAN
-   :types: bluemonday78.types.Barman
-   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
+   :types: bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.innkeeper
+            bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: DRINKER_1
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
@@ -21,8 +22,9 @@
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: NARRATOR
-   :types: bluemonday78.types.Narrator
+   :types:  bluemonday78.types.Narrator
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
+            19780117
 
 Anguish
 ~~~~~~~
