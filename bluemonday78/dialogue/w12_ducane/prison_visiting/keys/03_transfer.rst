@@ -9,26 +9,30 @@
 :project: bluemonday78
 :version: |VERSION|
 
+.. entity:: NARRATOR
+   :types:  bluemonday78.types.Narrator
+
 .. entity:: WIFE
-   :types: bluemonday78.types.PrisonVisitor
-   :states: 2
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.healer
+            bluemonday78.types.Spot.w12_ducane_prison_visiting
+            2
 
 .. entity:: CELLMATE
-   :types: bluemonday78.types.Prisoner
-
-.. entity:: HERO
-   :types: bluemonday78.types.Player
+   :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
 
-.. entity:: NARRATOR
-   :types: bluemonday78.types.Narrator
+.. entity:: HERO
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.thief
+            bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 .. entity:: OBJECTIVE
-   :types: bluemonday78.types.Location
+   :types:  bluemonday78.types.Location
    :states: bluemonday78.types.Spot.w12_latimer_arches
 
 .. entity:: EXIT
-   :types: bluemonday78.types.Location
+   :types:  bluemonday78.types.Location
    :states: bluemonday78.types.Spot.w12_ducane_prison_release
 
 In the Visiting Suite

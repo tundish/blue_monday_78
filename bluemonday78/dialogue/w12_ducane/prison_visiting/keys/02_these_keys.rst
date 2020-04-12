@@ -14,8 +14,10 @@
 .. |HUSBAND| property:: HUSBAND.name.firstname
 
 .. entity:: WIFE
-   :types: bluemonday78.types.PrisonVisitor
-   :states: 2
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.healer
+            bluemonday78.types.Spot.w12_ducane_prison_visiting
+            2
 
    A beautician in her late forties.
 
@@ -24,7 +26,8 @@
     * Has always looked after |HUSBAND|.
 
 .. entity:: HUSBAND
-   :types: bluemonday78.types.Prisoner
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
 
    A small-time offender in his mid forties.
 
@@ -33,8 +36,9 @@
     * Misbehaved at Standford Hill to see less of |WIFE|.
 
 .. entity:: HERO
-   :types: bluemonday78.types.Player
-   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Fit.thief
+            bluemonday78.types.Spot.w12_ducane_prison_visiting
 
    The player entity.
 
