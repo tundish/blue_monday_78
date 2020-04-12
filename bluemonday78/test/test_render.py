@@ -74,7 +74,7 @@ class RenderFrameTests(DialogueLoader, unittest.TestCase):
 
     def test_map_from_ensemble(self):
         ensemble = [Location(label=i.name).set_state(i) for i in Spot]
-        ensemble.append(bluemonday78.story.build_story())
+        ensemble.append(bluemonday78.story.build_narrator())
         rv = bluemonday78.render.ensemble_to_html(ensemble)
         self.assertEqual(7, rv.count("<form"))
 

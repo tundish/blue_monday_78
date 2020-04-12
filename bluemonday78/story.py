@@ -65,7 +65,7 @@ def ensemble(narrator=None):
     return rv
 
 
-def build_story(**kwargs):
+def build_narrator(**kwargs):
     memories = kwargs.pop("memories", [])
     rv = Narrator(
         memories=collections.deque(memories, maxlen=max(6, len(memories))),

@@ -44,7 +44,7 @@ class DialogueLoader:
         ]
         self.ensemble = [
             Character(name="A Test Actor").set_state(10),
-            bluemonday78.story.build_story()
+            bluemonday78.story.build_narrator()
 
         ]
 

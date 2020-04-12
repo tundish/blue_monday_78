@@ -30,7 +30,9 @@ from turberfield.utils.assembly import Assembly
 
 from bluemonday78.matcher import MultiMatcher
 import bluemonday78.story
-from bluemonday78.story import Spot
+from bluemonday78.types import Fit
+from bluemonday78.types import Spot
+from bluemonday78.types import Character
 from bluemonday78.types import Location
 from bluemonday78.types import Narrator
 
@@ -116,10 +118,10 @@ class SequenceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.ensemble = bluemonday78.story.ensemble(
-            bluemonday78.story.build_story()
+            bluemonday78.story.build_narrator()
         )
         cls.characters = {
-            k.__name__: v for k, v in group_by_type(cls.ensemble).items()
+            obj.get_state(Fit): obj for obj in cls.ensemble if isinstance(obj, Character)
         }
         cls.performer = Performer(
             list(bluemonday78.story.prepare_folders()),
@@ -165,17 +167,17 @@ class SequenceTests(unittest.TestCase):
 
         self.assertEqual(
             Spot.w12_ducane_prison_release,
-            self.characters["PrisonOfficer"][0].get_state(Spot)
+            self.characters[Fit.guardian][0].get_state(Spot)
         )
         self.assertEqual(
             Spot.w12_ducane_prison_release,
-            self.characters["Narrator"][0].get_state(Spot)
+            self.ensemble[-1].get_state(Spot)
         )
 
     def test_002(self):
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
-            self.characters["Hipster"][0].get_state(Spot)
+            self.characters[Fit.merchant][0].get_state(Spot)
         )
 
         self.assertFalse(self.performer.stopped)
@@ -192,7 +194,7 @@ class SequenceTests(unittest.TestCase):
 
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
-            self.characters["Hipster"][0].get_state(Spot)
+            self.characters[Fit.merchant][0].get_state(Spot)
         )
 
     def test_003(self):
@@ -221,7 +223,7 @@ class AssemblyTests(unittest.TestCase):
         hostile = 1
 
     def test_assembly(self):
-        narrator = bluemonday78.story.build_story()
+        narrator = bluemonday78.story.build_narrator()
         ensemble = bluemonday78.story.ensemble(narrator)
         text = Assembly.dumps(ensemble)
         clone = Assembly.loads(text)
@@ -234,7 +236,7 @@ class AssemblyTests(unittest.TestCase):
 
     def test_ready_narrator_01(self):
         Assembly.register(AssemblyTests.ForeignState)
-        narrator = bluemonday78.story.build_story().set_state(AssemblyTests.ForeignState.hostile)
+        narrator = bluemonday78.story.build_narrator().set_state(AssemblyTests.ForeignState.hostile)
         self.assertTrue(hasattr(narrator, "memories"))
         self.assertIsInstance(narrator.memories, collections.deque)
         narrator.memories.extend(range(4))
@@ -254,7 +256,7 @@ class AssemblyTests(unittest.TestCase):
         self.assertEqual(197801160800, clone.state)
         clone.state = 0
 
-        result = bluemonday78.story.build_story(
+        result = bluemonday78.story.build_narrator(
             id=None,
             memories=clone.memories,
             _states=clone._states
