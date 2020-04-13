@@ -158,7 +158,7 @@ class SequenceTests(unittest.TestCase):
         )
 
         list(self.performer.run())
-        self.assertTrue(self.performer.script.fP.endswith("step_forward.rst"))
+        self.assertTrue(self.performer.script.fP.endswith("step_forward.rst"), self.performer.script.fP)
         self.assertEqual(4, len(self.performer.shots))
         self.assertEqual(
             "ray joins them on the balcony",

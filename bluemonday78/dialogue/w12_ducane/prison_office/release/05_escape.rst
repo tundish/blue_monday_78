@@ -7,7 +7,7 @@
 
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
-            197801160830
+   :states: 197801160830
 
 .. entity:: OFFICER
    :types:  bluemonday78.types.Character

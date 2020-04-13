@@ -95,18 +95,6 @@ class Presenter:
                 continue
         return rv
 
-    @staticmethod
-    def dialogue(folders, ensemble, strict=True, roles=1):
-        """ Return the next selected scene script as compiled dialogue."""
-        for folder in folders:
-            for script in SceneScript.scripts(**folder._asdict()):
-                with script as dialogue:
-                    selection = dialogue.select(ensemble, roles=roles)
-                    if selection and all(selection.values()):
-                        return dialogue.cast(selection).run()
-                    elif not strict and any(selection.values()):
-                        return dialogue.cast(selection).run()
-
     def __init__(self, dialogue, ensemble=None):
         self.frames = [
             defaultdict(list, dict(
@@ -151,6 +139,22 @@ class Presenter:
             },
             "ensemble": ensemble,
         }
+
+    def dialogue(self, folders, ensemble, strict=True, roles=1):
+        """ Return the next selected scene script as compiled dialogue."""
+        for folder in folders:
+            for script in SceneScript.scripts(**folder._asdict()):
+                with script as dialogue:
+                    try:
+                        selection = dialogue.select(ensemble, roles=roles)
+                    except Exception as e:
+                        self.log.error("Unable to process {0.fP}".format(script))
+                        self.log.exception(e)
+                        continue
+                    if selection and all(selection.values()):
+                        return dialogue.cast(selection).run()
+                    elif not strict and any(selection.values()):
+                        return dialogue.cast(selection).run()
 
     def frame(self, dwell=0.3, pause=1, react=True):
         """ Return the next shot of dialogue as an animated frame."""
