@@ -74,11 +74,11 @@ def ensemble_to_html(ensemble):
         "<li>{0.label}</li>".format(i) for i in ensemble
         if not isinstance(i, (Location, Persona)) and hasattr(i, "label")
     )
+    spots = {i.get_state(Spot) for i in ensemble if isinstance(i, Persona)}
     moves = "\n".join(
         "<li>{0}</li>".format(location_to_html(i, path="/{0.id.hex}/".format(narrator)))
         for i in ensemble
-        if isinstance(i, Location) and
-        i.get_state(Spot) != spot
+        if isinstance(i, Location) and i.get_state(Spot) in spots
     )
     return f"""
 <section class="lay-banner">

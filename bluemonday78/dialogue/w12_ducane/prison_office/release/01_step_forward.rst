@@ -30,7 +30,7 @@
 
    A small-time offender in his mid forties.
 
-.. entity:: HERO
+.. entity:: INMATE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Spot.w12_ducane_prison_wing
             bluemonday78.types.Fit.thief
@@ -40,10 +40,6 @@
 .. entity:: OBJECTIVE
    :types:  bluemonday78.types.Location
    :states: bluemonday78.types.Spot.w12_ducane_prison_release
-
-.. entity:: HERE
-   :types:  bluemonday78.types.Location
-   :states: bluemonday78.types.Spot.w12_ducane_prison_wing
 
 A Prison Wing
 ~~~~~~~~~~~~~
@@ -65,9 +61,9 @@ Ray is on the landing
 
 [CELLMATE]_
 
-    Off you go then, |HERO_FIRSTNAME|. Looks like you're gonna get the Book.
+    Off you go then, |INMATE_FIRSTNAME|. Looks like you're gonna get the Book.
 
-[HERO]_
+[INMATE]_
 
     The what?
 
@@ -83,7 +79,7 @@ Ray enters
 
 [OFFICER]_
 
-    Prisoner |HERO_SURNAME| step forward. Prisoner |CELLMATE_SURNAME| step forward.
+    Prisoner |INMATE_SURNAME| step forward. Prisoner |CELLMATE_SURNAME| step forward.
 
 [CELLMATE]_
 
@@ -111,7 +107,7 @@ The prisoners leave
 
 [NARRATOR]_
 
-    |CELLMATE_SURNAME| and |HERO_SURNAME| step out of the cell onto the narrow
+    |CELLMATE_SURNAME| and |INMATE_SURNAME| step out of the cell onto the narrow
     balcony.
 
 Ray joins them on the balcony
@@ -124,19 +120,19 @@ Ray joins them on the balcony
     At the double, and in silence!
 
 .. memory:: 197801160805
-   :subject: HERO
+   :subject: NARRATOR
 
-   |HERO_FIRSTNAME| |HERO_SURNAME| gets out of Prison today.
+   |INMATE_FIRSTNAME| |INMATE_SURNAME| gets out of Prison today.
 
 .. property:: OFFICER.state bluemonday78.types.Spot.w12_ducane_prison_release
+.. property:: INMATE.state bluemonday78.types.Spot.w12_ducane_prison_release
 .. property:: CELLMATE.state bluemonday78.types.Spot.w12_ducane_prison_visiting
-.. property:: HERO.state bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. |OBJECTIVE_LABEL| property:: OBJECTIVE.label
 .. |OFFICER_TITLE| property:: OFFICER.name.title
 .. |OFFICER_SURNAME| property:: OFFICER.name.surname
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
 .. |CELLMATE_SURNAME| property:: CELLMATE.name.surname
-.. |HERO_TITLE| property:: HERO.name.title
-.. |HERO_FIRSTNAME| property:: HERO.name.firstname
-.. |HERO_SURNAME| property:: HERO.name.surname
+.. |INMATE_TITLE| property:: INMATE.name.title
+.. |INMATE_FIRSTNAME| property:: INMATE.name.firstname
+.. |INMATE_SURNAME| property:: INMATE.name.surname

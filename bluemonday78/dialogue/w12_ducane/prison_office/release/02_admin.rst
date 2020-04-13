@@ -66,8 +66,6 @@ Ray unlocks the office
 
    |HERO_FIRSTNAME| |HERO_SURNAME| is waiting for |OFFICER_SURNAME| to get back.
 
-.. property:: OBJECTIVE.state bluemonday78.types.Page.opened
-
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
 .. |CELLMATE_SURNAME| property:: CELLMATE.name.surname
 .. |HERO_TITLE| property:: HERO.name.title
