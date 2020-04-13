@@ -57,7 +57,7 @@ class RenderBaseTests(unittest.TestCase):
 class RenderFrameTests(DialogueLoader, unittest.TestCase):
 
     def test_prologue_frame(self):
-        dialogue = Presenter.dialogue(self.folders, self.ensemble)
+        dialogue = self.presenter.dialogue(self.folders, self.ensemble)
         presenter = Presenter(dialogue)
         frame = presenter.frame()
         rv = bluemonday78.render.frame_to_html(frame)
@@ -65,7 +65,7 @@ class RenderFrameTests(DialogueLoader, unittest.TestCase):
         self.assertEqual(3, rv.count("<img "))
 
     def test_epilogue_frame(self):
-        dialogue = Presenter.dialogue(self.folders, self.ensemble)
+        dialogue = self.presenter.dialogue(self.folders, self.ensemble)
         presenter = Presenter(dialogue)
         while presenter.pending:
             frame = presenter.frame()

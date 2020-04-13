@@ -47,12 +47,13 @@ class DialogueLoader:
             bluemonday78.story.build_narrator()
 
         ]
+        self.presenter = Presenter(None, self.ensemble)
 
 
 class PresenterTests(DialogueLoader, unittest.TestCase):
 
     def test_frame(self):
-        dialogue = Presenter.dialogue(self.folders, self.ensemble)
+        dialogue = self.presenter.dialogue(self.folders, self.ensemble)
         presenter = Presenter(dialogue)
         shot_index = 0
         self.assertEqual(10, self.ensemble[0].state)
@@ -65,7 +66,7 @@ class PresenterTests(DialogueLoader, unittest.TestCase):
         self.assertEqual(20, self.ensemble[0].state)
 
     def test_prologue(self):
-        dialogue = Presenter.dialogue(self.folders, self.ensemble)
+        dialogue = self.presenter.dialogue(self.folders, self.ensemble)
         presenter = Presenter(dialogue)
         frame = presenter.frame()
         self.assertEqual(3, len(frame[Model.Still]))
@@ -87,7 +88,7 @@ class PresenterTests(DialogueLoader, unittest.TestCase):
         )
 
     def test_option_0(self):
-        dialogue = Presenter.dialogue(self.folders, self.ensemble)
+        dialogue = self.presenter.dialogue(self.folders, self.ensemble)
         presenter = Presenter(dialogue)
         while presenter.pending != 1:
             frame = presenter.frame()
@@ -103,7 +104,7 @@ class PresenterTests(DialogueLoader, unittest.TestCase):
         self.assertEqual("On.", frame[Model.Line][0].element.text)
 
     def test_epilogue(self):
-        dialogue = Presenter.dialogue(self.folders, self.ensemble)
+        dialogue = self.presenter.dialogue(self.folders, self.ensemble)
         presenter = Presenter(dialogue)
         while presenter.pending:
             frame = presenter.frame()

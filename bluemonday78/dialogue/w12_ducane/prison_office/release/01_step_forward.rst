@@ -26,6 +26,7 @@
 
 .. entity:: CELLMATE
    :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Spot.w12_ducane_prison_wing
 
    A small-time offender in his mid forties.
 
@@ -130,8 +131,6 @@ Ray joins them on the balcony
 .. property:: OFFICER.state bluemonday78.types.Spot.w12_ducane_prison_release
 .. property:: CELLMATE.state bluemonday78.types.Spot.w12_ducane_prison_visiting
 .. property:: HERO.state bluemonday78.types.Spot.w12_ducane_prison_release
-.. property:: OBJECTIVE.state bluemonday78.types.Page.opened
-.. property:: HERE.state bluemonday78.types.Page.closed
 
 .. |OBJECTIVE_LABEL| property:: OBJECTIVE.label
 .. |OFFICER_TITLE| property:: OFFICER.name.title
