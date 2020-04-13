@@ -151,10 +151,20 @@ class Presenter:
                         self.log.error("Unable to process {0.fP}".format(script))
                         self.log.exception(e)
                         continue
+
                     if selection and all(selection.values()):
-                        return dialogue.cast(selection).run()
+                        self.log.debug("Selection made strictly")
                     elif not strict and any(selection.values()):
+                        self.log.debug("Selection made")
+                    else:
+                        continue
+
+                    try:
                         return dialogue.cast(selection).run()
+                    except Exception as e:
+                        self.log.error("Unable to run {0.fP}".format(script))
+                        self.log.exception(e)
+                        continue
 
     def frame(self, dwell=0.3, pause=1, react=True):
         """ Return the next shot of dialogue as an animated frame."""
