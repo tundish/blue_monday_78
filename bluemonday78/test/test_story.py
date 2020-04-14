@@ -30,7 +30,7 @@ from turberfield.utils.assembly import Assembly
 
 from bluemonday78.matcher import MultiMatcher
 import bluemonday78.story
-from bluemonday78.types import Fit
+from bluemonday78.types import Fitt
 from bluemonday78.types import Spot
 from bluemonday78.types import Character
 from bluemonday78.types import Location
@@ -121,7 +121,7 @@ class SequenceTests(unittest.TestCase):
             bluemonday78.story.build_narrator()
         )
         cls.characters = {
-            obj.get_state(Fit): obj for obj in cls.ensemble if isinstance(obj, Character)
+            obj.get_state(Fitt): obj for obj in cls.ensemble if isinstance(obj, Character)
         }
         cls.performer = Performer(
             list(bluemonday78.story.prepare_folders()),
@@ -154,7 +154,7 @@ class SequenceTests(unittest.TestCase):
         )
         self.assertEqual(
             Spot.w12_ducane_prison_wing,
-            self.characters[Fit.guardian].get_state(Spot)
+            self.characters[Fitt.guardian].get_state(Spot)
         )
 
         list(self.performer.run())
@@ -167,7 +167,7 @@ class SequenceTests(unittest.TestCase):
 
         self.assertEqual(
             Spot.w12_ducane_prison_release,
-            self.characters[Fit.guardian].get_state(Spot)
+            self.characters[Fitt.guardian].get_state(Spot)
         )
         self.assertEqual(
             Spot.w12_ducane_prison_release,

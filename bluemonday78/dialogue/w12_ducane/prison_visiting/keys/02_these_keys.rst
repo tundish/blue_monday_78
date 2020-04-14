@@ -15,7 +15,7 @@
 
 .. entity:: WIFE
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Fit.healer
+   :states: bluemonday78.types.Fitt.healer
             bluemonday78.types.Spot.w12_ducane_prison_visiting
             2
 
@@ -37,7 +37,7 @@
 
 .. entity:: HERO
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Fit.thief
+   :states: bluemonday78.types.Fitt.thief
             bluemonday78.types.Spot.w12_ducane_prison_visiting
 
    The player entity.

@@ -11,12 +11,12 @@
 
 .. entity:: HERO
    :types: bluemonday78.types.Character
-   :states: bluemonday78.types.Fit.thief
+   :states: bluemonday78.types.Fitt.thief
             bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: HIPSTER
    :types: bluemonday78.types.Character
-   :states: bluemonday78.types.Fit.merchant
+   :states: bluemonday78.types.Func.merchant
             bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: BARMAN

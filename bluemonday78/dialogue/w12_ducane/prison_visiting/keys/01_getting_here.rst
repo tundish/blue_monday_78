@@ -18,7 +18,7 @@
 
 .. entity:: WIFE
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Fit.healer
+   :states: bluemonday78.types.Fitt.healer
             1
 
    A beautician in her late forties.

@@ -16,7 +16,7 @@
 .. entity:: OFFICER
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Spot.w12_ducane_prison_wing
-            bluemonday78.types.Fit.guardian
+            bluemonday78.types.Fitt.guardian
 
    A Prison Officer. We first meet him on the day he retires.
 
@@ -33,7 +33,7 @@
 .. entity:: INMATE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Spot.w12_ducane_prison_wing
-            bluemonday78.types.Fit.thief
+            bluemonday78.types.Fitt.thief
 
    The player entity.
 

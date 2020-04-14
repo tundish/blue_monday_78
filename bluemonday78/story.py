@@ -34,7 +34,9 @@ from bluemonday78.types import Character
 from bluemonday78.types import Location
 from bluemonday78.types import Narrator
 from bluemonday78.types import Character
-from bluemonday78.types import Fit
+from bluemonday78.types import Form
+from bluemonday78.types import Fitt
+from bluemonday78.types import Func
 from bluemonday78.types import Spot
 import bluemonday78.utils.publisher
 
@@ -43,17 +45,27 @@ blue_monday = datetime.date(1978, 1, 16)
 
 def ensemble(narrator=None):
     rv = [
-        Character(name="Mr Ray Farington").set_state(Fit.guardian).set_state(Spot.w12_ducane_prison_wing),
-        Character(name="Mr William Billy McCarthy").set_state(Fit.thief).set_state(Spot.w12_ducane_prison_wing),
+        Character(
+            name="Mr Ray Farington"
+        ).set_state(Form.veteran).set_state(Fitt.guardian).set_state(Spot.w12_ducane_prison_wing),
+        Character(
+            name="Mr William Billy McCarthy"
+        ).set_state(Form.youth).set_state(Fitt.thief).set_state(Spot.w12_ducane_prison_wing),
         Character(
             name="Mrs Karen Sheppey"
-        ).set_state(Spot.w12_ducane_prison_visiting).set_state(Fit.healer).set_state(1),
-        Character(name="Mr Martin Sheppey").set_state(Spot.w12_ducane_prison_wing),
-        Character(name="Mr Barry Latimer").set_state(Fit.innkeeper).set_state(Spot.w12_goldhawk_tavern),
+        ).set_state(Form.punter).set_state(Fitt.healer).set_state(Spot.w12_ducane_prison_visiting).set_state(1),
+        Character(
+            name="Mr Martin Sheppey"
+        ).set_state(Form.mug).set_state(Spot.w12_ducane_prison_wing),
+        Character(
+            name="Mr Barry Latimer"
+        ).set_state(Func.innkeeper).set_state(Spot.w12_goldhawk_tavern),
         Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
         Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
-        Character(name="Mr Justin Cornelis Delcroix").set_state(Fit.merchant).set_state(Spot.w12_goldhawk_tavern),
-        Character(name="Mr Matthew Waladli").set_state(Fit.bard).set_state(Spot.w12_goldhawk_tavern),
+        Character(
+            name="Mr Justin Cornelis Delcroix"
+        ).set_state(Form.yuppie).set_state(Func.merchant).set_state(Spot.w12_goldhawk_tavern),
+        Character(name="Mr Matthew Waladli").set_state(Func.bard).set_state(Spot.w12_goldhawk_tavern),
         Location(label="Addison Arches 18A").set_state(Spot.w12_latimer_arches),
         Location(label="Visiting Suite").set_state(Spot.w12_ducane_prison_visiting),
         Location(label="Reception area").set_state(Spot.w12_ducane_prison_release),

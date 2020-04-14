@@ -11,12 +11,12 @@
 
 .. entity:: OFFICER
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Fit.guardian
+   :states: bluemonday78.types.Fitt.guardian
             bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. entity:: HERO
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Fit.thief
+   :states: bluemonday78.types.Fitt.thief
             bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. entity:: MARTIN

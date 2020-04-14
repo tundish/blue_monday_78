@@ -27,14 +27,29 @@ from turberfield.utils.assembly import Assembly
 
 
 @enum.unique
-class Fit(EnumFactory, enum.Enum):
+class Form(EnumFactory, enum.Enum):
+    youth = 1
+    mug = 2
+    punter = 3
+    yuppie = 4
+    face = 5
+    veteran = 6
+
+
+@enum.unique
+class Fitt(EnumFactory, enum.Enum):
+    guardian = 1
+    healer = 2
+    mage = 3
+    thief = 4
+
+
+@enum.unique
+class Func(EnumFactory, enum.Enum):
     bard = 1
-    guardian = 2
-    healer = 3
-    innkeeper = 4
-    merchant = 5
-    politician = 6
-    thief = 7
+    innkeeper = 2
+    merchant = 3
+    politician = 4
 
 
 class Spot(EnumFactory, enum.Enum):
@@ -52,4 +67,4 @@ class Location(Stateful, DataObject): pass
 class Narrator(Stateful, DataObject): pass
 
 
-Assembly.register(Fit, Spot, Character, Location, Narrator)
+Assembly.register(Form, Fitt, Func, Spot, Character, Location, Narrator)
