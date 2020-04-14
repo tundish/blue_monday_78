@@ -21,7 +21,7 @@
 
 .. entity:: BARMAN
    :types: bluemonday78.types.Character
-   :states: bluemonday78.types.Fit.innkeeper
+   :states: bluemonday78.types.Func.innkeeper
             bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: DRINKER_1
