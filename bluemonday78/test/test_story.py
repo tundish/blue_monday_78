@@ -30,7 +30,9 @@ from turberfield.utils.assembly import Assembly
 
 from bluemonday78.matcher import MultiMatcher
 import bluemonday78.story
+from bluemonday78.types import Form
 from bluemonday78.types import Fitt
+from bluemonday78.types import Func
 from bluemonday78.types import Spot
 from bluemonday78.types import Character
 from bluemonday78.types import Location
@@ -120,9 +122,13 @@ class SequenceTests(unittest.TestCase):
         cls.ensemble = bluemonday78.story.ensemble(
             bluemonday78.story.build_narrator()
         )
-        cls.characters = {
-            obj.get_state(Fitt): obj for obj in cls.ensemble if isinstance(obj, Character)
-        }
+        cls.characters = collections.defaultdict(list)
+        for obj in cls.ensemble:
+            cls.characters[obj.get_state(Form)].append(obj)
+        for obj in cls.ensemble:
+            cls.characters[obj.get_state(Fitt)].append(obj)
+        for obj in cls.ensemble:
+            cls.characters[obj.get_state(Func)].append(obj)
         cls.performer = Performer(
             list(bluemonday78.story.prepare_folders()),
             cls.ensemble
@@ -154,7 +160,7 @@ class SequenceTests(unittest.TestCase):
         )
         self.assertEqual(
             Spot.w12_ducane_prison_wing,
-            self.characters[Fitt.guardian].get_state(Spot)
+            next(iter(self.characters[Fitt.guardian])).get_state(Spot)
         )
 
         list(self.performer.run())
@@ -167,7 +173,7 @@ class SequenceTests(unittest.TestCase):
 
         self.assertEqual(
             Spot.w12_ducane_prison_release,
-            self.characters[Fitt.guardian].get_state(Spot)
+            next(iter(self.characters[Fitt.guardian])).get_state(Spot)
         )
         self.assertEqual(
             Spot.w12_ducane_prison_release,
@@ -177,7 +183,7 @@ class SequenceTests(unittest.TestCase):
     def test_002(self):
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
-            self.characters[Fit.merchant].get_state(Spot)
+            next(iter(self.characters[Func.merchant])).get_state(Spot)
         )
 
         self.assertFalse(self.performer.stopped)
@@ -194,7 +200,7 @@ class SequenceTests(unittest.TestCase):
 
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
-            self.characters[Fit.merchant].get_state(Spot)
+            self.characters[Func.merchant].get_state(Spot)
         )
 
     def test_003(self):
