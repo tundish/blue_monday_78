@@ -32,8 +32,9 @@ class Form(EnumFactory, enum.Enum):
     mug = 2
     punter = 3
     yuppie = 4
-    face = 5
-    veteran = 6
+    hipster= 5
+    face = 6
+    veteran = 7
 
 
 @enum.unique

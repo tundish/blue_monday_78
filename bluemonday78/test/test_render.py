@@ -22,6 +22,7 @@ from bluemonday78.presenter import Presenter
 import bluemonday78.render
 from bluemonday78.test.test_presenter import DialogueLoader
 import bluemonday78.story
+from bluemonday78.types import Character
 from bluemonday78.types import Location
 from bluemonday78.types import Spot
 
@@ -72,11 +73,25 @@ class RenderFrameTests(DialogueLoader, unittest.TestCase):
         rv = bluemonday78.render.frame_to_html(frame)
         self.assertEqual(1, rv.count("<audio"))
 
-    def test_map_from_ensemble(self):
+    def test_map_from_ensemble_empty(self):
         ensemble = [Location(label=i.name).set_state(i) for i in Spot]
         ensemble.append(bluemonday78.story.build_narrator())
         rv = bluemonday78.render.ensemble_to_html(ensemble)
-        self.assertEqual(6, rv.count("<form"), rv)
+        self.assertEqual(0, rv.count("<form"), rv)
+
+    def test_map_from_ensemble(self):
+        totals = list(range(len(Spot)))
+        self.assertTrue(totals)
+        for index in totals:
+            ensemble = [Location(label=i.name).set_state(i) for i in Spot]
+            with self.subTest(index=index):
+                for locn in ensemble[:index]:
+                    ensemble.append(
+                        Character(name="A").set_state(locn.get_state(Spot))
+                    )
+                ensemble.append(bluemonday78.story.build_narrator())
+                rv = bluemonday78.render.ensemble_to_html(ensemble)
+                self.assertEqual(index, rv.count("<form"), rv)
 
 
 class RenderStyleTests(DialogueLoader, unittest.TestCase):
