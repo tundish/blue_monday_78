@@ -5,21 +5,23 @@
 :author: D Haynes
 :date: 2017-07-04
 
+.. entity:: NARRATOR
+   :types:  bluemonday78.types.Narrator
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
+            197801161
+
 .. entity:: HIPSTER
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Func.merchant
             bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: BARMAN
-   :types: bluemonday78.types.Character
+   :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Func.innkeeper
             bluemonday78.types.Spot.w12_goldhawk_tavern
 
-.. entity:: NARRATOR
-   :types: bluemonday78.types.Narrator
-
 .. entity:: PUB
-   :types: bluemonday78.types.Location
+   :types:  bluemonday78.types.Location
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
 Sorrows

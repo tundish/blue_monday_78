@@ -191,7 +191,7 @@ class SequenceTests(unittest.TestCase):
             self.performer.folders, self.performer.ensemble
         )
         list(self.performer.run())
-        self.assertTrue(self.performer.script.fP.endswith("getting_here.rst"))
+        self.assertTrue(self.performer.script.fP.endswith("getting_here.rst"), self.performer.script.fP)
         self.assertEqual(4, len(self.performer.shots))
         self.assertEqual(
             "in the visiting suite",
@@ -205,7 +205,7 @@ class SequenceTests(unittest.TestCase):
 
     def test_003(self):
         list(self.performer.run())
-        self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"))
+        self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"), self.performer.script.fP)
         self.assertEqual(5, len(self.performer.shots))
         self.assertEqual(
             "in the visiting suite",
@@ -214,7 +214,7 @@ class SequenceTests(unittest.TestCase):
 
     def test_004(self):
         list(self.performer.run())
-        self.assertTrue(self.performer.script.fP.endswith("these_keys.rst"))
+        self.assertTrue(self.performer.script.fP.endswith("these_keys.rst"), self.performer.script.fP)
         self.assertEqual(6, len(self.performer.shots))
         self.assertEqual(
             "in the visiting suite",

@@ -6,8 +6,9 @@
 :date: 2017-07-25
 
 .. entity:: NARRATOR
-   :types: bluemonday78.types.Narrator
-            19780118
+   :types:  bluemonday78.types.Narrator
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
+            197801161
 
 .. entity:: HERO
    :types: bluemonday78.types.Character

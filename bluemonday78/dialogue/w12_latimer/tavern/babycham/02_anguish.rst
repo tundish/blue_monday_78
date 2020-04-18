@@ -5,13 +5,18 @@
 :author: D Haynes
 :date: 2017-07-19
 
+.. entity:: NARRATOR
+   :types:  bluemonday78.types.Narrator
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
+            197801161
+
 .. entity:: HIPSTER
-   :types: bluemonday78.types.Character
+   :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Func.merchant
             bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: BARMAN
-   :types: bluemonday78.types.Character
+   :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Func.innkeeper
             bluemonday78.types.Spot.w12_goldhawk_tavern
 
@@ -20,11 +25,6 @@
 
 .. entity:: DRINKER_2
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
-
-.. entity:: NARRATOR
-   :types:  bluemonday78.types.Narrator
-   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
-            19780117
 
 Anguish
 ~~~~~~~
