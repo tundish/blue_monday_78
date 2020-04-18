@@ -27,7 +27,7 @@ from turberfield.utils.assembly import Assembly
 
 
 @enum.unique
-class Form(EnumFactory, enum.Enum):
+class Look(EnumFactory, enum.Enum):
     youth = 1
     mug = 2
     punter = 3
@@ -46,8 +46,8 @@ class Mode(EnumFactory, enum.Enum):
 
 
 @enum.unique
-class Func(EnumFactory, enum.Enum):
-    bard = 1
+class Trade(EnumFactory, enum.Enum):
+    singer = 1
     innkeeper = 2
     merchant = 3
     politician = 4
@@ -68,4 +68,4 @@ class Location(Stateful, DataObject): pass
 class Narrator(Stateful, DataObject): pass
 
 
-Assembly.register(Form, Mode, Func, Spot, Character, Location, Narrator)
+Assembly.register(Look, Mode, Trade, Spot, Character, Location, Narrator)

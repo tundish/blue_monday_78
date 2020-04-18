@@ -30,9 +30,9 @@ from turberfield.utils.assembly import Assembly
 
 from bluemonday78.matcher import MultiMatcher
 import bluemonday78.story
-from bluemonday78.types import Form
+from bluemonday78.types import Look
 from bluemonday78.types import Mode
-from bluemonday78.types import Func
+from bluemonday78.types import Trade
 from bluemonday78.types import Spot
 from bluemonday78.types import Character
 from bluemonday78.types import Location
@@ -124,11 +124,11 @@ class SequenceTests(unittest.TestCase):
         )
         cls.characters = collections.defaultdict(list)
         for obj in cls.ensemble:
-            cls.characters[obj.get_state(Form)].append(obj)
+            cls.characters[obj.get_state(Look)].append(obj)
         for obj in cls.ensemble:
             cls.characters[obj.get_state(Mode)].append(obj)
         for obj in cls.ensemble:
-            cls.characters[obj.get_state(Func)].append(obj)
+            cls.characters[obj.get_state(Trade)].append(obj)
         cls.performer = Performer(
             list(bluemonday78.story.prepare_folders()),
             cls.ensemble
@@ -182,7 +182,7 @@ class SequenceTests(unittest.TestCase):
     def test_002(self):
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
-            next(iter(self.characters[Func.merchant])).get_state(Spot)
+            next(iter(self.characters[Trade.merchant])).get_state(Spot)
         )
 
         self.assertFalse(self.performer.stopped)
@@ -199,7 +199,7 @@ class SequenceTests(unittest.TestCase):
 
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
-            next(iter(self.characters[Func.merchant])).get_state(Spot)
+            next(iter(self.characters[Trade.merchant])).get_state(Spot)
         )
 
     def test_003(self):

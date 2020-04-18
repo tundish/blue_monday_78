@@ -30,7 +30,7 @@
 
 .. entity:: HUSBAND
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Form.mug
+   :states: bluemonday78.types.Look.mug
             bluemonday78.types.Spot.w12_ducane_prison_release
 
 

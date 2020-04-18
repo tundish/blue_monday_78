@@ -34,9 +34,9 @@ from bluemonday78.types import Character
 from bluemonday78.types import Location
 from bluemonday78.types import Narrator
 from bluemonday78.types import Character
-from bluemonday78.types import Form
+from bluemonday78.types import Look
 from bluemonday78.types import Mode
-from bluemonday78.types import Func
+from bluemonday78.types import Trade
 from bluemonday78.types import Spot
 import bluemonday78.utils.publisher
 
@@ -47,25 +47,25 @@ def ensemble(narrator=None):
     rv = [
         Character(
             name="Mr Ray Farington"
-        ).set_state(Form.veteran, Mode.guardian, Spot.w12_ducane_prison_wing),
+        ).set_state(Look.veteran, Mode.guardian, Spot.w12_ducane_prison_wing),
         Character(
             name="Mr William Billy McCarthy"
-        ).set_state(Form.youth, Mode.thief, Spot.w12_ducane_prison_wing),
+        ).set_state(Look.youth, Mode.thief, Spot.w12_ducane_prison_wing),
         Character(
             name="Mrs Karen Sheppey"
-        ).set_state(Form.punter, Mode.healer, Spot.w12_ducane_prison_visiting, 1),
+        ).set_state(Look.punter, Mode.healer, Spot.w12_ducane_prison_visiting, 1),
         Character(
             name="Mr Martin Sheppey"
-        ).set_state(Form.mug, Spot.w12_ducane_prison_wing),
+        ).set_state(Look.mug, Spot.w12_ducane_prison_wing),
         Character(
             name="Mr Barry Latimer"
-        ).set_state(Func.innkeeper, Spot.w12_goldhawk_tavern),
+        ).set_state(Trade.innkeeper, Spot.w12_goldhawk_tavern),
         Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
         Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
         Character(
             name="Mr Justin Cornelis Delcroix"
-        ).set_state(Form.yuppie, Func.merchant, Spot.w12_goldhawk_tavern),
-        Character(name="Mr Matthew Waladli").set_state(Func.bard, Spot.w12_goldhawk_tavern),
+        ).set_state(Look.yuppie, Trade.merchant, Spot.w12_goldhawk_tavern),
+        Character(name="Mr Matthew Waladli").set_state(Trade.singer, Spot.w12_goldhawk_tavern),
         Location(label="Addison Arches 18A").set_state(Spot.w12_latimer_arches),
         Location(label="Visiting Suite").set_state(Spot.w12_ducane_prison_visiting),
         Location(label="Reception area").set_state(Spot.w12_ducane_prison_release),
