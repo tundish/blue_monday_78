@@ -164,7 +164,7 @@ class SequenceTests(unittest.TestCase):
             next(iter(self.characters[Mode.guardian])).get_state(Spot)
         )
 
-        list(self.performer.run())
+        list(self.performer.run(react=True))
         self.assertTrue(self.performer.script.fP.endswith("step_forward.rst"), self.performer.script.fP)
         self.assertEqual(4, len(self.performer.shots))
         self.assertEqual(
@@ -175,6 +175,15 @@ class SequenceTests(unittest.TestCase):
         self.assertEqual(
             Spot.w12_ducane_prison_release,
             next(iter(self.characters[Mode.guardian])).get_state(Spot)
+        )
+
+        self.assertEqual(
+            Spot.w12_ducane_prison_visiting,
+            next(iter(self.characters[Look.mug])).get_state(Spot)
+        )
+
+        self.assertEqual(
+            197801160805, self.ensemble[-1].state
         )
 
         self.ensemble[-1].set_state(Spot.w12_ducane_prison_visiting)
@@ -189,7 +198,7 @@ class SequenceTests(unittest.TestCase):
         folder, index, script, selection, interlude = self.performer.next(
             self.performer.folders, self.performer.ensemble
         )
-        list(self.performer.run())
+        list(self.performer.run(react=True))
         self.assertTrue(self.performer.script.fP.endswith("getting_here.rst"), self.performer.script.fP)
         self.assertEqual(4, len(self.performer.shots), self.performer.shots)
         self.assertEqual(
@@ -203,7 +212,7 @@ class SequenceTests(unittest.TestCase):
         )
 
     def test_003(self):
-        list(self.performer.run())
+        list(self.performer.run(react=True))
         self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"), self.performer.script.fP)
         self.assertEqual(5, len(self.performer.shots))
         self.assertEqual(
@@ -212,7 +221,7 @@ class SequenceTests(unittest.TestCase):
         )
 
     def test_004(self):
-        list(self.performer.run())
+        list(self.performer.run(react=True))
         self.assertTrue(self.performer.script.fP.endswith("these_keys.rst"), self.performer.script.fP)
         self.assertEqual(6, len(self.performer.shots))
         self.assertEqual(

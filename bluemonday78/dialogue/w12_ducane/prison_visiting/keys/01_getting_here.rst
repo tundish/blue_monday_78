@@ -14,12 +14,12 @@
 
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
-   :states: bluemonday78.types.Spot.w12_ducane_prison_release
+   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 .. entity:: WIFE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.healer
-            bluemonday78.types.Spot.w12_ducane_prison_release
+            bluemonday78.types.Spot.w12_ducane_prison_visiting
             1
 
    A beautician in her late forties.
@@ -31,7 +31,7 @@
 .. entity:: HUSBAND
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Look.mug
-            bluemonday78.types.Spot.w12_ducane_prison_release
+            bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 
    A small-time offender in his mid forties.
