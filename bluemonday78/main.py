@@ -163,7 +163,7 @@ async def post_titles(request):
         request.app["log"].info("Load successful from assembly")
 
     presenter = Presenter(None, ensemble)
-    request.app["log"].debug(narrator)
+    presenter.log.debug(narrator)
     request.app["sessions"][narrator.id] = presenter
     request.app["log"].info("session: {0.id.hex}".format(narrator))
     raise web.HTTPFound("/{0.id.hex}".format(narrator))
@@ -183,7 +183,7 @@ async def post_hop(request):
 
     narrator = presenter.ensemble[-1]
     narrator.set_state(spot)
-    request.app["log"].debug("Hopped to {0}".format(spot))
+    presenter.log.debug("Hopped to {0}".format(spot))
 
     pathway = spot.value
     matcher = MultiMatcher(request.app["folders"])
