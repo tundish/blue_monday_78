@@ -38,7 +38,7 @@ class Form(EnumFactory, enum.Enum):
 
 
 @enum.unique
-class Fitt(EnumFactory, enum.Enum):
+class Mode(EnumFactory, enum.Enum):
     guardian = 1
     healer = 2
     mage = 3
@@ -68,4 +68,4 @@ class Location(Stateful, DataObject): pass
 class Narrator(Stateful, DataObject): pass
 
 
-Assembly.register(Form, Fitt, Func, Spot, Character, Location, Narrator)
+Assembly.register(Form, Mode, Func, Spot, Character, Location, Narrator)

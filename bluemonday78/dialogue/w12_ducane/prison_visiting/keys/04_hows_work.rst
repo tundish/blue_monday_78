@@ -11,7 +11,7 @@
 
 .. entity:: WIFE
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Fitt.healer
+   :states: bluemonday78.types.Mode.healer
             bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 .. entity:: HUSBAND
@@ -26,7 +26,7 @@
 
 .. entity:: HERO
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Fitt.thief
+   :states: bluemonday78.types.Mode.thief
             bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 In the Visiting Suite

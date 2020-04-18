@@ -18,7 +18,7 @@
 
 .. entity:: WIFE
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Fitt.healer
+   :states: bluemonday78.types.Mode.healer
             bluemonday78.types.Spot.w12_ducane_prison_release
             1
 

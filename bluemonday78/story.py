@@ -35,7 +35,7 @@ from bluemonday78.types import Location
 from bluemonday78.types import Narrator
 from bluemonday78.types import Character
 from bluemonday78.types import Form
-from bluemonday78.types import Fitt
+from bluemonday78.types import Mode
 from bluemonday78.types import Func
 from bluemonday78.types import Spot
 import bluemonday78.utils.publisher
@@ -47,13 +47,13 @@ def ensemble(narrator=None):
     rv = [
         Character(
             name="Mr Ray Farington"
-        ).set_state(Form.veteran, Fitt.guardian, Spot.w12_ducane_prison_wing),
+        ).set_state(Form.veteran, Mode.guardian, Spot.w12_ducane_prison_wing),
         Character(
             name="Mr William Billy McCarthy"
-        ).set_state(Form.youth, Fitt.thief, Spot.w12_ducane_prison_wing),
+        ).set_state(Form.youth, Mode.thief, Spot.w12_ducane_prison_wing),
         Character(
             name="Mrs Karen Sheppey"
-        ).set_state(Form.punter, Fitt.healer, Spot.w12_ducane_prison_visiting, 1),
+        ).set_state(Form.punter, Mode.healer, Spot.w12_ducane_prison_visiting, 1),
         Character(
             name="Mr Martin Sheppey"
         ).set_state(Form.mug, Spot.w12_ducane_prison_wing),

@@ -31,7 +31,7 @@ from turberfield.utils.assembly import Assembly
 from bluemonday78.matcher import MultiMatcher
 import bluemonday78.story
 from bluemonday78.types import Form
-from bluemonday78.types import Fitt
+from bluemonday78.types import Mode
 from bluemonday78.types import Func
 from bluemonday78.types import Spot
 from bluemonday78.types import Character
@@ -126,7 +126,7 @@ class SequenceTests(unittest.TestCase):
         for obj in cls.ensemble:
             cls.characters[obj.get_state(Form)].append(obj)
         for obj in cls.ensemble:
-            cls.characters[obj.get_state(Fitt)].append(obj)
+            cls.characters[obj.get_state(Mode)].append(obj)
         for obj in cls.ensemble:
             cls.characters[obj.get_state(Func)].append(obj)
         cls.performer = Performer(
@@ -161,7 +161,7 @@ class SequenceTests(unittest.TestCase):
         )
         self.assertEqual(
             Spot.w12_ducane_prison_wing,
-            next(iter(self.characters[Fitt.guardian])).get_state(Spot)
+            next(iter(self.characters[Mode.guardian])).get_state(Spot)
         )
 
         list(self.performer.run())
@@ -174,7 +174,7 @@ class SequenceTests(unittest.TestCase):
 
         self.assertEqual(
             Spot.w12_ducane_prison_release,
-            next(iter(self.characters[Fitt.guardian])).get_state(Spot)
+            next(iter(self.characters[Mode.guardian])).get_state(Spot)
         )
 
         self.ensemble[-1].set_state(Spot.w12_ducane_prison_visiting)
