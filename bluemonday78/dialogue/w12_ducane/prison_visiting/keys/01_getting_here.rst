@@ -9,16 +9,17 @@
 :project: bluemonday78
 :version: |VERSION|
 
-.. |HERO| property:: HERO.name.firstname
 .. |WIFE| property:: WIFE.name.firstname
 .. |HUSBAND| property:: HUSBAND.name.firstname
 
 .. entity:: NARRATOR
-   :types: bluemonday78.types.Narrator
+   :types:  bluemonday78.types.Narrator
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. entity:: WIFE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Fitt.healer
+            bluemonday78.types.Spot.w12_ducane_prison_release
             1
 
    A beautician in her late forties.
@@ -29,20 +30,15 @@
 
 .. entity:: HUSBAND
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Spot.w12_ducane_prison_release
+   :states: bluemonday78.types.Form.mug
+            bluemonday78.types.Spot.w12_ducane_prison_release
+
 
    A small-time offender in his mid forties.
 
     * Can't read. Dislocated.
     * Does what he's told. Wants a quiet life.
     * Misbehaved at Standford Hill to see less of |WIFE|.
-
-.. entity:: HERO
-   :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Spot.w12_ducane_prison_release
-            bluemonday78.types.Spot.w12_ducane_prison_release
-
-   The player entity.
 
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~
@@ -133,8 +129,5 @@ Why here?
 .. property:: WIFE.state 2
 
 .. |HUSBAND_FIRSTNAME| property:: HUSBAND.name.firstname
-.. |HERO_TITLE| property:: HERO.name.title
-.. |HERO_FIRSTNAME| property:: HERO.name.firstname
-.. |HERO_SURNAME| property:: HERO.name.surname
 .. |WIFE_TITLE| property:: WIFE.name.title
 .. |WIFE_SURNAME| property:: WIFE.name.surname

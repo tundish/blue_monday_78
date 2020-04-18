@@ -56,7 +56,7 @@ def ensemble(narrator=None):
         ).set_state(Form.punter).set_state(Fitt.healer).set_state(Spot.w12_ducane_prison_visiting).set_state(1),
         Character(
             name="Mr Martin Sheppey"
-        ).set_state(Form.mug).set_state(Spot.w12_ducane_prison_wing),
+        ).set_state(Form.mug).set_state(Form.mug).set_state(Spot.w12_ducane_prison_wing),
         Character(
             name="Mr Barry Latimer"
         ).set_state(Func.innkeeper).set_state(Spot.w12_goldhawk_tavern),

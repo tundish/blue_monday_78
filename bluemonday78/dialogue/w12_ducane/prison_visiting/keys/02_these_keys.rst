@@ -9,7 +9,7 @@
 :project: bluemonday78
 :version: |VERSION|
 
-.. |HERO| property:: HERO.name.firstname
+.. |INMATE| property:: INMATE.name.firstname
 .. |WIFE| property:: WIFE.name.firstname
 .. |HUSBAND| property:: HUSBAND.name.firstname
 
@@ -35,7 +35,7 @@
     * Does what he's told. Wants a quiet life.
     * Misbehaved at Standford Hill to see less of |WIFE|.
 
-.. entity:: HERO
+.. entity:: INMATE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Fitt.thief
             bluemonday78.types.Spot.w12_ducane_prison_visiting
@@ -121,13 +121,13 @@ Karen talks of the keys
 
     Shut up, will you.
 
-    See over there? |HERO| was in my cell. Gets out today.
-    |HERO| will take them for a while.
+    See over there? |INMATE| was in my cell. Gets out today.
+    |INMATE| will take them for a while.
 
     Then you can shut up.
 
 [WIFE]_
 
-    Well then |HERO| can have them.
-    And |HERO| had better not turn up at my door, either.
+    Well then |INMATE| can have them.
+    And |INMATE| had better not turn up at my door, either.
     I don't want any more of your prison mates hanging around.
