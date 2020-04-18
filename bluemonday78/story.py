@@ -47,25 +47,25 @@ def ensemble(narrator=None):
     rv = [
         Character(
             name="Mr Ray Farington"
-        ).set_state(Form.veteran).set_state(Fitt.guardian).set_state(Spot.w12_ducane_prison_wing),
+        ).set_state(Form.veteran, Fitt.guardian, Spot.w12_ducane_prison_wing),
         Character(
             name="Mr William Billy McCarthy"
-        ).set_state(Form.youth).set_state(Fitt.thief).set_state(Spot.w12_ducane_prison_wing),
+        ).set_state(Form.youth, Fitt.thief, Spot.w12_ducane_prison_wing),
         Character(
             name="Mrs Karen Sheppey"
-        ).set_state(Form.punter).set_state(Fitt.healer).set_state(Spot.w12_ducane_prison_visiting).set_state(1),
+        ).set_state(Form.punter, Fitt.healer, Spot.w12_ducane_prison_visiting, 1),
         Character(
             name="Mr Martin Sheppey"
-        ).set_state(Form.mug).set_state(Form.mug).set_state(Spot.w12_ducane_prison_wing),
+        ).set_state(Form.mug, Spot.w12_ducane_prison_wing),
         Character(
             name="Mr Barry Latimer"
-        ).set_state(Func.innkeeper).set_state(Spot.w12_goldhawk_tavern),
+        ).set_state(Func.innkeeper, Spot.w12_goldhawk_tavern),
         Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
         Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
         Character(
             name="Mr Justin Cornelis Delcroix"
-        ).set_state(Form.yuppie).set_state(Func.merchant).set_state(Spot.w12_goldhawk_tavern),
-        Character(name="Mr Matthew Waladli").set_state(Func.bard).set_state(Spot.w12_goldhawk_tavern),
+        ).set_state(Form.yuppie, Func.merchant, Spot.w12_goldhawk_tavern),
+        Character(name="Mr Matthew Waladli").set_state(Func.bard, Spot.w12_goldhawk_tavern),
         Location(label="Addison Arches 18A").set_state(Spot.w12_latimer_arches),
         Location(label="Visiting Suite").set_state(Spot.w12_ducane_prison_visiting),
         Location(label="Reception area").set_state(Spot.w12_ducane_prison_release),
