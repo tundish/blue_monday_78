@@ -12,7 +12,8 @@
 .. |HERO| property:: HERO.name.firstname
 
 .. entity:: NARRATOR
-   :types: bluemonday78.types.Narrator
+   :types:  bluemonday78.types.Narrator
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. entity:: OFFICER
    :types:  bluemonday78.types.Character

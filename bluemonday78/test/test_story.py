@@ -148,6 +148,7 @@ class SequenceTests(unittest.TestCase):
                 self.ensemble, self.performer.folders
             )
             self.assertIn(metadata, (None, self.folder.metadata))
+        self.performer.shots = []
 
     def test_001(self):
         self.assertEqual(
@@ -175,10 +176,8 @@ class SequenceTests(unittest.TestCase):
             Spot.w12_ducane_prison_release,
             next(iter(self.characters[Fitt.guardian])).get_state(Spot)
         )
-        self.assertEqual(
-            Spot.w12_ducane_prison_release,
-            self.ensemble[-1].get_state(Spot)
-        )
+
+        self.ensemble[-1].set_state(Spot.w12_ducane_prison_visiting)
 
     def test_002(self):
         self.assertEqual(
@@ -192,7 +191,7 @@ class SequenceTests(unittest.TestCase):
         )
         list(self.performer.run())
         self.assertTrue(self.performer.script.fP.endswith("getting_here.rst"), self.performer.script.fP)
-        self.assertEqual(4, len(self.performer.shots))
+        self.assertEqual(4, len(self.performer.shots), self.performer.shots)
         self.assertEqual(
             "in the visiting suite",
             self.performer.shots[-1].scene
@@ -200,7 +199,7 @@ class SequenceTests(unittest.TestCase):
 
         self.assertEqual(
             Spot.w12_goldhawk_tavern,
-            self.characters[Func.merchant].get_state(Spot)
+            next(iter(self.characters[Func.merchant])).get_state(Spot)
         )
 
     def test_003(self):
