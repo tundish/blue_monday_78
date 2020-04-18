@@ -174,10 +174,17 @@ async def post_hop(request):
         presenter = request.app["sessions"][uid]
     except KeyError:
         raise web.HTTPUnauthorized(reason="Session {0!s} not found.".format(uid))
+
     data = await request.post()
     location_id = uuid.UUID(hex=data["location_id"])
     location = next(bluemonday78.story.search(presenter.ensemble, id=location_id))
-    pathway = location.get_state(Spot).value
+    spot = location.get_state(Spot)
+
+    narrator = presenter.ensemble[-1]
+    narrator.set_state(spot)
+    request.app["log"].debug("Hopped to {0}".format(spot))
+
+    pathway = spot.value
     matcher = MultiMatcher(request.app["folders"])
     folders = list(matcher.options({"pathways": set([pathway])}))
     dialogue = presenter.dialogue(folders, presenter.ensemble)

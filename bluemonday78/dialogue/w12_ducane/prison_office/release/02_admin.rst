@@ -11,21 +11,22 @@
 
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
-   :states: 197801160805
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
+            197801160805
 
 .. entity:: OFFICER
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.guardian
             bluemonday78.types.Spot.w12_ducane_prison_release
 
-.. entity:: HERO
+.. entity:: INMATE
    :types: bluemonday78.types.Character
    :states: bluemonday78.types.Mode.thief
             bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. entity:: CELLMATE
    :types: bluemonday78.types.Character
-   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. entity:: OBJECTIVE
    :types: bluemonday78.types.Location
@@ -53,24 +54,26 @@ Ray unlocks the office
 
 [OFFICER]_
 
-    |HERO_SURNAME| you stay here while I unlock the Office.
+    |INMATE_SURNAME| you stay here while I unlock the Office.
 
 [OFFICER]_
 
     I'll be back in five minutes.
 
-    There'll be no nonsense while my back is turned, |HERO_SURNAME|.
+    There'll be no nonsense while my back is turned, |INMATE_SURNAME|.
 
-.. memory:: 197801160811
-   :subject: HERO
+.. memory:: 197801160810
+   :subject: NARRATOR
 
-   |HERO_FIRSTNAME| |HERO_SURNAME| is waiting for |OFFICER_SURNAME| to get back.
+   |INMATE_FIRSTNAME| |INMATE_SURNAME| is waiting for |OFFICER_SURNAME| to get back.
+
+.. property:: NARRATOR.state w12_ducane_prison_release 
 
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
 .. |CELLMATE_SURNAME| property:: CELLMATE.name.surname
-.. |HERO_TITLE| property:: HERO.name.title
-.. |HERO_FIRSTNAME| property:: HERO.name.firstname
-.. |HERO_SURNAME| property:: HERO.name.surname
+.. |INMATE_TITLE| property:: INMATE.name.title
+.. |INMATE_FIRSTNAME| property:: INMATE.name.firstname
+.. |INMATE_SURNAME| property:: INMATE.name.surname
 .. |OFFICER_TITLE| property:: OFFICER.name.title
 .. |OFFICER_FIRSTNAME| property:: OFFICER.name.firstname
 .. |OFFICER_SURNAME| property:: OFFICER.name.surname
