@@ -25,6 +25,7 @@ import configparser
 import functools
 import importlib.resources
 import logging
+import logging.config
 import pathlib
 import signal
 import socket
@@ -318,8 +319,13 @@ class Config:
             return src, None
         else:
             try:
+                logging.config.fileConfig(cfg, disable_existing_loggers=False)
+            except Exception as e:
+                log.exception(e)
+
+            try:
                 app["config"].append(cfg)
-            except (AttributeError, KeyError):
+            except (AttributeError, KeyError) as e:
                 app["config"] = deque([cfg], maxlen=1)
                 log.debug("First config is stored.")
             finally:
