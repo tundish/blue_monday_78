@@ -9,22 +9,21 @@
 :project: bluemonday78
 :version: |VERSION|
 
+.. entity:: NARRATOR
+   :types:  bluemonday78.types.Narrator
+   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
+
 .. entity:: WIFE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.healer
             bluemonday78.types.Spot.w12_ducane_prison_visiting
+            2
 
 .. entity:: HUSBAND
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
 
-   A small-time offender in his mid forties.
-
-    * Can't read. Dislocated.
-    * Does what he's told. Wants a quiet life.
-    * Misbehaved at Standford Hill to see less of |WIFE|.
-
-.. entity:: HERO
+.. entity:: INMATE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.thief
             bluemonday78.types.Spot.w12_ducane_prison_visiting
@@ -114,6 +113,8 @@ Karen talks of her work
 [WIFE]_
 
     No, I still do the cleaning.
+
+.. property:: WIFE.state 3
 
 .. |HUSBAND_FIRSTNAME| property:: HUSBAND.name.firstname
 .. |WIFE| property:: WIFE.name.firstname

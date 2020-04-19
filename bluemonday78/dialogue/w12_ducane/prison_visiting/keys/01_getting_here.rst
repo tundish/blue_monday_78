@@ -22,23 +22,10 @@
             bluemonday78.types.Spot.w12_ducane_prison_visiting
             1
 
-   A beautician in her late forties.
-
-    * Works in `Sandy Hair`, Leysdown-on-Sea.
-    * Very organised.
-    * Has always looked after |HUSBAND|.
-
 .. entity:: HUSBAND
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Look.mug
             bluemonday78.types.Spot.w12_ducane_prison_visiting
-
-
-   A small-time offender in his mid forties.
-
-    * Can't read. Dislocated.
-    * Does what he's told. Wants a quiet life.
-    * Misbehaved at Standford Hill to see less of |WIFE|.
 
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~

@@ -13,34 +13,24 @@
 .. |WIFE| property:: WIFE.name.firstname
 .. |HUSBAND| property:: HUSBAND.name.firstname
 
+.. entity:: NARRATOR
+   :types:  bluemonday78.types.Narrator
+   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
+
 .. entity:: WIFE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.healer
             bluemonday78.types.Spot.w12_ducane_prison_visiting
-            2
-
-   A beautician in her late forties.
-
-    * Works in `Sandy Hair`, Leysdown-on-Sea.
-    * Very organised.
-    * Has always looked after |HUSBAND|.
+            4
 
 .. entity:: HUSBAND
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
 
-   A small-time offender in his mid forties.
-
-    * Can't read. Dislocated.
-    * Does what he's told. Wants a quiet life.
-    * Misbehaved at Standford Hill to see less of |WIFE|.
-
 .. entity:: INMATE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.thief
             bluemonday78.types.Spot.w12_ducane_prison_visiting
-
-   The player entity.
 
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~

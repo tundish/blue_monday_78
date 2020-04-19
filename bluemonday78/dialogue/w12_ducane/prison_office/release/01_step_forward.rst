@@ -124,7 +124,6 @@ Ray joins them on the balcony
 
    |INMATE_FIRSTNAME| |INMATE_SURNAME| gets out of Prison today.
 
-.. property:: NARRATOR.state 197801160805
 .. property:: OFFICER.state bluemonday78.types.Spot.w12_ducane_prison_release
 .. property:: INMATE.state bluemonday78.types.Spot.w12_ducane_prison_release
 .. property:: CELLMATE.state bluemonday78.types.Spot.w12_ducane_prison_visiting

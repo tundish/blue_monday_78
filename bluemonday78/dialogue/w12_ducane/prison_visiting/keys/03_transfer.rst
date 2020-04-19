@@ -11,25 +11,22 @@
 
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
+   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 .. entity:: WIFE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.healer
             bluemonday78.types.Spot.w12_ducane_prison_visiting
-            2
+            3
 
 .. entity:: CELLMATE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
 
-.. entity:: HERO
+.. entity:: INMATE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.thief
             bluemonday78.types.Spot.w12_ducane_prison_visiting
-
-.. entity:: OBJECTIVE
-   :types:  bluemonday78.types.Location
-   :states: bluemonday78.types.Spot.w12_latimer_arches
 
 .. entity:: EXIT
    :types:  bluemonday78.types.Location
@@ -49,7 +46,7 @@ Martin hands over the keys
 
 [CELLMATE]_
 
-    |HERO| mate; quick. Take these keys. The address is on the
+    |INMATE| mate; quick. Take these keys. The address is on the
     label. Keep them out of sight.
 
 [NARRATOR]_
@@ -66,7 +63,7 @@ Martin hands over the keys
 
 [NARRATOR]_
 
-    |CELLMATE| eyes |HERO| nervously.
+    |CELLMATE| eyes |INMATE| nervously.
 
 [CELLMATE]_
 
@@ -75,6 +72,7 @@ Martin hands over the keys
     And don't let anybody in there. If you get anyone poking around,
     tell them you're looking after it for Frankie Marshall.
 
+.. property:: WIFE.state 4
+
 .. |CELLMATE| property:: CELLMATE.name.firstname
-.. |HERO| property:: HERO.name.firstname
-.. |OBJECTIVE_LABEL| property:: OBJECTIVE.label
+.. |INMATE| property:: INMATE.name.firstname

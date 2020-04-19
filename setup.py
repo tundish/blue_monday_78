@@ -50,12 +50,12 @@ setup(
         ]
     },
     install_requires=[
-        "turberfield-dialogue>=0.22.0",
+        "turberfield-dialogue>=0.24.0",
     ],
     zip_safe=True,
     entry_points={
         "console_scripts": [
-            "carmen-web = bluemonday78.main:run",
+            "bluemonday-web = bluemonday78.main:run",
         ],
     }
 )
