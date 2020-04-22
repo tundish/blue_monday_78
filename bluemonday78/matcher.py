@@ -35,6 +35,8 @@ class MultiMatcher(Matcher):
             12: ("%Y%m%d%H%M", datetime.timedelta(minutes=1)),
             14: ("%Y%m%d%H%M%S", datetime.timedelta(seconds=1)),
         }
+        if len(text) not in formats and min(formats) < len(text) < max(formats):
+            text = text + "0"
         try:
             format_string, span = formats[len(text)]
         except KeyError:

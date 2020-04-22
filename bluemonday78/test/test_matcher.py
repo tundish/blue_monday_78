@@ -16,11 +16,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
+import datetime
 import unittest
 
 from turberfield.dialogue.model import SceneScript
 
 from bluemonday78.matcher import MultiMatcher
+from bluemonday78.story import blue_monday
 
 
 class MatcherTests(unittest.TestCase):
@@ -74,3 +76,25 @@ class MatcherTests(unittest.TestCase):
         self.assertEqual("a_01", rv[0].metadata["arc"])
         self.assertEqual("a_11", rv[1].metadata["arc"])
 
+    def test_parse_timespan_day(self):
+        rv = MultiMatcher.parse_timespan(blue_monday.strftime("%Y%m%d"))
+        self.assertEqual(2, len(rv))
+        self.assertEqual(
+            datetime.datetime(blue_monday.year, blue_monday.month, blue_monday.day),
+            rv[0]
+        )
+        self.assertEqual(datetime.timedelta(days=1), rv[1])
+
+    def test_parse_timespan_period(self):
+        rv = MultiMatcher.parse_timespan(blue_monday.strftime("%Y%m%d") + "1")
+        self.assertEqual(2, len(rv))
+        self.assertEqual(
+            datetime.datetime(
+                blue_monday.year,
+                blue_monday.month,
+                blue_monday.day,
+                hour=10
+            ),
+            rv[0]
+        )
+        self.assertEqual(datetime.timedelta(hours=1), rv[1])
