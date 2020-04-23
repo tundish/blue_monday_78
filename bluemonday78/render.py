@@ -81,12 +81,12 @@ def ensemble_to_html(ensemble):
         if isinstance(i, Location) and i.get_state(Spot) in spots
     )
     return f"""
-<section class="lay-banner">
+<section class="fit-banner">
 <h1><span>Blue</span><span>Monday</span><span>78</span></h1>
 <h2>{ts.strftime("%H:%M:%S %p") if ts else ""}</h2>
 <h2>{ts.strftime("%a %d %b") if ts else ""}</h2>
 </section>
-<div class="lay-speech">
+<div class="fit-speech">
 <main>
 <ul class="obj-memory">
 {notes}
@@ -112,15 +112,15 @@ def frame_to_html(frame, ensemble=[], final=False):
     audio = "\n".join(audio_to_html(i) for i in frame[Model.Audio])
     return f"""
 {audio}
-<section class="lay-banner">
+<section class="fit-banner">
 <h1><span>Blue</span><span>Monday</span><span>78</span></h1>
 <h2>{ts.strftime("%H:%M:%S %p") if ts else ""}</h2>
 <h2>{ts.strftime("%a %d %b") if ts else ""}</h2>
 </section>
-<aside class="lay-photos">
+<aside class="fit-photos">
 {stills}
 </aside>
-<div class="lay-speech">
+<div class="fit-speech">
 <main>
 {'<h1>{0}</h1>'.format(spot.value[-1].capitalize().replace("_", " ")) if spot is not None else ''}
 <ul class="obj-dialogue">
@@ -151,11 +151,11 @@ def titles_to_html(config=None, url_pattern=Presenter.validation["url"].pattern)
     >""" if config and config.getboolean("assembly", "enable_user", fallback=False) else ""
 
     return f"""
-<section class="lay-banner">
+<section class="fit-banner">
 <h1><span>Blue</span><span>Monday</span><span>78</span></h1>
 <h2>An Addison Arches episode</h2>
 </section>
-<div class="lay-speech">
+<div class="fit-speech">
 <main>
 <h1>Start a new story.</h1>
 <p class="obj-speech">You can get the code for this story from
@@ -192,7 +192,7 @@ def body_html(refresh=None):
 {'<meta http-equiv="refresh" content="{0}">'.format(refresh) if refresh is not None else ''}
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Blue Monday 78: Pilot episode</title>
-<link rel="stylesheet" href="/css/blomt.css" />
+<link rel="stylesheet" href="/css/bfost.css" />
 </head>
 <body>
 <style type="text/css">

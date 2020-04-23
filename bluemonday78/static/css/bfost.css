@@ -1,4 +1,4 @@
-/* Base : Layout : Objects : Messages: Themes */
+/* Base : Fit : Objects : State: Theme */
 
 /*  Base    */
 
@@ -80,7 +80,7 @@ font-weight: 900;
 }
 
 
-/*  Layout  */
+/*  Fit  */
 
 body {
 display: grid;
@@ -90,7 +90,7 @@ grid-template-areas:
 height: 100vh;
 }
 
-.lay-banner {
+.fit-banner {
 background-color: var(--creamy, white);
 border-left: 0.25rem solid var(--pebble, grey);
 font-family: var(--titles);
@@ -98,7 +98,7 @@ grid-area: banner;
 padding-left: 1.0rem;
 }
 
-.lay-photos {
+.fit-photos {
 align-items: center;
 background-color: var(--pebble, grey);
 border-left: 1rem solid var(--creamy, white);
@@ -108,7 +108,7 @@ grid-area: photos;
 min-width: 128px;
 }
 
-.lay-speech {
+.fit-speech {
 background-color: var(--banana);
 display: flex;
 flex-direction: column;
@@ -124,7 +124,7 @@ grid-template-areas:
 "speech  photos"
 }
 
-.lay-banner {
+.fit-banner {
 display: none;
 }
 
@@ -180,7 +180,7 @@ padding: 0.5em;
 }
 
 
-/*  Messages   */
+/*  State   */
 
 @keyframes fadein {
 0% {
@@ -286,25 +286,25 @@ button:hover {
 border: 2px solid var(--creamy, white);
 }
 
-.lay-banner h1 {
+.fit-banner h1 {
 display: flex inline;
 flex-direction: column;
 font-size: 7rem;
 }
 
-.lay-banner h1 span:nth-child(1) {
+.fit-banner h1 span:nth-child(1) {
 color: var(--pebble, grey);
 }
 
-.lay-banner h1 span:nth-child(2) {
+.fit-banner h1 span:nth-child(2) {
 color: var(--claret, crimson);
 }
 
-.lay-banner h1 span:nth-child(3) {
+.fit-banner h1 span:nth-child(3) {
 color: var(--collie, limegreen);
 }
 
-.lay-banner h2 {
+.fit-banner h2 {
 color: var(--banana, gold);
 letter-spacing: 0.225rem;
 text-shadow: var(--pebble, grey) 0rem 0.1rem 0.05rem, var(--pebble, grey) 0rem -0.1rem 0.05rem,
