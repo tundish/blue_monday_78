@@ -97,4 +97,4 @@ class MatcherTests(unittest.TestCase):
             ),
             rv[0]
         )
-        self.assertEqual(datetime.timedelta(hours=1), rv[1])
+        self.assertEqual(datetime.timedelta(hours=10), rv[1])

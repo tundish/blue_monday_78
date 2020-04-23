@@ -37,6 +37,8 @@ class MultiMatcher(Matcher):
         }
         if len(text) not in formats and min(formats) < len(text) < max(formats):
             text = text + "0"
+            pair = formats[len(text)]
+            formats[len(text)] = (pair[0], 10 * pair[1])
         try:
             format_string, span = formats[len(text)]
         except KeyError:
