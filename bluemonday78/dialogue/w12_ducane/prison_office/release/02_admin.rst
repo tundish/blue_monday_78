@@ -22,11 +22,11 @@
 .. entity:: INMATE
    :types: bluemonday78.types.Character
    :states: bluemonday78.types.Mode.thief
-            bluemonday78.types.Spot.w12_ducane_prison_release
+            bluemonday78.types.Spot.w12_ducane_prison_wing
 
 .. entity:: CELLMATE
    :types: bluemonday78.types.Character
-   :states: bluemonday78.types.Spot.w12_ducane_prison_release
+   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 .. entity:: OBJECTIVE
    :types: bluemonday78.types.Location
