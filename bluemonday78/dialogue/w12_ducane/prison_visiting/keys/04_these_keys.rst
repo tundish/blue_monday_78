@@ -4,6 +4,8 @@
 
 .. |VERSION| property:: bluemonday78.story.version
 
+.. TODO: Rename this file
+
 :author: D Haynes
 :date: 2017-07-04
 :project: bluemonday78
@@ -30,7 +32,7 @@
 .. entity:: INMATE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.thief
-            bluemonday78.types.Spot.w12_ducane_prison_visiting
+            bluemonday78.types.Spot.w12_ducane_prison_release
 
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~

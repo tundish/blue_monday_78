@@ -192,6 +192,8 @@ class SequenceTests(unittest.TestCase):
         )
 
         self.ensemble[-1].set_state(Spot.w12_ducane_prison_visiting)
+        # TODO: Test Billy's scene alone
+        next(iter(self.characters[Mode.thief])).set_state(Spot.w12_ducane_prison_visiting)
 
     def test_002(self):
         self.assertEqual(1, next(iter(self.characters[Mode.healer])).get_state())
@@ -223,8 +225,6 @@ class SequenceTests(unittest.TestCase):
         self.assertEqual("in the visiting suite", self.performer.shots[-1].scene)
         self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
 
-        next(iter(self.characters[Mode.thief])).set_state(Spot.w12_ducane_prison_visiting)
-
     def test_004(self):
         self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
 
@@ -236,14 +236,14 @@ class SequenceTests(unittest.TestCase):
         self.assertTrue(self.performer.script.fP.endswith("transfer.rst"), self.performer.script.fP)
         self.assertEqual(1, len(self.performer.shots))
         self.assertEqual("in the visiting suite", self.performer.shots[-1].scene)
-        self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
+        self.assertEqual(4, next(iter(self.characters[Mode.healer])).get_state())
 
         next(iter(self.characters[Mode.thief])).set_state(Spot.w12_ducane_prison_release)
 
     def test_005(self):
         list(self.performer.run(react=True))
         self.assertTrue(self.performer.script.fP.endswith("these_keys.rst"), self.performer.script.fP)
-        self.assertEqual(6, len(self.performer.shots))
+        self.assertEqual(1, len(self.performer.shots))
         self.assertEqual(
             "in the visiting suite",
             self.performer.shots[-1].scene
