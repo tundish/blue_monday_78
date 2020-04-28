@@ -94,12 +94,12 @@ On the approach
 
 [OFFICER]_
 
-    You fell on your feet, didn't you? At some point soon we are
+    This your place of business is it? At some point soon we are
     going to have a little chat about your new employers.
 
 [HERO]_
 
-    This place belongs to Frankie Marshall.
+    It belongs to Frankie Marshall.
 
 [NARRATOR]_
 
@@ -107,7 +107,7 @@ On the approach
  
 [OFFICER]_
 
-    And I'd say that's where your problems begin.
+    Well I'd say this is where your problems begin.
 
 .. property:: OFFICER.state 19780119
 
