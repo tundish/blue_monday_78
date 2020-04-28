@@ -99,14 +99,17 @@ def main(args):
         if path.is_file() and str(mimetypes.guess_type(path)[0]).startswith(
             "image"
         ):
+            output_path = path.with_suffix(".png")
+            if output_path.exists():
+                print("Protecting ", output_path, file=sys.stderr)
+                continue
             with Image.open(path) as img:
                 print("Processing ", path, file=sys.stderr)
                 greyscale = img.convert("L")
-                half_tone = ink_from_grey(greyscale)
+                half_tone = ink_from_grey(greyscale, sample=8, angle=38)
                 output_path = path.with_suffix(".png")
-                if not output_path.exists():
-                    print("Saving ", output_path, file=sys.stderr)
-                    half_tone.save(output_path)
+                print("Saving ", output_path, file=sys.stderr)
+                half_tone.save(output_path)
 
 
 def parser(description=__doc__):
