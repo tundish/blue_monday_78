@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
+import datetime
 import enum
 import string
 
@@ -65,7 +66,27 @@ class Spot(EnumFactory, enum.Enum):
 
 class Character(Stateful, Persona): pass
 class Location(Stateful, DataObject): pass
-class Narrator(Stateful, DataObject): pass
+
+class Narrator(Stateful, DataObject):
+
+    state_format = "%Y%m%d%H%M"
+
+    @property
+    def clock(self):
+        ts = str(self.get_state(int))
+        try:
+            return datetime.datetime.strptime(ts, self.state_format)
+        except ValueError:
+            return ts
+
+    @clock.setter
+    def clock(self, hours=1):
+        try:
+            td = datetime.timedelta(hours=hours)
+            ts = self.clock + td
+            self.set_state(int(ts.strftime(self.state_format)))
+        finally:
+            return self.clock
 
 
 Assembly.register(Look, Mode, Trade, Spot, Character, Location, Narrator)
