@@ -242,7 +242,7 @@ class SequenceTests(unittest.TestCase):
 
     def test_005(self):
         list(self.performer.run(react=True))
-        self.assertTrue(self.performer.script.fP.endswith("these_keys.rst"), self.performer.script.fP)
+        self.assertTrue(self.performer.script.fP.endswith("well_goodbye.rst"), self.performer.script.fP)
         self.assertEqual(1, len(self.performer.shots))
         self.assertEqual(
             "in the visiting suite",
