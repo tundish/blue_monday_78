@@ -13,7 +13,6 @@
 
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
-   :states: 197801160820
 
 .. entity:: OFFICER
    :types:  bluemonday78.types.Character
@@ -25,15 +24,10 @@
    :states: bluemonday78.types.Mode.thief
             bluemonday78.types.Spot.w12_ducane_prison_release
 
-   The player entity.
-
 .. entity:: CELLMATE
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Spot.w12_ducane_prison_release
-
-.. entity:: OBJECTIVE
-   :types:  bluemonday78.types.Location
-   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
+   :states: bluemonday78.types.Look.mug
+            bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 Guards' Office
 ~~~~~~~~~~~~~~
@@ -88,4 +82,3 @@ Ray does the paperwork
 .. |HERO_SURNAME| property:: HERO.name.surname
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
 .. |CELLMATE_SURNAME| property:: CELLMATE.name.surname
-.. |OBJECTIVE_LABEL| property:: OBJECTIVE.label

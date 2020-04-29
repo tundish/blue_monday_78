@@ -23,11 +23,6 @@
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
 
-.. entity:: INMATE
-   :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Mode.thief
-            bluemonday78.types.Spot.w12_ducane_prison_visiting
-
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~
 

@@ -23,7 +23,7 @@
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.healer
             bluemonday78.types.Spot.w12_ducane_prison_visiting
-            4
+            3
 
 .. entity:: HUSBAND
    :types:  bluemonday78.types.Character
@@ -32,7 +32,6 @@
 .. entity:: INMATE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.thief
-            bluemonday78.types.Spot.w12_ducane_prison_release
 
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~
@@ -123,3 +122,6 @@ Karen talks of the keys
     Well then |INMATE| can have them.
     And |INMATE| had better not turn up at my door, either.
     I don't want any more of your prison mates hanging around.
+
+.. property:: WIFE.state 2
+

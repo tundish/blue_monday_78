@@ -39,6 +39,60 @@ from bluemonday78.types import Location
 from bluemonday78.types import Narrator
 
 
+class AssemblyTests(unittest.TestCase):
+
+    class ForeignState(EnumFactory, enum.Enum):
+        friendly = 0
+        hostile = 1
+
+    def test_assembly(self):
+        narrator = bluemonday78.story.build_narrator()
+        ensemble = bluemonday78.story.ensemble(narrator)
+        text = Assembly.dumps(ensemble)
+        clone = Assembly.loads(text)
+
+        self.assertEqual(
+            set(group_by_type(ensemble).keys()),
+            set(group_by_type(clone).keys()),
+            "Check all ensemble classes permit re-assembly (DataObject)"
+        )
+
+    def test_ready_narrator_01(self):
+        Assembly.register(AssemblyTests.ForeignState)
+        narrator = bluemonday78.story.build_narrator().set_state(AssemblyTests.ForeignState.hostile)
+        self.assertTrue(hasattr(narrator, "memories"))
+        self.assertIsInstance(narrator.memories, collections.deque)
+        narrator.memories.extend(range(4))
+        self.assertEqual(197801160800, narrator.state)
+        self.assertEqual(4, len(narrator.memories))
+        self.assertEqual(3, len(narrator._states))
+
+        text = Assembly.dumps(narrator)
+        clone = Assembly.loads(text)
+        self.assertEqual(narrator.id, clone.id)
+        self.assertTrue(hasattr(clone, "memories"))
+        self.assertIsInstance(clone.memories, list)
+        self.assertEqual(4, len(clone.memories))
+        self.assertEqual(3, len(narrator._states))
+
+        # Check state transfer
+        self.assertEqual(197801160800, clone.state)
+        clone.state = 0
+
+        result = bluemonday78.story.build_narrator(
+            id=None,
+            memories=clone.memories,
+            _states=clone._states
+        )
+        self.assertNotEqual(clone.id, result.id)
+        self.assertTrue(hasattr(result, "memories"))
+        self.assertIsInstance(result.memories, collections.deque)
+        self.assertEqual(4, len(result.memories))
+        self.assertEqual(0, result.state)
+        self.assertEqual(3, len(result._states))
+        self.assertEqual(AssemblyTests.ForeignState.hostile, result.get_state(AssemblyTests.ForeignState))
+
+
 class TimeSpanTests(unittest.TestCase):
 
     def test_seconds(self):
@@ -236,69 +290,54 @@ class SequenceTests(unittest.TestCase):
         self.assertTrue(self.performer.script.fP.endswith("transfer.rst"), self.performer.script.fP)
         self.assertEqual(1, len(self.performer.shots))
         self.assertEqual("in the visiting suite", self.performer.shots[-1].scene)
-        self.assertEqual(4, next(iter(self.characters[Mode.healer])).get_state())
+        self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
+        self.assertEqual(
+            Spot.w12_ducane_prison_release,
+            next(iter(self.characters[Mode.thief])).get_state(Spot)
+        )
+
+    def test_005(self):
+        self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
+        # Move Billy to test Karen's loop
+        self.assertEqual(
+            Spot.w12_ducane_prison_release,
+            next(iter(self.characters[Mode.thief])).get_state(Spot)
+        )
+        next(iter(self.characters[Mode.thief])).set_state(Spot.w12_ducane_prison_wing)
+
+        list(self.performer.run(react=True))
+        self.assertTrue(self.performer.script.fP.endswith("memories.rst"), self.performer.script.fP)
+        self.assertEqual(2, next(iter(self.characters[Mode.healer])).get_state())
+
+        self.assertFalse(self.performer.stopped)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
+        )
+        list(self.performer.run(react=True))
+        self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"), self.performer.script.fP)
+        self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
 
         next(iter(self.characters[Mode.thief])).set_state(Spot.w12_ducane_prison_release)
 
-    def test_005(self):
+    def test_006(self):
+        self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
+        next(iter(self.characters[Mode.thief])).set_state(Spot.w12_ducane_prison_release)
+
         list(self.performer.run(react=True))
         self.assertTrue(self.performer.script.fP.endswith("well_goodbye.rst"), self.performer.script.fP)
-        self.assertEqual(1, len(self.performer.shots))
+        self.assertEqual(4, next(iter(self.characters[Mode.healer])).get_state())
+
+    def test_007(self):
+        self.assertEqual(4, next(iter(self.characters[Mode.healer])).get_state())
         self.assertEqual(
-            "in the visiting suite",
-            self.performer.shots[-1].scene
+            Spot.w12_ducane_prison_release,
+            next(iter(self.characters[Mode.thief])).get_state(Spot)
         )
 
-
-class AssemblyTests(unittest.TestCase):
-
-    class ForeignState(EnumFactory, enum.Enum):
-        friendly = 0
-        hostile = 1
-
-    def test_assembly(self):
-        narrator = bluemonday78.story.build_narrator()
-        ensemble = bluemonday78.story.ensemble(narrator)
-        text = Assembly.dumps(ensemble)
-        clone = Assembly.loads(text)
-
-        self.assertEqual(
-            set(group_by_type(ensemble).keys()),
-            set(group_by_type(clone).keys()),
-            "Check all ensemble classes permit re-assembly (DataObject)"
+        self.assertFalse(self.performer.stopped)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
         )
-
-    def test_ready_narrator_01(self):
-        Assembly.register(AssemblyTests.ForeignState)
-        narrator = bluemonday78.story.build_narrator().set_state(AssemblyTests.ForeignState.hostile)
-        self.assertTrue(hasattr(narrator, "memories"))
-        self.assertIsInstance(narrator.memories, collections.deque)
-        narrator.memories.extend(range(4))
-        self.assertEqual(197801160800, narrator.state)
-        self.assertEqual(4, len(narrator.memories))
-        self.assertEqual(3, len(narrator._states))
-
-        text = Assembly.dumps(narrator)
-        clone = Assembly.loads(text)
-        self.assertEqual(narrator.id, clone.id)
-        self.assertTrue(hasattr(clone, "memories"))
-        self.assertIsInstance(clone.memories, list)
-        self.assertEqual(4, len(clone.memories))
-        self.assertEqual(3, len(narrator._states))
-
-        # Check state transfer
-        self.assertEqual(197801160800, clone.state)
-        clone.state = 0
-
-        result = bluemonday78.story.build_narrator(
-            id=None,
-            memories=clone.memories,
-            _states=clone._states
-        )
-        self.assertNotEqual(clone.id, result.id)
-        self.assertTrue(hasattr(result, "memories"))
-        self.assertIsInstance(result.memories, collections.deque)
-        self.assertEqual(4, len(result.memories))
-        self.assertEqual(0, result.state)
-        self.assertEqual(3, len(result._states))
-        self.assertEqual(AssemblyTests.ForeignState.hostile, result.get_state(AssemblyTests.ForeignState))
+        list(self.performer.run(react=True))
+        self.assertTrue(self.performer.script.fP.endswith("fatherly_advice.rst"), self.performer.script.fP)
+        self.assertEqual(4, next(iter(self.characters[Mode.healer])).get_state())

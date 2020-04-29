@@ -124,5 +124,4 @@ Karen talks of the keys
     And |INMATE| had better not turn up at my door, either.
     I don't want any more of your prison mates hanging around.
 
-.. property:: WIFE.state 2
-
+.. property:: WIFE.state 4

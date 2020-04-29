@@ -72,7 +72,7 @@ Martin hands over the keys
     And don't let anybody in there. If you get anyone poking around,
     tell them you're looking after it for Frankie Marshall.
 
-.. property:: WIFE.state 4
+.. property:: INMATE.state bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. |CELLMATE| property:: CELLMATE.name.firstname
 .. |INMATE| property:: INMATE.name.firstname

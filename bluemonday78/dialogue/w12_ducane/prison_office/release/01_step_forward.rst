@@ -50,7 +50,7 @@ HM Prison Wormwood Scrubs.
 Ray is on the landing
 ---------------------
 
-.. fx:: bluemonday78 ray/approaches-01.jpg
+.. fx:: bluemonday78 ray/approaches-01.png
    :offset: 0
    :duration: 30
    :loop: 1
