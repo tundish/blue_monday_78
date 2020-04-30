@@ -14,6 +14,7 @@
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Trade.merchant
             bluemonday78.types.Spot.w12_goldhawk_tavern
+            1
 
 .. entity:: BARMAN
    :types:  bluemonday78.types.Character
@@ -152,3 +153,5 @@ Not what I asked for
 
     Not what Elvis Costello wanted at all.
 
+.. property:: HIPSTER.state 2
+.. property:: NARRATOR.clock 1

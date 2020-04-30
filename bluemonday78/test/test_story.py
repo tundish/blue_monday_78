@@ -326,6 +326,8 @@ class SequenceTests(unittest.TestCase):
         list(self.performer.run(react=True))
         self.assertTrue(self.performer.script.fP.endswith("well_goodbye.rst"), self.performer.script.fP)
         self.assertEqual(4, next(iter(self.characters[Mode.healer])).get_state())
+        narrator = self.ensemble[-1]
+        narrator.set_state(Spot.w12_ducane_prison_release)
 
     def test_007(self):
         self.assertEqual(4, next(iter(self.characters[Mode.healer])).get_state())
@@ -340,4 +342,55 @@ class SequenceTests(unittest.TestCase):
         )
         list(self.performer.run(react=True))
         self.assertTrue(self.performer.script.fP.endswith("fatherly_advice.rst"), self.performer.script.fP)
-        self.assertEqual(4, next(iter(self.characters[Mode.healer])).get_state())
+        narrator = self.ensemble[-1]
+        self.assertEqual(197801161100, narrator.state)
+
+    def test_008(self):
+        self.assertEqual(1, next(iter(self.characters[Look.yuppie])).get_state())
+        narrator = self.ensemble[-1]
+        self.assertEqual(197801161100, narrator.state)
+        narrator.set_state(Spot.w12_goldhawk_tavern)
+
+        self.assertFalse(self.performer.stopped)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
+        )
+        list(self.performer.run(react=True))
+
+        self.assertTrue(self.performer.script.fP.endswith("early_doors.rst"), self.performer.script.fP)
+        self.assertEqual(2, next(iter(self.characters[Look.yuppie])).get_state())
+
+    def test_009(self):
+        narrator = self.ensemble[-1]
+        self.assertEqual(197801161200, narrator.state)
+        self.assertEqual(Spot.w12_goldhawk_tavern, narrator.get_state(Spot))
+        self.assertEqual(2, next(iter(self.characters[Look.yuppie])).get_state())
+
+        self.assertFalse(self.performer.stopped)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
+        )
+        list(self.performer.run(react=True))
+
+        self.assertTrue(
+            self.performer.script.fP.endswith("heres_to_family.rst"),
+            self.performer.script.fP
+        )
+        self.assertEqual(197801161300, narrator.state)
+
+    def test_010(self):
+        narrator = self.ensemble[-1]
+        self.assertEqual(197801161300, narrator.state)
+        narrator.set_state(Spot.w12_goldhawk_tavern)
+
+        self.assertFalse(self.performer.stopped)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
+        )
+        list(self.performer.run(react=True))
+
+        self.assertTrue(
+            self.performer.script.fP.endswith("what_about_the_catering.rst"),
+            self.performer.script.fP
+        )
+        self.assertEqual(197801161400, narrator.state)

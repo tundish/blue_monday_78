@@ -13,6 +13,7 @@
 
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. entity:: OFFICER
    :types:  bluemonday78.types.Character
@@ -77,6 +78,8 @@ Ray does the paperwork
 [NARRATOR]_
 
     An alarm bell rings.
+
+.. property:: NARRATOR.state 197801161100
 
 .. |HERO_TITLE| property:: HERO.name.title
 .. |HERO_SURNAME| property:: HERO.name.surname

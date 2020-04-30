@@ -14,6 +14,7 @@
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Trade.merchant
             bluemonday78.types.Spot.w12_goldhawk_tavern
+            2
 
 .. entity:: BARMAN
    :types:  bluemonday78.types.Character
@@ -261,8 +262,9 @@ The kindness of strangers
 
     Ha ha ha ha!
 
-.. property:: HIPSTER.state 19780118
-.. property:: NARRATOR.state bluemonday78.types.Spot.w12_latimer_arches
+
+.. property:: HIPSTER.state 3
+.. property:: NARRATOR.clock 1
 
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |BARMAN_SURNAME| property:: BARMAN.name.surname

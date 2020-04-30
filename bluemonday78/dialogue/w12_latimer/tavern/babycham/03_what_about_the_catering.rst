@@ -10,15 +10,11 @@
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
             197801161
 
-.. entity:: HERO
-   :types: bluemonday78.types.Character
-   :states: bluemonday78.types.Mode.thief
-            bluemonday78.types.Spot.w12_goldhawk_tavern
-
 .. entity:: HIPSTER
-   :types: bluemonday78.types.Character
+   :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Trade.merchant
             bluemonday78.types.Spot.w12_goldhawk_tavern
+            3
 
 .. entity:: BARMAN
    :types: bluemonday78.types.Character
@@ -43,8 +39,7 @@ A pub in Shepherd's Bush
 
 [NARRATOR]_
 
-    |HERO_FIRSTNAME| |HERO_SURNAME| sits at a small round table in
-    the bar of the Goldhawk Tavern. On the floor is an electric heater.
+    On the floor is an electric heater.
 
     The wallpaper is scarred, grimy, and punctuated by a diverse
     collection of framed posters.
@@ -55,11 +50,6 @@ A pub in Shepherd's Bush
 
     And one, incongruously, of a stricken cargo vessel run recently
     aground.
-
-[HERO]_
-
-    If you can't get rid of the family skeleton, you may as well
-    make it dance.
 
 [NARRATOR]_
 
@@ -206,11 +196,8 @@ What's your poison?
 
     Ha ha ha ha!
 
-.. property:: HIPSTER.state 19780119
-.. property:: NARRATOR.state 19780119
-.. property:: HERO.state bluemonday78.types.Spot.w12_latimer_arches
+.. property:: HIPSTER.state 1
+.. property:: NARRATOR.clock 1
 
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |HIPSTER_FIRSTNAME| property:: HIPSTER.name.firstname
-.. |HERO_FIRSTNAME| property:: HERO.name.firstname
-.. |HERO_SURNAME| property:: HERO.name.surname
