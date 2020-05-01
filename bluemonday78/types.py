@@ -26,6 +26,7 @@ from turberfield.dialogue.types import Persona
 from turberfield.dialogue.types import Stateful
 from turberfield.utils.assembly import Assembly
 
+from bluemonday78.matcher import MultiMatcher
 
 @enum.unique
 class Look(EnumFactory, enum.Enum):
@@ -73,11 +74,9 @@ class Narrator(Stateful, DataObject):
 
     @property
     def clock(self):
-        ts = str(self.get_state(int))
-        try:
-            return datetime.datetime.strptime(ts, self.state_format)
-        except ValueError:
-            return ts
+        text = str(self.get_state(int))
+        ts, span = MultiMatcher.parse_timespan(text)
+        return ts
 
     @clock.setter
     def clock(self, hours=1):

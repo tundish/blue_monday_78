@@ -17,6 +17,7 @@
 # along with Addison Arches.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
+import logging
 
 from turberfield.dialogue.directives import Entity
 from turberfield.dialogue.matcher import Matcher
@@ -67,10 +68,19 @@ class MultiMatcher(Matcher):
         return folder
 
     def options(self, arc=None, t=None, pathways=None):
-        t = None if isinstance(t, int) else t
-        yield from (
-            i for i in self.folders
-            if (arc is None or i.metadata.get("arc") == arc)
-            and (t is None or i.metadata.get("min_t", t) <= t <= i.metadata.get("max_t", t))
-            and (pathways is None or i.metadata.get("pathways", set()).intersection(pathways))
-        )
+        for f in self.folders:
+            if arc and f.metadata.get("arc", "") == arc:
+                yield f
+                continue
+
+            if pathways and f.metadata.get("pathways", set()).intersection(pathways):
+                yield f
+                continue
+
+            min_t = f.metadata.get("min_t", t)
+            max_t = f.metadata.get("max_t", t)
+            try:
+                if min_t <= t <= max_t:
+                    yield f
+            except TypeError:
+                continue

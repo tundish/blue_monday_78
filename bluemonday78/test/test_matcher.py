@@ -84,7 +84,15 @@ class MatcherTests(unittest.TestCase):
         matcher = MultiMatcher(self.folders)
 
         rv = list(matcher.options(t=0))
-        self.assertEqual(3, len(rv), rv)
+        self.assertEqual(1, len(rv), rv)
+        self.assertEqual("a_10", rv[0].metadata["arc"])
+
+    def test_match_by_str(self):
+        matcher = MultiMatcher(self.folders)
+
+        rv = list(matcher.options(t="0"))
+        self.assertEqual(1, len(rv), rv)
+        self.assertEqual("a_10", rv[0].metadata["arc"])
 
     def test_match_by_datetime(self):
         matcher = MultiMatcher(self.folders)
