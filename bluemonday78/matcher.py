@@ -67,6 +67,7 @@ class MultiMatcher(Matcher):
         return folder
 
     def options(self, arc=None, t=None, pathways=None):
+        t = None if isinstance(t, int) else t
         yield from (
             i for i in self.folders
             if (arc is None or i.metadata.get("arc") == arc)

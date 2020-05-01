@@ -90,6 +90,11 @@ async def get_map(request):
         presenter = request.app["sessions"][uid]
     except KeyError:
         raise web.HTTPUnauthorized(reason="Session {0!s} not found.".format(uid))
+    #TODO: Presenter calculates moves with time span matching clock
+    narrator = presenter.ensemble[-1]
+    matcher = MultiMatcher(request.app["folders"])
+    folders = matcher.options(t=narrator.clock)
+    presenter.log.debug(list(folders))
     return web.Response(
         text = bluemonday78.render.body_html(
             refresh=None
@@ -344,7 +349,7 @@ class Config:
         log = logging.getLogger(
             getattr(trace_config_ctx, "trace_request_ctx", {}).get("log_name", "")
         )
-        log.warning("redirectd: {0}".format(params))
+        log.warning("redirected: {0}".format(params))
 
     @classmethod
     async def on_request_end(cls, session, trace_config_ctx, params):
