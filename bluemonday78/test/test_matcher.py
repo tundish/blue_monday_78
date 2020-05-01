@@ -41,7 +41,9 @@ class MatcherTests(unittest.TestCase):
                     "arc": "a_01",
                     "pathways": frozenset((
                         ("w12_latimer", "lockup"),
-                    ))
+                    )),
+                    "min_t": datetime.date(2020, 5, 1),
+                    "max_t": datetime.date(2020, 5, 3),
                 },
                 {
                     "arc": "a_10",
@@ -54,7 +56,9 @@ class MatcherTests(unittest.TestCase):
                     "pathways": frozenset((
                         ("w12_latimer", "lockup"),
                         ("w12_latimer", "tavern"),
-                    ))
+                    )),
+                    "min_t": datetime.date(2020, 5, 5),
+                    "max_t": datetime.date(2020, 5, 7),
                 },
             ]
         ]
@@ -62,7 +66,7 @@ class MatcherTests(unittest.TestCase):
     def test_match_by_arc(self):
         matcher = MultiMatcher(self.folders)
 
-        rv = list(matcher.options({"arc": "a_11"}))
+        rv = list(matcher.options(arc="a_11"))
         self.assertEqual(1, len(rv), rv)
         self.assertEqual("a_11", rv[0].metadata["arc"])
 
@@ -70,11 +74,22 @@ class MatcherTests(unittest.TestCase):
         matcher = MultiMatcher(self.folders)
 
         rv = list(matcher.options(
-            {"pathways": set([("w12_latimer", "lockup")])}
+            pathways=set([("w12_latimer", "lockup")])
         ))
         self.assertEqual(2, len(rv), rv)
         self.assertEqual("a_01", rv[0].metadata["arc"])
         self.assertEqual("a_11", rv[1].metadata["arc"])
+
+    def test_match_by_time(self):
+        matcher = MultiMatcher(self.folders)
+
+        for d in range(1, 4):
+            t = datetime.date(2020, 5, d)
+            with self.subTest(t=t):
+                rv = list(matcher.options(t=t))
+                self.assertEqual(2, len(rv), rv)
+                self.assertEqual("a_01", rv[0].metadata["arc"])
+                self.assertEqual("a_10", rv[1].metadata["arc"])
 
     def test_parse_timespan_day(self):
         rv = MultiMatcher.parse_timespan(blue_monday.strftime("%Y%m%d"))

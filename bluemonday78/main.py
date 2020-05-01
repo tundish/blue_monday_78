@@ -61,7 +61,7 @@ async def get_frame(request):
         narrator = presenter.ensemble[-1]
         pathway = narrator.get_state(Spot).value
         matcher = MultiMatcher(request.app["folders"])
-        folders = list(matcher.options({"pathways": set([pathway])}))
+        folders = list(matcher.options(pathways=set([pathway])))
         dialogue = presenter.dialogue(folders, presenter.ensemble)
         request.app["sessions"][uid] = presenter = Presenter(dialogue, presenter.ensemble)
 
@@ -187,7 +187,7 @@ async def post_hop(request):
 
     pathway = spot.value
     matcher = MultiMatcher(request.app["folders"])
-    folders = list(matcher.options({"pathways": set([pathway])}))
+    folders = list(matcher.options(pathways=set([pathway])))
     dialogue = presenter.dialogue(folders, presenter.ensemble)
     if dialogue is None:
         request.app["log"].info("No new dialogue cast. Check selection.")

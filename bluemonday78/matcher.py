@@ -66,11 +66,10 @@ class MultiMatcher(Matcher):
         folder.metadata["max_t"] = max_t
         return folder
 
-    def options(self, data):
-        arc = data.get("arc", None)
-        pathways = data.get("pathways", set())
+    def options(self, arc=None, t=None, pathways=None):
         yield from (
             i for i in self.folders
-            if arc is not None and i.metadata.get("arc") == arc
-            or i.metadata.get("pathways", set()).intersection(pathways)
+            if (arc is None or i.metadata.get("arc") == arc)
+            and (t is None or i.metadata.get("min_t", t) <= t <= i.metadata.get("max_t", t))
+            and (pathways is None or i.metadata.get("pathways", set()).intersection(pathways))
         )
