@@ -90,17 +90,18 @@ async def get_map(request):
         presenter = request.app["sessions"][uid]
     except KeyError:
         raise web.HTTPUnauthorized(reason="Session {0!s} not found.".format(uid))
-    #TODO: Presenter calculates moves with time span matching clock
     narrator = presenter.ensemble[-1]
     matcher = MultiMatcher(request.app["folders"])
     folders = matcher.options(t=narrator.clock)
-    presenter.log.debug(list(folders))
+    pathways = {p for f in folders for p in f.metadata.get("pathways", [])}
+    spots = [i.get_state(Spot) for i in presenter.ensemble if not isinstance(i, Location)]
+    hots = [i for i in spots if i.value in pathways]
     return web.Response(
         text = bluemonday78.render.body_html(
             refresh=None
         ).format(
             bluemonday78.render.dict_to_css(presenter.definitions),
-            bluemonday78.render.ensemble_to_html(presenter.ensemble)
+            bluemonday78.render.ensemble_to_html(presenter.ensemble, hots)
         ),
         content_type="text/html"
     )

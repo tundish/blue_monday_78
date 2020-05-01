@@ -24,7 +24,6 @@ from turberfield.dialogue.matcher import Matcher
 from turberfield.dialogue.model import SceneScript
 from turberfield.utils.misc import group_by_type
 
-# TODO: Add matching over defined game timeframe
 
 class MultiMatcher(Matcher):
 

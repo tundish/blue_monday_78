@@ -61,11 +61,15 @@ def location_to_html(locn, path="/"):
 </form>"""
 
 
-def ensemble_to_html(ensemble):
+def ensemble_to_html(ensemble, spots=None, here=False):
     narrator = ensemble[-1]
-    spot = narrator.get_state(Spot)
-    assert isinstance(narrator, Narrator)
-    ts = MultiMatcher.parse_timespan(str(narrator.state))[0]
+    spots = spots or [i.get_state(Spot) for i in ensemble if not isinstance(i, Location)]
+    if not here:
+        try:
+            spots.remove(narrator.get_state(Spot))
+        except ValueError:
+            pass
+
     notes = "\n".join(
         "<li><p>{0.html}</p></li>".format(i)
         for i in getattr(narrator, "memories", [])
@@ -74,7 +78,6 @@ def ensemble_to_html(ensemble):
         "<li>{0.label}</li>".format(i) for i in ensemble
         if not isinstance(i, (Location, Persona)) and hasattr(i, "label")
     )
-    spots = {i.get_state(Spot) for i in ensemble if isinstance(i, Persona)}
     moves = "\n".join(
         "<li>{0}</li>".format(location_to_html(i, path="/{0.id.hex}/".format(narrator)))
         for i in ensemble
@@ -83,8 +86,8 @@ def ensemble_to_html(ensemble):
     return f"""
 <section class="fit-banner">
 <h1><span>Blue</span><span>Monday</span><span>78</span></h1>
-<h2>{ts.strftime("%H:%M:%S %p") if ts else ""}</h2>
-<h2>{ts.strftime("%a %d %b") if ts else ""}</h2>
+<h2>{narrator.clock.strftime("%H:%M:%S %p")}</h2>
+<h2>{narrator.clock.strftime("%a %d %b")}</h2>
 </section>
 <div class="fit-speech">
 <main>
