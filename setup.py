@@ -36,7 +36,7 @@ setup(
         "License :: OSI Approved :: GNU Affero General Public License v3"
         " or later (AGPLv3+)"
     ],
-    packages=["bluemonday78", "bluemonday78.test"],
+    packages=["bluemonday78", "bluemonday78.test", "bluemonday.utils"],
     package_data={
         "bluemonday78": [
             "*.cfg",
@@ -50,6 +50,7 @@ setup(
         ]
     },
     install_requires=[
+        "aiohttp>=3.6.2",
         "turberfield-dialogue>=0.24.0",
     ],
     zip_safe=True,

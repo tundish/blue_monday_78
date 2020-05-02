@@ -67,8 +67,6 @@ Ray unlocks the office
 
    |INMATE_FIRSTNAME| |INMATE_SURNAME| is waiting for |OFFICER_SURNAME| to get back.
 
-.. property:: NARRATOR.state w12_ducane_prison_release 
-
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
 .. |CELLMATE_SURNAME| property:: CELLMATE.name.surname
 .. |INMATE_TITLE| property:: INMATE.name.title
