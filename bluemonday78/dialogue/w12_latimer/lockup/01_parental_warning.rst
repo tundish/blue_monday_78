@@ -8,14 +8,15 @@
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
    :states: bluemonday78.types.Spot.w12_latimer_arches
+            197801162
 
 .. entity:: OFFICER
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Fit.guardian
+   :states: bluemonday78.types.Mode.guardian
 
-.. entity:: HERO
+.. entity:: INMATE
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Fit.thief
+   :states: bluemonday78.types.Mode.thief
             bluemonday78.types.Spot.w12_latimer_arches
 
 A chance encounter
@@ -31,7 +32,7 @@ On the approach
 [NARRATOR]_
 
     The rain has been falling since dawn.
-    |HERO_FIRSTNAME| |HERO_SURNAME| peers out from the lockup.
+    |INMATE_FIRSTNAME| |INMATE_SURNAME| peers out from the lockup.
 
     In a curve which follows the arches themselves, a motley array
     of vehicles is parked all the way down the lane which leads
@@ -55,7 +56,7 @@ On the approach
 
     Well, well, well.
 
-[HERO]_
+[INMATE]_
 
     |OFFICER_TITLE| |OFFICER_SURNAME|.
 
@@ -70,7 +71,7 @@ On the approach
     |OFFICER_FIRSTNAME| comes closer. He is wearing the uniform of a
     special constable.
 
-[HERO]_
+[INMATE]_
 
     I thought you said you'd retired,
     |OFFICER_TITLE| |OFFICER_SURNAME|.
@@ -97,7 +98,7 @@ On the approach
     This your place of business is it? At some point soon we are
     going to have a little chat about your new employers.
 
-[HERO]_
+[INMATE]_
 
     It belongs to Frankie Marshall.
 
@@ -115,12 +116,12 @@ On the approach
 .. I'm going to put you straight.
 .. Insubordinate. Insolent. A trickster with criminal tendencies.
 .. That last quality might be useful.
-.. But if I have any trouble with you |HERO|,  I shall bite you, |HERO|.
+.. But if I have any trouble with you |INMATE|,  I shall bite you, |INMATE|.
 .. And I shall bite you so hard you'll go right back to where I found you.
 
 
-.. |HERO_FIRSTNAME| property:: HERO.name.firstname
-.. |HERO_SURNAME| property:: HERO.name.surname
+.. |INMATE_FIRSTNAME| property:: INMATE.name.firstname
+.. |INMATE_SURNAME| property:: INMATE.name.surname
 .. |OFFICER_TITLE| property:: OFFICER.name.title
 .. |OFFICER_FIRSTNAME| property:: OFFICER.name.firstname
 .. |OFFICER_SURNAME| property:: OFFICER.name.surname

@@ -12,7 +12,7 @@
 
 .. entity:: HERO
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Fit.thief
+   :states: bluemonday78.types.Mode.thief
 
 Addison Arches
 ~~~~~~~~~~~~~~

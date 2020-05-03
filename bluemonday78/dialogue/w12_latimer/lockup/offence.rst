@@ -7,7 +7,7 @@
 
 .. entity:: BARMAN
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Fit.innkeeper
+   :states: bluemonday78.types.Mode.innkeeper
             bluemonday78.types.Spot.w12_goldhawk_tavern
             bluemonday78.types.Attitude.grumpy
 

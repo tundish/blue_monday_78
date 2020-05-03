@@ -9,7 +9,7 @@
 :project: bluemonday78
 :version: |VERSION|
 
-.. |HERO| property:: HERO.name.firstname
+.. |INMATE| property:: INMATE.name.firstname
 
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
@@ -20,7 +20,7 @@
    :states: bluemonday78.types.Mode.guardian
             bluemonday78.types.Spot.w12_ducane_prison_release
 
-.. entity:: HERO
+.. entity:: INMATE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.thief
             bluemonday78.types.Spot.w12_ducane_prison_release
@@ -80,8 +80,9 @@ Ray does the paperwork
     An alarm bell rings.
 
 .. property:: NARRATOR.state 197801161100
+.. property:: INMATE.state bluemonday78.types.Spot.w12_latimer_arches
 
-.. |HERO_TITLE| property:: HERO.name.title
-.. |HERO_SURNAME| property:: HERO.name.surname
+.. |INMATE_TITLE| property:: INMATE.name.title
+.. |INMATE_SURNAME| property:: INMATE.name.surname
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
 .. |CELLMATE_SURNAME| property:: CELLMATE.name.surname

@@ -4,12 +4,12 @@
 
 .. entity:: HERO
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Fit.thief
+   :states: bluemonday78.types.Mode.thief
             bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: HIPSTER
    :types: bluemonday78.types.Character
-   :states: bluemonday78.types.Fit.merchant
+   :states: bluemonday78.types.Mode.merchant
             bluemonday78.types.Spot.w12_goldhawk_tavern
 
 Goldhawk Tavern

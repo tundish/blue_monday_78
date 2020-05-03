@@ -8,11 +8,11 @@
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
-            197801161
+            1978011611
 
 .. entity:: HIPSTER
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Trade.merchant
+   :states: bluemonday78.types.Look.yuppie
             bluemonday78.types.Spot.w12_goldhawk_tavern
             1
 
@@ -20,10 +20,6 @@
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Trade.innkeeper
             bluemonday78.types.Spot.w12_goldhawk_tavern
-
-.. entity:: PUB
-   :types:  bluemonday78.types.Location
-   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
 Sorrows
 ~~~~~~~

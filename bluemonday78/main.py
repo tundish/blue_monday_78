@@ -101,7 +101,7 @@ async def get_map(request):
             refresh=None
         ).format(
             bluemonday78.render.dict_to_css(presenter.definitions),
-            bluemonday78.render.ensemble_to_html(presenter.ensemble, hots)
+            bluemonday78.render.ensemble_to_html(presenter.ensemble, hots, here=True)
         ),
         content_type="text/html"
     )

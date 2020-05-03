@@ -196,8 +196,8 @@ What's your poison?
 
     Ha ha ha ha!
 
-.. property:: HIPSTER.state 1
-.. property:: NARRATOR.clock 1
+.. property:: HIPSTER.state 2
+.. property:: NARRATOR.clock 2
 
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |HIPSTER_FIRSTNAME| property:: HIPSTER.name.firstname

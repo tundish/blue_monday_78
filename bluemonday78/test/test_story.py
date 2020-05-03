@@ -344,12 +344,16 @@ class SequenceTests(unittest.TestCase):
         self.assertTrue(self.performer.script.fP.endswith("fatherly_advice.rst"), self.performer.script.fP)
         narrator = self.ensemble[-1]
         self.assertEqual(197801161100, narrator.state)
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            next(iter(self.characters[Mode.thief])).get_state(Spot)
+        )
+        narrator.set_state(Spot.w12_goldhawk_tavern)
 
     def test_008(self):
         self.assertEqual(1, next(iter(self.characters[Look.yuppie])).get_state())
         narrator = self.ensemble[-1]
         self.assertEqual(197801161100, narrator.state)
-        narrator.set_state(Spot.w12_goldhawk_tavern)
 
         self.assertFalse(self.performer.stopped)
         folder, index, script, selection, interlude = self.performer.next(
@@ -393,4 +397,97 @@ class SequenceTests(unittest.TestCase):
             self.performer.script.fP.endswith("what_about_the_catering.rst"),
             self.performer.script.fP
         )
-        self.assertEqual(197801161400, narrator.state)
+        self.assertEqual(197801161500, narrator.state)
+
+    def test_011(self):
+        narrator = self.ensemble[-1]
+        self.assertEqual(197801161500, narrator.state)
+        self.assertEqual(Spot.w12_goldhawk_tavern, narrator.get_state(Spot))
+        self.assertEqual(2, next(iter(self.characters[Look.yuppie])).get_state())
+
+        self.assertFalse(self.performer.stopped)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
+        )
+        list(self.performer.run(react=True))
+
+        self.assertTrue(
+            self.performer.script.fP.endswith("heres_to_family.rst"),
+            self.performer.script.fP
+        )
+        self.assertEqual(197801161600, narrator.state)
+
+    def test_012(self):
+        narrator = self.ensemble[-1]
+        self.assertEqual(197801161600, narrator.state)
+        narrator.set_state(Spot.w12_goldhawk_tavern)
+
+        self.assertFalse(self.performer.stopped)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
+        )
+        list(self.performer.run(react=True))
+
+        self.assertTrue(
+            self.performer.script.fP.endswith("what_about_the_catering.rst"),
+            self.performer.script.fP
+        )
+        self.assertEqual(197801161800, narrator.state)
+
+    def test_013(self):
+        narrator = self.ensemble[-1]
+        self.assertEqual(197801161800, narrator.state)
+        self.assertEqual(Spot.w12_goldhawk_tavern, narrator.get_state(Spot))
+        self.assertEqual(2, next(iter(self.characters[Look.yuppie])).get_state())
+
+        self.assertFalse(self.performer.stopped)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
+        )
+        list(self.performer.run(react=True))
+
+        self.assertTrue(
+            self.performer.script.fP.endswith("heres_to_family.rst"),
+            self.performer.script.fP
+        )
+        self.assertEqual(197801161900, narrator.state)
+
+    def test_014(self):
+        narrator = self.ensemble[-1]
+        self.assertEqual(197801161900, narrator.state)
+        narrator.set_state(Spot.w12_goldhawk_tavern)
+
+        self.assertFalse(self.performer.stopped)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
+        )
+        list(self.performer.run(react=True))
+
+        self.assertTrue(
+            self.performer.script.fP.endswith("what_about_the_catering.rst"),
+            self.performer.script.fP
+        )
+        self.assertEqual(197801162100, narrator.state)
+        self.assertEqual(
+            Spot.w12_latimer_arches,
+            next(iter(self.characters[Mode.thief])).get_state(Spot)
+        )
+        narrator.set_state(Spot.w12_latimer_arches)
+
+    def test_015(self):
+        narrator = self.ensemble[-1]
+        self.assertEqual(197801162000, narrator.state)
+        self.assertEqual(Spot.w12_latimer_arches, narrator.get_state(Spot))
+        self.assertEqual(2, next(iter(self.characters[Look.yuppie])).get_state())
+
+        self.assertFalse(self.performer.stopped)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
+        )
+        list(self.performer.run(react=True))
+
+        self.assertTrue(
+            self.performer.script.fP.endswith("parental_warning.rst"),
+            self.performer.script.fP
+        )
+        self.assertEqual(197801161800, narrator.state)
