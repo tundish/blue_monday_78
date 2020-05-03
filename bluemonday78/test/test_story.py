@@ -476,7 +476,7 @@ class SequenceTests(unittest.TestCase):
 
     def test_015(self):
         narrator = self.ensemble[-1]
-        self.assertEqual(197801162000, narrator.state)
+        self.assertEqual(197801162100, narrator.state)
         self.assertEqual(Spot.w12_latimer_arches, narrator.get_state(Spot))
         self.assertEqual(2, next(iter(self.characters[Look.yuppie])).get_state())
 
@@ -490,4 +490,4 @@ class SequenceTests(unittest.TestCase):
             self.performer.script.fP.endswith("parental_warning.rst"),
             self.performer.script.fP
         )
-        self.assertEqual(197801161800, narrator.state)
+        self.assertEqual(197801162100, narrator.state)
