@@ -28,7 +28,7 @@ from turberfield.utils.misc import group_by_type
 class MultiMatcher(Matcher):
 
     @staticmethod
-    def parse_timespan(text):
+    def parse_timespan(text: str):
         formats = {
             8: ("%Y%m%d", datetime.timedelta(days=1)),
             10: ("%Y%m%d%H", datetime.timedelta(hours=1)),
@@ -43,7 +43,7 @@ class MultiMatcher(Matcher):
         try:
             format_string, span = formats[len(text)]
         except KeyError:
-            return text, ""
+            return text, None
         else:
             return datetime.datetime.strptime(text, format_string), mult * span
 
@@ -61,10 +61,11 @@ class MultiMatcher(Matcher):
             i for i in MultiMatcher.entity_states(folder) if i.isdigit()
         ):
             t, span = MultiMatcher.parse_timespan(entity_state)
-            min_t = min(min_t, t if span else min_t) if min_t is not None else t
-            max_t = max(max_t, (t + span) if span else max_t) if max_t is not None else t + span
-        folder.metadata["min_t"] = min_t
-        folder.metadata["max_t"] = max_t
+            if span is not None:
+                min_t = min(min_t, t if span else min_t) if min_t is not None else t
+                max_t = max(max_t, (t + span) if span else max_t) if max_t is not None else t + span
+                folder.metadata["min_t"] = min_t
+                folder.metadata["max_t"] = max_t
         return folder
 
     def options(self, arc=None, t=None, pathways=None):

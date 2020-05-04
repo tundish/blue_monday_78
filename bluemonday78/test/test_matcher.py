@@ -60,6 +60,15 @@ class MatcherTests(unittest.TestCase):
                     "min_t": datetime.date(2020, 5, 5),
                     "max_t": datetime.date(2020, 5, 7),
                 },
+                {
+                    "arc": "a_12",
+                    "pathways": frozenset((
+                        ("w12_latimer", "cafe"),
+                        ("w12_latimer", "lockup"),
+                    )),
+                    "min_t": 1,
+                    "max_t": 4,
+                },
             ]
         ]
 
@@ -76,9 +85,10 @@ class MatcherTests(unittest.TestCase):
         rv = list(matcher.options(
             pathways=set([("w12_latimer", "lockup")])
         ))
-        self.assertEqual(2, len(rv), rv)
+        self.assertEqual(3, len(rv), rv)
         self.assertEqual("a_01", rv[0].metadata["arc"])
         self.assertEqual("a_11", rv[1].metadata["arc"])
+        self.assertEqual("a_12", rv[2].metadata["arc"])
 
     def test_match_by_tnteger(self):
         matcher = MultiMatcher(self.folders)
@@ -86,6 +96,11 @@ class MatcherTests(unittest.TestCase):
         rv = list(matcher.options(t=0))
         self.assertEqual(1, len(rv), rv)
         self.assertEqual("a_10", rv[0].metadata["arc"])
+
+        rv = list(matcher.options(t=1))
+        self.assertEqual(2, len(rv), rv)
+        self.assertEqual("a_10", rv[0].metadata["arc"])
+        self.assertEqual("a_12", rv[1].metadata["arc"])
 
     def test_match_by_str(self):
         matcher = MultiMatcher(self.folders)
@@ -127,3 +142,8 @@ class MatcherTests(unittest.TestCase):
             rv[0]
         )
         self.assertEqual(datetime.timedelta(hours=10), rv[1])
+
+    def test_parse_timespan_integer(self):
+        rv = MultiMatcher.parse_timespan("4")
+        self.assertEqual(2, len(rv))
+        self.assertEqual(("4", None), rv)
