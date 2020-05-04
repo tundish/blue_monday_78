@@ -20,34 +20,24 @@
             bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. entity:: INMATE
-   :types: bluemonday78.types.Character
+   :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.thief
             bluemonday78.types.Spot.w12_ducane_prison_wing
 
 .. entity:: CELLMATE
-   :types: bluemonday78.types.Character
-   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Look.mug
+            bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 .. entity:: OBJECTIVE
-   :types: bluemonday78.types.Location
+   :types:  bluemonday78.types.Location
    :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
+
 
 Guards' Office
 ~~~~~~~~~~~~~~
 
 HM Prison Wormwood Scrubs.
-
-Ray splits them up
-------------------
-
-[OFFICER]_
-
-    |CELLMATE_SURNAME|, your lady wife has arrived outside. So you will have
-    visiting time until 09:00.
-
-[CELLMATE]_
-
-    Yes, |OFFICER_TITLE| |OFFICER_SURNAME|.
 
 Ray unlocks the office
 ----------------------
@@ -67,11 +57,11 @@ Ray unlocks the office
 
    |INMATE_FIRSTNAME| |INMATE_SURNAME| is waiting for |OFFICER_SURNAME| to get back.
 
+.. property:: INMATE.state bluemonday78.types.Spot.w12_ducane_prison_visiting
+
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
 .. |CELLMATE_SURNAME| property:: CELLMATE.name.surname
 .. |INMATE_TITLE| property:: INMATE.name.title
 .. |INMATE_FIRSTNAME| property:: INMATE.name.firstname
 .. |INMATE_SURNAME| property:: INMATE.name.surname
-.. |OFFICER_TITLE| property:: OFFICER.name.title
-.. |OFFICER_FIRSTNAME| property:: OFFICER.name.firstname
 .. |OFFICER_SURNAME| property:: OFFICER.name.surname

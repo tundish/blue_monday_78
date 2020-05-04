@@ -26,7 +26,8 @@
 
 .. entity:: CELLMATE
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Spot.w12_ducane_prison_wing
+   :states: bluemonday78.types.Look.mug
+            bluemonday78.types.Spot.w12_ducane_prison_wing
 
    A small-time offender in his mid forties.
 
@@ -60,17 +61,6 @@ Ray is on the landing
     The sound of keys in an iron door.
 
 [CELLMATE]_
-
-    Off you go then, |INMATE_FIRSTNAME|. Looks like you're gonna get the Book.
-
-[INMATE]_
-
-    The what?
-
-[CELLMATE]_
-
-    That's |OFFICER_SURNAME| outside. They call him the Book.
-    He's a total loony.
 
     Good luck on the outside.
 
@@ -109,6 +99,18 @@ The prisoners leave
 
     |CELLMATE_SURNAME| and |INMATE_SURNAME| step out of the cell onto the narrow
     balcony.
+
+Ray splits them up
+------------------
+
+[OFFICER]_
+
+    |CELLMATE_SURNAME|, your lady wife has arrived outside. So you will have
+    visiting time until 09:00.
+
+[CELLMATE]_
+
+    Yes, |OFFICER_TITLE| |OFFICER_SURNAME|.
 
 Ray joins them on the balcony
 -----------------------------

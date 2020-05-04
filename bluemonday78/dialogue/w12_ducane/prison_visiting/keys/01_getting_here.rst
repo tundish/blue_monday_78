@@ -15,6 +15,7 @@
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
    :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
+            197801160810
 
 .. entity:: WIFE
    :types:  bluemonday78.types.Character
@@ -26,6 +27,12 @@
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Look.mug
             bluemonday78.types.Spot.w12_ducane_prison_visiting
+
+.. entity:: OFFICER
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Spot.w12_ducane_prison_release
+            bluemonday78.types.Mode.guardian
+
 
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~
@@ -52,6 +59,19 @@ Karen talks of the journey
 
 Tables
 ------
+
+[HUSBAND]_
+
+    Got to be careful. Looks like we've got the Book.
+
+[WIFE]_
+
+    The what?
+
+[HUSBAND]_
+
+    That's |OFFICER_SURNAME| outside. They call him the Book.
+    He's a total loony.
 
 [WIFE]_
 
@@ -118,3 +138,4 @@ Why here?
 .. |HUSBAND_FIRSTNAME| property:: HUSBAND.name.firstname
 .. |WIFE_TITLE| property:: WIFE.name.title
 .. |WIFE_SURNAME| property:: WIFE.name.surname
+.. |OFFICER_SURNAME| property:: OFFICER.name.surname
