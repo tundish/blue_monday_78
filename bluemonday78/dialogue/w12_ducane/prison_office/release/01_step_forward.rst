@@ -73,7 +73,7 @@ Ray enters
 
 [CELLMATE]_
 
-    What, me too |OFFICER_TITLE| |OFFICER_SURNAME| ?
+    What, me too |OFFICER_TITLE| |OFFICER_SURNAME|?
 
 [OFFICER]_
 
@@ -91,14 +91,17 @@ Ray enters
 The prisoners leave
 -------------------
 
+[OFFICER]_
+
+    Did you hear me |CELLMATE_SURNAME|?
+
 [CELLMATE]_
 
     Yes, |OFFICER_TITLE| |OFFICER_SURNAME|.
 
-[NARRATOR]_
+[OFFICER]_
 
-    |CELLMATE_SURNAME| and |INMATE_SURNAME| step out of the cell onto the narrow
-    balcony.
+    Well look lively then.
 
 Ray splits them up
 ------------------

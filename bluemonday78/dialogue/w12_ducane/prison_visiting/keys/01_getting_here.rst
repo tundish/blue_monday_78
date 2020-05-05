@@ -15,7 +15,7 @@
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
    :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
-            197801160810
+            197801160805
 
 .. entity:: WIFE
    :types:  bluemonday78.types.Character
@@ -62,7 +62,7 @@ Tables
 
 [HUSBAND]_
 
-    Got to keep our voices down. Looks like we've got the Book.
+    Looks like we've got the Book. Try and keep your voice down.
 
 [WIFE]_
 
@@ -71,7 +71,10 @@ Tables
 [HUSBAND]_
 
     That's |OFFICER_SURNAME| outside. They call him the Book.
-    He's a total loony.
+    He's a total loony. And he listens to everything.
+
+Choices
+-------
 
 [WIFE]_
 
@@ -79,7 +82,7 @@ Tables
 
 [HUSBAND]_
 
-    No, let's sit here again.
+    No, let's just sit here again.
 
 Too early
 ---------
@@ -102,9 +105,7 @@ Too early
 
 [WIFE]_
 
-    Mid morning's okay. I sometimes go with the girls for lunch at Farthing Corner.
-
-    Which is nice.
+    I sometimes take the girls for lunch at Farthing Corner.
 
 [HUSBAND]_
 

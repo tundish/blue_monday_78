@@ -21,7 +21,8 @@
 
 .. entity:: HUSBAND
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
+   :states: bluemonday78.types.Look.mug
+            bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 In the Visiting Suite
 ~~~~~~~~~~~~~~~~~~~~~
@@ -34,8 +35,8 @@ A new spot
 
 [WIFE]_
 
-    Mandy left finally, and we had a move round.
-    So I've got the chair by the window now.
+    Mandy's gone now, and we had a move round.
+    So I've got the best chair right by the window.
 
 [HUSBAND]_
 
@@ -45,17 +46,20 @@ A new spot
 
     Which I like, but in the summer you get the sun right on you.
 
-    When the drier's on that's too much.
+    And when the drier's on it's worse still.
 
 [HUSBAND]_
 
     Yeah.
 
+A bit cold though
+-----------------
+
 [WIFE]_
 
-    And the cold comes straight through the glass.
+    All this week I've been getting the cold coming through the glass.
 
-    So for that I have my cardie.
+    So I have to wear my cardie, and it picks up the hair something chronic.
 
 [HUSBAND]_
 
@@ -88,12 +92,10 @@ It was my turn
 
     Mandy had it all the time she was there so fair's fair.
 
-Not the fair
-------------
+Not listening
+-------------
 
 [HUSBAND]_
-
-    . . .
 
     So now you're working at the fair?
 
@@ -103,6 +105,9 @@ Not the fair
     No, |HUSBAND_FIRSTNAME| I work at Sandy Hair.
 
     Next to the fair.
+
+Still not listening
+-------------------
 
 [HUSBAND]_
 
