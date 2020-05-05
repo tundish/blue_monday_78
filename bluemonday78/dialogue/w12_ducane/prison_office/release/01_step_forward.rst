@@ -77,7 +77,7 @@ Ray enters
 
 [OFFICER]_
 
-    You too, |CELLMATE_SURNAME|. You will vacate this cell immediately. You will
+    You too, |CELLMATE_SURNAME|. You will both vacate this cell immediately. You will
     touch nothing on your way out.
 
 [CELLMATE]_
@@ -105,12 +105,16 @@ Ray splits them up
 
 [OFFICER]_
 
-    |CELLMATE_SURNAME|, your lady wife has arrived outside. So you will have
+    |CELLMATE_SURNAME|, your lady wife is on site. So you will have
     visiting time until 09:00.
 
 [CELLMATE]_
 
     Yes, |OFFICER_TITLE| |OFFICER_SURNAME|.
+
+[OFFICER]_
+
+    |INMATE_SURNAME| it's your big day.
 
 Ray joins them on the balcony
 -----------------------------

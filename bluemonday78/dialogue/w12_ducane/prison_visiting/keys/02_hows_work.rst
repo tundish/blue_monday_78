@@ -28,8 +28,8 @@ In the Visiting Suite
 
 HM Prison Wormwood Scrubs.
 
-Karen talks of her work
------------------------
+A new spot
+----------
 
 
 [WIFE]_
@@ -53,13 +53,16 @@ Karen talks of her work
 
 [WIFE]_
 
-    And wintertime the cold comes straight through the glass.
+    And the cold comes straight through the glass.
 
     So for that I have my cardie.
 
 [HUSBAND]_
 
     Oh.
+
+It was my turn
+--------------
 
 [WIFE]_
 
@@ -85,6 +88,8 @@ Karen talks of her work
 
     Mandy had it all the time she was there so fair's fair.
 
+Not the fair
+------------
 
 [HUSBAND]_
 

@@ -62,7 +62,7 @@ Tables
 
 [HUSBAND]_
 
-    Got to be careful. Looks like we've got the Book.
+    Got to keep our voices down. Looks like we've got the Book.
 
 [WIFE]_
 
