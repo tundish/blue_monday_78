@@ -245,12 +245,60 @@ class SequenceTests(unittest.TestCase):
             next(iter(self.characters[Mode.thief])).get_state(Spot)
         )
 
-        self.ensemble[-1].set_state(Spot.w12_ducane_prison_release)
-        # TODO: Test Billy's scene alone
-        #next(iter(self.characters[Mode.thief])).set_state(Spot.w12_ducane_prison_visiting)
+        self.ensemble[-1].set_state(Spot.w12_ducane_prison_visiting)
 
     def test_002(self):
         self.assertEqual(1, next(iter(self.characters[Mode.healer])).get_state())
+
+        self.assertFalse(self.performer.stopped)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
+        )
+        list(self.performer.run(react=True))
+        self.assertTrue(self.performer.script.fP.endswith("getting_here.rst"), self.performer.script.fP)
+        self.assertEqual(5, len(self.performer.shots), self.performer.shots)
+        self.assertEqual(
+            "in the visiting suite",
+            self.performer.shots[-1].scene
+        )
+
+        self.assertEqual(2, next(iter(self.characters[Mode.healer])).get_state())
+
+    def test_003(self):
+        self.assertEqual(2, next(iter(self.characters[Mode.healer])).get_state())
+
+        self.assertFalse(self.performer.stopped)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
+        )
+        list(self.performer.run(react=True))
+        self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"), self.performer.script.fP)
+        self.assertEqual(5, len(self.performer.shots))
+        self.assertEqual("in the visiting suite", self.performer.shots[-1].scene)
+        self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
+
+    def test_004(self):
+        self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
+        self.assertEqual(
+            Spot.w12_ducane_prison_wing,
+            next(iter(self.characters[Mode.thief])).get_state(Spot)
+        )
+
+        list(self.performer.run(react=True))
+        self.assertTrue(self.performer.script.fP.endswith("memories.rst"), self.performer.script.fP)
+        self.assertEqual(2, next(iter(self.characters[Mode.healer])).get_state())
+
+        self.assertFalse(self.performer.stopped)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
+        )
+        list(self.performer.run(react=True))
+        self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"), self.performer.script.fP)
+        self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
+        self.ensemble[-1].set_state(Spot.w12_ducane_prison_release)
+
+    def test_005(self):
+        self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
 
         self.assertFalse(self.performer.stopped)
         folder, index, script, selection, interlude = self.performer.next(
@@ -262,40 +310,9 @@ class SequenceTests(unittest.TestCase):
             Spot.w12_ducane_prison_visiting,
             next(iter(self.characters[Mode.thief])).get_state(Spot)
         )
-
         self.ensemble[-1].set_state(Spot.w12_ducane_prison_visiting)
 
-    def test_003(self):
-        self.assertEqual(1, next(iter(self.characters[Mode.healer])).get_state())
-
-        self.assertFalse(self.performer.stopped)
-        folder, index, script, selection, interlude = self.performer.next(
-            self.performer.folders, self.performer.ensemble
-        )
-        list(self.performer.run(react=True))
-        self.assertTrue(self.performer.script.fP.endswith("getting_here.rst"), self.performer.script.fP)
-        self.assertEqual(4, len(self.performer.shots), self.performer.shots)
-        self.assertEqual(
-            "in the visiting suite",
-            self.performer.shots[-1].scene
-        )
-
-        self.assertEqual(2, next(iter(self.characters[Mode.healer])).get_state())
-
-    def test_004(self):
-        self.assertEqual(2, next(iter(self.characters[Mode.healer])).get_state())
-
-        self.assertFalse(self.performer.stopped)
-        folder, index, script, selection, interlude = self.performer.next(
-            self.performer.folders, self.performer.ensemble
-        )
-        list(self.performer.run(react=True))
-        self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"), self.performer.script.fP)
-        self.assertEqual(1, len(self.performer.shots))
-        self.assertEqual("in the visiting suite", self.performer.shots[-1].scene)
-        self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
-
-    def test_005(self):
+    def test_006(self):
         self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
 
         self.assertFalse(self.performer.stopped)
@@ -311,29 +328,6 @@ class SequenceTests(unittest.TestCase):
             Spot.w12_ducane_prison_release,
             next(iter(self.characters[Mode.thief])).get_state(Spot)
         )
-
-    def test_006(self):
-        self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
-        # Move Billy to test Karen's loop
-        self.assertEqual(
-            Spot.w12_ducane_prison_release,
-            next(iter(self.characters[Mode.thief])).get_state(Spot)
-        )
-        next(iter(self.characters[Mode.thief])).set_state(Spot.w12_ducane_prison_wing)
-
-        list(self.performer.run(react=True))
-        self.assertTrue(self.performer.script.fP.endswith("memories.rst"), self.performer.script.fP)
-        self.assertEqual(2, next(iter(self.characters[Mode.healer])).get_state())
-
-        self.assertFalse(self.performer.stopped)
-        folder, index, script, selection, interlude = self.performer.next(
-            self.performer.folders, self.performer.ensemble
-        )
-        list(self.performer.run(react=True))
-        self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"), self.performer.script.fP)
-        self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
-
-        next(iter(self.characters[Mode.thief])).set_state(Spot.w12_ducane_prison_release)
 
     def test_007(self):
         self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
