@@ -15,7 +15,7 @@
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
    :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
-            197801160805
+            1978011608
 
 .. entity:: WIFE
    :types:  bluemonday78.types.Character
