@@ -60,7 +60,7 @@ class Spot(EnumFactory, enum.Enum):
     w12_ducane_prison_visiting = ("w12_ducane", "prison_visiting")
     w12_ducane_prison_wing = ("w12_ducane", "prison_wing")
     w12_goldhawk_cafe = ("w12_latimer", "cafe")
-    w12_goldhawk_tavern = ("w12_latimer", "tavern")
+    w12_goldhawk_tavern = ("w12_latimer", "goldhawk_tavern")
     w12_latimer_lockup = ("w12_latimer", "lockup")
     w12_latimer_arches = ("w12_latimer", "arches")
 

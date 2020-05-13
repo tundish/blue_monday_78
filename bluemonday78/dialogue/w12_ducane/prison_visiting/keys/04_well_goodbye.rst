@@ -43,44 +43,6 @@ Karen talks of the keys
 -----------------------
 
 
-[WIFE]_
-
-    Which reminds me. What are these for?
-
-
-[HUSBAND]_
-
-    What?
-
-    Don't know.
-
-    But don't wave them around.
-
-[WIFE]_
-
-    They came in the post the other day.
-
-    With some documents. They were addressed to you.
-
-    This is a property deed, isn't it?
-
-[HUSBAND]_
-
-    How would I know?
-
-[WIFE]_
-
-    So you own property now, |HUSBAND|? While you're banged up for theft
-    and the only money we have is what I earn?
-
-[HUSBAND]_
-
-    No.
-
-[WIFE]_
-
-    It says, 'further to your instructions'. But you can't even read, |HUSBAND|.
-
 [HUSBAND]_
 
     I'm just doing a favour for someone.

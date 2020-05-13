@@ -44,7 +44,7 @@ Karen talks of the keys
 
 [WIFE]_
 
-    Which reminds me. What are these for?
+    Which reminds me. What are these keys for?
 
 
 [HUSBAND]_
@@ -61,7 +61,7 @@ Karen talks of the keys
 
     With some documents. They were addressed to you.
 
-    This is a property deed, isn't it?
+    Keys to where?
 
 [HUSBAND]_
 
@@ -69,7 +69,7 @@ Karen talks of the keys
 
 [WIFE]_
 
-    So you own property now, |HUSBAND|? While you're banged up for theft
+    Are you busy buying property now, |HUSBAND|? While you're banged up for theft
     and the only money we have is what I earn?
 
 [HUSBAND]_
@@ -78,7 +78,7 @@ Karen talks of the keys
 
 [WIFE]_
 
-    It says, 'further to your instructions'. But you can't even read, |HUSBAND|.
+    It says, 'further to your instructions'. You're in prison and you can't read, |HUSBAND|.
 
 [HUSBAND]_
 
@@ -94,34 +94,6 @@ Karen talks of the keys
     Every chance that comes along you go and fall for some dodgy scam.
     And it's not you that suffers in the end, it's me and the kids.
     It always comes back on us!
-
-[HUSBAND]_
-
-    Keep your voice down, or the screw will come over.
-
-[WIFE]_
-
-    Or maybe I should call him over. You're not doing this to us again.
-    I'm sick of bloody solicitors and loan agreements and ...
-
-    Bailiffs! 
-
-[HUSBAND]_
-
-    All right. Shut up.
-
-    Shut up, will you.
-
-    See over there? |INMATE| was in my cell. Gets out today.
-    |INMATE| will take them for a while.
-
-    Then you can shut up.
-
-[WIFE]_
-
-    Well then |INMATE| can have them.
-    And |INMATE| had better not turn up at my door, either.
-    I don't want any more of your prison mates hanging around.
 
 .. property:: WIFE.state 2
 
