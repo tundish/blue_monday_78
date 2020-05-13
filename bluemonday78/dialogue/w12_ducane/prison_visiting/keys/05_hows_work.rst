@@ -17,7 +17,7 @@
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.healer
             bluemonday78.types.Spot.w12_ducane_prison_visiting
-            2
+            3
 
 .. entity:: HUSBAND
    :types:  bluemonday78.types.Character
@@ -119,7 +119,7 @@ Still not listening
 
     No, I still do the cleaning.
 
-.. property:: WIFE.state 3
+.. property:: WIFE.state 2
 
 .. |HUSBAND_FIRSTNAME| property:: HUSBAND.name.firstname
 .. |WIFE| property:: WIFE.name.firstname

@@ -272,8 +272,8 @@ class SequenceTests(unittest.TestCase):
             self.performer.folders, self.performer.ensemble
         )
         list(self.performer.run(react=True))
-        self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"), self.performer.script.fP)
-        self.assertEqual(5, len(self.performer.shots))
+        self.assertTrue(self.performer.script.fP.endswith("simmering.rst"), self.performer.script.fP)
+        self.assertEqual(3, len(self.performer.shots))
         self.assertEqual("in the visiting suite", self.performer.shots[-1].scene)
         self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
 
@@ -285,7 +285,7 @@ class SequenceTests(unittest.TestCase):
         )
 
         list(self.performer.run(react=True))
-        self.assertTrue(self.performer.script.fP.endswith("memories.rst"), self.performer.script.fP)
+        self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"), self.performer.script.fP)
         self.assertEqual(2, next(iter(self.characters[Mode.healer])).get_state())
 
         self.assertFalse(self.performer.stopped)
@@ -293,7 +293,7 @@ class SequenceTests(unittest.TestCase):
             self.performer.folders, self.performer.ensemble
         )
         list(self.performer.run(react=True))
-        self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"), self.performer.script.fP)
+        self.assertTrue(self.performer.script.fP.endswith("simmering.rst"), self.performer.script.fP)
         self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
         self.ensemble[-1].set_state(Spot.w12_ducane_prison_release)
 
@@ -320,26 +320,41 @@ class SequenceTests(unittest.TestCase):
             self.performer.folders, self.performer.ensemble
         )
         list(self.performer.run(react=True))
-        self.assertTrue(self.performer.script.fP.endswith("transfer.rst"), self.performer.script.fP)
-        self.assertEqual(1, len(self.performer.shots))
+        self.assertTrue(self.performer.script.fP.endswith("hows_work.rst"), self.performer.script.fP)
+        self.assertEqual(
+            Spot.w12_ducane_prison_visiting,
+            next(iter(self.characters[Mode.thief])).get_state(Spot)
+        )
+        self.ensemble[-1].set_state(Spot.w12_ducane_prison_visiting)
+
+    def test_007(self):
+        self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
+
+        self.assertFalse(self.performer.stopped)
+        folder, index, script, selection, interlude = self.performer.next(
+            self.performer.folders, self.performer.ensemble
+        )
+        list(self.performer.run(react=True))
+        self.assertTrue(self.performer.script.fP.endswith("simmering.rst"), self.performer.script.fP)
+        self.assertEqual(3, len(self.performer.shots))
         self.assertEqual("in the visiting suite", self.performer.shots[-1].scene)
         self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
         self.assertEqual(
-            Spot.w12_ducane_prison_release,
+            Spot.w12_ducane_prison_visiting,
             next(iter(self.characters[Mode.thief])).get_state(Spot)
         )
+        narrator = self.ensemble[-1]
+        narrator.set_state(Spot.w12_ducane_prison_release)
 
-    def test_007(self):
+    def test_008(self):
         self.assertEqual(3, next(iter(self.characters[Mode.healer])).get_state())
         next(iter(self.characters[Mode.thief])).set_state(Spot.w12_ducane_prison_release)
 
         list(self.performer.run(react=True))
         self.assertTrue(self.performer.script.fP.endswith("well_goodbye.rst"), self.performer.script.fP)
         self.assertEqual(4, next(iter(self.characters[Mode.healer])).get_state())
-        narrator = self.ensemble[-1]
-        narrator.set_state(Spot.w12_ducane_prison_release)
 
-    def test_008(self):
+    def test_009(self):
         self.assertEqual(4, next(iter(self.characters[Mode.healer])).get_state())
         self.assertEqual(
             Spot.w12_ducane_prison_release,
@@ -360,7 +375,7 @@ class SequenceTests(unittest.TestCase):
         )
         narrator.set_state(Spot.w12_goldhawk_tavern)
 
-    def test_009(self):
+    def test_010(self):
         self.assertEqual(1, next(iter(self.characters[Look.yuppie])).get_state())
         narrator = self.ensemble[-1]
         self.assertEqual(197801161100, narrator.state)
@@ -374,7 +389,7 @@ class SequenceTests(unittest.TestCase):
         self.assertTrue(self.performer.script.fP.endswith("early_doors.rst"), self.performer.script.fP)
         self.assertEqual(2, next(iter(self.characters[Look.yuppie])).get_state())
 
-    def test_010(self):
+    def test_011(self):
         narrator = self.ensemble[-1]
         self.assertEqual(197801161200, narrator.state)
         self.assertEqual(Spot.w12_goldhawk_tavern, narrator.get_state(Spot))
@@ -392,7 +407,7 @@ class SequenceTests(unittest.TestCase):
         )
         self.assertEqual(197801161300, narrator.state)
 
-    def test_011(self):
+    def test_012(self):
         narrator = self.ensemble[-1]
         self.assertEqual(197801161300, narrator.state)
         narrator.set_state(Spot.w12_goldhawk_tavern)
@@ -409,7 +424,7 @@ class SequenceTests(unittest.TestCase):
         )
         self.assertEqual(197801161500, narrator.state)
 
-    def test_012(self):
+    def test_013(self):
         narrator = self.ensemble[-1]
         self.assertEqual(197801161500, narrator.state)
         self.assertEqual(Spot.w12_goldhawk_tavern, narrator.get_state(Spot))
@@ -427,7 +442,7 @@ class SequenceTests(unittest.TestCase):
         )
         self.assertEqual(197801161600, narrator.state)
 
-    def test_013(self):
+    def test_014(self):
         narrator = self.ensemble[-1]
         self.assertEqual(197801161600, narrator.state)
         narrator.set_state(Spot.w12_goldhawk_tavern)
@@ -444,7 +459,7 @@ class SequenceTests(unittest.TestCase):
         )
         self.assertEqual(197801161800, narrator.state)
 
-    def test_014(self):
+    def test_015(self):
         narrator = self.ensemble[-1]
         self.assertEqual(197801161800, narrator.state)
         self.assertEqual(Spot.w12_goldhawk_tavern, narrator.get_state(Spot))
@@ -462,7 +477,7 @@ class SequenceTests(unittest.TestCase):
         )
         self.assertEqual(197801161900, narrator.state)
 
-    def test_015(self):
+    def test_016(self):
         narrator = self.ensemble[-1]
         self.assertEqual(197801161900, narrator.state)
         narrator.set_state(Spot.w12_goldhawk_tavern)
@@ -484,7 +499,7 @@ class SequenceTests(unittest.TestCase):
         )
         narrator.set_state(Spot.w12_latimer_arches)
 
-    def test_016(self):
+    def test_017(self):
         narrator = self.ensemble[-1]
         self.assertEqual(197801162100, narrator.state)
         self.assertEqual(Spot.w12_latimer_arches, narrator.get_state(Spot))

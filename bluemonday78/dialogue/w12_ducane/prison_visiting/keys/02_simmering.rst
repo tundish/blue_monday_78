@@ -23,11 +23,12 @@
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.healer
             bluemonday78.types.Spot.w12_ducane_prison_visiting
-            3
+            2
 
 .. entity:: HUSBAND
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Spot.w12_ducane_prison_visiting
+   :states: bluemonday78.types.Look.mug
+            bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 .. entity:: INMATE
    :types:  bluemonday78.types.Character
@@ -105,5 +106,5 @@ Karen points the finger
     And it's not you that suffers in the end, it's me and the kids.
     It always comes back on us!
 
-.. property:: WIFE.state 2
+.. property:: WIFE.state 3
 
