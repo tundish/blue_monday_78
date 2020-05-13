@@ -38,8 +38,8 @@ In the Visiting Suite
 
 HM Prison Wormwood Scrubs.
 
-Karen talks of the keys
------------------------
+Karen remembers the keys
+------------------------
 
 
 [WIFE]_
@@ -67,9 +67,13 @@ Karen talks of the keys
 
     How would I know?
 
+Karen is suspicious
+-------------------
+
+
 [WIFE]_
 
-    Are you busy buying property now, |HUSBAND|? While you're banged up for theft
+    So in your spare time you're buying property now, |HUSBAND|? While you're banged up for theft
     and the only money we have is what I earn?
 
 [HUSBAND]_
@@ -78,15 +82,21 @@ Karen talks of the keys
 
 [WIFE]_
 
-    It says, 'further to your instructions'. You're in prison and you can't read, |HUSBAND|.
+    You're in prison and you can't read, |HUSBAND|.
+
+[WIFE]_
+
+    It says, 'further to your instructions'.
 
 [HUSBAND]_
 
     I'm just doing a favour for someone.
 
-[WIFE]_
 
-    A favour? Lord, what are you mixed up in now? A favour.
+Karen points the finger
+-----------------------
+
+[WIFE]_
 
     Someone's put one on you.
     I knew this would happen as soon as you got up here.
