@@ -50,8 +50,6 @@ Karen remembers the keys
 
 [HUSBAND]_
 
-    What?
-
     Don't know.
 
     But don't wave them around.
