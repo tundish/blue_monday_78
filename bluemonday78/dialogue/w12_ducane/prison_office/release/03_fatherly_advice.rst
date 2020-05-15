@@ -20,6 +20,12 @@
    :states: bluemonday78.types.Mode.guardian
             bluemonday78.types.Spot.w12_ducane_prison_release
 
+.. entity:: VISITOR
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Mode.healer
+            bluemonday78.types.Spot.w12_ducane_prison_visiting
+            4
+
 .. entity:: INMATE
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Mode.thief
