@@ -6,6 +6,17 @@
 Change Log
 ::::::::::
 
+0.7.0
+=====
+
+This release establishes a structure for the dialogue which will support
+an MVP release.
+
+* Switch from explicit typing of characters to assigning a triple of traits
+* Eliminate association relationships in favour of simple state changes
+* Create a design document (UML activity diagram)
+* Create unit tests which enforce the design
+
 0.6.0
 =====
 
