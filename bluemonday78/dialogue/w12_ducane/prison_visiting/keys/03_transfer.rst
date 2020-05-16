@@ -74,5 +74,10 @@ Martin hands over the keys
 
 .. property:: INMATE.state bluemonday78.types.Spot.w12_ducane_prison_release
 
+.. memory::  bluemonday78.types.Spot.w12_ducane_prison_visiting
+   :subject: NARRATOR
+
+   |CELLMATE| manages to get some keys to |INMATE|.
+
 .. |CELLMATE| property:: CELLMATE.name.firstname
-.. |INMATE| property:: INMATE.name.firstname
+.. |INMATE| property:: INMATE.nickname

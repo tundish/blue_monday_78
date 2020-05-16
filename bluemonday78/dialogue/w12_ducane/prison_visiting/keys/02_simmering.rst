@@ -106,3 +106,7 @@ Karen points the finger
 
 .. property:: WIFE.state 3
 
+.. memory::  bluemonday78.types.Spot.w12_ducane_prison_visiting
+   :subject: NARRATOR
+
+   |WIFE| has intercepted a mysterious parcel.
