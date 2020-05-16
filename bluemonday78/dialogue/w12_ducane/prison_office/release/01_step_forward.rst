@@ -131,7 +131,7 @@ Ray joins them on the balcony
 .. memory:: 197801160805
    :subject: NARRATOR
 
-   |INMATE_FIRSTNAME| |INMATE_SURNAME| gets out of Prison today.
+   |INMATE_NICK| |INMATE_SURNAME| gets out of Prison today.
 
 .. property:: OFFICER.state bluemonday78.types.Spot.w12_ducane_prison_release
 .. property:: CELLMATE.state bluemonday78.types.Spot.w12_ducane_prison_visiting
@@ -142,5 +142,6 @@ Ray joins them on the balcony
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
 .. |CELLMATE_SURNAME| property:: CELLMATE.name.surname
 .. |INMATE_TITLE| property:: INMATE.name.title
+.. |INMATE_NICK| property:: INMATE.nickname
 .. |INMATE_FIRSTNAME| property:: INMATE.name.firstname
 .. |INMATE_SURNAME| property:: INMATE.name.surname

@@ -55,13 +55,13 @@ Ray unlocks the office
 .. memory:: 197801160810
    :subject: NARRATOR
 
-   |INMATE_FIRSTNAME| |INMATE_SURNAME| is waiting for |OFFICER_SURNAME| to get back.
+   |OFFICER_SURNAME| leaves |INMATE_NICK| unsupervised.
 
 .. property:: INMATE.state bluemonday78.types.Spot.w12_ducane_prison_visiting
 
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
 .. |CELLMATE_SURNAME| property:: CELLMATE.name.surname
-.. |INMATE_TITLE| property:: INMATE.name.title
+.. |INMATE_NICK| property:: INMATE.nickname
 .. |INMATE_FIRSTNAME| property:: INMATE.name.firstname
 .. |INMATE_SURNAME| property:: INMATE.name.surname
 .. |OFFICER_SURNAME| property:: OFFICER.name.surname

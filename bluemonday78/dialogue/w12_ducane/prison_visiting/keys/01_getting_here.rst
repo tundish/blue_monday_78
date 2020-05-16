@@ -136,7 +136,15 @@ Why here?
 
 .. property:: WIFE.state 2
 
+.. memory::  bluemonday78.types.Spot.w12_ducane_prison_visiting
+   :subject: NARRATOR
+
+   |WIFE_FIRSTNAME| |WIFE_SURNAME| has come to see |HUSBAND_FIRSTNAME|.
+
+
+.. |NARRATOR_STATE| property:: NARRATOR.state
 .. |HUSBAND_FIRSTNAME| property:: HUSBAND.name.firstname
 .. |WIFE_TITLE| property:: WIFE.name.title
+.. |WIFE_FIRSTNAME| property:: WIFE.name.firstname
 .. |WIFE_SURNAME| property:: WIFE.name.surname
 .. |OFFICER_SURNAME| property:: OFFICER.name.surname
