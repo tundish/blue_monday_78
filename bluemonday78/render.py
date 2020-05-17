@@ -31,7 +31,7 @@ def animated_line_to_html(anim):
     return f"""
 <li style="animation-delay: {anim.delay:.2f}s; animation-duration: {anim.duration:.2f}s">
 <blockquote class="obj-line">
-<header class="{'obj-persona' if hasattr(anim.element.persona, '_name') else ''}">
+<header class="{'obj-persona' if hasattr(anim.element.persona, '_name') else 'obj-entity'}">
 { '{0.firstname} {0.surname}'.format(anim.element.persona.name) if hasattr(anim.element.persona, 'name') else ''}
 </header>
 <p class="obj-speech">{ anim.element.text }</p>

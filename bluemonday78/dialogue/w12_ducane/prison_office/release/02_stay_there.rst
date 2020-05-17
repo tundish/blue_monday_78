@@ -55,7 +55,7 @@ Ray unlocks the office
 .. memory:: 197801160810
    :subject: NARRATOR
 
-   |OFFICER_SURNAME| leaves |INMATE_NICK| unsupervised.
+   |OFFICER_SURNAME| is distracted.
 
 .. property:: INMATE.state bluemonday78.types.Spot.w12_ducane_prison_visiting
 

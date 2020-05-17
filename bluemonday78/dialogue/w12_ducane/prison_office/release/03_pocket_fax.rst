@@ -45,16 +45,18 @@ Ray bestows a parting gift
 [NARRATOR]_
 
     The Guard's Room is a shabby little office. There are some filing cabinets and a couple
-    of chairs. Everything is painted a thick institutional green.
+    of chairs.
 
-    |OFFICER_FIRSTNAME| |OFFICER_SURNAME| is rearranging boxes on a high wooden desk.
+    Everything is painted a thick institutional green.
 
 [OFFICER]_
 
     Good Lord, what a mess. I'm the only one who tidies this place up.
 
-    No-one replaces the stationery here you know. I had to bring in a load of rubber bands
-    this morning from home. And I see we're out of pens again.
+[NARRATOR]_
+
+    Someone has been throwing sharpened pencils at the suspended ceiling. Two or
+    three are stuck into the soft board and are just within reach.
 
 [NARRATOR]_
 
@@ -67,8 +69,10 @@ Ray bestows a parting gift
 
 [NARRATOR]_
 
-    |OFFICER_SURNAME| tosses onto the desk a small book. Its cover is of stiffened cloth.
-    A few dozen waxy leaves of thick paper have been double-punched through with holes.
+    |OFFICER_SURNAME| tosses onto the desk a small book of thick waxy paper.
+
+    Its cover is of stiffened cloth.
+
     It is held together by a shoelace.
 
 Ray shares a memory
@@ -91,22 +95,9 @@ Ray shares a memory
 
     That's okay, |OFFICER_TITLE| |OFFICER_SURNAME|.
 
-[NARRATOR]_
-
-    Someone has been throwing sharpened pencils at the suspended ceiling. Two or
-    three are stuck into the soft board and are just within reach.
-
 [OFFICER]_
 
     Help yourself to a pencil, though.
-
-[OFFICER]_
-
-    It isn't usual to read a form B107 to its subject,
-    |HERO_TITLE| |HERO_SURNAME|, but it looks like you've been playing it
-    straight.
-
-    That's what we like to see, eh?
 
 .. property:: OFFICER.state 197801160810
 

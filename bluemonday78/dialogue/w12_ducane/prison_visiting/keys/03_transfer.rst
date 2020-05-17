@@ -28,6 +28,10 @@
    :states: bluemonday78.types.Mode.thief
             bluemonday78.types.Spot.w12_ducane_prison_visiting
 
+.. entity:: OFFICER
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Mode.guardian
+
 .. entity:: EXIT
    :types:  bluemonday78.types.Location
    :states: bluemonday78.types.Spot.w12_ducane_prison_release
@@ -37,29 +41,41 @@ In the Visiting Suite
 
 HM Prison Wormwood Scrubs.
 
+[NARRATOR]_
+
+    |INMATE| is hovering in the doorway.
+
+Did not expect that
+-------------------
+
+[CELLMATE]_
+
+    |INMATE|, quick. She's only brought the keys with her.
+
+[INMATE]_
+
+    Nice. Couldn't have worked out better.
+
+    Your old dear's on the firm.
+
+[CELLMATE]_
+
+    What if they search her?
+
+[INMATE]_
+
+    Pass them over then.
+
 Martin hands over the keys
 --------------------------
 
 [NARRATOR]_
 
-    |CELLMATE| sidles over.
+    |CELLMATE| throws |INMATE| the keys.
 
-[CELLMATE]_
+[INMATE]_
 
-    |INMATE| mate; quick. Take these keys. The address is on the
-    label. Keep them out of sight.
-
-[NARRATOR]_
-
-    |CELLMATE| lowers his voice.
-
-[CELLMATE]_
-
-    It belongs to a firm over the West End. There's going to be a delivery come in soon
-    and when it does, they're gonna stash it in there.
-
-    In the cage downstairs is a load of tatty gear. You've got to clear that all
-    out, or there won't be room for the new stuff.
+    Saves me a trip.
 
 [NARRATOR]_
 
@@ -67,17 +83,37 @@ Martin hands over the keys
 
 [CELLMATE]_
 
-    Make sure that place is empty soon, or I'm gonna get a beating!
+    What about the money? You're still going to drop off my money, right?
 
-    And don't let anybody in there. If you get anyone poking around,
-    tell them you're looking after it for Frankie Marshall.
+[INMATE]_
+
+    Yeah but I've got to sell the gear first.
+
+Stand on me
+-----------
+
+[CELLMATE]_
+
+    Yeah, clear out all that gear or there won't be room for the new stuff.
+
+[INMATE]_
+
+    Don't worry mate, don't worry.
+
+[CELLMATE]_
+
+    Yeah, well make sure that place is empty soon, or I'm gonna get a hiding!
+
+    And don't let anybody in there.
+
+    And don't mention Frankie Marshall.
 
 .. property:: INMATE.state bluemonday78.types.Spot.w12_ducane_prison_release
 
 .. memory::  bluemonday78.types.Spot.w12_ducane_prison_visiting
    :subject: NARRATOR
 
-   |CELLMATE| manages to get some keys to |INMATE|.
+   |CELLMATE| passes some keys to |INMATE|.
 
 .. |CELLMATE| property:: CELLMATE.name.firstname
 .. |INMATE| property:: INMATE.nickname
