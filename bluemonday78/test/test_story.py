@@ -336,7 +336,7 @@ class SequenceTests(unittest.TestCase):
         )
         list(self.performer.run(react=True))
         self.assertTrue(self.performer.script.fP.endswith("well_goodbye.rst"), self.performer.script.fP)
-        self.assertEqual(1, len(self.performer.shots))
+        self.assertEqual(4, len(self.performer.shots))
         self.assertEqual("in the visiting suite", self.performer.shots[-1].scene)
         self.assertEqual(4, next(iter(self.characters[Mode.healer])).get_state())
         self.assertEqual(

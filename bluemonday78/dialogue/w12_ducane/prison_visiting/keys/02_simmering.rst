@@ -45,7 +45,7 @@ Karen remembers the keys
 
 [WIFE]_
 
-    Which reminds me. What are these keys for?
+    Which reminds me. What are all these keys for?
 
 
 [HUSBAND]_
@@ -72,16 +72,24 @@ Karen is suspicious
 
 [WIFE]_
 
-    So in your spare time you're buying property now, |HUSBAND|? While you're banged up for theft
-    and the only money we have is what I earn?
+    So you're buying property now, |HUSBAND|?
+
+    In your spare time.
+
+    While you're banged up for theft.
 
 [HUSBAND]_
 
     No.
 
+Karen points the finger
+-----------------------
+
 [WIFE]_
 
     You're in prison and you can't read, |HUSBAND|.
+
+    The only money we have is what I earn.
 
 [WIFE]_
 
@@ -90,19 +98,6 @@ Karen is suspicious
 [HUSBAND]_
 
     I'm just doing a favour for someone.
-
-
-Karen points the finger
------------------------
-
-[WIFE]_
-
-    Someone's put one on you.
-    I knew this would happen as soon as you got up here.
-
-    Every chance that comes along you go and fall for some dodgy scam.
-    And it's not you that suffers in the end, it's me and the kids.
-    It always comes back on us!
 
 .. property:: WIFE.state 3
 

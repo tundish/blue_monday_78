@@ -11,7 +11,7 @@
 :project: bluemonday78
 :version: |VERSION|
 
-.. |INMATE| property:: INMATE.name.firstname
+.. |INMATE| property:: INMATE.nickname
 .. |WIFE| property:: WIFE.name.firstname
 .. |HUSBAND| property:: HUSBAND.name.firstname
 
@@ -39,24 +39,50 @@ In the Visiting Suite
 
 HM Prison Wormwood Scrubs.
 
-Karen talks of the keys
------------------------
-
-
-[HUSBAND]_
-
-    I'm just doing a favour for someone.
+Do me a favour
+--------------
 
 [WIFE]_
 
-    A favour? Lord, what are you mixed up in now? A favour.
+    What are you doing?
+
+[HUSBAND]_
+
+    Look, it's just a favour for somebody.
+
+[WIFE]_
+
+    A favour? In here? I bet.
 
     Someone's put one on you.
     I knew this would happen as soon as you got up here.
 
-    Every chance that comes along you go and fall for some dodgy scam.
+[HUSBAND]_
+
+    It's not like that.
+
+Karen has seen it all before
+----------------------------
+
+[WIFE]_
+
+    Every time.
+
+    You fall for every dodgy scheme.
+
+[HUSBAND]_
+
+    It's just a little bit of business.
+
+    Stay out of it.
+
+[WIFE]_
+
     And it's not you that suffers in the end, it's me and the kids.
     It always comes back on us!
+
+Getting shouty
+--------------
 
 [HUSBAND]_
 
@@ -64,26 +90,37 @@ Karen talks of the keys
 
 [WIFE]_
 
-    Or maybe I should call him over. You're not doing this to us again.
+    Or maybe I should call him over.
+
+    You're not doing this to us again.
+
     I'm sick of bloody solicitors and loan agreements and ...
 
     Bailiffs! 
+
+Kicking off
+-----------
 
 [HUSBAND]_
 
     All right. Shut up.
 
+[WIFE]_
+
+    Don't you...
+
+[HUSBAND]_
+
     Shut up, will you.
-
-    See over there? |INMATE| was in my cell. Gets out today.
-    |INMATE| will take them for a while.
-
-    Then you can shut up.
 
 [WIFE]_
 
-    Well then |INMATE| can have them.
-    And |INMATE| had better not turn up at my door, either.
-    I don't want any more of your prison mates hanging around.
+    Don't you ever...
+
+[HUSBAND]_
+
+    |INMATE| has got them.
+
+    So now you can shut up.
 
 .. property:: WIFE.state 4

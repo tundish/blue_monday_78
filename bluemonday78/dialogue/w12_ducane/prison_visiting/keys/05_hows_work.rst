@@ -35,8 +35,9 @@ A new spot
 
 [WIFE]_
 
-    Mandy's gone now, and we had a move round.
-    So I've got the best chair right by the window.
+    Mandy's gone to have her baby, so we had a move around.
+
+    So now I've got the best chair right by the window.
 
 [HUSBAND]_
 
@@ -44,9 +45,10 @@ A new spot
 
 [WIFE]_
 
-    Which I like, but in the summer you get the sun right on you.
+    About time too.
 
-    And when the drier's on it's worse still.
+    You do get the cold come through the glass though.
+
 
 [HUSBAND]_
 
@@ -57,9 +59,7 @@ A bit cold though
 
 [WIFE]_
 
-    All this week I've been getting the cold coming through the glass.
-
-    So I have to wear my cardie, and it picks up the hair something chronic.
+    So I've been wearing my cardie, and its a devil to get the hair off it.
 
 [HUSBAND]_
 
@@ -70,7 +70,7 @@ It was my turn
 
 [WIFE]_
 
-    And you get the wind through the door.
+    And the wind comes under the door.
 
 [HUSBAND]_
 
