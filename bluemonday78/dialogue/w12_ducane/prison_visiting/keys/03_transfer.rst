@@ -77,9 +77,7 @@ Martin hands over the keys
 
     Saves me a trip.
 
-[NARRATOR]_
-
-    |CELLMATE| eyes |INMATE| nervously.
+    That M2...
 
 [CELLMATE]_
 
@@ -102,7 +100,7 @@ Stand on me
 
 [CELLMATE]_
 
-    Yeah, well make sure that place is empty soon, or I'm gonna get a hiding!
+    Well make sure that place is empty soon, or I'm gonna get a hiding!
 
     And don't let anybody in there.
 
