@@ -100,7 +100,7 @@ Stand on me
 
 [CELLMATE]_
 
-    You'd better get it empty soon, or I'll get a hiding!
+    You'd better get it empty soon, or I'll catch a hiding!
 
     And don't let anybody in there.
 
