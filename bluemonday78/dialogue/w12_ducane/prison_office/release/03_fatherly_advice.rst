@@ -41,10 +41,69 @@ Guards' Office
 
 HM Prison Wormwood Scrubs.
 
+Ray bestows a parting gift
+--------------------------
+
+[NARRATOR]_
+
+    The Guard's Room is a shabby little office. There are some filing cabinets and a couple
+    of chairs.
+
+    Everything is painted a thick institutional green.
+
+[OFFICER]_
+
+    Good Lord, what a mess. I'm the only one who tidies this place up.
+
+[NARRATOR]_
+
+    Someone has been throwing sharpened pencils at the suspended ceiling. Two or
+    three are stuck into the soft board and are just within reach.
+
+[NARRATOR]_
+
+    |OFFICER_FIRSTNAME| |OFFICER_SURNAME| pulls something out of a box near the floor.
+    He looks at it for a moment.
+
+[OFFICER]_
+
+    You may as well have this. It's not doing any good in here.
+
+[NARRATOR]_
+
+    |OFFICER_SURNAME| tosses onto the desk a small book of thick waxy paper.
+
+    Its cover is of stiffened cloth.
+
+    It is held together by a shoelace.
+
+Ray shares a memory
+-------------------
+
+[OFFICER]_
+
+    I would always issue these to my squad leaders. I used to train them
+    to make a note of everything they saw.
+
+[INMATE]_
+
+    Thanks, |OFFICER_TITLE| |OFFICER_SURNAME|.
+
+[OFFICER]_
+
+    Can't give you a pen I'm afraid.
+
+[INMATE]_
+
+    That's okay, |OFFICER_TITLE| |OFFICER_SURNAME|.
+
+[OFFICER]_
+
+    Help yourself to a pencil, though.
+
 Ray does the paperwork
 ----------------------
 
-.. Ray gives the PC a mission (find out what Martin's up to).
 
 [OFFICER]_
 
@@ -92,3 +151,6 @@ Ray does the paperwork
 .. |INMATE_SURNAME| property:: INMATE.name.surname
 .. |CELLMATE_FIRSTNAME| property:: CELLMATE.name.firstname
 .. |CELLMATE_SURNAME| property:: CELLMATE.name.surname
+.. |OFFICER_TITLE| property:: OFFICER.name.title
+.. |OFFICER_FIRSTNAME| property:: OFFICER.name.firstname
+.. |OFFICER_SURNAME| property:: OFFICER.name.surname

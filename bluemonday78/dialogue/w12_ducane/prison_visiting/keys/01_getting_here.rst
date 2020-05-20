@@ -89,7 +89,9 @@ Too early
 
 [WIFE]_
 
-    I don't like visiting time so early. There's traffic now on the M2.
+    I don't like visiting time so early.
+
+    I came up on the M2.
 
 [HUSBAND]_
 
@@ -97,7 +99,7 @@ Too early
 
 [WIFE]_
 
-    But it's not so bad later on.
+    There won't be as much traffic later on.
 
 [HUSBAND]_
 
@@ -105,7 +107,9 @@ Too early
 
 [WIFE]_
 
-    I sometimes take the girls for lunch at Farthing Corner.
+    You can go for lunch at Farthing Corner.
+
+    I take the girls up there sometimes.
 
 [HUSBAND]_
 
