@@ -192,7 +192,7 @@ class SequenceTests(unittest.TestCase):
         self.assertEqual(15, len(self.ensemble))
         (self.folder, self.index, self.script, self.selection,
          self.interlude) = self.performer.next(
-            self.performer.folders, self.ensemble, strict=True, roles=1
+            self.performer.folders, self.ensemble, strict=True, roles=2
         )
 
     def tearDown(self):
@@ -374,7 +374,7 @@ class SequenceTests(unittest.TestCase):
 
         self.assertFalse(self.performer.stopped)
         folder, index, script, selection, interlude = self.performer.next(
-            self.performer.folders, self.performer.ensemble
+            self.performer.folders, self.performer.ensemble, strict=True, roles=2
         )
         list(self.performer.run(react=True))
 
@@ -387,11 +387,10 @@ class SequenceTests(unittest.TestCase):
         self.assertEqual(Spot.w12_goldhawk_tavern, narrator.get_state(Spot))
         self.assertEqual(2, next(iter(self.characters[Look.yuppie])).get_state())
 
-        self.assertFalse(self.performer.stopped)
         folder, index, script, selection, interlude = self.performer.next(
-            self.performer.folders, self.performer.ensemble
+            self.performer.folders, self.performer.ensemble, strict=True, roles=2
         )
-        list(self.performer.run(react=True))
+        list(self.performer.run(react=True, strict=True, roles=2))
 
         self.assertTrue(
             self.performer.script.fP.endswith("heres_to_family.rst"),
@@ -404,11 +403,10 @@ class SequenceTests(unittest.TestCase):
         self.assertEqual(197801161300, narrator.state)
         narrator.set_state(Spot.w12_goldhawk_tavern)
 
-        self.assertFalse(self.performer.stopped)
         folder, index, script, selection, interlude = self.performer.next(
-            self.performer.folders, self.performer.ensemble
+            self.performer.folders, self.performer.ensemble, strict=True, roles=2
         )
-        list(self.performer.run(react=True))
+        list(self.performer.run(react=True, strict=True, roles=2))
 
         self.assertTrue(
             self.performer.script.fP.endswith("what_about_the_catering.rst"),
@@ -422,11 +420,10 @@ class SequenceTests(unittest.TestCase):
         self.assertEqual(Spot.w12_goldhawk_tavern, narrator.get_state(Spot))
         self.assertEqual(2, next(iter(self.characters[Look.yuppie])).get_state())
 
-        self.assertFalse(self.performer.stopped)
         folder, index, script, selection, interlude = self.performer.next(
-            self.performer.folders, self.performer.ensemble
+            self.performer.folders, self.performer.ensemble, strict=True, roles=2
         )
-        list(self.performer.run(react=True))
+        list(self.performer.run(react=True, strict=True, roles=2))
 
         self.assertTrue(
             self.performer.script.fP.endswith("heres_to_family.rst"),
@@ -439,11 +436,10 @@ class SequenceTests(unittest.TestCase):
         self.assertEqual(197801161600, narrator.state)
         narrator.set_state(Spot.w12_goldhawk_tavern)
 
-        self.assertFalse(self.performer.stopped)
         folder, index, script, selection, interlude = self.performer.next(
-            self.performer.folders, self.performer.ensemble
+            self.performer.folders, self.performer.ensemble, strict=True, roles=2
         )
-        list(self.performer.run(react=True))
+        list(self.performer.run(react=True, strict=True, roles=2))
 
         self.assertTrue(
             self.performer.script.fP.endswith("what_about_the_catering.rst"),
@@ -457,11 +453,10 @@ class SequenceTests(unittest.TestCase):
         self.assertEqual(Spot.w12_goldhawk_tavern, narrator.get_state(Spot))
         self.assertEqual(2, next(iter(self.characters[Look.yuppie])).get_state())
 
-        self.assertFalse(self.performer.stopped)
         folder, index, script, selection, interlude = self.performer.next(
-            self.performer.folders, self.performer.ensemble
+            self.performer.folders, self.performer.ensemble, strict=True, roles=2
         )
-        list(self.performer.run(react=True))
+        list(self.performer.run(react=True, strict=True, roles=2))
 
         self.assertTrue(
             self.performer.script.fP.endswith("heres_to_family.rst"),
@@ -474,17 +469,16 @@ class SequenceTests(unittest.TestCase):
         self.assertEqual(197801161900, narrator.state)
         narrator.set_state(Spot.w12_goldhawk_tavern)
 
-        self.assertFalse(self.performer.stopped)
         folder, index, script, selection, interlude = self.performer.next(
-            self.performer.folders, self.performer.ensemble
+            self.performer.folders, self.performer.ensemble, strict=True, roles=2
         )
-        list(self.performer.run(react=True))
+        list(self.performer.run(react=True, strict=True, roles=2))
 
         self.assertTrue(
             self.performer.script.fP.endswith("what_about_the_catering.rst"),
             self.performer.script.fP
         )
-        self.assertEqual(197801162100, narrator.state)
+        self.assertEqual(197801170815, narrator.state)
         self.assertEqual(
             Spot.w12_latimer_arches,
             next(iter(self.characters[Mode.thief])).get_state(Spot)
@@ -493,18 +487,18 @@ class SequenceTests(unittest.TestCase):
 
     def test_017(self):
         narrator = self.ensemble[-1]
-        self.assertEqual(197801162100, narrator.state)
+        self.assertEqual(197801170815, narrator.state)
         self.assertEqual(Spot.w12_latimer_arches, narrator.get_state(Spot))
         self.assertEqual(2, next(iter(self.characters[Look.yuppie])).get_state())
 
         self.assertFalse(self.performer.stopped)
         folder, index, script, selection, interlude = self.performer.next(
-            self.performer.folders, self.performer.ensemble
+            self.performer.folders, self.performer.ensemble, strict=True, roles=2
         )
-        list(self.performer.run(react=True))
+        list(self.performer.run(react=True, strict=True, roles=2))
 
         self.assertTrue(
             self.performer.script.fP.endswith("parental_warning.rst"),
             self.performer.script.fP
         )
-        self.assertEqual(197801162100, narrator.state)
+        self.assertEqual(197801170820, narrator.state)

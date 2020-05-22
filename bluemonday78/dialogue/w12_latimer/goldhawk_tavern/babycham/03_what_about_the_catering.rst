@@ -17,15 +17,28 @@
             3
 
 .. entity:: BARMAN
-   :types: bluemonday78.types.Character
+   :roles:  FRIENDLY
+   :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Trade.innkeeper
             bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: DRINKER_1
+   :roles:  FRIENDLY
+   :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: DRINKER_2
+   :roles:  FRIENDLY
+   :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
+
+.. entity:: FRIENDLY
+   :roles:  BARMAN
+            DRINKER_1
+            DRINKER_2
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
+            1
 
 Desparation
 ~~~~~~~~~~~
@@ -196,8 +209,17 @@ What's your poison?
 
     Ha ha ha ha!
 
+.. property:: FRIENDLY.state 2
 .. property:: HIPSTER.state 2
 .. property:: NARRATOR.clock 2
+
+Time please
+-----------
+
+.. condition:: NARRATOR.state 197801162100
+
+.. property:: NARRATOR.state 197801170815
+
 
 .. |BARMAN_FIRSTNAME| property:: BARMAN.name.firstname
 .. |HIPSTER_FIRSTNAME| property:: HIPSTER.name.firstname

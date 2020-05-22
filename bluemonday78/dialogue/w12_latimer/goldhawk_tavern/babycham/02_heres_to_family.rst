@@ -12,20 +12,33 @@
 
 .. entity:: HIPSTER
    :types:  bluemonday78.types.Character
-   :states: bluemonday78.types.Trade.merchant
+   :states: bluemonday78.types.Look.yuppie
             bluemonday78.types.Spot.w12_goldhawk_tavern
             2
 
 .. entity:: BARMAN
+   :roles:  FRIENDLY
    :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Trade.innkeeper
             bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: DRINKER_1
+   :roles:  FRIENDLY
+   :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
 
 .. entity:: DRINKER_2
+   :roles:  FRIENDLY
+   :types:  bluemonday78.types.Character
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
+
+.. entity:: FRIENDLY
+   :roles:  BARMAN
+            DRINKER_1
+            DRINKER_2
+   :types:  bluemonday78.types.Character
+   :states: bluemonday78.types.Spot.w12_goldhawk_tavern
+            1
 
 Anguish
 ~~~~~~~
@@ -91,7 +104,7 @@ Just a tourist
 Where you from?
 ---------------
 
-[BARMAN]_
+[FRIENDLY]_
 
     Where's home for you then, |HIPSTER_FIRSTNAME|?
 

@@ -140,7 +140,7 @@ class Presenter:
             "ensemble": ensemble,
         }
 
-    def dialogue(self, folders, ensemble, strict=True, roles=1):
+    def dialogue(self, folders, ensemble, strict=True, roles=2):
         """ Return the next selected scene script as compiled dialogue."""
         for folder in folders:
             for script in SceneScript.scripts(**folder._asdict()):

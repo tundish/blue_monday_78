@@ -8,7 +8,7 @@
 .. entity:: NARRATOR
    :types:  bluemonday78.types.Narrator
    :states: bluemonday78.types.Spot.w12_latimer_arches
-            1978011621
+            19780117
 
 .. entity:: OFFICER
    :types:  bluemonday78.types.Character
@@ -110,7 +110,7 @@ On the approach
 
     Well I'd say this is where your problems begin.
 
-.. property:: OFFICER.state 19780119
+.. property:: NARRATOR.state 197801170820
 
 .. Needs alternative for "show yourself":
 .. I'm going to put you straight.

@@ -59,13 +59,13 @@ def ensemble(narrator=None):
         ).set_state(Look.mug, Spot.w12_ducane_prison_wing),
         Character(
             name="Mr Barry Latimer"
-        ).set_state(Trade.innkeeper, Spot.w12_goldhawk_tavern),
-        Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern),
-        Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern),
+        ).set_state(Trade.innkeeper, Spot.w12_goldhawk_tavern, 1),
+        Character(name="Mr Ian Thomas").set_state(Spot.w12_goldhawk_tavern, 1),
+        Character(name="Mr Mike Phillips").set_state(Spot.w12_goldhawk_tavern, 1),
         Character(
             name="Mr Justin Cornelis Delcroix"
         ).set_state(Look.yuppie, Trade.merchant, Spot.w12_goldhawk_tavern, 1),
-        Character(name="Mr Matthew Waladli").set_state(Trade.singer, Spot.w12_goldhawk_tavern),
+        Character(name="Mr Matthew Waladli").set_state(Trade.singer),
         Location(label="Addison Arches 18A").set_state(Spot.w12_latimer_arches),
         Location(label="Visiting Suite").set_state(Spot.w12_ducane_prison_visiting),
         Location(label="Reception area").set_state(Spot.w12_ducane_prison_release),
