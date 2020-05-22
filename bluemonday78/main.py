@@ -97,7 +97,7 @@ async def get_map(request):
     pathways = {p for f in folders for p in f.metadata.get("pathways", [])}
     presenter.log.debug("Pathways: {0}".format(pathways))
 
-    spots = [i.get_state(Spot) for i in presenter.ensemble if not isinstance(i, Location)]
+    spots = list(filter(None, (i.get_state(Spot) for i in presenter.ensemble if not isinstance(i, Location))))
     presenter.log.debug("Spots: {0}".format(spots))
 
     hots = [i for i in spots if i.value in pathways]
