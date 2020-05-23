@@ -40,8 +40,8 @@
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
             1
 
-Desparation
-~~~~~~~~~~~
+Prospects
+~~~~~~~~~
 
 A pub in Shepherd's Bush
 ------------------------
@@ -63,22 +63,6 @@ A pub in Shepherd's Bush
 
     And one, incongruously, of a stricken cargo vessel run recently
     aground.
-
-[NARRATOR]_
-
-    It goes quiet for a moment.
-
-[BARMAN]_
-
-    Quite so.
-
-[HIPSTER]_
-
-    Why didn't I think of that?
-
-[BARMAN]_
-
-    Maybe you need to read a little wider.
 
 Needs to make his mark
 ----------------------

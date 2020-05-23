@@ -40,20 +40,73 @@
    :states: bluemonday78.types.Spot.w12_goldhawk_tavern
             1
 
-Anguish
-~~~~~~~
+Family
+~~~~~~
 
-A pub in Shepherd's Bush
-------------------------
+This script plays at:
+
+* 197801161200
+* 197801161500
+* 197801161800
+
+Up from the depths
+------------------
+
+.. condition:: NARRATOR.state 197801161200
 
 [NARRATOR]_
 
     The head and shoulders of |BARMAN_FIRSTNAME| |BARMAN_SURNAME| rise
     slowly above the level of the counter top. He is negotiating the
-    cellar steps at a resigned pace.
+    cellar steps at a steady pace.
 
-    His gaze is attracted, like a magpie, to an object on the bar. It is
+A better class of customer
+--------------------------
+
+.. condition:: NARRATOR.state 197801161500
+
+[NARRATOR]_
+
+    |BARMAN_FIRSTNAME|'s gaze is attracted, like a magpie, to an object on the bar. It is
     the well-stuffed wallet of |HIPSTER_FIRSTNAME| |HIPSTER_SURNAME|.
+
+Justin pipes up
+---------------
+
+[HIPSTER]_
+
+    I used to be in the music industry.
+
+    Until this morning.
+
+    I'm celebrating being unemployed.
+
+[FRIENDLY]_
+
+    Oh dear. Did they pay you off though?
+
+[HIPSTER]_
+
+    Yes, I've got it right here.
+
+[FRIENDLY]_
+
+    Ah, good.
+ 
+Not what I asked for
+--------------------
+
+[HIPSTER]_
+
+    So the coach turned up covered in England flags and smelling of sick.
+
+[FRIENDLY]_
+
+    So that's why you got the sack then.
+
+[HIPSTER]_
+
+    Not what Elvis Costello wanted at all.
 
 Hospitality
 -----------
@@ -72,7 +125,7 @@ Hospitality
 
 [HIPSTER]_
 
-    Nice one, geezer.
+    And one for yourself.
 
 [BARMAN]_
 
@@ -81,25 +134,32 @@ Hospitality
 Just a tourist
 --------------
 
-[DRINKER_1]_
-
-    Ha ha ha ha!
-
-    Oh, look out.
-
-    We could have a Mockney on our hands.
-
-[DRINKER_2]_
-
-    No, I thought Mick Jagger had walked in here for a minute.
-
-[BARMAN]_
+[FRIENDLY]_
 
     You're not from around here, are you, son.
 
 [HIPSTER]_
 
     No, actually.
+
+He's on the phone
+-----------------
+
+[HIPSTER]_
+
+    They told me to go out and hire a tour bus.
+
+    It was all very last minute.
+
+[FRIENDLY]_
+
+    Did you look in the Yellow Pages?
+
+[HIPSTER]_
+
+    They only had one phone in the office. You could never get on it.
+
+    So I went round to a place near here. It's on my way home.
 
 Where you from?
 ---------------
@@ -274,6 +334,42 @@ The kindness of strangers
 [DRINKER_1]_
 
     Ha ha ha ha!
+
+What not to do
+--------------
+
+[HIPSTER]_
+
+    Bulldog coaches, do you know them?
+
+    A character called Victor Yeoman.
+
+[BARMAN]_
+
+    Vic Yeoman.
+
+    His yard is in on Depot Road.
+
+[HIPSTER]_
+
+    That's the one.
+
+There's your mistake
+--------------------
+
+[FRIENDLY]_
+
+    Vic does the football tours over to Holland and Spain.
+
+    I don't think you're cut out to be one of his passengers though, to be honest.
+
+[HIPSTER]_
+
+    Do you find him slighty right wing?
+
+[FRIENDLY]_
+
+    I'd say a bit right wing, yes.
 
 
 .. property:: HIPSTER.state 3
