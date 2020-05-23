@@ -32,7 +32,7 @@ A pub in Shepherd's Bush
 
 [NARRATOR]_
 
-    Monday afternoon.
+    Monday lunchtime.
 
     Just two hours ago, Stiff Records fired their most junior runner.
 

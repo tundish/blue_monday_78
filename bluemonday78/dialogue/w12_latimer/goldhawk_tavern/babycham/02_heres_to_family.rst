@@ -93,21 +93,6 @@ Justin pipes up
 
     Ah, good.
  
-Not what I asked for
---------------------
-
-[HIPSTER]_
-
-    So the coach turned up covered in England flags and smelling of sick.
-
-[FRIENDLY]_
-
-    So that's why you got the sack then.
-
-[HIPSTER]_
-
-    Not what Elvis Costello wanted at all.
-
 Hospitality
 -----------
 
@@ -134,6 +119,8 @@ Hospitality
 Just a tourist
 --------------
 
+.. condition:: NARRATOR.state 197801161200
+
 [FRIENDLY]_
 
     You're not from around here, are you, son.
@@ -142,27 +129,10 @@ Just a tourist
 
     No, actually.
 
-He's on the phone
------------------
-
-[HIPSTER]_
-
-    They told me to go out and hire a tour bus.
-
-    It was all very last minute.
-
-[FRIENDLY]_
-
-    Did you look in the Yellow Pages?
-
-[HIPSTER]_
-
-    They only had one phone in the office. You could never get on it.
-
-    So I went round to a place near here. It's on my way home.
-
 Where you from?
 ---------------
+
+.. condition:: NARRATOR.state 197801161500
 
 [FRIENDLY]_
 
@@ -178,6 +148,8 @@ Where you from?
 
 What's your name?
 -----------------
+
+.. condition:: NARRATOR.state 197801161800
 
 [HIPSTER]_
 
@@ -230,7 +202,7 @@ Global downturn
 No money
 --------
 
-[BARMAN]_
+[FRIENDLY]_
 
     What course was that then; music?
 
@@ -238,7 +210,7 @@ No money
 
     No, I was doing Banking and International Finance.
 
-[DRINKER_1]_
+[FRIENDLY]_
 
     Stone me.
 
@@ -256,9 +228,6 @@ No money
 
     Ha ha ha ha!
 
-Pay me
-------
-
 [HIPSTER]_
 
     So I got the job at the record company.
@@ -271,10 +240,15 @@ Pay me
 
     And then I realised that I wanted to be in music.
 
+Pay me
+------
+
+.. condition:: NARRATOR.state 197801161200
+
 [BARMAN]_
 
     I'm very sorry, |DRINKER_2_FIRSTNAME|, but I'm going to need to see some
-    cash this evening.
+    cash this week.
 
 [HIPSTER]_
 
@@ -286,6 +260,8 @@ Pay me
 
 Seriously, pay me
 -----------------
+
+.. condition:: NARRATOR.state 197801161500
 
 [BARMAN]_
 
@@ -312,6 +288,8 @@ Seriously, pay me
 The kindness of strangers
 -------------------------
 
+.. condition:: NARRATOR.state 197801161800
+
 [BARMAN]_
 
     I am saying this for your own good. It's not me who comes to collect if
@@ -335,16 +313,39 @@ The kindness of strangers
 
     Ha ha ha ha!
 
+He's on the phone
+-----------------
+
+.. condition:: NARRATOR.state 197801161500
+
+[HIPSTER]_
+
+    They told me to go out and hire a tour bus.
+
+    It was all very last minute.
+
+[FRIENDLY]_
+
+    Did you look in the Yellow Pages?
+
+[HIPSTER]_
+
+    They only had one phone in the office. You could never get on it.
+
+    So I went round to a place near here. It's on my way home.
+
 What not to do
 --------------
+
+.. condition:: NARRATOR.state 197801161500
 
 [HIPSTER]_
 
     Bulldog coaches, do you know them?
 
-    A character called Victor Yeoman.
+    A guy called Victor Yeoman.
 
-[BARMAN]_
+[FRIENDLY]_
 
     Vic Yeoman.
 
@@ -357,7 +358,9 @@ What not to do
 There's your mistake
 --------------------
 
-[FRIENDLY]_
+.. condition:: NARRATOR.state 197801161800
+
+[BARMAN]_
 
     Vic does the football tours over to Holland and Spain.
 
@@ -367,10 +370,29 @@ There's your mistake
 
     Do you find him slighty right wing?
 
-[FRIENDLY]_
+[BARMAN]_
 
     I'd say a bit right wing, yes.
 
+Not what I asked for
+--------------------
+
+.. condition:: NARRATOR.state 197801161800
+
+[HIPSTER]_
+
+    So the coach turned up covered in England flags and smelling of sick.
+
+[FRIENDLY]_
+
+    So that's why you got the sack then.
+
+[HIPSTER]_
+
+    Not what Elvis Costello wanted at all.
+
+Always
+------
 
 .. property:: HIPSTER.state 3
 .. property:: NARRATOR.clock 1
