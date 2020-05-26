@@ -39,22 +39,5 @@ A pub in Shepherd's Bush
     He ran off with a Sony Pressman TC-D5 and is
     now in the Goldhawk Tavern, Shepherd's Bush.
 
-[BARMAN]_
-
-    So what paper are you with, then?
-
-[HIPSTER]_
-
-    What paper?
-
-[BARMAN]_
-
-    I'm looking at your tape recorder.
-
-    And I'm noting the early and expeditious application
-    of my best whisky.
-
-    So I'm going to guess you may be a journalist.
-
 .. property:: HIPSTER.state 2
 .. property:: NARRATOR.clock 1

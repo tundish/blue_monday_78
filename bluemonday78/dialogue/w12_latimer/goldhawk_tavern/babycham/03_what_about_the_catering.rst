@@ -43,6 +43,12 @@
 Prospects
 ~~~~~~~~~
 
+This script plays at:
+
+* 197801161300
+* 197801161600
+* 197801161900
+
 A pub in Shepherd's Bush
 ------------------------
 
@@ -63,6 +69,23 @@ A pub in Shepherd's Bush
 
     And one, incongruously, of a stricken cargo vessel run recently
     aground.
+
+Not what I asked for
+--------------------
+
+.. condition:: NARRATOR.state 197801161800
+
+[HIPSTER]_
+
+    So the coach turned up covered in England flags and smelling of sick.
+
+[FRIENDLY]_
+
+    So that's why you got the sack then.
+
+[HIPSTER]_
+
+    Not what Elvis Costello wanted at all.
 
 Needs to make his mark
 ----------------------
@@ -200,7 +223,7 @@ What's your poison?
 Time please
 -----------
 
-.. condition:: NARRATOR.state 197801162100
+.. condition:: NARRATOR.state 197801161900
 
 .. property:: NARRATOR.state 197801170815
 

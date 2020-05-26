@@ -49,10 +49,32 @@ This script plays at:
 * 197801161500
 * 197801161800
 
+You journalists
+---------------
+
+.. condition:: NARRATOR.state 197801161200
+
+[BARMAN]_
+
+    So what paper are you with, then?
+
+[HIPSTER]_
+
+    What paper?
+
+[BARMAN]_
+
+    I'm looking at your tape recorder.
+
+    And I'm noting the early and expeditious application
+    of my best whisky.
+
+    So I'm going to guess you may be a journalist.
+
 Up from the depths
 ------------------
 
-.. condition:: NARRATOR.state 197801161200
+.. condition:: NARRATOR.state 197801161500
 
 [NARRATOR]_
 
@@ -60,16 +82,24 @@ Up from the depths
     slowly above the level of the counter top. He is negotiating the
     cellar steps at a steady pace.
 
+[FRIENDLY]_
+
+    Are you on the television?
+ 
 A better class of customer
 --------------------------
 
-.. condition:: NARRATOR.state 197801161500
+.. condition:: NARRATOR.state 197801161800
 
 [NARRATOR]_
 
     |BARMAN_FIRSTNAME|'s gaze is attracted, like a magpie, to an object on the bar. It is
     the well-stuffed wallet of |HIPSTER_FIRSTNAME| |HIPSTER_SURNAME|.
 
+[FRIENDLY]_
+
+    I reckon he's on the television.
+ 
 Justin pipes up
 ---------------
 
@@ -316,7 +346,7 @@ The kindness of strangers
 He's on the phone
 -----------------
 
-.. condition:: NARRATOR.state 197801161500
+.. condition:: NARRATOR.state 197801161200
 
 [HIPSTER]_
 
@@ -373,23 +403,6 @@ There's your mistake
 [BARMAN]_
 
     I'd say a bit right wing, yes.
-
-Not what I asked for
---------------------
-
-.. condition:: NARRATOR.state 197801161800
-
-[HIPSTER]_
-
-    So the coach turned up covered in England flags and smelling of sick.
-
-[FRIENDLY]_
-
-    So that's why you got the sack then.
-
-[HIPSTER]_
-
-    Not what Elvis Costello wanted at all.
 
 Always
 ------
