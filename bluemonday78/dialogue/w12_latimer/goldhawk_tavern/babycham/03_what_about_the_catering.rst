@@ -58,8 +58,6 @@ A pub in Shepherd's Bush
 
 [NARRATOR]_
 
-    On the floor is an electric heater.
-
     The wallpaper is scarred, grimy, and punctuated by a diverse
     collection of framed posters.
 
@@ -73,7 +71,7 @@ A pub in Shepherd's Bush
 Not what I asked for
 --------------------
 
-.. condition:: NARRATOR.state 197801161800
+.. condition:: NARRATOR.state 197801161900
 
 [HIPSTER]_
 
@@ -89,6 +87,8 @@ Not what I asked for
 
 Needs to make his mark
 ----------------------
+
+.. condition:: NARRATOR.state 197801161300
 
 [HIPSTER]_
 
@@ -150,6 +150,8 @@ What about premises?
 Who's doing your catering?
 --------------------------
 
+.. condition:: NARRATOR.state 197801161600
+
 [BARMAN]_
 
     Now I tell you what, |HIPSTER_FIRSTNAME|. I can hook you up with
@@ -178,6 +180,8 @@ Who's doing your catering?
 
 What's your poison?
 -------------------
+
+.. condition:: NARRATOR.state 197801161900
 
 [NARRATOR]_
 
@@ -212,6 +216,9 @@ What's your poison?
 
     This is going to work brilliantly.
 
+You're avin' a laugh
+--------------------
+
 [DRINKER_1]_
 
     Ha ha ha ha!
@@ -223,7 +230,7 @@ What's your poison?
 Time please
 -----------
 
-.. condition:: NARRATOR.state 197801161900
+.. condition:: NARRATOR.state 197801162100
 
 .. property:: NARRATOR.state 197801170815
 
