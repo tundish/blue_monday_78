@@ -6,6 +6,11 @@
 Change Log
 ::::::::::
 
+0.8.0
+=====
+
+Rolls up some minor changes in time for NarraScope 2020.
+
 0.7.0
 =====
 
