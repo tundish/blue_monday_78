@@ -28,7 +28,6 @@ from turberfield.dialogue.types import EnumFactory
 from turberfield.utils.misc import group_by_type
 from turberfield.utils.assembly import Assembly
 
-from bluemonday78.matcher import MultiMatcher
 import bluemonday78.story
 from bluemonday78.types import Look
 from bluemonday78.types import Mode
@@ -96,7 +95,7 @@ class AssemblyTests(unittest.TestCase):
 class TimeSpanTests(unittest.TestCase):
 
     def test_seconds(self):
-        start, span = MultiMatcher.parse_timespan("20191108173004")
+        start, span = Narrator.parse_timespan("20191108173004")
         self.assertEqual(2019, start.year)
         self.assertEqual(11, start.month)
         self.assertEqual(8, start.day)
@@ -106,7 +105,7 @@ class TimeSpanTests(unittest.TestCase):
         self.assertEqual(1, span.seconds)
 
     def test_minutes(self):
-        start, span = MultiMatcher.parse_timespan("201911081730")
+        start, span = Narrator.parse_timespan("201911081730")
         self.assertEqual(2019, start.year)
         self.assertEqual(11, start.month)
         self.assertEqual(8, start.day)
@@ -115,7 +114,7 @@ class TimeSpanTests(unittest.TestCase):
         self.assertEqual(60, span.seconds)
 
     def test_hours(self):
-        start, span = MultiMatcher.parse_timespan("2019110817")
+        start, span = Narrator.parse_timespan("2019110817")
         self.assertEqual(2019, start.year)
         self.assertEqual(11, start.month)
         self.assertEqual(8, start.day)
@@ -123,7 +122,7 @@ class TimeSpanTests(unittest.TestCase):
         self.assertEqual(3600, span.seconds)
 
     def test_days(self):
-        start, span = MultiMatcher.parse_timespan("20191108")
+        start, span = Narrator.parse_timespan("20191108")
         self.assertEqual(2019, start.year)
         self.assertEqual(11, start.month)
         self.assertEqual(8, start.day)

@@ -26,7 +26,6 @@ from turberfield.dialogue.types import Persona
 from turberfield.dialogue.types import Stateful
 from turberfield.utils.assembly import Assembly
 
-from bluemonday78.matcher import MultiMatcher
 
 @enum.unique
 class Look(EnumFactory, enum.Enum):
@@ -68,14 +67,35 @@ class Spot(EnumFactory, enum.Enum):
 class Character(Stateful, Persona): pass
 class Location(Stateful, DataObject): pass
 
+
 class Narrator(Stateful, DataObject):
 
     state_format = "%Y%m%d%H%M"
 
+    @staticmethod
+    def parse_timespan(text: str):
+        formats = {
+            8: ("%Y%m%d", datetime.timedelta(days=1)),
+            10: ("%Y%m%d%H", datetime.timedelta(hours=1)),
+            12: ("%Y%m%d%H%M", datetime.timedelta(minutes=1)),
+            14: ("%Y%m%d%H%M%S", datetime.timedelta(seconds=1)),
+        }
+        if len(text) not in formats and min(formats) < len(text) < max(formats):
+            text = text + "0"
+            mult = 10
+        else:
+            mult = 1
+        try:
+            format_string, span = formats[len(text)]
+        except KeyError:
+            return text, None
+        else:
+            return datetime.datetime.strptime(text, format_string), mult * span
+
     @property
     def clock(self):
         text = str(self.get_state(int))
-        ts, span = MultiMatcher.parse_timespan(text)
+        ts, span = self.parse_timespan(text)
         return ts
 
     @clock.setter

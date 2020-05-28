@@ -19,6 +19,7 @@
 import datetime
 import unittest
 
+from bluemonday78.story import blue_monday
 from bluemonday78.story import build_narrator
 from bluemonday78.types import Narrator
 from bluemonday78.types import Spot
@@ -59,6 +60,34 @@ class NarratorTests(unittest.TestCase):
         narrator.clock = 1
         self.assertEqual('7', narrator.clock)
         self.assertEqual(7, narrator.state)
+
+    def test_parse_timespan_day(self):
+        rv = Narrator.parse_timespan(blue_monday.strftime("%Y%m%d"))
+        self.assertEqual(2, len(rv))
+        self.assertEqual(
+            datetime.datetime(blue_monday.year, blue_monday.month, blue_monday.day),
+            rv[0]
+        )
+        self.assertEqual(datetime.timedelta(days=1), rv[1])
+
+    def test_parse_timespan_period(self):
+        rv = Narrator.parse_timespan(blue_monday.strftime("%Y%m%d") + "1")
+        self.assertEqual(2, len(rv))
+        self.assertEqual(
+            datetime.datetime(
+                blue_monday.year,
+                blue_monday.month,
+                blue_monday.day,
+                hour=10
+            ),
+            rv[0]
+        )
+        self.assertEqual(datetime.timedelta(hours=10), rv[1])
+
+    def test_parse_timespan_integer(self):
+        rv = Narrator.parse_timespan("4")
+        self.assertEqual(2, len(rv))
+        self.assertEqual(("4", None), rv)
 
 
 class SpotTests(unittest.TestCase):

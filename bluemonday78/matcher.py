@@ -20,32 +20,16 @@ import datetime
 import logging
 
 from turberfield.dialogue.directives import Entity
+from turberfield.dialogue.directives import Pathfinder
 from turberfield.dialogue.matcher import Matcher
 from turberfield.dialogue.model import SceneScript
 from turberfield.utils.misc import group_by_type
 
+from bluemonday78.types import Narrator
+from bluemonday78.types import Spot
+
 
 class MultiMatcher(Matcher):
-
-    @staticmethod
-    def parse_timespan(text: str):
-        formats = {
-            8: ("%Y%m%d", datetime.timedelta(days=1)),
-            10: ("%Y%m%d%H", datetime.timedelta(hours=1)),
-            12: ("%Y%m%d%H%M", datetime.timedelta(minutes=1)),
-            14: ("%Y%m%d%H%M%S", datetime.timedelta(seconds=1)),
-        }
-        if len(text) not in formats and min(formats) < len(text) < max(formats):
-            text = text + "0"
-            mult = 10
-        else:
-            mult = 1
-        try:
-            format_string, span = formats[len(text)]
-        except KeyError:
-            return text, None
-        else:
-            return datetime.datetime.strptime(text, format_string), mult * span
 
     @staticmethod
     def entity_states(folder):
@@ -57,10 +41,13 @@ class MultiMatcher(Matcher):
 
     @staticmethod
     def decorate_folder(folder, min_t, max_t):
-        for entity_state in (
-            i for i in MultiMatcher.entity_states(folder) if i.isdigit()
-        ):
-            t, span = MultiMatcher.parse_timespan(entity_state)
+        integer_states = [i for i in MultiMatcher.entity_states(folder) if i.isdigit()]
+        object_states = [
+            Pathfinder.string_import(i) for i in MultiMatcher.entity_states(folder) if i not in integer_states
+        ]
+        folder.metadata["spots"] = {i for i in object_states if isinstance(i, Spot)}
+        for entity_state in integer_states:
+            t, span = Narrator.parse_timespan(entity_state)
             if span is not None:
                 min_t = min(min_t, t if span else min_t) if min_t is not None else t
                 max_t = max(max_t, (t + span) if span else max_t) if max_t is not None else t + span
