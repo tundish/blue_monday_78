@@ -60,12 +60,25 @@ class Presenter:
         "collie": "hsl(76, 80%, 35%, 1.0)",
         "titles": '"AA Paro", sans-serif',
         "detail": '"Inknut Antiqua", sans-serif',
+        "mono": ", ".join([
+            "SFMono-Regular", "Menlo", "Monaco",
+            "Consolas", '"Liberation Mono"',
+            '"Courier New"', "monospace"
+        ]),
         "system": ", ".join([
-            "BlinkMacSystemFont", '"Segoe UI"', "Roboto", '"Helvetica Neue"',
+            "BlinkMacSystemFont", '"Segoe UI"', '"Helvetica Neue"',
             '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"',
             "Arial", "sans-serif"
         ]),
     }
+
+    @staticmethod
+    def animate_audio(seq):
+        """ Generate animations for audio effects."""
+        yield from (
+            Presenter.Animation(asset.offset, asset.duration, asset)
+            for asset in seq
+        )
 
     @staticmethod
     def animate_lines(seq, dwell, pause):
@@ -179,6 +192,7 @@ class Presenter:
                 frame[Model.Line] = list(
                     self.animate_lines(frame[Model.Line], dwell, pause)
                 )
+                frame[Model.Audio] = list(self.animate_audio(frame[Model.Audio]))
                 frame[Model.Still] = list(self.animate_stills(frame[Model.Still]))
                 for p in frame[Model.Property]:
                     if react and p.object is not None:

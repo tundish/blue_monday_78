@@ -27,6 +27,14 @@ from bluemonday78.types import Narrator
 from bluemonday78.types import Spot
 
 
+def animated_audio_to_html(anim):
+    return f"""<div>
+<audio src="/audio/{anim.element.resource}" autoplay="autoplay"
+preload="auto" {'loop="loop"' if anim.element.loop and int(anim.element.loop) > 1 else ""}>
+</audio>
+</div>"""
+
+
 def animated_line_to_html(anim):
     return f"""
 <li style="animation-delay: {anim.delay:.2f}s; animation-duration: {anim.duration:.2f}s">
@@ -43,13 +51,6 @@ def animated_still_to_html(anim):
     return f"""
 <div style="animation-duration: {anim.duration}s; animation-delay: {anim.delay}s">
 <img src="/img/{anim.element.resource}" alt="{anim.element.package} {anim.element.resource}" />
-</div>"""
-
-
-def audio_to_html(elem):
-    return f"""<div>
-<audio src="/audio/{elem.resource}" autoplay="autoplay" preload="auto" >
-</audio>
 </div>"""
 
 
@@ -112,7 +113,7 @@ def frame_to_html(frame, ensemble=[], final=False):
     spot = narrator.get_state(Spot) if narrator else None
     dialogue = "\n".join(animated_line_to_html(i) for i in frame[Model.Line])
     stills = "\n".join(animated_still_to_html(i) for i in frame[Model.Still])
-    audio = "\n".join(audio_to_html(i) for i in frame[Model.Audio])
+    audio = "\n".join(animated_audio_to_html(i) for i in frame[Model.Audio])
     return f"""
 {audio}
 <section class="fit-banner">
